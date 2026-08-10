@@ -28,12 +28,10 @@ const AiDevelopmentPage = () => {
 
   return (
     <div className="min-h-screen pt-28 pb-20 bg-slate-50 dark:bg-[#060b13] text-slate-800 dark:text-slate-100 transition-colors duration-300 font-sans selection:bg-[#60a5fa] selection:text-slate-900 overflow-hidden relative">
-      {/* Background Ambient Glow Effects */}
       <div className="absolute top-0 left-1/4 w-125 h-125 bg-blue-500/10 dark:bg-blue-600/15 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute top-1/3 right-10 w-112.5 h-112.5 bg-cyan-500/10 dark:bg-cyan-600/15 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-20">
-        {/* Hero Section - Completely New Modern Asymmetric Layout */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
