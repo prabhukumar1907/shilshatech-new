@@ -9,6 +9,7 @@ import {
   CheckCircle2,
   Sparkles,
   ShieldCheck,
+  Code2,
 } from "lucide-react";
 
 import { FaFacebook } from "react-icons/fa";
@@ -37,9 +38,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-16 pb-8">
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-slate-200 dark:border-slate-800/80">
-          
           {/* Column 1: Brand Info */}
-          <div className="lg:col-span-4 space-y-5">
+          <div className="lg:col-span-3 space-y-5">
             <Link to="/" className="items-center group inline-block">
               <div className="relative">
                 <img
@@ -62,10 +62,26 @@ export default function Footer() {
             {/* Social Media Buttons */}
             <div className="flex items-center gap-2.5 pt-2">
               {[
-                { icon: FaFacebook, href: "https://www.facebook.com/shilshatechnologies", label: "Facebook" },
-                { icon: BsInstagram, href: "https://www.instagram.com/shilsha_technologies", label: "Instagram" },
-                { icon: BsLinkedin, href: "https://www.linkedin.com/company/shilsha-technologies", label: "LinkedIn" },
-                { icon: BsTwitterX, href: "https://twitter.com/shilshatech", label: "Twitter" },
+                {
+                  icon: FaFacebook,
+                  href: "https://www.facebook.com/shilshatechnologies",
+                  label: "Facebook",
+                },
+                {
+                  icon: BsInstagram,
+                  href: "https://www.instagram.com/shilsha_technologies",
+                  label: "Instagram",
+                },
+                {
+                  icon: BsLinkedin,
+                  href: "https://www.linkedin.com/company/shilsha-technologies",
+                  label: "LinkedIn",
+                },
+                {
+                  icon: BsTwitterX,
+                  href: "https://twitter.com/shilshatech",
+                  label: "Twitter",
+                },
               ].map((item, i) => (
                 <a
                   key={i}
@@ -75,7 +91,10 @@ export default function Footer() {
                   aria-label={item.label}
                   className="relative group w-9 h-9 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 backdrop-blur-md flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-white dark:hover:text-white hover:bg-[#276ea5] dark:hover:bg-[#276ea5] transition-all duration-300 shadow-sm hover:scale-105 hover:border-[#60a5fa]/50"
                 >
-                  <item.icon size={15} className="relative z-10 transition-transform duration-300 group-hover:scale-110" />
+                  <item.icon
+                    size={15}
+                    className="relative z-10 transition-transform duration-300 group-hover:scale-110"
+                  />
                 </a>
               ))}
             </div>
@@ -105,7 +124,7 @@ export default function Footer() {
                       size={12}
                       className="opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-300 text-[#60a5fa]"
                     />
-                    
+
                     {/* Expanding Underline */}
                     <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 rounded-full transition-all duration-300 group-hover:w-full opacity-0 group-hover:opacity-100 bg-linear-to-r from-[#276ea5] to-[#60a5fa]" />
                   </Link>
@@ -114,8 +133,53 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Address & Contact */}
-          <div className="lg:col-span-3 space-y-4">
+          {/* Column 3: Hire Developers */}
+          <div className="lg:col-span-2 space-y-4">
+            <h4 className="text-xs font-bold uppercase tracking-widest flex items-center gap-1.5 text-[#276ea5] dark:text-[#60a5fa]">
+              <Code2 size={13} />
+              Hire Developers
+            </h4>
+            <ul className="space-y-2.5 text-sm text-slate-600 dark:text-slate-300">
+              {[
+                {
+                  name: "ReactJS Developers",
+                  path: "/hire-developers/react-developer",
+                },
+                {
+                  name: "Node.js Developers",
+                  path: "/hire-developers/nodejs-developer",
+                },
+                {
+                  name: "Full Stack Experts",
+                  path: "/hire-developers/full-stack-developer",
+                },
+                {
+                  name: "Mobile App Engineers",
+                  path: "/hire-developers/mobile-app-developer",
+                },
+                {
+                  name: "AI & ML Specialists",
+                  path: "/hire-developers/ai-ml-developer",
+                },
+              ].map((item, i) => (
+                <li key={i}>
+                  <Link
+                    to={item.path}
+                    className="relative inline-flex items-center gap-1 group py-0.5 transition-colors duration-300 hover:text-[#276ea5] dark:hover:text-[#60a5fa]"
+                  >
+                    <span>{item.name}</span>
+                    <ArrowUpRight
+                      size={12}
+                      className="opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-300 text-[#60a5fa]"
+                    />
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 rounded-full transition-all duration-300 group-hover:w-full opacity-0 group-hover:opacity-100 bg-linear-to-r from-[#276ea5] to-[#60a5fa]" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="lg:col-span-2 space-y-4">
             <h4 className="text-xs font-bold uppercase tracking-widest text-[#276ea5] dark:text-[#60a5fa]">
               Address
             </h4>
@@ -127,8 +191,10 @@ export default function Footer() {
                   className="shrink-0 mt-0.5 text-[#276ea5] dark:text-[#60a5fa]"
                 />
                 <address className="not-italic leading-relaxed text-xs sm:text-sm">
-                  Shilsha Technologies<br />
-                  iThum Tower, Sector 62, Noida<br />
+                  Shilsha Technologies
+                  <br />
+                  iThum Tower, Sector 62, Noida
+                  <br />
                   Uttar Pradesh 201301, INDIA
                 </address>
               </div>
@@ -142,7 +208,7 @@ export default function Footer() {
                   href="tel:+911204120113"
                   className="relative inline-block group py-0.5 hover:text-[#276ea5] dark:hover:text-[#60a5fa] transition-colors text-xs sm:text-sm"
                 >
-                  +91 - 120- 412- 0113
+                  +91 - 120 - 412 - 0113
                   <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 rounded-full transition-all duration-300 group-hover:w-full opacity-0 group-hover:opacity-100 bg-linear-to-r from-[#276ea5] to-[#60a5fa]" />
                 </a>
               </div>
@@ -163,7 +229,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 4: Contact Form */}
+          {/* Column 5: Contact Form */}
           <div className="lg:col-span-3 space-y-4">
             <h4 className="text-xs font-bold uppercase tracking-widest text-[#276ea5] dark:text-[#60a5fa]">
               Want to ask something?
@@ -205,25 +271,36 @@ export default function Footer() {
               </form>
             )}
           </div>
-
         </div>
 
         {/* Legal Disclaimer Note */}
         <div className="py-6 border-b border-slate-200 dark:border-slate-800/80">
           <div className="flex items-start gap-2.5 text-[11px] leading-relaxed text-slate-500 dark:text-slate-400">
-            <ShieldCheck size={14} className="shrink-0 mt-0.5 text-slate-400 dark:text-slate-500" />
+            <ShieldCheck
+              size={14}
+              className="shrink-0 mt-0.5 text-slate-400 dark:text-slate-500"
+            />
             <p>
               <strong className="font-medium text-slate-700 dark:text-slate-300">
                 Legal & Trademark Notice:
               </strong>{" "}
-              All client logos, partner emblems, and third-party award images displayed in our Client Sliders and Awards section belong to their respective registered trademark owners. Shilsha Technologies displays these assets solely for portfolio presentation, case study illustration, and historical verification purposes under fair usage practices. No implicit endorsement or direct sponsorship is claimed unless explicitly specified.
+              All client logos, partner emblems, and third-party award images
+              displayed in our Client Sliders and Awards section belong to their
+              respective registered trademark owners. Shilsha Technologies
+              displays these assets solely for portfolio presentation, case
+              study illustration, and historical verification purposes under
+              fair usage practices. No implicit endorsement or direct
+              sponsorship is claimed unless explicitly specified.
             </p>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
-          <p>© {new Date().getFullYear()} Shilsha Technologies. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} Shilsha Technologies. All rights
+            reserved.
+          </p>
           <div className="flex items-center gap-6">
             <Link
               to="/privacy-policy"

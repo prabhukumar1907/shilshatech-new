@@ -19,6 +19,9 @@ import {
   PieChart,
   MessageCircle,
   TrendingUp,
+  Users,
+  Server,
+  Layers,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
@@ -38,12 +41,11 @@ import {
   SiDocker,
   SiKubernetes,
   SiJenkins,
-  SiGithubactions,
-  SiGitlab,
   SiMysql,
   SiMongodb,
   SiPostgresql,
   SiSelenium,
+  SiExpress,
 } from "react-icons/si";
 
 import {
@@ -55,7 +57,6 @@ import {
   VscWindow,
   VscDeviceMobile,
   VscPackage,
-  VscMegaphone,
 } from "react-icons/vsc";
 
 import logo from "../assets/shilshalogofinal.webp";
@@ -79,31 +80,112 @@ const services = [
     label: "AI Development",
     href: "/ai-development",
     desc: "Custom end-to-end AI models",
+    icon: <Cpu className="shrink-0 text-blue-500" size={16} />,
   },
   {
     label: "AI Consulting",
     href: "/ai-consulting-company",
     desc: "Strategy & roadmap planning",
+    icon: <Sparkles className="shrink-0 text-purple-500" size={16} />,
   },
   {
     label: "Generative AI",
     href: "/generative-ai",
     desc: "LLMs & synthetic media",
+    icon: <Layers className="shrink-0 text-cyan-500" size={16} />,
   },
   {
     label: "Model Training",
     href: "/ai-modal-training",
     desc: "Fine-tuning & optimization",
+    icon: <Server className="shrink-0 text-green-600" size={16} />,
   },
   {
     label: "Natural Language Processing",
     href: "/natural-language-processing",
     desc: "Text & speech analytics",
+    icon: <MessageCircle className="shrink-0 text-indigo-500" size={16} />,
   },
   {
     label: "LLM Development",
     href: "/llm-development",
     desc: "Enterprise AI integrations",
+    icon: <Code2 className="shrink-0 text-blue-600" size={16} />,
+  },
+];
+
+const hireDevelopers = [
+  {
+    label: "Full Stack Developer",
+    href: "/hire-developers/full-stack-developer",
+    desc: "End-to-end web architecture & scalable solutions",
+    icon: <Code2 className="shrink-0 text-blue-500" size={16} />,
+  },
+  {
+    label: "AI/ML Developer",
+    href: "/hire-developers/ai-ml-developer",
+    desc: "Expert neural networks & predictive models",
+    icon: <Cpu className="shrink-0 text-purple-500" size={16} />,
+  },
+  {
+    label: "React Developer",
+    href: "/hire-developers/react-developer",
+    desc: "Dynamic, high-performance UI components",
+    icon: <SiReact className="shrink-0 text-cyan-500" size={16} />,
+  },
+  {
+    label: "Node.js Developer",
+    href: "/hire-developers/nodejs-developer",
+    desc: "Fast, scalable backend & microservices",
+    icon: <SiNodedotjs className="shrink-0 text-green-600" size={16} />,
+  },
+  {
+    label: "Mobile App Developer",
+    href: "/hire-developers/mobile-app-developer",
+    desc: "Native & cross-platform iOS/Android apps",
+    icon: <Smartphone className="shrink-0 text-indigo-500" size={16} />,
+  },
+  {
+    label: "Python Developer",
+    href: "/hire-developers/python-developer",
+    desc: "Robust scripting, data analytics & APIs",
+    icon: <SiPython className="shrink-0 text-blue-600" size={16} />,
+  },
+  {
+    label: "DevOps Engineer",
+    href: "/hire-developers/devops-engineer",
+    desc: "CI/CD pipelines, cloud infrastructure & automation",
+    icon: <Server className="shrink-0 text-amber-500" size={16} />,
+  },
+  {
+    label: "MERN Stack Developer",
+    href: "/hire-developers/mern-stack-developer",
+    desc: "MongoDB, Express, React, Node full-stack apps",
+    icon: <SiMongodb className="shrink-0 text-emerald-600" size={16} />,
+  },
+  {
+    label: "MEAN Stack Developer",
+    href: "/hire-developers/mean-stack-developer",
+    desc: "MongoDB, Express, Angular, Node solutions",
+    icon: <SiAngular className="shrink-0 text-red-600" size={16} />,
+  },
+  {
+    label: ".NET Developer",
+    href: "/hire-developers/dotnet-developer",
+    desc: "Enterprise web apps using C# and .NET Core",
+    icon: <SiDotnet className="shrink-0 text-purple-600" size={16} />,
+  },
+  {
+    label: "Frontend Developer",
+    href: "/hire-developers/frontend-developer",
+    desc: "Stunning, responsive UI/UX web interfaces",
+    icon: <Globe className="shrink-0 text-cyan-600" size={16} />,
+  },
+  {
+    label: "Backend Developer",
+    href: "/hire-developers/backend-developer",
+    desc: "Secure databases, APIs, and server architecture",
+    icon: <Database className="shrink-0 text-blue-500" size={16} />,
   },
 ];
 
@@ -242,8 +324,6 @@ const technologies = [
         to: "/technologies/jenkins",
         icon: <SiJenkins className="shrink-0 text-red-500" size={15} />,
       },
-      // { label: "GitHub Actions", to: "/technologies/github-actions", icon: <SiGithubactions className="shrink-0 text-blue-400" size={15} /> },
-      // { label: "GitLab CI/CD", to: "/technologies/gitlab-ci-cd", icon: <SiGitlab className="shrink-0 text-orange-600" size={15} /> },
     ],
   },
   {
@@ -374,8 +454,10 @@ const NavLink = ({ to, children }) => {
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [hireOpen, setHireOpen] = useState(false);
   const [techOpen, setTechOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileHireOpen, setMobileHireOpen] = useState(false);
   const [mobileTechOpen, setMobileTechOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { darkMode, toggleDarkMode } = useTheme();
@@ -410,7 +492,7 @@ const Navbar = () => {
         <nav className="hidden lg:flex items-center gap-1">
           <NavLink to="/">Home</NavLink>
 
-          {/* Services Dropdown */}
+          {/* Services Dropdown - Updated to Grid View with Icons */}
           <div
             className="relative"
             onMouseEnter={() => setServicesOpen(true)}
@@ -432,35 +514,38 @@ const Navbar = () => {
             </Link>
 
             <div
-              className={`absolute left-0 top-full pt-3 w-88 transition-all duration-200 origin-top-left ${
+              className={`absolute left-0 top-full pt-3 w-130 max-w-[95vw] transition-all duration-200 origin-top-left ${
                 servicesOpen
                   ? "opacity-100 translate-y-0 scale-100"
                   : "opacity-0 translate-y-2 scale-95 pointer-events-none"
               }`}
             >
-              <div className="rounded-2xl border p-3 shadow-xl backdrop-blur-md overflow-hidden bg-white border-slate-200 text-slate-900 dark:bg-[#0b1528] dark:border-blue-500/30 dark:text-white dark:shadow-black/90">
-                {/* Header Badge */}
-                <div className="flex items-center gap-2 px-3 py-2 border-b mb-2 border-slate-200 text-[#286b94] dark:border-[#286b94]/30 dark:text-[#6ea1ff]">
+              <div className="rounded-2xl border p-4 shadow-xl backdrop-blur-md overflow-hidden bg-white border-slate-200 text-slate-900 dark:bg-[#0b1528] dark:border-blue-500/30 dark:text-white dark:shadow-black/90">
+                <div className="flex items-center gap-2 px-3 py-2 border-b mb-3 border-slate-200 text-[#286b94] dark:border-[#286b94]/30 dark:text-[#6ea1ff]">
                   <Sparkles size={14} className="shrink-0" />
                   <span className="text-[11px] font-bold uppercase tracking-wider">
                     AI & Digital Services
                   </span>
                 </div>
 
-                {/* Items */}
-                <div className="flex flex-col gap-1">
+                <div className="grid grid-cols-2 gap-2">
                   {services.map((s) => (
                     <Link
                       key={s.label}
                       to={s.href}
-                      className="group flex flex-col px-3.5 py-2.5 rounded-xl transition-all duration-200 border-l-2 border-transparent hover:bg-blue-50/80 hover:border-[#286b94] dark:hover:bg-[#286b94]/30 dark:hover:border-[#6ea1ff]"
+                      className="group flex items-start gap-2.5 p-2.5 rounded-xl transition-all duration-200 border border-transparent hover:bg-blue-50/80 hover:border-[#286b94]/40 dark:hover:bg-[#286b94]/20 dark:hover:border-[#6ea1ff]/40"
                     >
-                      <span className="text-xs font-bold text-slate-900 group-hover:text-[#1e3a8a] dark:text-white dark:group-hover:text-white">
-                        {s.label}
-                      </span>
-                      <span className="text-[11px] mt-0.5 leading-snug text-slate-600 group-hover:text-blue-950 font-medium dark:text-slate-300 dark:group-hover:text-sky-300 dark:font-normal">
-                        {s.desc}
-                      </span>
+                      <div className="mt-0.5 p-1.5 rounded-lg bg-blue-50 dark:bg-[#286b94]/30 shrink-0">
+                        {s.icon}
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-xs font-bold text-slate-900 group-hover:text-[#1e3a8a] dark:text-white dark:group-hover:text-sky-300">
+                          {s.label}
+                        </span>
+                        <span className="text-[10px] mt-0.5 leading-snug text-slate-500 dark:text-slate-400 line-clamp-1">
+                          {s.desc}
+                        </span>
+                      </div>
                     </Link>
                   ))}
                 </div>
@@ -468,7 +553,65 @@ const Navbar = () => {
             </div>
           </div>
 
-          <NavLink to="/hire-a-developer">Hire Developers</NavLink>
+          <div
+            className="relative"
+            onMouseEnter={() => setHireOpen(true)}
+            onMouseLeave={() => setHireOpen(false)}
+          >
+            <Link
+              to="/hire-developers"
+              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-medium transition-colors duration-200 ${
+                hireOpen
+                  ? "text-[#1e3a8a] bg-blue-50 dark:text-white dark:bg-[#286b94]/25"
+                  : "text-slate-700 hover:text-[#1e3a8a] dark:text-slate-200 dark:hover:text-white"
+              }`}
+            >
+              Hire Developers
+              <ChevronDown
+                size={14}
+                className={`transition-transform duration-200 ${hireOpen ? "rotate-180 text-[#6ea1ff]" : ""}`}
+              />
+            </Link>
+
+            <div
+              className={`absolute left-0 top-full pt-3 w-180 max-w-[95vw] transition-all duration-200 origin-top-left ${
+                hireOpen
+                  ? "opacity-100 translate-y-0 scale-100"
+                  : "opacity-0 translate-y-2 scale-95 pointer-events-none"
+              }`}
+            >
+              <div className="rounded-2xl border p-4 shadow-xl backdrop-blur-md overflow-hidden bg-white border-slate-200 text-slate-900 dark:bg-[#0b1528] dark:border-blue-500/30 dark:text-white dark:shadow-black/90">
+                <div className="flex items-center gap-2 px-3 py-2 border-b mb-3 border-slate-200 text-[#286b94] dark:border-[#286b94]/30 dark:text-[#6ea1ff]">
+                  <Users size={14} className="shrink-0" />
+                  <span className="text-[11px] font-bold uppercase tracking-wider">
+                    Trusted Developers
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-3 gap-2">
+                  {hireDevelopers.map((h) => (
+                    <Link
+                      key={h.label}
+                      to={h.href}
+                      className="group flex items-start gap-2.5 p-2.5 rounded-xl transition-all duration-200 border border-transparent hover:bg-blue-50/80 hover:border-[#286b94]/40 dark:hover:bg-[#286b94]/20 dark:hover:border-[#6ea1ff]/40"
+                    >
+                      <div className="mt-0.5 p-1.5 rounded-lg bg-blue-50 dark:bg-[#286b94]/30 shrink-0">
+                        {h.icon}
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-xs font-bold text-slate-900 group-hover:text-[#1e3a8a] dark:text-white dark:group-hover:text-sky-300">
+                          {h.label}
+                        </span>
+                        <span className="text-[10px] mt-0.5 leading-snug text-slate-500 dark:text-slate-400 line-clamp-1">
+                          {h.desc}
+                        </span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* Technologies Mega Menu */}
           <div
@@ -605,31 +748,45 @@ const Navbar = () => {
             />
           </button>
           {mobileServicesOpen && (
-            <div className="ml-3 pl-3 border-l border-blue-500/20 flex flex-col gap-1.5 my-1">
+            <div className="ml-3 pl-3 border-l border-blue-500/20 grid grid-cols-2 gap-1.5 my-1">
               {services.map((s) => (
-                <a
+                <Link
                   key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-3 py-1.5 rounded-lg text-xs flex flex-col text-slate-900 hover:bg-blue-50 dark:text-white dark:hover:bg-[#286b94]/25"
+                  to={s.href}
+                  onClick={() => setIsOpen(false)}
+                  className="px-2.5 py-2 rounded-lg text-xs flex flex-col text-slate-900 bg-slate-50 hover:bg-blue-50 dark:bg-[#286b94]/10 dark:text-white dark:hover:bg-[#286b94]/30"
                 >
-                  <span className="font-bold">{s.label}</span>
-                  <span className="text-[10px] text-slate-600 dark:text-sky-300">
-                    {s.desc}
-                  </span>
-                </a>
+                  <span className="font-bold text-[11px]">{s.label}</span>
+                </Link>
               ))}
             </div>
           )}
 
-          <Link
-            to="hire-a-developer"
-            onClick={() => setIsOpen(false)}
-            className="px-4 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
+          {/* Mobile Hire Developers Accordion */}
+          <button
+            onClick={() => setMobileHireOpen(!mobileHireOpen)}
+            className="flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-medium cursor-pointer text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
           >
-            Hire Developers
-          </Link>
+            <span>Hire Developers</span>
+            <ChevronDown
+              size={15}
+              className={`transition-transform duration-200 ${mobileHireOpen ? "rotate-180 text-[#6ea1ff]" : ""}`}
+            />
+          </button>
+          {mobileHireOpen && (
+            <div className="ml-3 pl-3 border-l border-blue-500/20 grid grid-cols-2 gap-1.5 my-1">
+              {hireDevelopers.map((h) => (
+                <Link
+                  key={h.label}
+                  to={h.href}
+                  onClick={() => setIsOpen(false)}
+                  className="px-2.5 py-2 rounded-lg text-xs flex flex-col text-slate-900 bg-slate-50 hover:bg-blue-50 dark:bg-[#286b94]/10 dark:text-white dark:hover:bg-[#286b94]/30"
+                >
+                  <span className="font-bold text-[11px]">{h.label}</span>
+                </Link>
+              ))}
+            </div>
+          )}
 
           {/* Mobile Technologies Accordion */}
           <button

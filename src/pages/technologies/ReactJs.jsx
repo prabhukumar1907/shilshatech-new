@@ -1,23 +1,25 @@
-import React from "react";
-import { 
-  CheckCircle2, 
-  ArrowRight, 
-  Layers, 
-  Zap, 
-  ShieldCheck, 
-  Cpu, 
-  Code, 
-  Globe, 
-  Layers3, 
-  Workflow 
+import React, { useState } from "react";
+import {
+  CheckCircle2,
+  ArrowRight,
+  Zap,
+  ShieldCheck,
+  Workflow,
+  ChevronDown,
+  Sparkles,
+  Globe,
+  Layers,
+  Cpu,
+  Code2,
+  Terminal,
+  Gauge,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { FaReact } from "react-icons/fa";
 import AwardsSection from "../../components/AwardsSection";
 import ReasonsWhySection from "../../components/ReasonsWhySection";
-import ServicesSection from "../../components/ServiceSection";
 import Footer from "../../components/Footer";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const theme = {
   primary: "#276ea5",
@@ -25,203 +27,343 @@ const theme = {
   glow: "#60a5fa",
 };
 
+const servicesList = [
+  {
+    title: "Custom ReactJS Applications",
+    desc: "Engineered from scratch to match your exact business logic with hyper-responsive layouts.",
+    icon: Code2,
+  },
+  {
+    title: "UI/UX Modernization",
+    desc: "Translating complex design systems into pixel-perfect, accessible React interfaces.",
+    icon: Sparkles,
+  },
+  {
+    title: "Modular Component Design",
+    desc: "Building atomic, reusable component libraries that accelerate your entire engineering cycle.",
+    icon: Layers,
+  },
+  {
+    title: "Enterprise API Integration",
+    desc: "Seamless bridging between React frontends and robust microservices or cloud architectures.",
+    icon: Workflow,
+  },
+  {
+    title: "Legacy Migration & Upgrades",
+    desc: "Upgrading monoliths or older frameworks to modern React stacks with zero downtime.",
+    icon: Terminal,
+  },
+  {
+    title: "Speed & Core Web Vitals",
+    desc: "Optimizing virtual DOM re-renders and bundle sizes for maximum SEO and lightning performance.",
+    icon: Gauge,
+  },
+];
+
+const faqs = [
+  {
+    q: "Why choose ReactJS for modern enterprise web applications?",
+    a: "React's virtual DOM architecture ensures lightning-fast rendering, unmatched modularity via reusable components, and a massive ecosystem of enterprise-grade libraries.",
+  },
+  {
+    q: "How does Shilsha Technologies handle quality assurance?",
+    a: "We enforce strict code reviews, automated unit testing, continuous integration pipelines, and component-driven testing to eliminate regressions.",
+  },
+  {
+    q: "Can you connect React with our existing backend stack?",
+    a: "Yes. Our engineers specialize in integrating React frontends with diverse backends including Node.js, Python/Django, PHP, Java, and serverless cloud setups.",
+  },
+  {
+    q: "What is your typical project kickoff timeline?",
+    a: "We deploy vetted engineering squads within 48 to 72 hours following initial architecture alignment and scope definition.",
+  },
+];
+
 const ReactServicesPage = () => {
-  const brandTheme = {
-    primaryBlue: "#276ea5",
-    secondaryIndigo: "#1d4ed8",
-    electricCyan: "#60a5fa",
-  };
-
-  const whyChooseItems = [
-    {
-      title: "Expertise and Experience",
-      desc: "Our team of experienced React JS developers builds robust and scalable web applications, ensuring high-quality deliverables.",
-    },
-    {
-      title: "Customized Solutions",
-      desc: "We understand the unique requirements of your business and provide tailored React JS development solutions that align with your specific needs and objectives.",
-    },
-    {
-      title: "Agile Approach",
-      desc: "We follow an agile development methodology, ensuring regular updates, efficient collaboration, and flexibility to accommodate changes throughout the project.",
-    },
-    {
-      title: "Transparent Communication",
-      desc: "We maintain open and transparent communication channels, keeping you informed about progress, milestones, and decisions throughout the development process.",
-    },
-    {
-      title: "Timely Delivery",
-      desc: "We prioritize delivering projects on time, ensuring that your React JS application is deployed within the agreed-upon timeframe.",
-    },
-    {
-      title: "Quality Assurance",
-      desc: "Our stringent quality assurance processes guarantee a flawless user experience and a high-performance React JS application.",
-    },
-  ];
-
-  const servicesList = [
-    {
-      title: "Custom ReactJS Development",
-      desc: "We build highly interactive and scalable web applications from scratch, precisely tailored to your unique requirements.",
-    },
-    {
-      title: "ReactJS UI/UX Design",
-      desc: "Our design team crafts stunning user interfaces with intuitive navigation and seamless user experiences to capture your target audience.",
-    },
-    {
-      title: "ReactJS Component Development",
-      desc: "We specialize in developing reusable and modular React components, accelerating development time, and ensuring code efficiency.",
-    },
-    {
-      title: "ReactJS Integration Services",
-      desc: "Seamlessly integrate ReactJS with existing systems and third-party APIs to enhance functionality and data exchange across platforms.",
-    },
-    {
-      title: "ReactJS Migration and Upgrades",
-      desc: "We help migrate your existing applications to ReactJS or upgrade them to the latest versions, ensuring smooth transitions and improved performance.",
-    },
-    {
-      title: "ReactJS Support and Maintenance",
-      desc: "Our team provides ongoing support, monitoring, and maintenance services to ensure your ReactJS applications stay secure, optimized, and up-to-date.",
-    },
-    {
-      title: "ReactJS Plugin and API Integrations",
-      desc: "We integrate third-party plugins and APIs seamlessly into your ReactJS application, expanding its functionality and allowing seamless communication with external services and platforms.",
-    },
-    {
-      title: "ReactJS Performance Optimization",
-      desc: "We optimize your ReactJS applications for maximum performance, ensuring fast loading times, efficient rendering, and smooth user interactions. This optimization enhances user experience and boosts conversion rates.",
-    },
-  ];
+  const [openFaq, setOpenFaq] = useState(null);
 
   return (
-    <div className="min-h-screen pt-28 pb-16 bg-slate-50 dark:bg-[#070d18] text-slate-800 dark:text-slate-100 transition-colors duration-200 font-sans selection:bg-[#60a5fa] selection:text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Hero Section */}
-        <div className="relative rounded-3xl border border-slate-200/80 dark:border-blue-500/20 bg-white dark:bg-[#0b1528] p-8 sm:p-12 shadow-xl overflow-hidden mb-12">
-          <div 
-            className="absolute top-0 left-0 h-1 w-full"
-            style={{ background: `linear-gradient(90deg, #276ea5, ${theme.glow})` }}
-          />
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div className="flex flex-col gap-4">
-              <div className="inline-flex items-center gap-2 w-fit px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 text-sky-600 dark:bg-sky-500/10 dark:text-sky-400 border border-sky-200 dark:border-sky-500/20">
-                <FaReact size={14} className="shrink-0 animate-spin" style={{ animationDuration: '10s' }} />
-                <span>Shilsha Technologies Expert Services</span>
-              </div>
-              <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
-                ReactJS Development Company in India
-              </h1>
-              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-                Shilsha Technologies offers expert ReactJS services for seamless web development. Transform your ideas into reality today!
-              </p>
-              <div className="flex flex-wrap gap-3 pt-2">
-                <Link
-                  to="/contact-us"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white text-xs font-semibold shadow-md transition-transform duration-200 hover:-translate-y-0.5"
-                  style={{ background: `linear-gradient(90deg, #276ea5, ${theme.secondary})` }}
-                >
-                  <span>Hire React Developers</span>
-                  <ArrowRight size={15} />
-                </Link>
-              </div>
-            </div>
-            <div className="flex justify-center">
-              <div className="p-8 rounded-2xl border border-slate-100 dark:border-blue-500/10 bg-slate-50 dark:bg-[#070d18] flex items-center justify-center shadow-inner">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/1126/1126012.png?w=1380&t=st=1689938464~exp=1689939064~hmac=18fb1d5ba0eb7d7b6f0d2d4404a50cb4f6a6a12953c4878069d8e5780163aacf"
-                  alt="React Development"
-                  className="w-48 h-48 sm:w-64 sm:h-64 object-contain drop-shadow-2xl animate-pulse"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+    <div className="relative min-h-screen pt-32 pb-24 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans selection:bg-blue-500 selection:text-white transition-colors duration-500 overflow-hidden">
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-225 h-137.5 rounded-full blur-[160px] pointer-events-none opacity-20 dark:opacity-20"
+        style={{
+          background: `radial-gradient(circle, ${theme.primary} 0%, ${theme.secondary} 60%, transparent 100%)`,
+        }}
+      />
+      <div className="absolute top-[40%] right-[-10%] w-125 h-125 rounded-full blur-[180px] pointer-events-none opacity-10 bg-blue-600" />
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="p-6 rounded-2xl border border-slate-200/80 dark:border-blue-500/20 bg-white dark:bg-[#0b1528] shadow-sm">
-            <div className="h-10 w-10 rounded-xl bg-sky-50 dark:bg-sky-500/10 flex items-center justify-center text-sky-600 dark:text-sky-400 mb-4">
-              <Zap size={20} />
-            </div>
-            <h3 className="text-base font-bold mb-2">High Performance</h3>
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Leverage React's virtual DOM and efficient rendering engine for lightning-fast web applications and optimal user engagement.
-            </p>
-          </div>
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-size-[32px_32px] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 
-          <div className="p-6 rounded-2xl border border-slate-200/80 dark:border-blue-500/20 bg-white dark:bg-[#0b1528] shadow-sm">
-            <div className="h-10 w-10 rounded-xl bg-sky-50 dark:bg-sky-500/10 flex items-center justify-center text-sky-600 dark:text-sky-400 mb-4">
-              <Workflow size={20} />
-            </div>
-            <h3 className="text-base font-bold mb-2">Component-Based Architecture</h3>
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Modular and reusable components ensure clean code organization, rapid development workflows, and simplified ongoing maintenance.
-            </p>
-          </div>
-
-          <div className="p-6 rounded-2xl border border-slate-200/80 dark:border-blue-500/20 bg-white dark:bg-[#0b1528] shadow-sm">
-            <div className="h-10 w-10 rounded-xl bg-sky-50 dark:bg-sky-500/10 flex items-center justify-center text-sky-600 dark:text-sky-400 mb-4">
-              <ShieldCheck size={20} />
-            </div>
-            <h3 className="text-base font-bold mb-2">Enterprise Scalability</h3>
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Easily integrate with robust state management tools and third-party APIs to scale your application alongside your growing business needs.
-            </p>
-          </div>
-        </div>
-
-      </div>
-
-      {/* Main Intro Section */}
-      <section className="py-16 px-6 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-12 space-y-8">
-            <h2 
-              className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-snug"
-              style={{ color: brandTheme.primaryBlue }}
-            >
-              Power Your Web Presence with the Best React JS Development Company in India
-            </h2>
-            <div 
-              className="w-full h-1 rounded-full my-6 opacity-40" 
-              style={{ background: `linear-gradient(to right, ${brandTheme.primaryBlue}, ${brandTheme.electricCyan})` }}
-            />
-            <div className="p-8 rounded-3xl bg-white dark:bg-[#0b1528] backdrop-blur-xl border border-slate-200 dark:border-blue-500/20 shadow-xl space-y-6">
-              <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-base sm:text-lg">
-                Are you looking to leverage React JS's full potential for your web development projects? Look no further! As a premier React JS Development Company, our expert team builds dynamic and responsive web applications.
-              </p>
-              <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-base sm:text-lg">
-                Contact us today to discuss your requirements and find out what ReactJS can do for you!
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Software & Application Benefits Section */}
-      <section className="py-16 px-6 bg-slate-100/60 dark:bg-[#0b1528]/40 border-y border-slate-200 dark:border-blue-500/20">
-        <div className="max-w-7xl mx-auto space-y-8">
-          <h2 
-            className="text-3xl sm:text-5xl font-extrabold tracking-tight"
-            style={{ color: brandTheme.primaryBlue }}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-28">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {/* Hero Main Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-8 rounded-3xl border border-slate-200/80 dark:border-white/10 bg-linear-to-br from-white/90 via-slate-50/50 to-blue-50/30 dark:from-slate-900/90 dark:via-slate-900/50 dark:to-blue-950/30 backdrop-blur-2xl p-8 sm:p-12 shadow-2xl flex flex-col justify-between relative overflow-hidden group"
           >
-            Build a full-featured application with React JS
-          </h2>
-          <div className="space-y-6 text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-            <p className="p-8 rounded-3xl bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-blue-500/20 shadow-lg transition-transform hover:-translate-y-1 duration-300">
-              As a ReactJS Development Company in India, we offer numerous benefits to websites. We provide a fast and responsive user interface, ensuring smooth rendering and an enhanced user experience. Its component-based architecture enables code reusability, resulting in faster development and easier maintenance. We also offer efficient state management, optimizing performance and scalability. As a ReactJS Development Company, we leverage these advantages to create highly interactive, performant, and user-friendly websites.
+            <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-blue-500/20 transition-all duration-700" />
+
+            <div className="space-y-6 relative z-10">
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-semibold bg-sky-50 dark:bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-200 dark:border-sky-500/20 backdrop-blur-xl">
+                <FaReact
+                  size={15}
+                  className="animate-spin text-sky-500 dark:text-sky-400"
+                  style={{ animationDuration: "12s" }}
+                />
+                <span>Shilsha Technologies Enterprise Division</span>
+              </div>
+
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1]">
+                Next-Gen ReactJS{" "}
+                <span
+                  className="bg-clip-text text-transparent"
+                  style={{
+                    backgroundImage: `linear-gradient(135deg, ${theme.primary} 0%, #3b82f6 50%, ${theme.secondary} 100%)`,
+                  }}
+                >
+                  Development
+                </span>
+              </h1>
+
+              <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg max-w-xl leading-relaxed">
+                Empowering global enterprises with high-performance, scalable,
+                and beautifully crafted ReactJS architectures built by elite
+                developers at Shilsha Technologies.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-4 pt-8 relative z-10">
+              <Link
+                to="/contact-us"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-xl text-white text-sm font-bold shadow-xl shadow-blue-600/30 transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-600/50"
+                style={{
+                  background: `linear-gradient(135deg, ${theme.primary} 0%, ${theme.secondary} 100%)`,
+                }}
+              >
+                <span>Hire React Experts</span>
+                <ArrowRight size={16} />
+              </Link>
+
+              <div className="flex items-center gap-2 px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-100/80 dark:bg-white/5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                Available for immediate onboarding
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Hero Side Metric Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="lg:col-span-4 rounded-3xl border border-slate-200/80 dark:border-white/10 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden"
+          >
+            <div className="space-y-4">
+              <div className="p-3 rounded-2xl bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 w-fit border border-blue-200 dark:border-blue-500/20">
+                <Zap size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                Lightning Speed
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Optimized state management and minimal re-renders guarantee
+                sub-second load times across mobile and desktop viewports.
+              </p>
+            </div>
+
+            <div className="pt-6 border-t border-slate-200 dark:border-white/10 grid grid-cols-2 gap-4 text-center">
+              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5">
+                <div className="text-2xl font-black text-sky-600 dark:text-sky-400">
+                  99.9%
+                </div>
+                <div className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider mt-1">
+                  Uptime SLA
+                </div>
+              </div>
+              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5">
+                <div className="text-2xl font-black text-blue-600 dark:text-blue-400">
+                  2x
+                </div>
+                <div className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider mt-1">
+                  Faster Delivery
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Feature Highlights Bento Row */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="p-8 rounded-3xl border border-slate-200/80 dark:border-white/10 bg-white/90 dark:bg-slate-900/60 backdrop-blur-xl hover:border-blue-500/40 transition-all duration-300 group shadow-xl dark:shadow-none">
+            <div className="h-12 w-12 rounded-2xl bg-sky-50 dark:bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <Cpu size={22} />
+            </div>
+            <h4 className="text-lg font-bold mb-2 text-slate-900 dark:text-white">
+              Virtual DOM Efficiency
+            </h4>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Smart reconciliation algorithms ensure your interface updates
+              smoothly even under heavy data streams.
             </p>
-            <p className="p-8 rounded-3xl bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-blue-500/20 shadow-lg transition-transform hover:-translate-y-1 duration-300">
-              By choosing our ReactJS development services, you ensure a website that stands out, engages users and drives business growth in the competitive digital landscape.
+          </div>
+
+          <div className="p-8 rounded-3xl border border-slate-200/80 dark:border-white/10 bg-white/90 dark:bg-slate-900/60 backdrop-blur-xl hover:border-blue-500/40 transition-all duration-300 group shadow-xl dark:shadow-none">
+            <div className="h-12 w-12 rounded-2xl bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <Workflow size={22} />
+            </div>
+            <h4 className="text-lg font-bold mb-2 text-slate-900 dark:text-white">
+              Atomic Architecture
+            </h4>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Decoupled, modular code structures that make scaling features
+              seamless for multi-team engineering units.
+            </p>
+          </div>
+
+          <div className="p-8 rounded-3xl border border-slate-200/80 dark:border-white/10 bg-white/90 dark:bg-slate-900/60 backdrop-blur-xl hover:border-blue-500/40 transition-all duration-300 group shadow-xl dark:shadow-none">
+            <div className="h-12 w-12 rounded-2xl bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <ShieldCheck size={22} />
+            </div>
+            <h4 className="text-lg font-bold mb-2 text-slate-900 dark:text-white">
+              Enterprise Security
+            </h4>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Vulnerability scans, secure state boundaries, and robust
+              authentication patterns built into every release.
             </p>
           </div>
         </div>
-      </section>
 
-      <ReasonsWhySection />
-      <AwardsSection />
+        {/* Brand Showcase Banner */}
+        <section className="relative rounded-3xl border border-slate-200/80 dark:border-white/10 bg-linear-to-r from-blue-50/80 via-white/90 to-white/90 dark:from-blue-950/40 dark:via-slate-900/80 dark:to-slate-900/80 backdrop-blur-2xl p-10 sm:p-14 overflow-hidden shadow-2xl">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="max-w-3xl space-y-6 relative z-10">
+            <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+              Power Your Digital Ecosystem with Shilsha Technologies
+            </h2>
+            <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed font-normal">
+              As a premier ReactJS development authority in India, Shilsha
+              Technologies bridges the gap between ambitious product roadmaps
+              and flawless technical execution. Let's engineer your market
+              advantage today.
+            </p>
+            <div className="pt-2">
+              <Link
+                to="/contact-us"
+                className="inline-flex items-center gap-2 text-sm font-bold text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 transition-colors"
+              >
+                <span>Consult with our React architects</span>
+                <ArrowRight size={15} />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Modern Services Grid */}
+        <section className="space-y-12">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
+            <div className="inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-xs font-bold bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-500/20">
+              <Sparkles size={13} /> Capabilities
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white">
+              Specialized ReactJS Services
+            </h2>
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
+              Comprehensive front-end solutions designed for modern enterprise
+              demands.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {servicesList.map((srv, idx) => {
+              const Icon = srv.icon;
+              return (
+                <motion.div
+                  key={srv.title}
+                  whileHover={{ y: -5 }}
+                  className="p-8 rounded-3xl border border-slate-200/80 dark:border-white/10 bg-white/90 dark:bg-slate-900/60 backdrop-blur-xl shadow-xl flex flex-col justify-between group hover:border-blue-500/50 transition-all"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="p-3 rounded-2xl bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-500/20 group-hover:scale-110 transition-transform">
+                        <Icon size={22} />
+                      </div>
+                      <span className="text-xs font-mono font-bold text-slate-400 dark:text-slate-600">
+                        0{idx + 1}
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-bold mb-2 text-slate-900 dark:text-white">
+                      {srv.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                      {srv.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Interactive FAQ Section */}
+        <section className="max-w-4xl mx-auto w-full space-y-8">
+          <div className="text-center space-y-3">
+            <h2 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-sm text-slate-600 dark:text-slate-400">
+              Everything you need to know about partnering with Shilsha
+              Technologies.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {faqs.map((faq, index) => {
+              const isOpen = openFaq === index;
+              return (
+                <div
+                  key={index}
+                  className="rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white/90 dark:bg-slate-900/80 backdrop-blur-xl overflow-hidden shadow-lg transition-all"
+                >
+                  <button
+                    onClick={() => setOpenFaq(isOpen ? null : index)}
+                    className="w-full flex items-center justify-between p-6 text-left font-bold text-sm sm:text-base focus:outline-none cursor-pointer text-slate-900 dark:text-white"
+                  >
+                    <span>{faq.q}</span>
+                    <ChevronDown
+                      size={18}
+                      className={`transition-transform duration-300 text-blue-600 dark:text-blue-400 shrink-0 ml-4 ${
+                        isOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <div className="px-6 pb-6 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-white/5 pt-4">
+                          {faq.a}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        <ReasonsWhySection />
+        <AwardsSection />
+      </div>
       <Footer />
     </div>
   );

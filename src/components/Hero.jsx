@@ -17,18 +17,19 @@ const containerVariants = {
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
+      staggerChildren: 0.12,
+      delayChildren: 0.05,
     },
   },
 };
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: [0.215, 0.61, 0.355, 1] },
+    scale: 1,
+    transition: { type: "spring", stiffness: 100, damping: 20 },
   },
 };
 
@@ -88,15 +89,17 @@ const rightTagsPool = [
 
 const typingPhrases = [
   "AI Development",
+  "AI/ML Solutions",
   "Full-Stack Development",
   "Next-Gen SaaS Platforms",
-  "Enterprise Mobile Solutions",
-  "Secure Cloud Ecosystems",
+  "Enterprise Solutions",
+  "App Development",
 ];
 
 const Hero = () => {
   const [activeStage, setActiveStage] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   const [currentLeftTags, setCurrentLeftTags] = useState([
     leftTagsPool[0],
@@ -113,6 +116,17 @@ const Hero = () => {
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [typingSpeed, setTypingSpeed] = useState(120);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const { innerWidth, innerHeight } = window;
+      const x = (e.clientX / innerWidth - 0.5) * 30;
+      const y = (e.clientY / innerHeight - 0.5) * -30;
+      setMousePos({ x, y });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   useEffect(() => {
     const checkDark = () => document.documentElement.classList.contains("dark");
@@ -189,13 +203,25 @@ const Hero = () => {
   }, [currentText, isDeleting, phraseIndex, typingSpeed]);
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 pt-32 pb-20 transition-colors duration-500 selection:bg-blue-500 selection:text-white bg-slate-50 text-slate-900 dark:bg-[#070d18] dark:text-slate-100">
+    <section 
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 pt-32 pb-20 transition-colors duration-500 selection:bg-blue-500 selection:text-white bg-slate-50 text-slate-900 dark:bg-[#070d18] dark:text-slate-100"
+      style={{ perspective: "1400px" }}
+    >
+      <motion.div 
+        className="absolute pointer-events-none w-150 h-150 rounded-full blur-[140px] opacity-30 dark:opacity-40 transition-all duration-300 z-0"
+        style={{
+          background: `radial-gradient(circle, ${theme.glow} 0%, ${theme.primary} 60%, transparent 100%)`,
+          left: `calc(50% + ${mousePos.x * 12}px - 300px)`,
+          top: `calc(50% + ${mousePos.y * 12}px - 300px)`,
+        }}
+      />
+
       <div
-        className="absolute inset-0 opacity-25 pointer-events-none transition-opacity duration-500"
+        className="absolute inset-0 opacity-25 pointer-events-none transition-opacity duration-500 z-0"
         style={{
           backgroundImage: `radial-gradient(${
             isDarkMode ? theme.glow : theme.primary
-          } 1.2px, transparent 1.2px)`,
+          } 1.3px, transparent 1.3px)`,
           backgroundSize: "36px 36px",
           maskImage:
             "radial-gradient(ellipse 70% 60% at 50% 40%, black 25%, transparent 80%)",
@@ -204,29 +230,21 @@ const Hero = () => {
         }}
       />
 
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div
-          className="h-136 w-136 sm:h-184 sm:w-184 rounded-full blur-[150px] animate-pulse transition-opacity duration-500 opacity-20 dark:opacity-35"
-          style={{
-            background: `radial-gradient(circle, ${theme.primary} 0%, ${theme.secondary} 50%, ${theme.accent} 85%)`,
-            animationDuration: "9s",
-          }}
-        />
-      </div>
-
-      <div className="hidden xl:block">
+      <div className="hidden xl:block z-10">
         <AnimatePresence mode="popLayout">
           {currentLeftTags.map(({ label, offset }, i) => (
             <motion.div
               key={`${label}-${i}`}
-              initial={{ opacity: 0, x: -20, scale: 0.95 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              exit={{ opacity: 0, x: -20, scale: 0.95 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-              className={`absolute ${offset} left-8 2xl:left-16 flex items-center gap-2.5 rounded-full border px-4 py-2 text-xs font-medium backdrop-blur-xl shadow-lg transition-colors border-slate-200 bg-white/80 text-slate-700 shadow-slate-200/60 dark:border-blue-500/25 dark:bg-[#0e182d]/80 dark:text-slate-200 dark:shadow-black/40`}
+              initial={{ opacity: 0, x: -50, scale: 0.8, rotateZ: -10 }}
+              animate={{ opacity: 1, x: 0, scale: 1, rotateZ: 0 }}
+              exit={{ opacity: 0, x: -50, scale: 0.8, rotateZ: 10 }}
+              transition={{ type: "spring", stiffness: 200, damping: 20 }}
+              whileHover={{ scale: 1.15, x: 10, rotateZ: 2, z: 60 }}
+              style={{ transformStyle: "preserve-3d" }}
+              className={`absolute ${offset} left-8 2xl:left-16 flex items-center gap-3 rounded-2xl border px-5 py-2.5 text-xs font-semibold shadow-2xl transition-all border-slate-200/80 bg-white/80 text-slate-700 shadow-slate-300/50 dark:border-blue-500/30 dark:bg-[#0e182d]/85 dark:text-slate-200 dark:shadow-[0_10px_30px_rgba(0,0,0,0.6)] cursor-pointer backdrop-blur-xl`}
             >
               <span
-                className="h-2 w-2 rounded-full animate-ping"
+                className="h-2.5 w-2.5 rounded-full animate-ping"
                 style={{ background: theme.glow }}
               />
               {label}
@@ -238,14 +256,16 @@ const Hero = () => {
           {currentRightTags.map(({ label, offset }, i) => (
             <motion.div
               key={`${label}-${i}`}
-              initial={{ opacity: 0, x: 20, scale: 0.95 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              exit={{ opacity: 0, x: 20, scale: 0.95 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-              className={`absolute ${offset} right-8 2xl:right-16 flex items-center gap-2.5 rounded-full border px-4 py-2 text-xs font-medium backdrop-blur-xl shadow-lg transition-colors border-slate-200 bg-white/80 text-slate-700 shadow-slate-200/60 dark:border-blue-500/25 dark:bg-[#0e182d]/80 dark:text-slate-200 dark:shadow-black/40`}
+              initial={{ opacity: 0, x: 50, scale: 0.8, rotateZ: 10 }}
+              animate={{ opacity: 1, x: 0, scale: 1, rotateZ: 0 }}
+              exit={{ opacity: 0, x: 50, scale: 0.8, rotateZ: -10 }}
+              transition={{ type: "spring", stiffness: 200, damping: 20 }}
+              whileHover={{ scale: 1.15, x: -10, rotateZ: -2, z: 60 }}
+              style={{ transformStyle: "preserve-3d" }}
+              className={`absolute ${offset} right-8 2xl:right-16 flex items-center gap-3 rounded-2xl border px-5 py-2.5 text-xs font-semibold shadow-2xl transition-all border-slate-200/80 bg-white/80 text-slate-700 shadow-slate-300/50 dark:border-blue-500/30 dark:bg-[#0e182d]/85 dark:text-slate-200 dark:shadow-[0_10px_30px_rgba(0,0,0,0.6)] cursor-pointer backdrop-blur-xl`}
             >
               <span
-                className="h-2 w-2 rounded-full animate-ping"
+                className="h-2.5 w-2.5 rounded-full animate-ping"
                 style={{ background: theme.glow }}
               />
               {label}
@@ -258,24 +278,33 @@ const Hero = () => {
         variants={containerVariants}
         initial="hidden"
         animate="show"
-        className="relative z-10 mx-auto max-w-5xl text-center flex flex-col items-center"
+        style={{
+          transform: `rotateX(${mousePos.y * 0.8}deg) rotateY(${mousePos.x * 0.8}deg)`,
+          transformStyle: "preserve-3d",
+        }}
+        className="relative z-20 mx-auto max-w-5xl text-center flex flex-col items-center transition-transform duration-150 ease-out"
       >
-        <motion.div variants={fadeUp}>
-          <div className="inline-flex items-center gap-2.5 rounded-full border px-4 py-2 text-xs font-semibold tracking-wide backdrop-blur-xl transition-colors border-blue-200 bg-blue-50/80 text-blue-900 hover:border-blue-300 dark:border-blue-400/30 dark:bg-blue-950/50 dark:text-blue-300 dark:hover:border-blue-400/60">
-            <Sparkles size={14} className="text-blue-500 animate-spin-slow" />
+        <motion.div 
+          variants={fadeUp} 
+          whileHover={{ scale: 1.08, z: 40 }} 
+          style={{ transformStyle: "preserve-3d" }}
+        >
+          <div className="inline-flex items-center gap-3 rounded-full border px-5 py-2.5 text-xs font-bold tracking-wide transition-all border-blue-200 bg-blue-50/90 text-blue-900 hover:border-blue-400 dark:border-blue-400/40 dark:bg-blue-950/70 dark:text-blue-300 shadow-xl shadow-blue-500/10 backdrop-blur-xl">
+            <Sparkles size={15} className="text-blue-500 animate-spin" style={{ animationDuration: "4s" }} />
             <span>Next-Gen Software Development</span>
-            <ChevronRight size={12} className="text-blue-500 opacity-70" />
+            <ChevronRight size={13} className="text-blue-500 opacity-80" />
           </div>
         </motion.div>
 
         <motion.h1
           variants={fadeUp}
           className="mt-8 text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.12] max-w-4xl"
+          style={{ transform: "translateZ(60px)", transformStyle: "preserve-3d" }}
         >
           Engineering Excellence for{" "}
           <span className="block sm:inline min-h-[1.2em]">
             <span
-              className="bg-clip-text text-transparent inline-block"
+              className="bg-clip-text text-transparent inline-block drop-shadow-lg"
               style={{
                 backgroundImage: isDarkMode
                   ? `linear-gradient(135deg, #a5f3fc 0%, ${theme.glow} 40%, #818cf8 100%)`
@@ -290,10 +319,10 @@ const Hero = () => {
           </span>
         </motion.h1>
 
-        {/* Subtitle */}
         <motion.p
           variants={fadeUp}
-          className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed font-normal text-slate-600 dark:text-slate-300 dark:opacity-90"
+          className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed font-normal text-slate-600 dark:text-slate-300/90"
+          style={{ transform: "translateZ(40px)" }}
         >
           We engineer high-performance web platforms, intelligent mobile
           applications, and scalable cloud infrastructure designed to accelerate
@@ -302,60 +331,67 @@ const Hero = () => {
 
         <motion.div
           variants={fadeUp}
-          className="mt-10 flex flex-wrap justify-center items-center gap-4"
+          className="mt-10 flex flex-wrap justify-center items-center gap-5"
+          style={{ transform: "translateZ(80px)", transformStyle: "preserve-3d" }}
         >
-          <Link
-            to="/contact-us"
-            className="group relative inline-flex items-center gap-2.5 rounded-xl px-7 py-3.5 text-sm font-semibold text-white shadow-xl transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
-            style={{
-              background: `linear-gradient(90deg, ${theme.primary}, ${theme.secondary})`,
-              boxShadow: `0 10px 25px -5px ${theme.primary}80`,
-            }}
-          >
-            <span>Get Started</span>
-            <ArrowUpRight
-              size={18}
-              className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            />
-          </Link>
+          <motion.div whileHover={{ scale: 1.08, z: 30 }} whileTap={{ scale: 0.95 }}>
+            <Link
+              to="/contact-us"
+              className="group relative inline-flex items-center gap-3 rounded-2xl px-8 py-4 text-sm font-bold text-white shadow-2xl transition-all"
+              style={{
+                background: `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`,
+                boxShadow: `0 20px 40px -10px ${theme.primary}99, inset 0 1px 0 rgba(255,255,255,0.4)`,
+              }}
+            >
+              <span>Get Started</span>
+              <ArrowUpRight
+                size={18}
+                className="transition-transform duration-300 group-hover:translate-x-1.5 group-hover:-translate-y-1.5"
+              />
+            </Link>
+          </motion.div>
 
-          <Link
-            to="/services"
-            className="group flex items-center gap-3 rounded-xl border px-6 py-3.5 text-sm font-semibold backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 shadow-md border-slate-200 bg-white/90 text-slate-800 hover:border-slate-300 hover:bg-slate-100 hover:text-slate-900 dark:border-blue-500/20 dark:bg-[#0c1629]/80 dark:text-slate-200 dark:hover:border-blue-500/40 dark:hover:bg-[#121f3a] dark:hover:text-white"
-          >
-            <span className="flex h-7 w-7 items-center justify-center rounded-full transition-colors duration-300 bg-blue-100 text-[#286b94] group-hover:bg-[#286b94] group-hover:text-white dark:bg-blue-500/15 dark:text-blue-400 dark:group-hover:bg-blue-500 dark:group-hover:text-white">
-              <Layers size={14} />
-            </span>
-            Explore Our Services
-          </Link>
+          <motion.div whileHover={{ scale: 1.08, z: 30 }} whileTap={{ scale: 0.95 }}>
+            <Link
+              to="/services"
+              className="group flex items-center gap-3 rounded-2xl border px-7 py-4 text-sm font-bold transition-all shadow-xl border-slate-200/80 bg-white/90 text-slate-800 hover:border-slate-300 hover:bg-slate-100 hover:text-slate-900 dark:border-blue-500/25 dark:bg-[#0c1629]/90 dark:text-slate-200 dark:hover:border-blue-500/50 dark:hover:bg-[#121f3a] dark:hover:text-white backdrop-blur-xl"
+            >
+              <span className="flex h-8 w-8 items-center justify-center rounded-full transition-colors duration-300 bg-blue-100 text-[#286b94] group-hover:bg-[#286b94] group-hover:text-white dark:bg-blue-500/20 dark:text-blue-400 dark:group-hover:bg-blue-500 dark:group-hover:text-white">
+                <Layers size={15} />
+              </span>
+              Explore Our Services
+            </Link>
+          </motion.div>
         </motion.div>
 
         <motion.div
           variants={fadeUp}
-          className="mt-14 inline-flex flex-wrap items-center justify-center gap-2 rounded-2xl border p-2.5 backdrop-blur-2xl shadow-2xl transition-colors border-slate-200/80 bg-white/80 shadow-slate-200/50 dark:border-blue-500/20 dark:bg-[#0a1325]/70"
+          className="mt-14 inline-flex flex-wrap items-center justify-center gap-2.5 rounded-3xl border p-3 shadow-2xl transition-colors border-slate-200/80 bg-white/90 shadow-slate-200/50 dark:border-blue-500/25 dark:bg-[#0a1325]/85 backdrop-blur-2xl"
+          style={{ transform: "translateZ(50px)" }}
         >
           {pipelineStages.map(({ label, Icon }, i) => {
             const isActive = i === activeStage;
             return (
               <React.Fragment key={label}>
-                <div
-                  className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all duration-500 ${
+                <motion.div
+                  whileHover={{ scale: 1.06, y: -2 }}
+                  className={`flex items-center gap-2.5 rounded-2xl px-5 py-2.5 text-xs font-bold transition-all duration-500 ${
                     isActive
-                      ? "text-white shadow-md shadow-blue-900/30"
+                      ? "text-white shadow-xl shadow-blue-900/40"
                       : "text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200"
                   }`}
                   style={{
                     background: isActive
-                      ? `linear-gradient(90deg, ${theme.primary}, ${theme.secondary})`
+                      ? `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`
                       : "transparent",
                   }}
                 >
                   <Icon
-                    size={14}
+                    size={15}
                     className={isActive ? "animate-bounce" : ""}
                   />
                   {label}
-                </div>
+                </motion.div>
                 {i < pipelineStages.length - 1 && (
                   <div className="h-px w-4 sm:w-8 bg-slate-300 dark:bg-blue-500/20" />
                 )}
@@ -365,21 +401,27 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
-      {/* Stats Bar */}
       <motion.div
         variants={fadeUp}
         initial="hidden"
         animate="show"
-        className="relative z-10 mt-16 w-full max-w-4xl"
+        className="relative z-25 mt-16 w-full max-w-4xl"
+        style={{ transformStyle: "preserve-3d" }}
       >
-        <div className="grid grid-cols-2 gap-4 rounded-2xl border p-6 backdrop-blur-2xl sm:grid-cols-4 sm:gap-8 shadow-2xl transition-colors border-slate-200 bg-white/80 shadow-slate-200/50 dark:border-blue-500/20 dark:bg-[#0a1325]/60">
+        <motion.div 
+          whileHover={{ scale: 1.02, rotateX: 4, rotateY: -2 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          className="grid grid-cols-2 gap-4 rounded-3xl border p-7 sm:grid-cols-4 sm:gap-8 shadow-2xl transition-all border-slate-200/80 bg-white/80 shadow-slate-200/50 dark:border-blue-500/25 dark:bg-[#0a1325]/75 backdrop-blur-2xl"
+          style={{ transform: "translateZ(45px)" }}
+        >
           {stats.map((stat) => (
-            <div
+            <motion.div
               key={stat.label}
-              className="flex flex-col items-center text-center"
+              whileHover={{ y: -4, scale: 1.05 }}
+              className="flex flex-col items-center text-center group cursor-pointer"
             >
               <span
-                className="text-2xl sm:text-3xl font-extrabold tracking-tight bg-clip-text text-transparent"
+                className="text-3xl sm:text-4xl font-black tracking-tight bg-clip-text text-transparent transition-transform duration-300 group-hover:scale-110"
                 style={{
                   backgroundImage: isDarkMode
                     ? `linear-gradient(90deg, #93c5fd, ${theme.glow})`
@@ -388,20 +430,19 @@ const Hero = () => {
               >
                 {stat.value}
               </span>
-              <span className="mt-1 text-xs font-medium text-slate-600 dark:text-slate-300/80">
+              <span className="mt-1.5 text-xs font-semibold text-slate-600 dark:text-slate-300/80">
                 {stat.label}
               </span>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </motion.div>
 
-      {/* Tech Marquee */}
       <motion.div
         variants={fadeUp}
         initial="hidden"
         animate="show"
-        className="relative z-10 mt-16 w-full max-w-5xl overflow-hidden"
+        className="relative z-20 mt-16 w-full max-w-5xl overflow-hidden"
         style={{
           maskImage:
             "linear-gradient(90deg, transparent 0%, black 15%, black 85%, transparent 100%)",
@@ -410,44 +451,44 @@ const Hero = () => {
         }}
       >
         <style>{`
-          @keyframes marquee {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-50%); }
+          @keyframes crossBrowserMarquee {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
           }
-          .animate-marquee {
-            animation: marquee 25s linear infinite;
+          .firefox-safe-marquee {
+            display: flex;
+            width: max-content;
+            will-change: transform;
+            animation: crossBrowserMarquee 25s linear infinite;
           }
-          .animate-marquee:hover {
+          .firefox-safe-marquee:hover {
             animation-play-state: paused;
           }
         `}</style>
 
-        <div className="flex w-max gap-3 mt-2 animate-marquee">
+        <div className="firefox-safe-marquee gap-3.5 mt-2">
           {[...techMarquee, ...techMarquee].map((tech, i) => (
             <span
               key={`${tech}-${i}`}
               className="
                 whitespace-nowrap rounded-full
-                border border-slate-200 dark:border-blue-500/20
-                bg-white/80 dark:bg-[#0a1325]/80
-                px-5 py-2
-                text-sm font-medium
+                border border-slate-200/80 dark:border-blue-500/25
+                bg-white/90 dark:bg-[#0a1325]/90
+                px-6 py-2.5
+                text-sm font-semibold
                 text-slate-700 dark:text-slate-300
-                shadow-sm
-                backdrop-blur-md
-
+                shadow-xl
                 transition-all duration-300 ease-out
-
-                hover:-translate-y-0.5
+                hover:-translate-y-1.5 hover:scale-110
                 hover:border-blue-500
                 hover:bg-blue-50
                 hover:text-blue-700
-                hover:shadow-[0_8px_24px_rgba(59,130,246,0.15)]
-
+                hover:shadow-[0_15px_35px_rgba(59,130,246,0.3)]
                 dark:hover:border-blue-400
-                dark:hover:bg-blue-950/40
+                dark:hover:bg-blue-950/50
                 dark:hover:text-white
-                dark:hover:shadow-[0_8px_24px_rgba(59,130,246,0.25)]
+                dark:hover:shadow-[0_15px_35px_rgba(59,130,246,0.4)]
+                cursor-pointer backdrop-blur-xl
               "
             >
               {tech}

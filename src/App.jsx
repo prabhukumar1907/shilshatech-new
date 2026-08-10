@@ -4,6 +4,18 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
 import PageLoader from "./lib/PageLoader";
+import FullStackDeveloper from "./pages/hireDeveloper/FullStackDeveloper";
+import AIMLDeveloper from "./pages/hireDeveloper/AIMLDeveloper";
+import ReactDeveloper from "./pages/hireDeveloper/ReactDeveloper";
+import NodejsDeveloper from "./pages/hireDeveloper/NodejsDeveloper";
+import FrontendDeveloper from "./pages/hireDeveloper/FrontendDeveloper";
+import DevOpsEngineer from "./pages/hireDeveloper/DevOpsEngineer";
+import DotnetDeveloper from "./pages/hireDeveloper/DotnetDeveloper";
+import MEANStackDeveloper from "./pages/hireDeveloper/MEANStackDeveloper";
+import BackendDeveloper from "./pages/hireDeveloper/BackendDeveloper";
+import MERNStackDeveloper from "./pages/hireDeveloper/MERNStackDeveloper";
+import MobileAppDeveloper from "./pages/hireDeveloper/MobileAppDeveloper";
+import PythonDeveloper from "./pages/hireDeveloper/PythonDeveloper";
 const Home = lazy(() => import("./pages/Home"));
 const HireADeveloper = lazy(() => import("./pages/HireADeveloper"));
 const AboutUs = lazy(() => import("./pages/AboutUs"));
@@ -110,7 +122,61 @@ const App = () => {
             element={<NaturalLanguageProcessingPage />}
           />
           <Route path="/llm-development" element={<LlmDevelopmentPage />} />
-          <Route path="/hire-a-developer" element={<HireADeveloper />} />
+          <Route path="/hire-developers" element={<HireADeveloper />} />
+
+          <Route
+            path="/hire-developers/full-stack-developer"
+            element={<FullStackDeveloper />}
+          />
+          <Route
+            path="/hire-developers/ai-ml-developer"
+            element={<AIMLDeveloper />}
+          />
+          <Route
+            path="/hire-developers/react-developer"
+            element={<ReactDeveloper />}
+          />
+          <Route
+            path="/hire-developers/nodejs-developer"
+            element={<NodejsDeveloper />}
+          />
+          <Route
+            path="/hire-developers/mern-stack-developer"
+            element={<MERNStackDeveloper />}
+          />
+          <Route
+            path="/hire-developers/mean-stack-developer"
+            element={<MEANStackDeveloper />}
+          />
+          <Route
+            path="/hire-developers/frontend-developer"
+            element={<FrontendDeveloper />}
+          />
+          <Route
+            path="/hire-developers/devops-engineer"
+            element={<DevOpsEngineer />}
+          />
+
+          <Route
+            path="/hire-developers/dotnet-developer"
+            element={<DotnetDeveloper />}
+          />
+
+          <Route
+            path="/hire-developers/mobile-app-developer"
+            element={<MobileAppDeveloper />}
+          />
+
+          <Route
+            path="/hire-developers/backend-developer"
+            element={<BackendDeveloper />}
+          />
+
+          <Route
+            path="/hire-developers/python-developer"
+            element={<PythonDeveloper />}
+          />
+
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/services" element={<ServicesPage />} />
