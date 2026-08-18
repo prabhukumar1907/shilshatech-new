@@ -1,35 +1,33 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import Hero from "../components/Hero";
-import Services from "./Services";
-import WhyChooseUs from "./WhyChooseUs";
-import TechStack from "./TechStack";
-import CTA from "./CTA";
-import OurStrength from "../components/OurStrength";
-import CountsSection from "../components/CountsSection";
-import ServicesSection from "../components/ServiceSection";
-import TechSection from "../components/TechSection";
-import CTASection from "../components/CTASection";
-import ReasonsWhySection from "../components/ReasonsWhySection";
-import IndustriesSection from "../components/IndustriesSection";
-import AwardsSection from "../components/AwardsSection";
-import ClientSlider from "../components/ClientSlider";
-import FAQSection from "../components/FAQ";
-import Footer from "../components/Footer";
+
+const OurStrength = lazy(() => import("../components/OurStrength"));
+const CountsSection = lazy(() => import("../components/CountsSection"));
+const ServicesSection = lazy(() => import("../components/ServiceSection"));
+const TechSection = lazy(() => import("../components/TechSection"));
+const ReasonsWhySection = lazy(() => import("../components/ReasonsWhySection"));
+const IndustriesSection = lazy(() => import("../components/IndustriesSection"));
+const AwardsSection = lazy(() => import("../components/AwardsSection"));
+const ClientSlider = lazy(() => import("../components/ClientSlider"));
+const FAQSection = lazy(() => import("../components/FAQ"));
+const Footer = lazy(() => import("../components/Footer"));
 
 const Home = () => {
   return (
     <div>
       <Hero />
-      <OurStrength />
-      <CountsSection />
-      <ServicesSection />
-      <TechSection />
-      <ReasonsWhySection />
-      <IndustriesSection />
-      <AwardsSection />
-      <ClientSlider />
-      <FAQSection />
-      <Footer />
+      <Suspense fallback={null}>
+        <OurStrength />
+        <CountsSection />
+        <ServicesSection />
+        <TechSection />
+        <ReasonsWhySection />
+        <IndustriesSection />
+        <AwardsSection />
+        <ClientSlider />
+        <FAQSection />
+        <Footer />
+      </Suspense>
     </div>
   );
 };

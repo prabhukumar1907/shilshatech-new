@@ -104,13 +104,8 @@ const ServicesSection = () => {
   useEffect(() => {
     const checkDark = () => document.documentElement.classList.contains("dark");
     setIsDarkMode(checkDark());
-
     const observer = new MutationObserver(() => setIsDarkMode(checkDark()));
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
     return () => observer.disconnect();
   }, []);
 
@@ -119,28 +114,24 @@ const ServicesSection = () => {
       id="services"
       className="relative py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-500 overflow-hidden bg-slate-50 text-slate-900 dark:bg-[#070d18] dark:text-white"
     >
-      {/* Background Radial Grid Pattern */}
       <div
         className="absolute inset-0 opacity-20 pointer-events-none transition-opacity duration-500"
         style={{
-          backgroundImage: `radial-gradient(${
-            isDarkMode ? theme.glow : theme.primary
-          } 1px, transparent 1px)`,
+          backgroundImage: `radial-gradient(${isDarkMode ? theme.glow : theme.primary} 1px, transparent 1px)`,
           backgroundSize: "36px 36px",
-          maskImage:
-            "radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 80%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 80%)",
+          maskImage: "radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 80%)",
+          WebkitMaskImage: "radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 80%)",
         }}
       />
 
-      {/* Atmospheric Ambient Glows */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-175 h-87.5 bg-[#276ea5]/15 rounded-full blur-[150px] pointer-events-none" />
+      <div
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 w-175 h-87.5 bg-[#276ea5]/15 rounded-full blur-[150px] pointer-events-none"
+        style={{ willChange: "transform" }}
+      />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Header */}
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-bold uppercase tracking-wider backdrop-blur-xl mb-4 transition-colors border-[#276ea5]/30 bg-blue-50 text-[#276ea5] dark:border-[#276ea5]/40 dark:bg-[#276ea5]/20 dark:text-[#60a5fa]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-bold uppercase tracking-wider mb-4 transition-colors border-[#276ea5]/30 bg-blue-50 text-[#276ea5] dark:border-[#276ea5]/40 dark:bg-[#276ea5]/25 dark:text-[#60a5fa]">
             <Sparkles size={14} className="shrink-0" />
             <span>Our Core Capabilities</span>
           </div>
@@ -166,7 +157,6 @@ const ServicesSection = () => {
           </p>
         </div>
 
-        {/* Services Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -182,34 +172,28 @@ const ServicesSection = () => {
                 variants={cardVariants}
                 className="group relative h-full"
               >
-                {/* Glow Border Effect on Hover */}
                 <div
-                  className="absolute -inset-0.5 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500 blur-md pointer-events-none"
+                  className="absolute -inset-0.5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md pointer-events-none"
                   style={{
                     background: `linear-gradient(135deg, ${theme.primary}, ${theme.glow})`,
                   }}
                 />
 
-                {/* Main Card Content */}
-                <div className="relative flex flex-col justify-between h-full p-6 rounded-2xl border backdrop-blur-xl transition-all duration-300 group-hover:-translate-y-1.5 bg-white/90 border-slate-200/80 shadow-sm hover:shadow-xl shadow-slate-200/60 dark:bg-[#0b1528]/80 dark:border-blue-500/20 dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)] dark:group-hover:bg-[#0d1a32]">
+                <div className="relative flex flex-col justify-between h-full p-6 rounded-2xl border transition-all duration-300 group-hover:-translate-y-1.5 bg-white/95 border-slate-200/80 shadow-sm hover:shadow-xl shadow-slate-200/60 dark:bg-[#0b1528]/95 dark:border-blue-500/20 dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)] dark:group-hover:bg-[#0d1a32]">
                   <div>
-                    {/* Icon Badge */}
                     <div className="inline-flex p-3 rounded-xl border mb-5 transition-all duration-300 group-hover:scale-110 bg-blue-50 border-blue-200 text-[#276ea5] group-hover:bg-[#276ea5] group-hover:text-white dark:bg-[#276ea5]/20 dark:border-[#276ea5]/40 dark:text-[#60a5fa] dark:group-hover:bg-[#276ea5] dark:group-hover:text-white dark:group-hover:border-[#60a5fa]">
                       <IconComponent size={24} />
                     </div>
 
-                    {/* Title */}
                     <h3 className="text-lg font-bold tracking-tight mb-2 transition-colors dark:group-hover:text-[#60a5fa]">
                       {service.title}
                     </h3>
 
-                    {/* Description */}
                     <p className="text-xs sm:text-sm leading-relaxed mb-6 text-slate-600 dark:text-slate-300">
                       {service.description}
                     </p>
                   </div>
 
-                  {/* Footer Tags & CTA Link */}
                   <div>
                     <div className="flex flex-wrap gap-1.5 mb-5">
                       {service.tags.map((tag) => (

@@ -14,7 +14,6 @@ import {
 
 import { FaFacebook } from "react-icons/fa";
 import { BsInstagram, BsTwitterX, BsLinkedin } from "react-icons/bs";
-
 import logo from "../assets/shilshalogofinal.webp";
 
 export default function Footer() {
@@ -28,23 +27,29 @@ export default function Footer() {
 
   return (
     <footer className="relative font-sans bg-slate-50 text-slate-700 dark:bg-[#060b13] dark:text-slate-200 border-t border-slate-200 dark:border-slate-800/80 transition-colors duration-500 overflow-hidden">
-      {/* 1. Subtle Radial Grid Overlay */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.08] bg-[radial-gradient(#276ea5_1px,transparent_1px)] dark:bg-[radial-gradient(#60a5fa_1px,transparent_1px)] bg-size-[24px_24px]" />
 
-      {/* 2. Theme Ambient Radial Glows */}
-      <div className="absolute -top-32 left-1/4 w-125 h-75 rounded-full blur-[130px] pointer-events-none opacity-20 bg-[#276ea5]" />
-      <div className="absolute bottom-0 right-1/4 w-100 h-62.5 rounded-full blur-[120px] pointer-events-none opacity-20 bg-[#276ea5]" />
+      <div
+        className="absolute -top-32 left-1/4 w-125 h-75 rounded-full blur-[130px] pointer-events-none opacity-20 bg-[#276ea5]"
+        style={{ willChange: "transform" }}
+      />
+      <div
+        className="absolute bottom-0 right-1/4 w-100 h-62.5 rounded-full blur-[120px] pointer-events-none opacity-20 bg-[#276ea5]"
+        style={{ willChange: "transform" }}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-16 pb-8">
-        {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-slate-200 dark:border-slate-800/80">
-          {/* Column 1: Brand Info */}
           <div className="lg:col-span-3 space-y-5">
             <Link to="/" className="items-center group inline-block">
               <div className="relative">
                 <img
                   src={logo}
                   alt="Shilsha Technologies"
+                  width={140}
+                  height={36}
+                  loading="lazy"
+                  decoding="async"
                   className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105 dark:drop-shadow-[0_0_10px_rgba(96,165,250,0.25)]"
                 />
               </div>
@@ -59,28 +64,31 @@ export default function Footer() {
               development, Web applications, and automated QA services.
             </p>
 
-            {/* Social Media Buttons */}
             <div className="flex items-center gap-2.5 pt-2">
               {[
                 {
                   icon: FaFacebook,
                   href: "https://www.facebook.com/shilshatechnologies",
                   label: "Facebook",
+                  color: "#1877F2",
                 },
                 {
                   icon: BsInstagram,
                   href: "https://www.instagram.com/shilsha_technologies",
                   label: "Instagram",
+                  color: "#E4405F",
                 },
                 {
                   icon: BsLinkedin,
                   href: "https://www.linkedin.com/company/shilsha-technologies",
                   label: "LinkedIn",
+                  color: "#0A66C2",
                 },
                 {
                   icon: BsTwitterX,
                   href: "https://twitter.com/shilshatech",
                   label: "Twitter",
+                  color: "#000000",
                 },
               ].map((item, i) => (
                 <a
@@ -89,18 +97,18 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={item.label}
-                  className="relative group w-9 h-9 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 backdrop-blur-md flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-white dark:hover:text-white hover:bg-[#276ea5] dark:hover:bg-[#276ea5] transition-all duration-300 shadow-sm hover:scale-105 hover:border-[#60a5fa]/50"
+                  className="relative group w-9 h-9 rounded-xl bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-800 flex items-center justify-center transition-all duration-300 shadow-sm hover:scale-105 hover:bg-blue-50 dark:hover:bg-blue-950/30 hover:border-[#60a5fa]/50"
                 >
                   <item.icon
                     size={15}
-                    className="relative z-10 transition-transform duration-300 group-hover:scale-110"
+                    color={`${item.color}`}
+                    className="relative z-10 transition-transform duration-300 group-hover:text-white group-hover:scale-110"
                   />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Column 2: Quick Links */}
           <div className="lg:col-span-2 space-y-4">
             <h4 className="text-xs font-bold uppercase tracking-widest flex items-center gap-1.5 text-[#276ea5] dark:text-[#60a5fa]">
               <Sparkles size={13} />
@@ -124,8 +132,6 @@ export default function Footer() {
                       size={12}
                       className="opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-300 text-[#60a5fa]"
                     />
-
-                    {/* Expanding Underline */}
                     <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 rounded-full transition-all duration-300 group-hover:w-full opacity-0 group-hover:opacity-100 bg-linear-to-r from-[#276ea5] to-[#60a5fa]" />
                   </Link>
                 </li>
@@ -133,7 +139,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Hire Developers */}
           <div className="lg:col-span-2 space-y-4">
             <h4 className="text-xs font-bold uppercase tracking-widest flex items-center gap-1.5 text-[#276ea5] dark:text-[#60a5fa]">
               <Code2 size={13} />
@@ -229,14 +234,13 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 5: Contact Form */}
           <div className="lg:col-span-3 space-y-4">
             <h4 className="text-xs font-bold uppercase tracking-widest text-[#276ea5] dark:text-[#60a5fa]">
               Want to ask something?
             </h4>
 
             {submitted ? (
-              <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center gap-2 text-xs backdrop-blur-md">
+              <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center gap-2 text-xs">
                 <CheckCircle2 size={16} />
                 <span>Thank you! Your query has been submitted.</span>
               </div>
@@ -245,7 +249,7 @@ export default function Footer() {
                 action="https://formsubmit.co/info@shilshatech.com"
                 method="POST"
                 onSubmit={handleSubmit}
-                className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 backdrop-blur-xl space-y-3 shadow-xl"
+                className="p-4 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-800 space-y-3 shadow-xl"
               >
                 <input
                   type="email"
@@ -263,7 +267,7 @@ export default function Footer() {
                 />
                 <button
                   type="submit"
-                  className="w-full py-2.5 text-white font-semibold text-xs rounded-xl transition-all duration-300 shadow-md shadow-[#276ea5]/20 flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95 bg-linear-to-r from-[#276ea5] to-[#1e527b]"
+                  className="w-full py-2.5 cursor-pointer text-white font-semibold text-xs rounded-xl transition-all duration-300 shadow-md shadow-[#276ea5]/20 flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95 bg-linear-to-r from-[#276ea5] to-[#1e527b]"
                 >
                   <span>Submit</span>
                   <Send size={12} />
@@ -273,7 +277,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Legal Disclaimer Note */}
         <div className="py-6 border-b border-slate-200 dark:border-slate-800/80">
           <div className="flex items-start gap-2.5 text-[11px] leading-relaxed text-slate-500 dark:text-slate-400">
             <ShieldCheck
@@ -295,7 +298,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
           <p>
             © {new Date().getFullYear()} Shilsha Technologies. All rights

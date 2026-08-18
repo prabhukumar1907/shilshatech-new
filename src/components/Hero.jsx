@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useMemo, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowUpRight,
@@ -12,32 +12,11 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.05,
-    },
-  },
-};
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
-  show: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { type: "spring", stiffness: 100, damping: 20 },
-  },
-};
-
 const theme = {
-  primary: "#286b94", // Core Shilsha Brand Blue
-  secondary: "#1e3a8a", // Deep Indigo Accent
-  glow: "#6ea1ff", // Cyan-Blue Electric Glow
-  accent: "#38bdf8", // Vibrant Sky Highlight
+  primary: "#286b94",
+  secondary: "#1e3a8a",
+  glow: "#6ea1ff",
+  accent: "#38bdf8",
 };
 
 const stats = [
@@ -88,140 +67,208 @@ const rightTagsPool = [
 ];
 
 const typingPhrases = [
-  "AI Development",
   "AI/ML Solutions",
   "Full-Stack Development",
-  "Next-Gen SaaS Platforms",
+  "SaaS Platforms",
   "Enterprise Solutions",
   "App Development",
 ];
 
-const Hero = () => {
-  const [activeStage, setActiveStage] = useState(0);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
-  const [currentLeftTags, setCurrentLeftTags] = useState([
-    leftTagsPool[0],
-    leftTagsPool[1],
-    leftTagsPool[2],
-  ]);
-  const [currentRightTags, setCurrentRightTags] = useState([
-    rightTagsPool[0],
-    rightTagsPool[1],
-    rightTagsPool[2],
-  ]);
-
+const TypingHeadline = memo(function TypingHeadline({ isDarkMode }) {
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
-  const [typingSpeed, setTypingSpeed] = useState(120);
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      const { innerWidth, innerHeight } = window;
-      const x = (e.clientX / innerWidth - 0.5) * 30;
-      const y = (e.clientY / innerHeight - 0.5) * -30;
-      setMousePos({ x, y });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+    const fullText = typingPhrases[phraseIndex];
+    const speed = isDeleting ? 45 : 90;
+
+    const timer = setTimeout(() => {
+      if (!isDeleting) {
+        const next = fullText.substring(0, currentText.length + 1);
+        setCurrentText(next);
+        if (next === fullText) setTimeout(() => setIsDeleting(true), 1800);
+      } else {
+        const next = fullText.substring(0, currentText.length - 1);
+        setCurrentText(next);
+        if (next === "") {
+          setIsDeleting(false);
+          setPhraseIndex((p) => (p + 1) % typingPhrases.length);
+        }
+      }
+    }, speed);
+
+    return () => clearTimeout(timer);
+  }, [currentText, isDeleting, phraseIndex]);
+
+  return (
+    <span
+      className="bg-clip-text text-transparent inline-block drop-shadow-lg"
+      style={{
+        backgroundImage: isDarkMode
+          ? `linear-gradient(135deg, #a5f3fc 0%, ${theme.glow} 40%, #818cf8 100%)`
+          : `linear-gradient(135deg, ${theme.primary} 0%, #1d4ed8 50%, ${theme.secondary} 100%)`,
+      }}
+    >
+      {currentText}
+      <span className="animate-pulse font-light ml-0.5 text-blue-500">|</span>
+    </span>
+  );
+});
+
+const PipelineStrip = memo(function PipelineStrip({ inView }) {
+  const [activeStage, setActiveStage] = useState(0);
 
   useEffect(() => {
-    const checkDark = () => document.documentElement.classList.contains("dark");
-    setIsDarkMode(checkDark());
+    if (!inView) return;
+    const id = setInterval(() => {
+      setActiveStage((s) => (s + 1) % pipelineStages.length);
+    }, 2200);
+    return () => clearInterval(id);
+  }, [inView]);
 
-    const observer = new MutationObserver(() => setIsDarkMode(checkDark()));
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
+  return (
+    <div className="mt-14 inline-flex flex-wrap items-center justify-center gap-2.5 rounded-3xl border p-3 shadow-2xl transition-colors border-slate-200/80 bg-white/90 shadow-slate-200/50 dark:border-blue-500/25 dark:bg-[#0a1325]/95">
+      {pipelineStages.map(({ label, Icon }, i) => {
+        const isActive = i === activeStage;
+        return (
+          <React.Fragment key={label}>
+            <div
+              className={`flex items-center gap-2.5 rounded-2xl px-5 py-2.5 text-xs font-bold transition-colors duration-500 ${
+                isActive
+                  ? "text-white shadow-xl shadow-blue-900/40"
+                  : "text-slate-500 dark:text-slate-400"
+              }`}
+              style={{
+                background: isActive
+                  ? `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`
+                  : "transparent",
+              }}
+            >
+              <Icon size={15} />
+              {label}
+            </div>
+            {i < pipelineStages.length - 1 && (
+              <div className="h-px w-4 sm:w-8 bg-slate-300 dark:bg-blue-500/20" />
+            )}
+          </React.Fragment>
+        );
+      })}
+    </div>
+  );
+});
 
+const TagCloud = memo(function TagCloud({ pool, side, inView }) {
+  const [tags, setTags] = useState([pool[0], pool[1], pool[2]]);
+
+  useEffect(() => {
+    if (!inView) return;
+    const id = setInterval(() => {
+      setTags((prev) => {
+        const offsets = prev.map((t) => t.offset);
+        const available = pool.filter(
+          (t) => !prev.some((p) => p.label === t.label),
+        );
+        const shuffled = [...available].sort(() => 0.5 - Math.random());
+        return offsets.map((offset, i) => ({
+          ...(shuffled[i] || pool[i]),
+          offset,
+        }));
+      });
+    }, 6000);
+    return () => clearInterval(id);
+  }, [pool, inView]);
+
+  const sideClass =
+    side === "left" ? "left-8 2xl:left-16" : "right-8 2xl:right-16";
+
+  return (
+    <AnimatePresence mode="popLayout">
+      {tags.map(({ label, offset }) => (
+        <motion.div
+          key={label}
+          initial={{ opacity: 0, x: side === "left" ? -40 : 40, scale: 0.85 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          exit={{ opacity: 0, x: side === "left" ? -40 : 40, scale: 0.85 }}
+          transition={{ type: "spring", stiffness: 200, damping: 24 }}
+          className={`absolute ${offset} ${sideClass} flex items-center gap-3 rounded-2xl border px-5 py-2.5 text-xs font-semibold shadow-2xl border-slate-200/80 bg-white/90 text-slate-700 shadow-slate-300/40 dark:border-blue-500/30 dark:bg-[#0e182d]/95 dark:text-slate-200`}
+        >
+          <span
+            className="h-2.5 w-2.5 rounded-full"
+            style={{ background: theme.glow }}
+          />
+          {label}
+        </motion.div>
+      ))}
+    </AnimatePresence>
+  );
+});
+
+const Hero = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [inView, setInView] = useState(true);
+  const sectionRef = useRef(null);
+  const glowRef = useRef(null);
+  const rafRef = useRef(null);
+  const targetPos = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.1 },
+    );
+    observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    const id = setInterval(() => {
-      setActiveStage((s) => (s + 1) % pipelineStages.length);
-    }, 2000);
-    return () => clearInterval(id);
-  }, []);
-
-  useEffect(() => {
-    const tagInterval = setInterval(() => {
-      setCurrentLeftTags((prev) => {
-        const offsets = prev.map((item) => item.offset);
-        const available = leftTagsPool.filter(
-          (t) => !prev.some((p) => p.label === t.label),
-        );
-        const shuffled = [...available].sort(() => 0.5 - Math.random());
-        return offsets.map((offset, i) => ({
-          ...(shuffled[i] || leftTagsPool[i]),
-          offset,
-        }));
-      });
-
-      setCurrentRightTags((prev) => {
-        const offsets = prev.map((item) => item.offset);
-        const available = rightTagsPool.filter(
-          (t) => !prev.some((p) => p.label === t.label),
-        );
-        const shuffled = [...available].sort(() => 0.5 - Math.random());
-        return offsets.map((offset, i) => ({
-          ...(shuffled[i] || rightTagsPool[i]),
-          offset,
-        }));
-      });
-    }, 4500);
-
-    return () => clearInterval(tagInterval);
-  }, []);
-
-  useEffect(() => {
-    const fullText = typingPhrases[phraseIndex];
-
-    const handleTyping = () => {
-      if (!isDeleting) {
-        setCurrentText(fullText.substring(0, currentText.length + 1));
-        if (currentText === fullText) {
-          setTimeout(() => setIsDeleting(true), 1800);
-          setTypingSpeed(60);
+    const handleMouseMove = (e) => {
+      const { innerWidth, innerHeight } = window;
+      targetPos.current = {
+        x: (e.clientX / innerWidth - 0.5) * 30,
+        y: (e.clientY / innerHeight - 0.5) * -30,
+      };
+      if (rafRef.current) return;
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = null;
+        if (glowRef.current) {
+          glowRef.current.style.setProperty("--mx", `${targetPos.current.x}px`);
+          glowRef.current.style.setProperty("--my", `${targetPos.current.y}px`);
         }
-      } else {
-        setCurrentText(fullText.substring(0, currentText.length - 1));
-        if (currentText === "") {
-          setIsDeleting(false);
-          setPhraseIndex((prev) => (prev + 1) % typingPhrases.length);
-          setTypingSpeed(120);
-        }
-      }
+      });
     };
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
 
-    const timer = setTimeout(handleTyping, typingSpeed);
-    return () => clearInterval(timer);
-  }, [currentText, isDeleting, phraseIndex, typingSpeed]);
+  const marqueeItems = useMemo(() => [...techMarquee, ...techMarquee], []);
 
   return (
-    <section 
+    <section
+      ref={sectionRef}
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 pt-32 pb-20 transition-colors duration-500 selection:bg-blue-500 selection:text-white bg-slate-50 text-slate-900 dark:bg-[#070d18] dark:text-slate-100"
-      style={{ perspective: "1400px" }}
     >
-      <motion.div 
-        className="absolute pointer-events-none w-150 h-150 rounded-full blur-[140px] opacity-30 dark:opacity-40 transition-all duration-300 z-0"
+      <div
+        ref={glowRef}
+        className="absolute pointer-events-none w-96 h-96 rounded-full blur-[90px] opacity-25 dark:opacity-35 z-0"
         style={{
           background: `radial-gradient(circle, ${theme.glow} 0%, ${theme.primary} 60%, transparent 100%)`,
-          left: `calc(50% + ${mousePos.x * 12}px - 300px)`,
-          top: `calc(50% + ${mousePos.y * 12}px - 300px)`,
+          left: "50%",
+          top: "50%",
+          transform:
+            "translate3d(calc(-50% + var(--mx, 0px)), calc(-50% + var(--my, 0px)), 0)",
+          willChange: "transform",
         }}
       />
 
       <div
-        className="absolute inset-0 opacity-25 pointer-events-none transition-opacity duration-500 z-0"
+        className="absolute inset-0 opacity-20 pointer-events-none z-0"
         style={{
-          backgroundImage: `radial-gradient(${
-            isDarkMode ? theme.glow : theme.primary
-          } 1.3px, transparent 1.3px)`,
+          backgroundImage: `radial-gradient(${isDarkMode ? theme.glow : theme.primary} 1.3px, transparent 1.3px)`,
           backgroundSize: "36px 36px",
           maskImage:
             "radial-gradient(ellipse 70% 60% at 50% 40%, black 25%, transparent 80%)",
@@ -231,197 +278,73 @@ const Hero = () => {
       />
 
       <div className="hidden xl:block z-10">
-        <AnimatePresence mode="popLayout">
-          {currentLeftTags.map(({ label, offset }, i) => (
-            <motion.div
-              key={`${label}-${i}`}
-              initial={{ opacity: 0, x: -50, scale: 0.8, rotateZ: -10 }}
-              animate={{ opacity: 1, x: 0, scale: 1, rotateZ: 0 }}
-              exit={{ opacity: 0, x: -50, scale: 0.8, rotateZ: 10 }}
-              transition={{ type: "spring", stiffness: 200, damping: 20 }}
-              whileHover={{ scale: 1.15, x: 10, rotateZ: 2, z: 60 }}
-              style={{ transformStyle: "preserve-3d" }}
-              className={`absolute ${offset} left-8 2xl:left-16 flex items-center gap-3 rounded-2xl border px-5 py-2.5 text-xs font-semibold shadow-2xl transition-all border-slate-200/80 bg-white/80 text-slate-700 shadow-slate-300/50 dark:border-blue-500/30 dark:bg-[#0e182d]/85 dark:text-slate-200 dark:shadow-[0_10px_30px_rgba(0,0,0,0.6)] cursor-pointer backdrop-blur-xl`}
-            >
-              <span
-                className="h-2.5 w-2.5 rounded-full animate-ping"
-                style={{ background: theme.glow }}
-              />
-              {label}
-            </motion.div>
-          ))}
-        </AnimatePresence>
-
-        <AnimatePresence mode="popLayout">
-          {currentRightTags.map(({ label, offset }, i) => (
-            <motion.div
-              key={`${label}-${i}`}
-              initial={{ opacity: 0, x: 50, scale: 0.8, rotateZ: 10 }}
-              animate={{ opacity: 1, x: 0, scale: 1, rotateZ: 0 }}
-              exit={{ opacity: 0, x: 50, scale: 0.8, rotateZ: -10 }}
-              transition={{ type: "spring", stiffness: 200, damping: 20 }}
-              whileHover={{ scale: 1.15, x: -10, rotateZ: -2, z: 60 }}
-              style={{ transformStyle: "preserve-3d" }}
-              className={`absolute ${offset} right-8 2xl:right-16 flex items-center gap-3 rounded-2xl border px-5 py-2.5 text-xs font-semibold shadow-2xl transition-all border-slate-200/80 bg-white/80 text-slate-700 shadow-slate-300/50 dark:border-blue-500/30 dark:bg-[#0e182d]/85 dark:text-slate-200 dark:shadow-[0_10px_30px_rgba(0,0,0,0.6)] cursor-pointer backdrop-blur-xl`}
-            >
-              <span
-                className="h-2.5 w-2.5 rounded-full animate-ping"
-                style={{ background: theme.glow }}
-              />
-              {label}
-            </motion.div>
-          ))}
-        </AnimatePresence>
+        <TagCloud pool={leftTagsPool} side="left" inView={inView} />
+        <TagCloud pool={rightTagsPool} side="right" inView={inView} />
       </div>
 
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="show"
-        style={{
-          transform: `rotateX(${mousePos.y * 0.8}deg) rotateY(${mousePos.x * 0.8}deg)`,
-          transformStyle: "preserve-3d",
-        }}
-        className="relative z-20 mx-auto max-w-5xl text-center flex flex-col items-center transition-transform duration-150 ease-out"
-      >
-        <motion.div 
-          variants={fadeUp} 
-          whileHover={{ scale: 1.08, z: 40 }} 
-          style={{ transformStyle: "preserve-3d" }}
-        >
-          <div className="inline-flex items-center gap-3 rounded-full border px-5 py-2.5 text-xs font-bold tracking-wide transition-all border-blue-200 bg-blue-50/90 text-blue-900 hover:border-blue-400 dark:border-blue-400/40 dark:bg-blue-950/70 dark:text-blue-300 shadow-xl shadow-blue-500/10 backdrop-blur-xl">
-            <Sparkles size={15} className="text-blue-500 animate-spin" style={{ animationDuration: "4s" }} />
-            <span>Next-Gen Software Development</span>
-            <ChevronRight size={13} className="text-blue-500 opacity-80" />
-          </div>
-        </motion.div>
+      <div className="relative z-20 mx-auto max-w-5xl text-center flex flex-col items-center">
+        <div className="inline-flex items-center gap-3 rounded-full border px-5 py-2.5 text-xs font-bold tracking-wide border-blue-200 bg-blue-50/90 text-blue-900 dark:border-blue-400/40 dark:bg-blue-950/70 dark:text-blue-300 shadow-xl shadow-blue-500/10">
+          <Sparkles
+            size={15}
+            className={`text-blue-500 ${inView ? "animate-spin" : ""}`}
+            style={{ animationDuration: "4s" }}
+          />
+          <span>Next-Gen Software Development</span>
+          <ChevronRight size={13} className="text-blue-500 opacity-80" />
+        </div>
 
-        <motion.h1
-          variants={fadeUp}
-          className="mt-8 text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.12] max-w-4xl"
-          style={{ transform: "translateZ(60px)", transformStyle: "preserve-3d" }}
-        >
+        <h1 className="mt-8 text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.12] max-w-4xl">
           Engineering Excellence for{" "}
           <span className="block sm:inline min-h-[1.2em]">
-            <span
-              className="bg-clip-text text-transparent inline-block drop-shadow-lg"
-              style={{
-                backgroundImage: isDarkMode
-                  ? `linear-gradient(135deg, #a5f3fc 0%, ${theme.glow} 40%, #818cf8 100%)`
-                  : `linear-gradient(135deg, ${theme.primary} 0%, #1d4ed8 50%, ${theme.secondary} 100%)`,
-              }}
-            >
-              {currentText}
-              <span className="animate-pulse font-light ml-0.5 text-blue-500">
-                |
-              </span>
-            </span>
+            <TypingHeadline isDarkMode={isDarkMode} />
           </span>
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          variants={fadeUp}
-          className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed font-normal text-slate-600 dark:text-slate-300/90"
-          style={{ transform: "translateZ(40px)" }}
-        >
+        <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed font-normal text-slate-600 dark:text-slate-300/90">
           We engineer high-performance web platforms, intelligent mobile
           applications, and scalable cloud infrastructure designed to accelerate
           enterprise growth.
-        </motion.p>
+        </p>
 
-        <motion.div
-          variants={fadeUp}
-          className="mt-10 flex flex-wrap justify-center items-center gap-5"
-          style={{ transform: "translateZ(80px)", transformStyle: "preserve-3d" }}
-        >
-          <motion.div whileHover={{ scale: 1.08, z: 30 }} whileTap={{ scale: 0.95 }}>
-            <Link
-              to="/contact-us"
-              className="group relative inline-flex items-center gap-3 rounded-2xl px-8 py-4 text-sm font-bold text-white shadow-2xl transition-all"
-              style={{
-                background: `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`,
-                boxShadow: `0 20px 40px -10px ${theme.primary}99, inset 0 1px 0 rgba(255,255,255,0.4)`,
-              }}
-            >
-              <span>Get Started</span>
-              <ArrowUpRight
-                size={18}
-                className="transition-transform duration-300 group-hover:translate-x-1.5 group-hover:-translate-y-1.5"
-              />
-            </Link>
-          </motion.div>
+        <div className="mt-10 flex flex-wrap justify-center items-center gap-5">
+          <Link
+            to="/contact-us"
+            className="group relative inline-flex items-center gap-3 rounded-2xl px-8 py-4 text-sm font-bold text-white shadow-2xl transition-transform hover:scale-105 active:scale-95"
+            style={{
+              background: `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`,
+              boxShadow: `0 20px 40px -10px ${theme.primary}99, inset 0 1px 0 rgba(255,255,255,0.4)`,
+            }}
+          >
+            <span>Get Started</span>
+            <ArrowUpRight
+              size={18}
+              className="transition-transform duration-300 group-hover:translate-x-1.5 group-hover:-translate-y-1.5"
+            />
+          </Link>
 
-          <motion.div whileHover={{ scale: 1.08, z: 30 }} whileTap={{ scale: 0.95 }}>
-            <Link
-              to="/services"
-              className="group flex items-center gap-3 rounded-2xl border px-7 py-4 text-sm font-bold transition-all shadow-xl border-slate-200/80 bg-white/90 text-slate-800 hover:border-slate-300 hover:bg-slate-100 hover:text-slate-900 dark:border-blue-500/25 dark:bg-[#0c1629]/90 dark:text-slate-200 dark:hover:border-blue-500/50 dark:hover:bg-[#121f3a] dark:hover:text-white backdrop-blur-xl"
-            >
-              <span className="flex h-8 w-8 items-center justify-center rounded-full transition-colors duration-300 bg-blue-100 text-[#286b94] group-hover:bg-[#286b94] group-hover:text-white dark:bg-blue-500/20 dark:text-blue-400 dark:group-hover:bg-blue-500 dark:group-hover:text-white">
-                <Layers size={15} />
-              </span>
-              Explore Our Services
-            </Link>
-          </motion.div>
-        </motion.div>
+          <Link
+            to="/services"
+            className="group flex items-center gap-3 rounded-2xl border px-7 py-4 text-sm font-bold shadow-xl border-slate-200/80 bg-white/90 text-slate-800 hover:border-slate-300 hover:bg-slate-100 dark:border-blue-500/25 dark:bg-[#0c1629]/90 dark:text-slate-200 dark:hover:border-blue-500/50 dark:hover:bg-[#121f3a] transition-transform hover:scale-105 active:scale-95"
+          >
+            <span className="flex h-8 w-8 items-center justify-center rounded-full transition-colors duration-300 bg-blue-100 text-[#286b94] group-hover:bg-[#286b94] group-hover:text-white dark:bg-blue-500/20 dark:text-blue-400 dark:group-hover:bg-blue-500 dark:group-hover:text-white">
+              <Layers size={15} />
+            </span>
+            Explore Our Services
+          </Link>
+        </div>
 
-        <motion.div
-          variants={fadeUp}
-          className="mt-14 inline-flex flex-wrap items-center justify-center gap-2.5 rounded-3xl border p-3 shadow-2xl transition-colors border-slate-200/80 bg-white/90 shadow-slate-200/50 dark:border-blue-500/25 dark:bg-[#0a1325]/85 backdrop-blur-2xl"
-          style={{ transform: "translateZ(50px)" }}
-        >
-          {pipelineStages.map(({ label, Icon }, i) => {
-            const isActive = i === activeStage;
-            return (
-              <React.Fragment key={label}>
-                <motion.div
-                  whileHover={{ scale: 1.06, y: -2 }}
-                  className={`flex items-center gap-2.5 rounded-2xl px-5 py-2.5 text-xs font-bold transition-all duration-500 ${
-                    isActive
-                      ? "text-white shadow-xl shadow-blue-900/40"
-                      : "text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200"
-                  }`}
-                  style={{
-                    background: isActive
-                      ? `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`
-                      : "transparent",
-                  }}
-                >
-                  <Icon
-                    size={15}
-                    className={isActive ? "animate-bounce" : ""}
-                  />
-                  {label}
-                </motion.div>
-                {i < pipelineStages.length - 1 && (
-                  <div className="h-px w-4 sm:w-8 bg-slate-300 dark:bg-blue-500/20" />
-                )}
-              </React.Fragment>
-            );
-          })}
-        </motion.div>
-      </motion.div>
+        <PipelineStrip inView={inView} />
+      </div>
 
-      <motion.div
-        variants={fadeUp}
-        initial="hidden"
-        animate="show"
-        className="relative z-25 mt-16 w-full max-w-4xl"
-        style={{ transformStyle: "preserve-3d" }}
-      >
-        <motion.div 
-          whileHover={{ scale: 1.02, rotateX: 4, rotateY: -2 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          className="grid grid-cols-2 gap-4 rounded-3xl border p-7 sm:grid-cols-4 sm:gap-8 shadow-2xl transition-all border-slate-200/80 bg-white/80 shadow-slate-200/50 dark:border-blue-500/25 dark:bg-[#0a1325]/75 backdrop-blur-2xl"
-          style={{ transform: "translateZ(45px)" }}
-        >
+      <div className="relative z-20 mt-16 w-full max-w-4xl">
+        <div className="grid grid-cols-2 gap-4 rounded-3xl border p-7 sm:grid-cols-4 sm:gap-8 shadow-2xl border-slate-200/80 bg-white/90 shadow-slate-200/50 dark:border-blue-500/25 dark:bg-[#0a1325]/95">
           {stats.map((stat) => (
-            <motion.div
+            <div
               key={stat.label}
-              whileHover={{ y: -4, scale: 1.05 }}
-              className="flex flex-col items-center text-center group cursor-pointer"
+              className="flex flex-col items-center text-center group cursor-default"
             >
               <span
-                className="text-3xl sm:text-4xl font-black tracking-tight bg-clip-text text-transparent transition-transform duration-300 group-hover:scale-110"
+                className="text-3xl sm:text-4xl font-black tracking-tight bg-clip-text text-transparent"
                 style={{
                   backgroundImage: isDarkMode
                     ? `linear-gradient(90deg, #93c5fd, ${theme.glow})`
@@ -433,15 +356,12 @@ const Hero = () => {
               <span className="mt-1.5 text-xs font-semibold text-slate-600 dark:text-slate-300/80">
                 {stat.label}
               </span>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
-      <motion.div
-        variants={fadeUp}
-        initial="hidden"
-        animate="show"
+      <div
         className="relative z-20 mt-16 w-full max-w-5xl overflow-hidden"
         style={{
           maskImage:
@@ -460,6 +380,7 @@ const Hero = () => {
             width: max-content;
             will-change: transform;
             animation: crossBrowserMarquee 25s linear infinite;
+            animation-play-state: ${inView ? "running" : "paused"};
           }
           .firefox-safe-marquee:hover {
             animation-play-state: paused;
@@ -467,35 +388,16 @@ const Hero = () => {
         `}</style>
 
         <div className="firefox-safe-marquee gap-3.5 mt-2">
-          {[...techMarquee, ...techMarquee].map((tech, i) => (
+          {marqueeItems.map((tech, i) => (
             <span
               key={`${tech}-${i}`}
-              className="
-                whitespace-nowrap rounded-full
-                border border-slate-200/80 dark:border-blue-500/25
-                bg-white/90 dark:bg-[#0a1325]/90
-                px-6 py-2.5
-                text-sm font-semibold
-                text-slate-700 dark:text-slate-300
-                shadow-xl
-                transition-all duration-300 ease-out
-                hover:-translate-y-1.5 hover:scale-110
-                hover:border-blue-500
-                hover:bg-blue-50
-                hover:text-blue-700
-                hover:shadow-[0_15px_35px_rgba(59,130,246,0.3)]
-                dark:hover:border-blue-400
-                dark:hover:bg-blue-950/50
-                dark:hover:text-white
-                dark:hover:shadow-[0_15px_35px_rgba(59,130,246,0.4)]
-                cursor-pointer backdrop-blur-xl
-              "
+              className="whitespace-nowrap rounded-full border border-slate-200/80 dark:border-blue-500/25 bg-white/90 dark:bg-[#0a1325]/90 px-6 py-2.5 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-xl transition-transform duration-300 ease-out hover:-translate-y-1.5 hover:scale-110 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-700 dark:hover:border-blue-400 dark:hover:bg-blue-950/50 dark:hover:text-white cursor-pointer"
             >
               {tech}
             </span>
           ))}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

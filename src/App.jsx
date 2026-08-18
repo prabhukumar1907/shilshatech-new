@@ -16,6 +16,8 @@ import BackendDeveloper from "./pages/hireDeveloper/BackendDeveloper";
 import MERNStackDeveloper from "./pages/hireDeveloper/MERNStackDeveloper";
 import MobileAppDeveloper from "./pages/hireDeveloper/MobileAppDeveloper";
 import PythonDeveloper from "./pages/hireDeveloper/PythonDeveloper";
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
 const Home = lazy(() => import("./pages/Home"));
 const HireADeveloper = lazy(() => import("./pages/HireADeveloper"));
 const AboutUs = lazy(() => import("./pages/AboutUs"));
@@ -180,6 +182,12 @@ const App = () => {
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/services" element={<ServicesPage />} />
+          <Route
+            path="/terms-and-conditions"
+            element={<TermsAndConditions />}
+          />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+
           <Route path="technologies" element={<Outlet />}>
             <Route path="react-js" element={<ReactServicesPage />} />
             <Route path="angular" element={<AngularServicesPage />} />

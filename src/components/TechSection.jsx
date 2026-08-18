@@ -50,43 +50,19 @@ const brandTheme = {
 };
 
 const techCategories = [
-  {
-    id: "all",
-    label: "All Tech",
-    icon: Layers,
-  },
+  { id: "all", label: "All Tech", icon: Layers },
   {
     id: "mobility",
     title: "Mobility",
     icon: Smartphone,
     glow: "rgba(39, 110, 165, 0.25)",
     items: [
-      {
-        name: "Android",
-        tag: "Native Mobile",
-        icon: FaAndroid,
-        color: "#3DDC84",
-      },
+      { name: "Android", tag: "Native Mobile", icon: FaAndroid, color: "#3DDC84" },
       { name: "iOS", tag: "Native Mobile", icon: FaApple, color: "#A2AAAD" },
-      {
-        name: "Flutter",
-        tag: "Cross-Platform",
-        icon: SiFlutter,
-        color: "#02569B",
-      },
-      {
-        name: "React Native",
-        tag: "Cross-Platform",
-        icon: FaReact,
-        color: "#61DAFB",
-      },
+      { name: "Flutter", tag: "Cross-Platform", icon: SiFlutter, color: "#02569B" },
+      { name: "React Native", tag: "Cross-Platform", icon: FaReact, color: "#61DAFB" },
       { name: "Ionic", tag: "Hybrid Mobile", icon: SiIonic, color: "#3880FF" },
-      {
-        name: "Xamarin",
-        tag: "Cross-Platform",
-        icon: SiDotnet,
-        color: "#3498DB",
-      },
+      { name: "Xamarin", tag: "Cross-Platform", icon: SiDotnet, color: "#3498DB" },
     ],
   },
   {
@@ -95,20 +71,10 @@ const techCategories = [
     icon: Layout,
     glow: "rgba(29, 78, 216, 0.25)",
     items: [
-      {
-        name: "Angular JS",
-        tag: "Web Framework",
-        icon: FaAngular,
-        color: "#DD0031",
-      },
+      { name: "Angular JS", tag: "Web Framework", icon: FaAngular, color: "#DD0031" },
       { name: "React JS", tag: "Web Library", icon: FaReact, color: "#61DAFB" },
       { name: "Vue JS", tag: "Web Framework", icon: FaVuejs, color: "#4FC08D" },
-      {
-        name: "Next.js",
-        tag: "React Framework",
-        icon: SiNextdotjs,
-        color: "#000000",
-      },
+      { name: "Next.js", tag: "React Framework", icon: SiNextdotjs, color: "#000000" },
     ],
   },
   {
@@ -118,26 +84,11 @@ const techCategories = [
     glow: "rgba(39, 110, 165, 0.25)",
     items: [
       { name: "Java", tag: "Enterprise", icon: FaJava, color: "#5382A1" },
-      {
-        name: ".NET",
-        tag: "Enterprise Core",
-        icon: SiDotnet,
-        color: "#512BD4",
-      },
+      { name: ".NET", tag: "Enterprise Core", icon: SiDotnet, color: "#512BD4" },
       { name: "PHP", tag: "Web Engine", icon: FaPhp, color: "#777BB4" },
-      {
-        name: "Node JS",
-        tag: "Async Runtime",
-        icon: FaNodeJs,
-        color: "#339933",
-      },
+      { name: "Node JS", tag: "Async Runtime", icon: FaNodeJs, color: "#339933" },
       { name: "Python", tag: "Data & Web", icon: FaPython, color: "#3776AB" },
-      {
-        name: "Laravel",
-        tag: "PHP Framework",
-        icon: FaLaravel,
-        color: "#FF2D20",
-      },
+      { name: "Laravel", tag: "PHP Framework", icon: FaLaravel, color: "#FF2D20" },
     ],
   },
   {
@@ -147,24 +98,9 @@ const techCategories = [
     glow: "rgba(96, 165, 250, 0.25)",
     items: [
       { name: "DevOps", tag: "CI/CD Automation", icon: Cpu, color: "#007ACC" },
-      {
-        name: "Azure",
-        tag: "Microsoft Cloud",
-        icon: FaWindows,
-        color: "#0089D6",
-      },
-      {
-        name: "AWS",
-        tag: "Amazon Web Services",
-        icon: FaAws,
-        color: "#FF9900",
-      },
-      {
-        name: "GCP",
-        tag: "Google Cloud",
-        icon: SiGooglecloud,
-        color: "#4285F4",
-      },
+      { name: "Azure", tag: "Microsoft Cloud", icon: FaWindows, color: "#0089D6" },
+      { name: "AWS", tag: "Amazon Web Services", icon: FaAws, color: "#FF9900" },
+      { name: "GCP", tag: "Google Cloud", icon: SiGooglecloud, color: "#4285F4" },
     ],
   },
   {
@@ -173,22 +109,10 @@ const techCategories = [
     icon: FileText,
     glow: "rgba(39, 110, 165, 0.25)",
     items: [
-      {
-        name: "SharePoint",
-        tag: "Enterprise Portal",
-        icon: FaWindows,
-        color: "#0078D4",
-      },
+      { name: "SharePoint", tag: "Enterprise Portal", icon: FaWindows, color: "#0078D4" },
       { name: "Drupal", tag: "Headless CMS", icon: FaDrupal, color: "#0678BE" },
-      {
-        name: "Sitecore",
-        tag: "Digital Experience",
-        icon: Boxes,
-        color: "#EB292C",
-      },
+      { name: "Sitecore", tag: "Digital Experience", icon: Boxes, color: "#EB292C" },
       { name: "Sitefinity", tag: "Web CMS", icon: Globe, color: "#50B848" },
-      { name: "Umbraco", tag: ".NET CMS", icon: FileText, color: "#333333" },
-      { name: "Kentico", tag: "DXP Platform", icon: Boxes, color: "#F05A22" },
     ],
   },
   {
@@ -197,36 +121,10 @@ const techCategories = [
     icon: Cpu,
     glow: "rgba(29, 78, 216, 0.25)",
     items: [
-      {
-        name: "ML & AI",
-        tag: "Machine Learning",
-        icon: Brain,
-        color: "#8E44AD",
-      },
-      {
-        name: "Chatbot",
-        tag: "Conversational AI",
-        icon: Bot,
-        color: "#10A37F",
-      },
-      {
-        name: "Ethereum",
-        tag: "Smart Contracts",
-        icon: FaEthereum,
-        color: "#3C3C3D",
-      },
-      {
-        name: "Hyperledger",
-        tag: "Enterprise Web3",
-        icon: ShieldCheck,
-        color: "#2F3134",
-      },
-      {
-        name: "TensorFlow",
-        tag: "Deep Learning",
-        icon: SiTensorflow,
-        color: "#FF6F00",
-      },
+      { name: "ML & AI", tag: "Machine Learning", icon: Brain, color: "#8E44AD" },
+      { name: "Chatbot", tag: "Conversational AI", icon: Bot, color: "#10A37F" },
+      { name: "Ethereum", tag: "Smart Contracts", icon: FaEthereum, color: "#3C3C3D" },
+      { name: "TensorFlow", tag: "Deep Learning", icon: SiTensorflow, color: "#FF6F00" },
     ],
   },
 ];
@@ -241,16 +139,15 @@ const TechSection = () => {
 
   return (
     <section className="relative py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-500 overflow-hidden font-sans bg-slate-50 text-slate-900 dark:bg-[#060b13] dark:text-white">
-      {/* Background Lighting Radial Gradients */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-125 blur-[120px] pointer-events-none opacity-20"
         style={{
           backgroundImage: `radial-gradient(ellipse at top, ${brandTheme.primaryBlue}, ${brandTheme.secondaryIndigo}, transparent)`,
+          willChange: "transform",
         }}
       />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border text-xs font-semibold tracking-wide uppercase mb-4 transition-colors bg-blue-50 border-blue-200 text-[#276ea5] dark:bg-slate-900/80 dark:border-slate-800 dark:text-sky-400">
             <Sparkles size={14} style={{ color: brandTheme.electricCyan }} />
@@ -276,7 +173,6 @@ const TechSection = () => {
           </p>
         </div>
 
-        {/* Filter Navigation Tabs */}
         <div className="flex flex-wrap items-center justify-center gap-2.5 mb-14">
           {techCategories.map((cat) => {
             const Icon = cat.icon;
@@ -299,7 +195,6 @@ const TechSection = () => {
           })}
         </div>
 
-        {/* Dynamic Category Cards Grid */}
         <motion.div
           layout
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -318,15 +213,13 @@ const TechSection = () => {
                   transition={{ duration: 0.3 }}
                   className="group relative"
                 >
-                  {/* Outer Glow on Hover */}
                   <div
-                    className="absolute -inset-0.5 rounded-3xl opacity-0 group-hover:opacity-100 transition duration-500 blur-xl pointer-events-none"
+                    className="absolute -inset-0.5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl pointer-events-none"
                     style={{ background: cat.glow }}
                   />
 
-                  <div className="relative h-full p-6 sm:p-7 rounded-3xl border backdrop-blur-xl transition-all duration-300 flex flex-col justify-between bg-white/90 border-slate-200 hover:border-slate-300 shadow-xl shadow-slate-200/50 dark:border-slate-800/80 dark:bg-slate-900/60 dark:hover:border-slate-700/80 dark:shadow-none">
+                  <div className="relative h-full p-6 sm:p-7 rounded-3xl border transition-all duration-300 flex flex-col justify-between bg-white/95 border-slate-200 hover:border-slate-300 shadow-xl shadow-slate-200/50 dark:border-slate-800/80 dark:bg-slate-900/90 dark:hover:border-slate-700/80 dark:shadow-none">
                     <div>
-                      {/* Category Header */}
                       <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-100 dark:border-slate-800/60">
                         <div className="flex items-center gap-3">
                           <div
@@ -353,7 +246,6 @@ const TechSection = () => {
                         />
                       </div>
 
-                      {/* Tech List Items */}
                       <div className="grid grid-cols-2 gap-2.5">
                         {cat.items.map((item) => {
                           const ItemIcon = item.icon;
@@ -363,7 +255,6 @@ const TechSection = () => {
                               key={item.name}
                               className="group/item flex flex-col p-2.5 rounded-xl border transition-all duration-200 border-slate-100 bg-slate-50 hover:bg-slate-100/80 hover:border-slate-200 dark:border-slate-800/60 dark:bg-[#060b13]/60 dark:hover:bg-slate-900/80 dark:hover:border-slate-700 overflow-hidden relative"
                             >
-                              {/* Soft brand tint on item hover */}
                               <div
                                 className="absolute inset-0 opacity-0 group-hover/item:opacity-5 transition-opacity pointer-events-none"
                                 style={{ backgroundColor: item.color }}

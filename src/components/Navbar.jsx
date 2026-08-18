@@ -433,14 +433,15 @@ const technologies = [
     ],
   },
 ];
-
-const NavLink = ({ to, children }) => {
+const NavLink = ({ to, children, onClick }) => {
   return (
     <Link
       to={to}
-      className="group relative px-3.5 py-2 rounded-xl text-sm font-medium transition-colors duration-200 text-slate-700 hover:text-[#1e3a8a] dark:text-slate-200 dark:hover:text-white"
+      onClick={onClick}
+      className="group relative rounded-xl px-3.5 py-2 text-sm font-medium text-slate-700 transition-colors duration-200 hover:text-[#1e3a8a] dark:text-slate-200 dark:hover:text-white"
     >
       <span>{children}</span>
+
       <span
         className="absolute bottom-1 left-1/2 h-0.5 w-0 -translate-x-1/2 rounded-full transition-all duration-300 ease-out group-hover:w-3/5"
         style={{
@@ -453,97 +454,211 @@ const NavLink = ({ to, children }) => {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
-  const [hireOpen, setHireOpen] = useState(false);
-  const [techOpen, setTechOpen] = useState(false);
+
+  const [desktopDropdown, setDesktopDropdown] = useState(null);
+
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileHireOpen, setMobileHireOpen] = useState(false);
   const [mobileTechOpen, setMobileTechOpen] = useState(false);
+
   const [scrolled, setScrolled] = useState(false);
+
   const { darkMode, toggleDarkMode } = useTheme();
 
+  const navbarRef = React.useRef(null);
+
+  /* ---------------------------------------------
+     Scroll Detection
+  --------------------------------------------- */
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
+  /* ---------------------------------------------
+     Close menus on outside click
+  --------------------------------------------- */
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+        setDesktopDropdown(null);
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+
+  /* ---------------------------------------------
+     Escape key
+  --------------------------------------------- */
+  useEffect(() => {
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        setDesktopDropdown(null);
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
+  /* ---------------------------------------------
+     Prevent body scroll when mobile menu opens
+  --------------------------------------------- */
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  /* ---------------------------------------------
+     Helpers
+  --------------------------------------------- */
+  const closeAllMenus = () => {
+    setDesktopDropdown(null);
+    setIsOpen(false);
+    setMobileServicesOpen(false);
+    setMobileHireOpen(false);
+    setMobileTechOpen(false);
+  };
+
+  const toggleDesktopDropdown = (menu) => {
+    setDesktopDropdown((current) => (current === menu ? null : menu));
+  };
+
+  const toggleMobileMenu = () => {
+    setIsOpen((current) => !current);
+    setDesktopDropdown(null);
+  };
+
   return (
-    <header className="fixed top-0 z-50 w-full px-4 pt-4">
+    <header
+      ref={navbarRef}
+      className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-4 sm:pt-4"
+    >
       <div
-        className={`mx-auto flex h-16 max-w-7xl items-center justify-between rounded-2xl border transition-colors duration-200 px-6 transform-gpu ${
+        className={`mx-auto flex h-16 max-w-7xl items-center justify-between rounded-2xl border px-4 shadow-sm backdrop-blur-md transition-all duration-300 sm:px-6 ${
           scrolled
-            ? "bg-white/95 border-slate-200/90 shadow-md backdrop-blur-md dark:bg-[#070d18]/95 dark:border-blue-500/25"
-            : "bg-white/85 border-slate-200/60 shadow-sm backdrop-blur-sm dark:bg-[#070d18]/85 dark:border-blue-500/20"
+            ? "border-slate-200/90 bg-white/95 shadow-md dark:border-blue-500/25 dark:bg-[#070d18]/95"
+            : "border-slate-200/60 bg-white/85 dark:border-blue-500/20 dark:bg-[#070d18]/85"
         }`}
       >
-        {/* Logo */}
-        <Link to="/" className="flex items-center group">
-          <div className="relative">
-            <img
-              src={logo}
-              alt="Shilsha Logo"
-              className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-            />
-          </div>
+        {/* =====================================================
+            LOGO
+        ====================================================== */}
+        <Link
+          to="/"
+          onClick={closeAllMenus}
+          aria-label="Shilsha Technologies Home"
+          className="group flex shrink-0 items-center"
+        >
+          <img
+            src={logo}
+            width={60}
+            height={60}
+            loading="eager"
+            decoding="async"
+            alt="Shilsha Logo"
+            className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+          />
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1">
-          <NavLink to="/">Home</NavLink>
+        <nav
+          aria-label="Main navigation"
+          className="hidden items-center gap-1 lg:flex"
+        >
+          <NavLink to="/" onClick={closeAllMenus}>
+            Home
+          </NavLink>
 
-          {/* Services Dropdown - Updated to Grid View with Icons */}
-          <div
-            className="relative"
-            onMouseEnter={() => setServicesOpen(true)}
-            onMouseLeave={() => setServicesOpen(false)}
-          >
-            <Link
-              to="/services"
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-medium transition-colors duration-200 ${
-                servicesOpen
-                  ? "text-[#1e3a8a] bg-blue-50 dark:text-white dark:bg-[#286b94]/25"
+          <div className="relative">
+            <button
+              type="button"
+              aria-haspopup="true"
+              aria-expanded={desktopDropdown === "services"}
+              onClick={() => toggleDesktopDropdown("services")}
+              onMouseEnter={() => setDesktopDropdown("services")}
+              className={`flex cursor-pointer items-center gap-1.5 rounded-xl px-3.5 py-2 text-sm font-medium transition-colors duration-200 ${
+                desktopDropdown === "services"
+                  ? "bg-blue-50 text-[#1e3a8a] dark:bg-[#286b94]/25 dark:text-white"
                   : "text-slate-700 hover:text-[#1e3a8a] dark:text-slate-200 dark:hover:text-white"
               }`}
             >
               Services
               <ChevronDown
                 size={14}
-                className={`transition-transform duration-200 ${servicesOpen ? "rotate-180 text-[#6ea1ff]" : ""}`}
+                aria-hidden="true"
+                className={`transition-transform duration-200 ${
+                  desktopDropdown === "services"
+                    ? "rotate-180 text-[#6ea1ff]"
+                    : ""
+                }`}
               />
-            </Link>
+            </button>
 
             <div
-              className={`absolute left-0 top-full pt-3 w-130 max-w-[95vw] transition-all duration-200 origin-top-left ${
-                servicesOpen
-                  ? "opacity-100 translate-y-0 scale-100"
-                  : "opacity-0 translate-y-2 scale-95 pointer-events-none"
+              onMouseEnter={() => setDesktopDropdown("services")}
+              onMouseLeave={() => setDesktopDropdown(null)}
+              className={`absolute left-0 top-full w-130 max-w-[calc(100vw-24px)] pt-3 transition-all duration-200 ${
+                desktopDropdown === "services"
+                  ? "visible translate-y-0 opacity-100"
+                  : "invisible pointer-events-none translate-y-2 opacity-0"
               }`}
             >
-              <div className="rounded-2xl border p-4 shadow-xl backdrop-blur-md overflow-hidden bg-white border-slate-200 text-slate-900 dark:bg-[#0b1528] dark:border-blue-500/30 dark:text-white dark:shadow-black/90">
-                <div className="flex items-center gap-2 px-3 py-2 border-b mb-3 border-slate-200 text-[#286b94] dark:border-[#286b94]/30 dark:text-[#6ea1ff]">
-                  <Sparkles size={14} className="shrink-0" />
+              <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 text-slate-900 shadow-xl backdrop-blur-md dark:border-blue-500/30 dark:bg-[#0b1528] dark:text-white dark:shadow-black/90">
+                <div className="mb-3 flex items-center gap-2 border-b border-slate-200 px-3 py-2 text-[#286b94] dark:border-[#286b94]/30 dark:text-[#6ea1ff]">
+                  <Sparkles size={14} />
+
                   <span className="text-[11px] font-bold uppercase tracking-wider">
                     AI & Digital Services
                   </span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2">
-                  {services.map((s) => (
+                  {services.map((service) => (
                     <Link
-                      key={s.label}
-                      to={s.href}
-                      className="group flex items-start gap-2.5 p-2.5 rounded-xl transition-all duration-200 border border-transparent hover:bg-blue-50/80 hover:border-[#286b94]/40 dark:hover:bg-[#286b94]/20 dark:hover:border-[#6ea1ff]/40"
+                      key={service.label}
+                      to={service.href}
+                      onClick={closeAllMenus}
+                      className="group flex items-start gap-2.5 rounded-xl border border-transparent p-2.5 transition-all duration-200 hover:border-[#286b94]/40 hover:bg-blue-50/80 dark:hover:border-[#6ea1ff]/40 dark:hover:bg-[#286b94]/20"
                     >
-                      <div className="mt-0.5 p-1.5 rounded-lg bg-blue-50 dark:bg-[#286b94]/30 shrink-0">
-                        {s.icon}
+                      <div className="mt-0.5 shrink-0 rounded-lg bg-blue-50 p-1.5 dark:bg-[#286b94]/30">
+                        {service.icon}
                       </div>
-                      <div className="flex flex-col">
-                        <span className="text-xs font-bold text-slate-900 group-hover:text-[#1e3a8a] dark:text-white dark:group-hover:text-sky-300">
-                          {s.label}
+
+                      <div className="min-w-0">
+                        <span className="block text-xs font-bold text-slate-900 group-hover:text-[#1e3a8a] dark:text-white dark:group-hover:text-sky-300">
+                          {service.label}
                         </span>
-                        <span className="text-[10px] mt-0.5 leading-snug text-slate-500 dark:text-slate-400 line-clamp-1">
-                          {s.desc}
+
+                        <span className="mt-0.5 block line-clamp-2 text-[10px] leading-snug text-slate-500 dark:text-slate-400">
+                          {service.desc}
                         </span>
                       </div>
                     </Link>
@@ -553,57 +668,66 @@ const Navbar = () => {
             </div>
           </div>
 
-          <div
-            className="relative"
-            onMouseEnter={() => setHireOpen(true)}
-            onMouseLeave={() => setHireOpen(false)}
-          >
-            <Link
-              to="/hire-developers"
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-medium transition-colors duration-200 ${
-                hireOpen
-                  ? "text-[#1e3a8a] bg-blue-50 dark:text-white dark:bg-[#286b94]/25"
+          <div className="relative">
+            <button
+              type="button"
+              aria-haspopup="true"
+              aria-expanded={desktopDropdown === "hire"}
+              onClick={() => toggleDesktopDropdown("hire")}
+              onMouseEnter={() => setDesktopDropdown("hire")}
+              className={`flex cursor-pointer items-center gap-1.5 rounded-xl px-3.5 py-2 text-sm font-medium transition-colors duration-200 ${
+                desktopDropdown === "hire"
+                  ? "bg-blue-50 text-[#1e3a8a] dark:bg-[#286b94]/25 dark:text-white"
                   : "text-slate-700 hover:text-[#1e3a8a] dark:text-slate-200 dark:hover:text-white"
               }`}
             >
               Hire Developers
               <ChevronDown
                 size={14}
-                className={`transition-transform duration-200 ${hireOpen ? "rotate-180 text-[#6ea1ff]" : ""}`}
+                aria-hidden="true"
+                className={`transition-transform duration-200 ${
+                  desktopDropdown === "hire" ? "rotate-180 text-[#6ea1ff]" : ""
+                }`}
               />
-            </Link>
+            </button>
 
             <div
-              className={`absolute left-0 top-full pt-3 w-180 max-w-[95vw] transition-all duration-200 origin-top-left ${
-                hireOpen
-                  ? "opacity-100 translate-y-0 scale-100"
-                  : "opacity-0 translate-y-2 scale-95 pointer-events-none"
+              onMouseEnter={() => setDesktopDropdown("hire")}
+              onMouseLeave={() => setDesktopDropdown(null)}
+              className={`absolute left-0 top-full w-180 max-w-[calc(100vw-24px)] pt-3 transition-all duration-200 ${
+                desktopDropdown === "hire"
+                  ? "visible translate-y-0 opacity-100"
+                  : "invisible pointer-events-none translate-y-2 opacity-0"
               }`}
             >
-              <div className="rounded-2xl border p-4 shadow-xl backdrop-blur-md overflow-hidden bg-white border-slate-200 text-slate-900 dark:bg-[#0b1528] dark:border-blue-500/30 dark:text-white dark:shadow-black/90">
-                <div className="flex items-center gap-2 px-3 py-2 border-b mb-3 border-slate-200 text-[#286b94] dark:border-[#286b94]/30 dark:text-[#6ea1ff]">
-                  <Users size={14} className="shrink-0" />
+              <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 text-slate-900 shadow-xl backdrop-blur-md dark:border-blue-500/30 dark:bg-[#0b1528] dark:text-white dark:shadow-black/90">
+                <div className="mb-3 flex items-center gap-2 border-b border-slate-200 px-3 py-2 text-[#286b94] dark:border-[#286b94]/30 dark:text-[#6ea1ff]">
+                  <Users size={14} />
+
                   <span className="text-[11px] font-bold uppercase tracking-wider">
                     Trusted Developers
                   </span>
                 </div>
 
                 <div className="grid grid-cols-3 gap-2">
-                  {hireDevelopers.map((h) => (
+                  {hireDevelopers.map((developer) => (
                     <Link
-                      key={h.label}
-                      to={h.href}
-                      className="group flex items-start gap-2.5 p-2.5 rounded-xl transition-all duration-200 border border-transparent hover:bg-blue-50/80 hover:border-[#286b94]/40 dark:hover:bg-[#286b94]/20 dark:hover:border-[#6ea1ff]/40"
+                      key={developer.label}
+                      to={developer.href}
+                      onClick={closeAllMenus}
+                      className="group flex items-start gap-2.5 rounded-xl border border-transparent p-2.5 transition-all duration-200 hover:border-[#286b94]/40 hover:bg-blue-50/80 dark:hover:border-[#6ea1ff]/40 dark:hover:bg-[#286b94]/20"
                     >
-                      <div className="mt-0.5 p-1.5 rounded-lg bg-blue-50 dark:bg-[#286b94]/30 shrink-0">
-                        {h.icon}
+                      <div className="mt-0.5 shrink-0 rounded-lg bg-blue-50 p-1.5 dark:bg-[#286b94]/30">
+                        {developer.icon}
                       </div>
-                      <div className="flex flex-col">
-                        <span className="text-xs font-bold text-slate-900 group-hover:text-[#1e3a8a] dark:text-white dark:group-hover:text-sky-300">
-                          {h.label}
+
+                      <div className="min-w-0">
+                        <span className="block text-xs font-bold text-slate-900 group-hover:text-[#1e3a8a] dark:text-white dark:group-hover:text-sky-300">
+                          {developer.label}
                         </span>
-                        <span className="text-[10px] mt-0.5 leading-snug text-slate-500 dark:text-slate-400 line-clamp-1">
-                          {h.desc}
+
+                        <span className="mt-0.5 block line-clamp-2 text-[10px] leading-snug text-slate-500 dark:text-slate-400">
+                          {developer.desc}
                         </span>
                       </div>
                     </Link>
@@ -613,36 +737,43 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Technologies Mega Menu */}
-          <div
-            className="relative"
-            onMouseEnter={() => setTechOpen(true)}
-            onMouseLeave={() => setTechOpen(false)}
-          >
+          <div className="relative">
             <button
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-medium transition-colors duration-200 cursor-pointer ${
-                techOpen
-                  ? "text-[#1e3a8a] bg-blue-50 dark:text-white dark:bg-[#286b94]/25"
+              type="button"
+              aria-haspopup="true"
+              aria-expanded={desktopDropdown === "technologies"}
+              onClick={() => toggleDesktopDropdown("technologies")}
+              onMouseEnter={() => setDesktopDropdown("technologies")}
+              className={`flex cursor-pointer items-center gap-1.5 rounded-xl px-3.5 py-2 text-sm font-medium transition-colors duration-200 ${
+                desktopDropdown === "technologies"
+                  ? "bg-blue-50 text-[#1e3a8a] dark:bg-[#286b94]/25 dark:text-white"
                   : "text-slate-700 hover:text-[#1e3a8a] dark:text-slate-200 dark:hover:text-white"
               }`}
             >
               Technologies
               <ChevronDown
                 size={14}
-                className={`transition-transform duration-200 ${techOpen ? "rotate-180 text-[#6ea1ff]" : ""}`}
+                aria-hidden="true"
+                className={`transition-transform duration-200 ${
+                  desktopDropdown === "technologies"
+                    ? "rotate-180 text-[#6ea1ff]"
+                    : ""
+                }`}
               />
             </button>
 
             <div
-              className={`absolute left-1/2 -translate-x-1/2 top-full pt-3 w-232 max-w-[95vw] transition-all duration-200 origin-top ${
-                techOpen
-                  ? "opacity-100 translate-y-0 scale-100"
-                  : "opacity-0 translate-y-2 scale-95 pointer-events-none"
+              onMouseEnter={() => setDesktopDropdown("technologies")}
+              onMouseLeave={() => setDesktopDropdown(null)}
+              className={`absolute left-1/2 top-full w-280 max-w-[calc(100vw-24px)] -translate-x-1/2 pt-3 transition-all duration-200 ${
+                desktopDropdown === "technologies"
+                  ? "visible translate-y-0 opacity-100"
+                  : "invisible pointer-events-none translate-y-2 opacity-0"
               }`}
             >
-              <div className="relative rounded-2xl border p-6 shadow-xl backdrop-blur-md grid grid-cols-4 gap-x-6 gap-y-7 overflow-hidden bg-white border-slate-200 text-slate-800 dark:bg-[#0b1528] dark:border-blue-500/30 dark:text-slate-100 dark:shadow-black/90">
+              <div className="relative grid grid-cols-4 gap-x-6 gap-y-7 overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 text-slate-800 shadow-xl backdrop-blur-md dark:border-blue-500/30 dark:bg-[#0b1528] dark:text-slate-100 dark:shadow-black/90">
                 <div
-                  className="absolute top-0 left-0 h-0.5 w-full"
+                  className="absolute left-0 top-0 h-0.5 w-full"
                   style={{
                     background: `linear-gradient(90deg, ${theme.primary}, ${theme.glow}, ${theme.secondary})`,
                   }}
@@ -651,10 +782,14 @@ const Navbar = () => {
                 {technologies.map((group) => {
                   const Icon = group.icon;
                   return (
-                    <div key={group.category} className="flex flex-col gap-2.5">
-                      <div className="px-1 mb-2">
-                        <div className="flex items-center gap-2 w-fit px-2.5 py-1 rounded-lg border text-[11px] font-bold uppercase tracking-wider border-[#286b94]/30 bg-blue-50 text-[#286b94] dark:border-[#286b94]/40 dark:bg-[#286b94]/20 dark:text-[#6ea1ff]">
-                          <Icon size={13} className="shrink-0" />
+                    <div
+                      key={group.category}
+                      className="flex min-w-0 flex-col gap-2.5"
+                    >
+                      <div className="mb-2 px-1">
+                        <div className="flex w-fit items-center gap-2 rounded-lg border border-[#286b94]/30 bg-blue-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#286b94] dark:border-[#286b94]/40 dark:bg-[#286b94]/20 dark:text-[#6ea1ff]">
+                          <Icon size={13} />
+
                           <span>{group.category}</span>
                         </div>
                       </div>
@@ -664,9 +799,11 @@ const Navbar = () => {
                           <Link
                             key={item.label}
                             to={item.to}
-                            className="flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-xs font-semibold border-l-2 border-transparent transition-all duration-200 text-slate-800 hover:text-[#1e3a8a] hover:border-[#286b94] hover:bg-blue-100/70 hover:translate-x-1 dark:text-slate-200 dark:hover:text-white dark:hover:border-[#6ea1ff] dark:hover:bg-[#286b94]/30"
+                            onClick={closeAllMenus}
+                            className="flex items-center gap-2 rounded-lg border-l-2 border-transparent px-2.5 py-1.5 text-xs font-semibold text-slate-800 transition-all duration-200 hover:translate-x-1 hover:border-[#286b94] hover:bg-blue-100/70 hover:text-[#1e3a8a] dark:text-slate-200 dark:hover:border-[#6ea1ff] dark:hover:bg-[#286b94]/30 dark:hover:text-white"
                           >
                             {item.icon}
+
                             <span>{item.label}</span>
                           </Link>
                         ))}
@@ -678,176 +815,218 @@ const Navbar = () => {
             </div>
           </div>
 
-          <NavLink to="/about-us">About</NavLink>
-          <NavLink to="/contact-us">Contact</NavLink>
+          <NavLink to="/about-us" onClick={closeAllMenus}>
+            About
+          </NavLink>
+
+          <NavLink to="/contact-us" onClick={closeAllMenus}>
+            Contact
+          </NavLink>
         </nav>
 
-        {/* Action Controls */}
-        <div className="flex items-center gap-2.5">
-          {/* Dark Mode Switcher */}
+        <div className="flex shrink-0 items-center gap-2">
           <button
+            type="button"
             onClick={toggleDarkMode}
-            className="h-9 w-9 cursor-pointer rounded-xl border flex items-center justify-center transition-colors duration-200 active:scale-95 border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-amber-300 dark:hover:bg-blue-500/20"
-            aria-label="Toggle dark mode"
+            aria-label={
+              darkMode ? "Switch to light mode" : "Switch to dark mode"
+            }
+            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-slate-700 transition-all duration-200 hover:bg-slate-100 active:scale-95 dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-amber-300 dark:hover:bg-blue-500/20"
           >
             {darkMode ? <Sun size={16} /> : <Moon size={16} />}
           </button>
 
-          {/* CTA Button */}
+          {/* Desktop CTA */}
           <Link
             to="/contact-us"
-            className="hidden lg:flex relative cursor-pointer items-center gap-2 px-4.5 py-2 rounded-xl text-white text-xs font-semibold transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0 overflow-hidden group shadow-md"
+            onClick={closeAllMenus}
+            className="group relative hidden items-center gap-2 overflow-hidden rounded-xl px-4 py-2 text-xs font-semibold text-white shadow-md transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0 lg:flex"
             style={{
               background: `linear-gradient(90deg, ${theme.primary}, ${theme.secondary})`,
             }}
           >
             <span className="relative">Get a Quote</span>
+
             <ArrowUpRight
               size={15}
-              className="relative transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              className="relative transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
             />
           </Link>
 
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Toggle */}
           <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden cursor-pointer h-9 w-9 rounded-xl border flex items-center justify-center transition-colors duration-200 active:scale-95 border-slate-200 text-slate-800 hover:bg-slate-100 dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-white"
-            aria-label="Toggle navigation menu"
+            type="button"
+            onClick={toggleMobileMenu}
+            aria-label={
+              isOpen ? "Close navigation menu" : "Open navigation menu"
+            }
+            aria-expanded={isOpen}
+            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-xl border border-slate-200 text-slate-800 transition-all duration-200 hover:bg-slate-100 active:scale-95 dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-white lg:hidden"
           >
-            {isOpen ? <X size={16} /> : <Menu size={16} />}
+            {isOpen ? <X size={17} /> : <Menu size={17} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
       <div
-        className={`lg:hidden mx-4 mt-2 overflow-hidden rounded-2xl border transition-all duration-200 backdrop-blur-md bg-white border-slate-200 text-slate-800 shadow-xl dark:bg-[#0b1528] dark:border-blue-500/20 dark:text-slate-100 ${
+        className={`mx-1 mt-2 overflow-hidden rounded-2xl border shadow-xl backdrop-blur-md transition-all duration-300 sm:mx-4 ${
           isOpen
-            ? "max-h-[85vh] overflow-y-auto opacity-100 p-4"
-            : "max-h-0 opacity-0 p-0 pointer-events-none"
+            ? "max-h-[calc(100vh-90px)] overflow-y-auto border-slate-200 bg-white p-3 opacity-100 dark:border-blue-500/20 dark:bg-[#0b1528]"
+            : "pointer-events-none max-h-0 border-transparent p-0 opacity-0"
         }`}
       >
-        <div className="flex flex-col gap-1">
+        <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
+          {/* Home */}
           <Link
             to="/"
-            onClick={() => setIsOpen(false)}
-            className="px-4 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
+            onClick={closeAllMenus}
+            className="rounded-xl px-4 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
           >
             Home
           </Link>
 
-          {/* Mobile Services Accordion */}
           <button
-            onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-            className="flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-medium cursor-pointer text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
+            type="button"
+            aria-expanded={mobileServicesOpen}
+            onClick={() => setMobileServicesOpen((current) => !current)}
+            className="flex cursor-pointer items-center justify-between rounded-xl px-4 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
           >
             <span>Services</span>
+
             <ChevronDown
               size={15}
-              className={`transition-transform duration-200 ${mobileServicesOpen ? "rotate-180 text-[#6ea1ff]" : ""}`}
+              className={`transition-transform duration-200 ${
+                mobileServicesOpen ? "rotate-180 text-[#6ea1ff]" : ""
+              }`}
             />
           </button>
+
           {mobileServicesOpen && (
-            <div className="ml-3 pl-3 border-l border-blue-500/20 grid grid-cols-2 gap-1.5 my-1">
-              {services.map((s) => (
+            <div className="ml-3 grid grid-cols-2 gap-1.5 border-l border-blue-500/20 pl-3">
+              {services.map((service) => (
                 <Link
-                  key={s.label}
-                  to={s.href}
-                  onClick={() => setIsOpen(false)}
-                  className="px-2.5 py-2 rounded-lg text-xs flex flex-col text-slate-900 bg-slate-50 hover:bg-blue-50 dark:bg-[#286b94]/10 dark:text-white dark:hover:bg-[#286b94]/30"
+                  key={service.label}
+                  to={service.href}
+                  onClick={closeAllMenus}
+                  className="rounded-lg bg-slate-50 px-2.5 py-2 text-slate-900 transition-colors hover:bg-blue-50 dark:bg-[#286b94]/10 dark:text-white dark:hover:bg-[#286b94]/30"
                 >
-                  <span className="font-bold text-[11px]">{s.label}</span>
+                  <span className="block text-[11px] font-bold leading-tight">
+                    {service.label}
+                  </span>
                 </Link>
               ))}
             </div>
           )}
 
-          {/* Mobile Hire Developers Accordion */}
           <button
-            onClick={() => setMobileHireOpen(!mobileHireOpen)}
-            className="flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-medium cursor-pointer text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
+            type="button"
+            aria-expanded={mobileHireOpen}
+            onClick={() => setMobileHireOpen((current) => !current)}
+            className="flex cursor-pointer items-center justify-between rounded-xl px-4 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
           >
             <span>Hire Developers</span>
+
             <ChevronDown
               size={15}
-              className={`transition-transform duration-200 ${mobileHireOpen ? "rotate-180 text-[#6ea1ff]" : ""}`}
+              className={`transition-transform duration-200 ${
+                mobileHireOpen ? "rotate-180 text-[#6ea1ff]" : ""
+              }`}
             />
           </button>
+
           {mobileHireOpen && (
-            <div className="ml-3 pl-3 border-l border-blue-500/20 grid grid-cols-2 gap-1.5 my-1">
-              {hireDevelopers.map((h) => (
+            <div className="ml-3 grid grid-cols-2 gap-1.5 border-l border-blue-500/20 pl-3">
+              {hireDevelopers.map((developer) => (
                 <Link
-                  key={h.label}
-                  to={h.href}
-                  onClick={() => setIsOpen(false)}
-                  className="px-2.5 py-2 rounded-lg text-xs flex flex-col text-slate-900 bg-slate-50 hover:bg-blue-50 dark:bg-[#286b94]/10 dark:text-white dark:hover:bg-[#286b94]/30"
+                  key={developer.label}
+                  to={developer.href}
+                  onClick={closeAllMenus}
+                  className="rounded-lg bg-slate-50 px-2.5 py-2 text-slate-900 transition-colors hover:bg-blue-50 dark:bg-[#286b94]/10 dark:text-white dark:hover:bg-[#286b94]/30"
                 >
-                  <span className="font-bold text-[11px]">{h.label}</span>
+                  <span className="block text-[11px] font-bold leading-tight">
+                    {developer.label}
+                  </span>
                 </Link>
               ))}
             </div>
           )}
 
-          {/* Mobile Technologies Accordion */}
           <button
-            onClick={() => setMobileTechOpen(!mobileTechOpen)}
-            className="flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-medium cursor-pointer text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
+            type="button"
+            aria-expanded={mobileTechOpen}
+            onClick={() => setMobileTechOpen((current) => !current)}
+            className="flex cursor-pointer items-center justify-between rounded-xl px-4 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
           >
             <span>Technologies</span>
+
             <ChevronDown
               size={15}
-              className={`transition-transform duration-200 ${mobileTechOpen ? "rotate-180 text-[#6ea1ff]" : ""}`}
+              className={`transition-transform duration-200 ${
+                mobileTechOpen ? "rotate-180 text-[#6ea1ff]" : ""
+              }`}
             />
           </button>
+
           {mobileTechOpen && (
-            <div className="ml-3 pl-3 border-l border-blue-500/20 flex flex-col gap-3 my-2">
-              {technologies.map((group) => (
-                <div key={group.category} className="flex flex-col gap-1">
-                  <span className="text-[11px] font-semibold uppercase text-[#6ea1ff]">
-                    {group.category}
-                  </span>
-                  {group.items.map((item) => (
-                    <Link
-                      key={item.label}
-                      to={item.to}
-                      onClick={() => setIsOpen(false)}
-                      className="flex items-center gap-2 px-3 py-1 rounded-lg text-xs font-medium text-slate-600 hover:bg-blue-50 dark:text-slate-300 dark:hover:bg-blue-500/15"
-                    >
-                      {item.icon}
-                      <span>{item.label}</span>
-                    </Link>
-                  ))}
-                </div>
-              ))}
+            <div className="ml-3 flex flex-col gap-3 border-l border-blue-500/20 pl-3">
+              {technologies.map((group) => {
+                const Icon = group.icon;
+
+                return (
+                  <div key={group.category} className="flex flex-col gap-1">
+                    <div className="flex items-center gap-1.5 px-2 text-[10px] font-bold uppercase tracking-wider text-[#6ea1ff]">
+                      <Icon size={12} />
+                      {group.category}
+                    </div>
+
+                    {group.items.map((item) => (
+                      <Link
+                        key={item.label}
+                        to={item.to}
+                        onClick={closeAllMenus}
+                        className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium text-slate-600 transition-colors hover:bg-blue-50 dark:text-slate-300 dark:hover:bg-blue-500/15"
+                      >
+                        {item.icon}
+
+                        <span>{item.label}</span>
+                      </Link>
+                    ))}
+                  </div>
+                );
+              })}
             </div>
           )}
 
+          {/* About */}
           <Link
             to="/about-us"
-            onClick={() => setIsOpen(false)}
-            className="px-4 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
+            onClick={closeAllMenus}
+            className="rounded-xl px-4 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
           >
             About
           </Link>
+
+          {/* Contact */}
           <Link
             to="/contact-us"
-            onClick={() => setIsOpen(false)}
-            className="px-4 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
+            onClick={closeAllMenus}
+            className="rounded-xl px-4 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
           >
             Contact
           </Link>
 
+          {/* Mobile CTA */}
           <Link
             to="/contact-us"
-            onClick={() => setIsOpen(false)}
-            className="mt-2 py-2.5 text-center cursor-pointer rounded-xl text-white text-xs font-semibold shadow-md"
+            onClick={closeAllMenus}
+            className="mt-2 rounded-xl py-2.5 text-center text-xs font-semibold text-white shadow-md transition-transform active:scale-[0.98]"
             style={{
               background: `linear-gradient(90deg, ${theme.primary}, ${theme.secondary})`,
             }}
           >
             Get a Quote
           </Link>
-        </div>
+        </nav>
       </div>
     </header>
   );
