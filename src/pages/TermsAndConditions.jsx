@@ -99,12 +99,12 @@ const TermsAndConditions = () => {
           {/* Breadcrumb */}
           <div className="mb-10 flex items-center gap-2 text-sm">
             <span className="font-medium text-slate-400 dark:text-slate-600">
-              Shilsha
+              Shilsha Technologies
             </span>
 
             <ChevronRight
               size={14}
-              className="text-slate-300 dark:text-slate-700"
+              className="text-slate-500 dark:text-slate-700"
             />
 
             <span
