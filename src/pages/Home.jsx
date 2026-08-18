@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import Hero from "../components/Hero";
-
+import Footer from "../components/Footer";
 const OurStrength = lazy(() => import("../components/OurStrength"));
 const CountsSection = lazy(() => import("../components/CountsSection"));
 const ServicesSection = lazy(() => import("../components/ServiceSection"));
@@ -10,7 +10,6 @@ const IndustriesSection = lazy(() => import("../components/IndustriesSection"));
 const AwardsSection = lazy(() => import("../components/AwardsSection"));
 const ClientSlider = lazy(() => import("../components/ClientSlider"));
 const FAQSection = lazy(() => import("../components/FAQ"));
-const Footer = lazy(() => import("../components/Footer"));
 
 const Home = () => {
   return (

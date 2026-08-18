@@ -287,8 +287,6 @@ export default function FAQSectionShilsha() {
               <Mail size={16} /> Email Us
             </a>
           </div>
-
-          {/* Decorative Background Glow */}
           <div className="absolute -right-10 -bottom-10 w-48 h-48 bg-[#60a5fa]/20 rounded-full blur-3xl pointer-events-none" />
         </div>
       </div>

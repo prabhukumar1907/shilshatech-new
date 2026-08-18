@@ -42,10 +42,6 @@ const sections = [
   ["contact", "Contact Us"],
 ];
 
-/* =========================================================
-   ICONS
-========================================================= */
-
 const sectionIcons = {
   acceptance: <CheckCircle2 />,
   services: <Code2 />,
@@ -64,10 +60,6 @@ const sectionIcons = {
   "governing-law": <Scale />,
   changes: <FileText />,
 };
-
-/* =========================================================
-   MAIN COMPONENT
-========================================================= */
 
 const TermsAndConditions = () => {
   const lastUpdated = "August 18, 2026";

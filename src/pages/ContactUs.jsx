@@ -19,6 +19,7 @@ import {
   Globe,
   ChevronDown,
 } from "lucide-react";
+import Footer from "../components/Footer";
 
 const brandTheme = {
   primaryBlue: "#276ea5",
@@ -652,6 +653,7 @@ const ContactUs = () => {
   }, []);
 
   return (
+    <>
     <main
       id="main"
       className="relative min-h-screen overflow-hidden bg-slate-50 font-sans text-slate-900 transition-colors duration-500 dark:bg-[#060b13] dark:text-slate-100"
@@ -757,6 +759,8 @@ const ContactUs = () => {
         </div>
       </section>
     </main>
+    <Footer/>
+    </>
   );
 };
 
