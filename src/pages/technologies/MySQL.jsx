@@ -1,286 +1,417 @@
 import React from "react";
-import { Zap, ShieldCheck, Workflow, ArrowRight, Database } from "lucide-react";
+import {
+  Zap,
+  ShieldCheck,
+  ArrowRight,
+  Database,
+  Server,
+  Activity,
+  Lock,
+  Gauge,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { SiMysql } from "react-icons/si";
 import { motion } from "framer-motion";
+
 import AwardsSection from "../../components/AwardsSection";
 import ReasonsWhySection from "../../components/ReasonsWhySection";
-import ServicesSection from "../../components/ServiceSection";
 import Footer from "../../components/Footer";
 
 const theme = {
-  primary: "#00758F", // MySQL Blue
+  primary: "#00758F",
   secondary: "#005466",
   glow: "#38bdf8",
 };
 
+const features = [
+  {
+    number: "01",
+    icon: Database,
+    title: "Optimized Database Architecture",
+    desc: "Design normalized, scalable MySQL schemas built around performance, reliability, and long-term maintainability.",
+  },
+  {
+    number: "02",
+    icon: Zap,
+    title: "Advanced Query Optimization",
+    desc: "Identify slow queries, improve indexing strategies, optimize joins, and tune execution plans for faster response times.",
+  },
+  {
+    number: "03",
+    icon: Server,
+    title: "High Availability & Replication",
+    desc: "Build resilient database environments with replication, failover strategies, load balancing, and recovery planning.",
+  },
+  {
+    number: "04",
+    icon: Lock,
+    title: "Security & Access Control",
+    desc: "Harden database infrastructure with least-privilege access, encrypted connections, auditing, and secure configurations.",
+  },
+  {
+    number: "05",
+    icon: Activity,
+    title: "Migration & Modernization",
+    desc: "Move legacy workloads to modern MySQL environments and cloud platforms while minimizing downtime and risk.",
+  },
+  {
+    number: "06",
+    icon: Gauge,
+    title: "Continuous Performance Tuning",
+    desc: "Monitor database workloads and continuously tune resources, queries, indexes, and server configuration.",
+  },
+];
+
+const services = [
+  "MySQL Database Architecture & Design",
+  "Query Performance Tuning & Indexing",
+  "Cloud Migration & Managed Hosting",
+  "Replication & High Availability",
+  "Backup & Disaster Recovery",
+  "Stored Procedures & Triggers",
+  "Database Security & Hardening",
+  "Ongoing Database Maintenance",
+];
+
 const MysqlServicesPage = () => {
-  const brandTheme = {
-    primaryBlue: "#00758F",
-    secondaryIndigo: "#005466",
-    electricCyan: "#38bdf8",
-  };
-
-  const whyChooseItems = [
-    {
-      title: "Relational Database Experts",
-      desc: "Our database engineers specialize in designing highly normalized, performant, and secure MySQL database schemas.",
-    },
-    {
-      title: "Advanced Query Optimization",
-      desc: "We analyze execution plans and configure proper indexing to ensure lightning-fast read and write operations.",
-    },
-    {
-      title: "High Availability & Replication",
-      desc: "Set up master-slave replication, clustering, and automated failover systems to guarantee 99.99% uptime.",
-    },
-    {
-      title: "Enterprise Security & Auditing",
-      desc: "Implement strict user access controls, data encryption at rest/transit, and regular vulnerability assessments.",
-    },
-    {
-      title: "Seamless Migration Services",
-      desc: "Migrate your legacy databases safely to MySQL or cloud-managed instances (RDS, Aurora) with zero data loss.",
-    },
-    {
-      title: "Proactive Performance Tuning",
-      desc: "Continuously monitor database metrics and tune server parameters (InnoDB buffer pool, query cache) for peak efficiency.",
-    },
-  ];
-
-  const servicesList = [
-    {
-      title: "MySQL Database Architecture & Design",
-      desc: "Design robust, scalable relational schemas with proper foreign keys, constraints, and normalization standards.",
-    },
-    {
-      title: "Query Performance Tuning & Indexing",
-      desc: "Identify bottlenecks, optimize complex joins, and configure strategic indexes using EXPLAIN plans.",
-    },
-    {
-      title: "Cloud Migration & Managed Hosting",
-      desc: "Transition on-premise databases to MySQL on AWS RDS, Azure Database, or Google Cloud SQL seamlessly.",
-    },
-    {
-      title: "Replication & High Availability Setup",
-      desc: "Configure master-replica configurations, load balancing, and automated failover to prevent downtime.",
-    },
-    {
-      title: "Database Backup & Disaster Recovery",
-      desc: "Implement automated snapshot backups, point-in-time recovery (PITR), and tested recovery protocols.",
-    },
-    {
-      title: "Stored Procedures & Triggers",
-      desc: "Develop efficient stored procedures, functions, and triggers to handle complex business logic inside the database.",
-    },
-    {
-      title: "Database Security & Hardening",
-      desc: "Secure user permissions, enable SSL connections, and protect against SQL injection vulnerabilities.",
-    },
-    {
-      title: "Ongoing Maintenance & Support",
-      desc: "Monitor query performance, handle routine maintenance, and apply security patches proactively.",
-    },
-  ];
-
   return (
-    <div className="min-h-screen pt-28 pb-16 bg-slate-50 dark:bg-[#070d18] text-slate-800 dark:text-slate-100 transition-colors duration-200 font-sans selection:bg-[#38bdf8] selection:text-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Hero Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="relative rounded-3xl border border-slate-200/80 dark:border-cyan-500/20 bg-white dark:bg-[#0b1528] p-8 sm:p-12 shadow-xl overflow-hidden mb-12"
-        >
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="absolute top-0 left-0 h-1 w-full origin-left"
-            style={{
-              background: `linear-gradient(90deg, #00758F, ${theme.glow})`,
-            }}
-          />
+    <main className="min-h-screen bg-slate-50 dark:bg-[#050a12] text-slate-900 dark:text-white overflow-hidden">
 
+      <section className="relative pt-28 sm:pt-36 pb-24 sm:pb-32">
+        <div className="absolute inset-0 pointer-events-none">
           <div
-            className="absolute -top-24 -right-24 w-72 h-72 rounded-full blur-3xl opacity-10 pointer-events-none"
+            className="absolute top-20 right-[-10%] w-125 h-125 rounded-full blur-[140px] opacity-20"
             style={{ background: theme.glow }}
           />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div
+            className="absolute bottom-0 left-[-10%] w-100 h-100 rounded-full blur-[140px] opacity-10"
+            style={{ background: theme.primary }}
+          />
+
+          <div className="absolute inset-0 opacity-[0.035] dark:opacity-[0.05]">
+            <div
+              className="w-full h-full"
+              style={{
+                backgroundImage: `
+                  linear-gradient(#00758F 1px, transparent 1px),
+                  linear-gradient(90deg, #00758F 1px, transparent 1px)
+                `,
+                backgroundSize: "60px 60px",
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-5 sm:px-8">
+
+          {/* Top label */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-3 mb-8"
+          >
+            <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-[#00758F]/10 dark:bg-[#38bdf8]/10">
+              <SiMysql
+                size={23}
+                className="text-[#00758F] dark:text-[#38bdf8]"
+              />
+            </div>
+
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.25em] font-bold text-[#00758F] dark:text-[#38bdf8]">
+                Shilsha Technologies
+              </p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                Database Engineering Services
+              </p>
+            </div>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-[1.25fr_0.75fr] gap-14 lg:gap-20 items-center">
+
+            {/* Hero content */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col gap-4"
+              transition={{ duration: 0.7 }}
             >
-              <div className="inline-flex items-center gap-2 w-fit px-3 py-1 rounded-full text-xs font-semibold bg-cyan-50 text-cyan-700 dark:bg-cyan-500/10 dark:text-cyan-400 border border-cyan-200 dark:border-cyan-500/20 shadow-sm">
-                <SiMysql size={24} className="shrink-0" />
-                <span>Shilsha Technologies Expert Services</span>
-              </div>
-              <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
-                MySQL Database Consulting & Optimization Services in India
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-[-0.04em] leading-[0.98]">
+                MySQL Database
+                <span className="block mt-2 text-transparent bg-clip-text bg-linear-to-r from-[#00758F] to-[#38bdf8]">
+                  Built for Performance.
+                </span>
               </h1>
-              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-                Shilsha Technologies delivers high-performance MySQL database
-                architecture, query optimization, and high-availability
-                clustering solutions for modern enterprise applications.
+
+              <p className="mt-8 max-w-2xl text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+                High-performance MySQL architecture, optimization, migration,
+                security, and high-availability solutions for modern
+                applications and enterprise workloads.
               </p>
-              <motion.div
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                className="flex flex-wrap gap-3 pt-2"
-              >
+
+              <div className="flex flex-wrap items-center gap-4 mt-9">
                 <Link
                   to="/contact-us"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white text-xs font-semibold shadow-md transition-shadow duration-200 hover:shadow-lg"
-                  style={{
-                    background: `linear-gradient(90deg, #00758F, ${theme.secondary})`,
-                  }}
+                  className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-[#00758F] hover:bg-[#005466] text-white text-sm font-semibold transition-all duration-300 shadow-lg shadow-[#00758F]/20"
                 >
-                  <span>Hire MySQL Experts</span>
-                  <ArrowRight size={15} />
+                  Hire MySQL Experts
+                  <ArrowRight
+                    size={17}
+                    className="transition-transform duration-300 group-hover:translate-x-1"
+                  />
                 </Link>
-              </motion.div>
+
+                <a
+                  href="#services"
+                  className="inline-flex items-center px-6 py-3.5 rounded-full border border-slate-300 dark:border-white/15 text-sm font-semibold hover:border-[#00758F] hover:text-[#00758F] dark:hover:text-[#38bdf8] transition-colors"
+                >
+                  Explore Services
+                </a>
+              </div>
             </motion.div>
 
+            {/* Hero visual */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex justify-center"
+              transition={{ duration: 0.8, delay: 0.15 }}
+              className="relative flex justify-center lg:justify-end"
             >
-              <div className="p-8 rounded-2xl border border-slate-100 dark:border-cyan-500/10 bg-slate-50 dark:bg-[#070d18] flex items-center justify-center shadow-inner relative group">
-                <div className="absolute inset-0 rounded-2xl bg-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <SiMysql
-                  className="text-[#00758F] dark:text-[#38bdf8] transition-transform duration-500 group-hover:scale-110"
-                  size={130}
-                />
+              <div className="relative w-65 h-65 sm:w-85 sm:h-85">
+
+                {/* Outer ring */}
+                <div className="absolute inset-0 rounded-full border border-[#00758F]/20 dark:border-[#38bdf8]/20" />
+
+                <div className="absolute inset-6 rounded-full border border-dashed border-[#00758F]/20 dark:border-[#38bdf8]/20 animate-[spin_25s_linear_infinite]" />
+
+                {/* Glow */}
+                <div className="absolute inset-12 rounded-full bg-[#00758F]/10 dark:bg-[#38bdf8]/10 blur-3xl" />
+
+                {/* Icon */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <SiMysql
+                    size={150}
+                    className="relative z-10 text-[#00758F] dark:text-[#38bdf8] drop-shadow-[0_0_30px_rgba(56,189,248,0.25)]"
+                  />
+                </div>
+
+                {/* Floating labels */}
+                <div className="absolute top-3 right-0 sm:-right-5 px-3 py-2 rounded-lg bg-white/80 dark:bg-[#0b1528]/80 backdrop-blur-md border border-slate-200 dark:border-white/10 text-[10px] font-bold uppercase tracking-wider text-[#00758F] dark:text-[#38bdf8]">
+                  High Availability
+                </div>
+
+                <div className="absolute bottom-8 -left-3.75 px-3 py-2 rounded-lg bg-white/80 dark:bg-[#0b1528]/80 backdrop-blur-md border border-slate-200 dark:border-white/10 text-[10px] font-bold uppercase tracking-wider">
+                  Query Optimization
+                </div>
+
               </div>
             </motion.div>
           </div>
-        </motion.div>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {[
-            {
-              icon: <Database size={20} />,
-              title: "Optimized Schemas",
-              desc: "Build well-structured, normalized relational databases designed for data integrity and speed.",
-            },
-            {
-              icon: <Zap size={20} />,
-              title: "Query Tuning",
-              desc: "Eliminate slow-running queries and configure proper indexes to maximize execution velocity.",
-            },
-            {
-              icon: <ShieldCheck size={20} />,
-              title: "High Availability",
-              desc: "Ensure continuous operations with robust replication and automated failover setups.",
-            },
-          ].map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-              whileHover={{ y: -5 }}
-              className="p-6 rounded-2xl border border-slate-200/80 dark:border-cyan-500/20 bg-white dark:bg-[#0b1528] shadow-sm transition-shadow duration-300 hover:shadow-xl group"
-            >
-              <div className="h-10 w-10 rounded-xl bg-cyan-50 dark:bg-cyan-500/10 flex items-center justify-center text-cyan-700 dark:text-cyan-400 mb-4 transition-transform duration-300 group-hover:scale-110">
-                {feature.icon}
+          {/* Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-0 mt-20 border-y border-slate-200 dark:border-white/10"
+          >
+            {[
+              ["01", "Architecture"],
+              ["02", "Optimization"],
+              ["03", "Security"],
+              ["04", "Availability"],
+            ].map(([num, label]) => (
+              <div
+                key={num}
+                className="py-6 px-5 border-r last:border-r-0 border-slate-200 dark:border-white/10"
+              >
+                <span className="text-xs font-bold text-[#00758F] dark:text-[#38bdf8]">
+                  {num}
+                </span>
+                <p className="mt-1 text-sm font-semibold">{label}</p>
               </div>
-              <h3 className="text-base font-bold mb-2 group-hover:text-cyan-600 transition-colors duration-200">
-                {feature.title}
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                {feature.desc}
-              </p>
-            </motion.div>
-          ))}
+            ))}
+          </motion.div>
         </div>
-      </div>
-
-      {/* Main Intro Section */}
-      <section className="py-16 px-6 max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
-        >
-          <div className="lg:col-span-12 space-y-8">
-            <h2
-              className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-snug"
-              style={{ color: brandTheme.primaryBlue }}
-            >
-              Power Your Applications with Expert MySQL Database Solutions
-            </h2>
-            <div
-              className="w-full h-1 rounded-full my-6 opacity-40"
-              style={{
-                background: `linear-gradient(to right, ${brandTheme.primaryBlue}, ${brandTheme.electricCyan})`,
-              }}
-            />
-            <div className="p-8 rounded-3xl bg-white dark:bg-[#0b1528] backdrop-blur-xl border border-slate-200 dark:border-cyan-500/20 shadow-xl space-y-6">
-              <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-base sm:text-lg">
-                MySQL remains the backbone of millions of web applications
-                worldwide. Shilsha Technologies provides expert database
-                administration, schema design, query optimization, and scaling
-                services to ensure your application data layer performs
-                flawlessly under any load.
-              </p>
-              <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-base sm:text-lg">
-                Contact our database specialists today to audit your MySQL setup
-                and elevate your system performance!
-              </p>
-            </div>
-          </div>
-        </motion.div>
       </section>
 
-      {/* Software & Application Benefits Section */}
-      <section className="py-16 px-6 bg-slate-100/60 dark:bg-[#0b1528]/40 border-y border-slate-200 dark:border-cyan-500/20">
-        <div className="max-w-7xl mx-auto space-y-8">
-          <motion.h2
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+      <section className="relative py-24 sm:py-32 border-t border-slate-200 dark:border-white/10">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+
+          <div className="grid lg:grid-cols-12 gap-12">
+
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="lg:col-span-5"
+            >
+              <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#00758F] dark:text-[#38bdf8] mb-5">
+                Database Engineering
+              </p>
+
+              <h2 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+                Power your applications with a stronger data layer.
+              </h2>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="lg:col-span-7"
+            >
+              <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
+                MySQL remains one of the most widely used relational database
+                technologies for modern web and enterprise applications.
+                Shilsha Technologies helps organizations design, optimize,
+                secure, migrate, and scale their MySQL environments.
+              </p>
+
+              <p className="mt-6 text-lg sm:text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
+                From schema architecture and indexing to replication,
+                disaster recovery, and cloud migration, our database
+                engineers build infrastructure that stays reliable under
+                demanding workloads.
+              </p>
+
+              <div className="mt-8 flex items-center gap-3 text-sm font-semibold text-[#00758F] dark:text-[#38bdf8]">
+                <span className="w-8 h-px bg-current" />
+                Performance-first database engineering
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 sm:py-32 bg-slate-100/70 dark:bg-[#08111e]">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-3xl sm:text-5xl font-extrabold tracking-tight"
-            style={{ color: brandTheme.primaryBlue }}
+            className="max-w-3xl mb-16"
           >
-            Ensure Data Integrity and Unmatched Speed
-          </motion.h2>
-          <div className="space-y-6 text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#00758F] dark:text-[#38bdf8] mb-5">
+              Why MySQL Engineering Matters
+            </p>
+
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight">
+              Every millisecond matters when your database powers the product.
+            </h2>
+          </motion.div>
+
+          <div className="divide-y divide-slate-300 dark:divide-white/10 border-y border-slate-300 dark:border-white/10">
+            {features.map((feature, index) => {
+              const Icon = feature.icon;
+
+              return (
+                <motion.div
+                  key={feature.number}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.45, delay: index * 0.05 }}
+                  className="group grid md:grid-cols-[80px_60px_1fr] gap-5 md:gap-8 items-start py-8 sm:py-10"
+                >
+                  <span className="text-sm font-bold text-[#00758F] dark:text-[#38bdf8]">
+                    {feature.number}
+                  </span>
+
+                  <div className="w-11 h-11 flex items-center justify-center">
+                    <Icon
+                      size={22}
+                      className="text-slate-500 group-hover:text-[#00758F] dark:text-slate-500 dark:group-hover:text-[#38bdf8] transition-colors duration-300"
+                    />
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl sm:text-2xl font-bold group-hover:text-[#00758F] dark:group-hover:text-[#38bdf8] transition-colors duration-300">
+                      {feature.title}
+                    </h3>
+
+                    <p className="mt-3 max-w-3xl text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+                      {feature.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="services"
+        className="py-24 sm:py-32 relative"
+      >
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+
+          <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-16">
+
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              whileHover={{ y: -2 }}
-              className="p-8 rounded-3xl bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-cyan-500/20 shadow-lg transition-transform duration-300"
             >
-              As an expert software development agency, we integrate secure,
-              high-speed relational storage systems into every web and mobile
-              solution we build, ensuring absolute reliability and transaction
-              safety.
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#00758F] dark:text-[#38bdf8] mb-5">
+                What We Do
+              </p>
+
+              <h2 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+                MySQL services designed around your workload.
+              </h2>
+
+              <p className="mt-6 text-slate-600 dark:text-slate-400 leading-relaxed">
+                Whether you need a database from scratch or need to rescue a
+                struggling production environment, our engineers can help.
+              </p>
+
+              <Link
+                to="/contact-us"
+                className="group inline-flex items-center gap-3 mt-8 text-sm font-bold text-[#00758F] dark:text-[#38bdf8]"
+              >
+                Discuss your database
+                <ArrowRight
+                  size={17}
+                  className="group-hover:translate-x-1 transition-transform"
+                />
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              whileHover={{ y: -2 }}
-              className="p-8 rounded-3xl bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-cyan-500/20 shadow-lg transition-transform duration-300"
             >
-              Get in touch with our engineers to architect or optimize your
-              MySQL database infrastructure today.
-            </motion.p>
+              <div className="divide-y divide-slate-200 dark:divide-white/10 border-y border-slate-200 dark:border-white/10">
+                {services.map((service, index) => (
+                  <div
+                    key={service}
+                    className="group flex items-center justify-between gap-5 py-5 sm:py-6"
+                  >
+                    <div className="flex items-center gap-4">
+                      <span className="text-[11px] font-bold text-slate-400 dark:text-slate-600">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+
+                      <span className="text-base sm:text-lg font-semibold group-hover:text-[#00758F] dark:group-hover:text-[#38bdf8] transition-colors">
+                        {service}
+                      </span>
+                    </div>
+
+                    <ArrowRight
+                      size={17}
+                      className="shrink-0 text-slate-300 dark:text-slate-700 group-hover:text-[#00758F] dark:group-hover:text-[#38bdf8] group-hover:translate-x-1 transition-all"
+                    />
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
           </div>
         </div>
       </section>
@@ -288,7 +419,8 @@ const MysqlServicesPage = () => {
       <ReasonsWhySection />
       <AwardsSection />
       <Footer />
-    </div>
+
+    </main>
   );
 };
 

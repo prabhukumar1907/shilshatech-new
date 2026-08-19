@@ -2,11 +2,8 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Sparkles,
-  ArrowRight,
   Target,
   Eye,
-  MapPin,
-  ChevronDown,
   GraduationCap,
   UtensilsCrossed,
   Plane,
@@ -16,114 +13,118 @@ import {
   DollarSign,
   Hotel,
   Film,
-  Award,
   Mail,
-  CheckCircle2,
   Globe2,
+  ChevronDown,
+  ArrowUpRight,
+  Code2,
+  Layers3,
+  CloudCog,
+  Smartphone,
 } from "lucide-react";
 import AwardsSection from "../components/AwardsSection";
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
 
 const theme = {
   primary: "#276ea5",
-  darkNavy: "#0b1329",
-  glow: "#38bdf8",
-};
-
-const MotionLink = motion.create(Link);
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const staggerContainer = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.08 },
-  },
-};
-
-const staggerItem = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
+  cyan: "#38bdf8",
+  navy: "#07111f",
 };
 
 const industries = [
   {
     title: "Education",
     icon: GraduationCap,
-    desc: "Interactive e-learning portals, student management systems, and custom educational mobile apps.",
+    desc: "E-learning platforms, student systems, education portals and mobile applications.",
   },
   {
     title: "Restaurant",
     icon: UtensilsCrossed,
-    desc: "Online ordering engines, table reservation portals, digital menus, and delivery platform integrations.",
+    desc: "Ordering platforms, digital menus, reservations and delivery integrations.",
   },
   {
     title: "Tour & Travel",
     icon: Plane,
-    desc: "Comprehensive booking platforms, itinerary planners, interactive maps, and trip management tools.",
+    desc: "Booking engines, itinerary systems, interactive maps and travel management.",
   },
   {
     title: "Real Estate",
     icon: Home,
-    desc: "Property listing platforms, interactive maps, mortgage calculators, and lead capture pipelines.",
+    desc: "Property platforms, map experiences, calculators and lead management systems.",
   },
   {
     title: "Banking",
     icon: Landmark,
-    desc: "Encrypted transaction workflows, account management systems, and financial tracking dashboards.",
+    desc: "Secure financial workflows, account systems and transaction dashboards.",
   },
   {
     title: "Insurance",
     icon: ShieldCheck,
-    desc: "Policy administration, automated quote generation, claims processing, and client portals.",
+    desc: "Policy platforms, automated quotes, claims systems and customer portals.",
   },
   {
     title: "Finance",
     icon: DollarSign,
-    desc: "Loan calculators, investment management dashboards, and personalized wealth tools.",
+    desc: "Investment dashboards, loan tools and personalized financial experiences.",
   },
   {
     title: "Hotel Booking",
     icon: Hotel,
-    desc: "Seamless reservation systems, real-time availability tracking, and secure payment integrations.",
+    desc: "Reservation systems, live availability and secure payment experiences.",
   },
   {
     title: "Media & Entertainment",
     icon: Film,
-    desc: "Content delivery systems, live streaming integrations, and audience engagement platforms.",
+    desc: "Streaming platforms, content systems and audience engagement products.",
   },
 ];
 
 const faqs = [
   {
     q: "What is the general process for IoT application development?",
-    a: "In general, IoT app development begins with platform selection, followed by choosing hardware and development boards, designing for optimal usability, and ensuring high-speed firmware cloud connectivity.",
+    a: "IoT app development generally starts with platform selection, hardware and development-board planning, UX design, firmware development and cloud connectivity.",
   },
   {
     q: "How much time will it take to build an IoT application?",
-    a: "It takes around 12 weeks for a startup MVP with standard feature sets. Complex enterprise applications with custom firmware, hardware integrations, and AWS deployment range between 12 to 18 weeks.",
+    a: "A startup MVP with standard functionality generally takes around 12 weeks. More complex enterprise applications involving custom hardware, firmware and AWS deployment can take 12 to 18 weeks.",
   },
   {
     q: "Why choose Shilsha Technologies for app & software development?",
-    a: "Shilsha Technologies blends deep full-stack technical knowledge with extensive cross-industry experience, delivering scalable, highly secure solutions backed by agile project management.",
+    a: "Shilsha Technologies combines full-stack engineering expertise with cross-industry experience to create scalable, secure and user-focused digital products.",
   },
   {
     q: "Does your company work according to my time zone preferences?",
-    a: "Yes! We operate flexibly across global time zones (PST, EST, CST, MST, GMT, and IST) to guarantee overlapping communication windows and on-time project delivery.",
+    a: "Yes. Our teams can work across PST, EST, CST, MST, GMT and IST time zones to provide convenient communication windows.",
   },
   {
     q: "Can your developers work with my existing system, tool, or CRM?",
-    a: "Absolutely. We routinely integrate with legacy systems, custom APIs, third-party software, and existing cloud infrastructures without interrupting ongoing business operations.",
+    a: "Yes. We integrate with legacy applications, APIs, CRMs, third-party software and existing cloud infrastructures.",
   },
   {
     q: "Do you sign a Non-Disclosure Agreement (NDA)?",
-    a: "Yes, confidentiality is strictly guaranteed. We sign standard NDAs before any deep technical discussions to ensure your business concept, assets, and intellectual property remain 100% secure.",
+    a: "Yes. NDAs can be signed before detailed technical discussions to protect your business information, intellectual property and project concepts.",
   },
 ];
+
+const fadeUp = {
+  hidden: {
+    opacity: 0,
+    y: 25,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+  },
+};
+
+const stagger = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
 
 const AboutUs = () => {
   const [openFaq, setOpenFaq] = useState(0);
@@ -131,9 +132,13 @@ const AboutUs = () => {
 
   useEffect(() => {
     const checkDark = () => document.documentElement.classList.contains("dark");
+
     setIsDarkMode(checkDark());
 
-    const observer = new MutationObserver(() => setIsDarkMode(checkDark()));
+    const observer = new MutationObserver(() => {
+      setIsDarkMode(checkDark());
+    });
+
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["class"],
@@ -144,376 +149,581 @@ const AboutUs = () => {
 
   return (
     <>
-      <main className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 font-sans">
-        {/* Modernized Hero Section */}
-        <section className="relative pt-32 pb-20 px-6 lg:px-12 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
-          {/* Subtle Background Glow Elements */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-125 bg-blue-400/10 dark:bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+      <main className="min-h-screen bg-[#f8fafc] text-slate-900 dark:bg-[#050b14] dark:text-white font-sans overflow-hidden">
+        <section className="relative min-h-170 flex items-center px-6 lg:px-12 pt-28 pb-16 overflow-hidden">
+          {/* Background */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div
+              className="absolute -top-40 -right-40 w-137.5 h-137.5 rounded-full blur-[120px] opacity-20"
+              style={{
+                background: isDarkMode ? "#0ea5e9" : "#93c5fd",
+              }}
+            />
 
-          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-            <motion.div
-              className="lg:col-span-7 space-y-6"
-              initial="hidden"
-              animate="visible"
-              variants={staggerContainer}
-            >
+            <div
+              className="absolute -bottom-50 -left-37.5 w-112.5 h-112.5 rounded-full blur-[120px] opacity-10"
+              style={{
+                background: "#276ea5",
+              }}
+            />
+
+            <div
+              className="absolute inset-0 opacity-[0.035] dark:opacity-[0.04]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(#276ea5 1px, transparent 1px), linear-gradient(90deg, #276ea5 1px, transparent 1px)",
+                backgroundSize: "60px 60px",
+              }}
+            />
+          </div>
+
+          <div className="max-w-7xl mx-auto w-full relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              {/* Left */}
               <motion.div
-                variants={staggerItem}
-                transition={{ duration: 0.5 }}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300 border border-blue-200 dark:border-blue-800 shadow-sm"
+                className="lg:col-span-8"
+                initial="hidden"
+                animate="visible"
+                variants={stagger}
               >
-                <Sparkles size={14} className="text-[#276ea5]" />
-                <span>Leading Software Engineering Partner</span>
+                <motion.div
+                  variants={fadeUp}
+                  transition={{ duration: 0.5 }}
+                  className="flex items-center gap-3 mb-7"
+                >
+                  <span className="w-10 h-px bg-[#276ea5]" />
+
+                  <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#276ea5] dark:text-[#38bdf8]">
+                    About Shilsha Technologies
+                  </span>
+                </motion.div>
+
+                <motion.h1
+                  variants={fadeUp}
+                  transition={{ duration: 0.6 }}
+                  className="text-5xl sm:text-6xl lg:text-[78px] font-black tracking-[-0.045em] leading-[0.98]"
+                >
+                  Engineering
+                  <br />
+                  <span className="bg-linear-to-r from-[#276ea5] via-blue-500 to-[#38bdf8] bg-clip-text text-transparent">
+                    Digital Futures.
+                  </span>
+                </motion.h1>
+
+                <motion.p
+                  variants={fadeUp}
+                  transition={{ duration: 0.6 }}
+                  className="mt-8 max-w-2xl text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed"
+                >
+                  Shilsha Technologies builds high-performance web, mobile,
+                  cloud and enterprise solutions that help ambitious businesses
+                  turn complex ideas into scalable digital products.
+                </motion.p>
+
+                {/* Capability line */}
+                <motion.div
+                  variants={fadeUp}
+                  transition={{ duration: 0.6 }}
+                  className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3"
+                >
+                  {[
+                    "Web Development",
+                    "Mobile Engineering",
+                    "Cloud Solutions",
+                    "Digital Transformation",
+                  ].map((item) => (
+                    <span
+                      key={item}
+                      className="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-300"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#276ea5] dark:bg-[#38bdf8]" />
+                      {item}
+                    </span>
+                  ))}
+                </motion.div>
               </motion.div>
 
-              <motion.h1
-                variants={staggerItem}
-                transition={{ duration: 0.6 }}
-                className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.12]"
+              {/* Right visual */}
+              <motion.div
+                className="lg:col-span-4 relative"
+                initial={{ opacity: 0, scale: 0.92 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.25 }}
               >
-                About{" "}
-                <span className="bg-clip-text text-transparent bg-linear-to-r from-[#276ea5] to-blue-600 dark:from-[#38bdf8] dark:to-blue-400">
-                  Shilsha Technologies
-                </span>
-              </motion.h1>
+                <div className="relative aspect-square max-w-87.5 mx-auto">
+                  {/* Rings */}
+                  <div className="absolute inset-8 rounded-full border border-[#276ea5]/20 dark:border-[#38bdf8]/20" />
+                  <div className="absolute inset-16 rounded-full border border-[#276ea5]/20 dark:border-[#38bdf8]/20" />
+                  <div className="absolute inset-24 rounded-full border border-[#276ea5]/30 dark:border-[#38bdf8]/30" />
+
+                  {/* Glow */}
+                  <div className="absolute inset-20 rounded-full bg-[#276ea5]/10 dark:bg-[#38bdf8]/10 blur-2xl" />
+
+                  {/* Center */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="relative w-32 h-32 rounded-full bg-white dark:bg-[#0b1626] border border-slate-200 dark:border-blue-400/20 shadow-2xl flex items-center justify-center">
+                      <Code2
+                        size={52}
+                        className="text-[#276ea5] dark:text-[#38bdf8]"
+                      />
+
+                      <motion.div
+                        className="absolute -inset-3.75 rounded-full border border-[#38bdf8]/30"
+                        animate={{
+                          scale: [1, 1.12, 1],
+                          opacity: [0.4, 0.1, 0.4],
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Floating labels */}
+                  <div className="absolute top-2 right-4 flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                    <Smartphone size={14} className="text-[#276ea5]" />
+                    Mobile
+                  </div>
+
+                  <div className="absolute bottom-8 left-0 flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                    <CloudCog size={14} className="text-[#276ea5]" />
+                    Cloud
+                  </div>
+
+                  <div className="absolute top-1/2 -right-5 flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                    <Layers3 size={14} className="text-[#276ea5]" />
+                    Scale
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Bottom stats */}
+            <motion.div
+              className="mt-16 pt-7 border-t border-slate-200 dark:border-slate-800 grid grid-cols-2 lg:grid-cols-4 gap-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
+              {[
+                ["01", "Product Engineering"],
+                ["02", "Cross-Industry Expertise"],
+                ["03", "Scalable Architecture"],
+                ["04", "Long-Term Partnerships"],
+              ].map(([number, title]) => (
+                <div key={number} className="flex gap-3">
+                  <span className="text-xs font-black text-[#276ea5] dark:text-[#38bdf8]">
+                    {number}
+                  </span>
+
+                  <span className="text-xs font-semibold text-slate-600 dark:text-slate-300">
+                    {title}
+                  </span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        <section className="px-6 lg:px-12 py-20 bg-white dark:bg-[#08111e]">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={stagger}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-12"
+            >
+              <motion.div
+                variants={fadeUp}
+                transition={{ duration: 0.55 }}
+                className="lg:col-span-4"
+              >
+                <p className="text-xs uppercase tracking-[0.25em] font-bold text-[#276ea5] dark:text-[#38bdf8] mb-4">
+                  Our Philosophy
+                </p>
+
+                <h2 className="text-3xl sm:text-4xl font-black tracking-tight leading-tight">
+                  Built around ideas that create impact.
+                </h2>
+              </motion.div>
+
+              <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-10">
+                <motion.div
+                  variants={fadeUp}
+                  transition={{ duration: 0.55, delay: 0.1 }}
+                  className="relative"
+                >
+                  <div className="absolute left-0 top-0 w-10 h-10 rounded-full bg-[#276ea5]/10 dark:bg-[#38bdf8]/10 flex items-center justify-center">
+                    <Target
+                      size={18}
+                      className="text-[#276ea5] dark:text-[#38bdf8]"
+                    />
+                  </div>
+
+                  <div className="pl-14">
+                    <p className="text-xs uppercase tracking-[0.2em] font-bold text-[#276ea5] dark:text-[#38bdf8] mb-4">
+                      Our Mission
+                    </p>
+
+                    <h3 className="text-xl font-bold mb-4">
+                      Transforming ideas into useful technology.
+                    </h3>
+
+                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                      We transform businesses through innovative web and mobile
+                      solutions designed around real user needs, operational
+                      efficiency and measurable business outcomes.
+                    </p>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  variants={fadeUp}
+                  transition={{ duration: 0.55, delay: 0.2 }}
+                  className="relative"
+                >
+                  <div className="absolute left-0 top-0 w-10 h-10 rounded-full bg-[#276ea5]/10 dark:bg-[#38bdf8]/10 flex items-center justify-center">
+                    <Eye
+                      size={18}
+                      className="text-[#276ea5] dark:text-[#38bdf8]"
+                    />
+                  </div>
+
+                  <div className="pl-14">
+                    <p className="text-xs uppercase tracking-[0.2em] font-bold text-[#276ea5] dark:text-[#38bdf8] mb-4">
+                      Our Vision
+                    </p>
+
+                    <h3 className="text-xl font-bold mb-4">
+                      Building technology that lasts.
+                    </h3>
+
+                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                      We aim to be a pioneering technology partner, creating
+                      scalable digital experiences that help businesses grow,
+                      adapt and succeed in an evolving digital landscape.
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        <section className="relative px-6 lg:px-12 py-24 bg-[#07111f] text-white overflow-hidden">
+          <div
+            className="absolute top-0 right-0 w-125 h-125 rounded-full blur-[130px] opacity-15"
+            style={{
+              background: "#38bdf8",
+            }}
+          />
+
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
+              <motion.div
+                className="lg:col-span-8"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                transition={{ duration: 0.6 }}
+              >
+                <p className="text-xs uppercase tracking-[0.25em] text-[#38bdf8] font-bold mb-6">
+                  Why We Build
+                </p>
+
+                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05]">
+                  Technology should make
+                  <span className="text-[#38bdf8]"> complexity disappear.</span>
+                </h2>
+              </motion.div>
 
               <motion.p
-                variants={staggerItem}
-                transition={{ duration: 0.6 }}
-                className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl"
+                className="lg:col-span-4 text-sm text-slate-400 leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.15 }}
               >
-                Hire India's expert team for Mobile App and Website Development
-                Services. Delivering high-quality, cost-effective digital
-                solutions tailored to accelerate global business growth.
+                From the first product concept to deployment and continuous
+                improvement, we focus on creating digital systems that are
+                intuitive, reliable and ready to scale.
               </motion.p>
+            </div>
 
-              <motion.div
-                variants={staggerItem}
-                transition={{ duration: 0.6 }}
-                className="pt-2 flex flex-wrap gap-4"
-              >
-                <MotionLink
-                  to="/contact-us"
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="px-7 py-3.5 rounded-xl text-sm font-bold text-white transition-all shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 flex items-center gap-2.5"
-                  style={{ backgroundColor: "#276ea5" }}
+            <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 border-t border-white/10">
+              {[
+                [
+                  "01",
+                  "Think",
+                  "Understand the problem before writing the solution.",
+                ],
+                [
+                  "02",
+                  "Build",
+                  "Engineer products around people, performance and scale.",
+                ],
+                [
+                  "03",
+                  "Evolve",
+                  "Continuously improve products as businesses grow.",
+                ],
+              ].map(([number, title, desc]) => (
+                <motion.div
+                  key={number}
+                  className="pt-7 sm:pr-8 sm:border-r border-white/10 last:border-0"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.5,
+                    delay: Number(number) * 0.08,
+                  }}
                 >
-                  <span>Connect With Us</span>
-                  <ArrowRight size={16} />
-                </MotionLink>
-              </motion.div>
-            </motion.div>
+                  <span className="text-xs font-bold text-[#38bdf8]">
+                    {number}
+                  </span>
 
-            <motion.div
-              className="lg:col-span-5"
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-            >
-              <div className="p-8 rounded-2xl bg-slate-100/80 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 shadow-xl backdrop-blur-xl space-y-4">
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-                  Who We Are
-                </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                  Shilsha Technologies is a premier web and mobile app
-                  development company specializing in custom digital solutions.
-                  Our passion for technology drives us to deliver exceptional
-                  results across web, mobile, cloud, and enterprise platforms.
-                </p>
-                <div className="pt-2 space-y-2.5">
-                  {[
-                    "Mobile App Development (iOS & Android)",
-                    "Custom Web & Portal Engineering",
-                    "Quality Assurance & Performance Testing",
-                    "Digital Transformation & Cloud Services",
-                  ].map((item, idx) => (
-                    <motion.div
-                      key={item}
-                      initial={{ opacity: 0, x: 12 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: 0.4 + idx * 0.08 }}
-                      className="flex items-center gap-2.5 text-xs font-semibold text-slate-700 dark:text-slate-200"
-                    >
-                      <CheckCircle2
-                        size={16}
-                        className="text-[#276ea5] shrink-0"
-                      />
-                      <span>{item}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+                  <h3 className="mt-3 text-lg font-bold">{title}</h3>
 
-        <section className="py-12 px-6 max-w-7xl mx-auto">
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={staggerContainer}
-          >
-            {/* Mission */}
-            <motion.div
-              variants={staggerItem}
-              transition={{ duration: 0.5 }}
-              className="p-8 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-md"
-            >
-              <div
-                className="w-12 h-12 rounded-lg flex items-center justify-center mb-6 text-white shadow-md shadow-blue-500/20"
-                style={{ backgroundColor: "#276ea5" }}
-              >
-                <Target size={24} />
-              </div>
-              <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">
-                Our Mission
-              </h2>
-              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                At Shilsha Technologies, our mission is to transform businesses
-                and empower individuals through innovative web and mobile app
-                solutions. We strive to create cutting-edge, user-centric
-                experiences that enhance efficiency, productivity, and
-                engagement across all industries.
-              </p>
-            </motion.div>
-
-            {/* Vision */}
-            <motion.div
-              variants={staggerItem}
-              transition={{ duration: 0.5 }}
-              className="p-8 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-md"
-            >
-              <div
-                className="w-12 h-12 rounded-lg flex items-center justify-center mb-6 text-white shadow-md shadow-blue-500/20"
-                style={{ backgroundColor: "#276ea5" }}
-              >
-                <Eye size={24} />
-              </div>
-              <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">
-                Our Vision
-              </h2>
-              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                At Shilsha Technologies, our vision is to be a pioneering force
-                in web and mobile app development, empowering businesses with
-                innovative solutions that drive growth and long-term success
-                through seamless user experiences and scalable architecture.
-              </p>
-            </motion.div>
-          </motion.div>
-        </section>
-
-        <motion.section
-          className="py-12 px-6 bg-slate-900 text-white border-y border-slate-800"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.4 }}
-          variants={fadeUp}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="max-w-5xl mx-auto text-center space-y-6">
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              Improve Your Online Presence with Professional Web Development
-              Services Today!
-            </h2>
-            <p className="text-slate-400 text-sm max-w-2xl mx-auto">
-              Partner with Shilsha Technologies to scale your business with
-              robust software applications.
-            </p>
-            <div>
-              <MotionLink
-                to="/contact-us"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-block px-8 py-3.5 rounded-lg text-sm font-bold text-white transition-transform shadow-lg shadow-blue-500/20"
-                style={{ backgroundColor: "#276ea5" }}
-              >
-                Get In Touch
-              </MotionLink>
+                  <p className="mt-2 text-xs text-slate-400 leading-relaxed max-w-xs">
+                    {desc}
+                  </p>
+                </motion.div>
+              ))}
             </div>
           </div>
-        </motion.section>
+        </section>
 
-        <section className="py-12 px-6 max-w-7xl mx-auto">
-          <motion.div
-            className="mb-12 text-center max-w-2xl mx-auto"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.5 }}
-            variants={fadeUp}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className="text-3xl font-extrabold mb-3 text-slate-900 dark:text-white">
-              Industries We Cater
-            </h2>
-            <p className="text-slate-600 dark:text-slate-300 text-sm">
-              We deliver high-level customer satisfaction through innovative
-              project management and robust web & mobile engineering.
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.15 }}
-            variants={staggerContainer}
-          >
-            {industries.map(({ title, icon: Icon, desc }) => (
-              <motion.div
-                key={title}
-                variants={staggerItem}
-                transition={{ duration: 0.45 }}
-                whileHover={{ y: -4 }}
-                className="p-6 rounded-xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 transition-shadow hover:shadow-md"
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <div
-                    className="p-3 rounded-lg text-white"
-                    style={{ backgroundColor: "#276ea5" }}
-                  >
-                    <Icon size={20} />
-                  </div>
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                    {title}
-                  </h3>
-                </div>
-                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                  {desc}
+        <section className="px-6 lg:px-12 py-20">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-12"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+            >
+              <div className="lg:col-span-7">
+                <p className="text-xs uppercase tracking-[0.25em] font-bold text-[#276ea5] dark:text-[#38bdf8] mb-4">
+                  Industry Experience
                 </p>
-              </motion.div>
-            ))}
-          </motion.div>
+
+                <h2 className="text-4xl sm:text-5xl font-black tracking-tight">
+                  Built for different industries.
+                </h2>
+              </div>
+
+              <p className="lg:col-span-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed lg:pt-8">
+                Our engineering teams adapt technology to the workflows,
+                customers and operational requirements of each industry rather
+                than forcing businesses into generic solutions.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              variants={stagger}
+              className="border-t border-slate-200 dark:border-slate-800"
+            >
+              {industries.map(({ title, icon: Icon, desc }, index) => (
+                <motion.div
+                  key={title}
+                  variants={fadeUp}
+                  transition={{ duration: 0.4 }}
+                  className="group grid grid-cols-12 gap-4 sm:gap-8 py-6 border-b border-slate-200 dark:border-slate-800"
+                >
+                  <div className="col-span-2 sm:col-span-1">
+                    <span className="text-xs font-bold text-slate-400 dark:text-slate-600">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+
+                  <div className="col-span-10 sm:col-span-4 flex items-center gap-3">
+                    <Icon
+                      size={19}
+                      className="text-[#276ea5] dark:text-[#38bdf8] group-hover:scale-110 transition-transform"
+                    />
+
+                    <h3 className="text-sm sm:text-base font-bold">{title}</h3>
+                  </div>
+
+                  <p className="col-span-12 sm:col-span-7 sm:pl-5 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                    {desc}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </section>
 
         <AwardsSection />
-
-        <section className="py-12 px-6 max-w-7xl mx-auto">
-          <motion.h2
-            className="text-2xl font-bold mb-8 text-slate-900 dark:text-white"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.5 }}
-          >
-            Where We Are
-          </motion.h2>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-            <motion.div
-              className="lg:col-span-4 p-8 rounded-xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 flex flex-col justify-between"
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.6 }}
-            >
-              <div>
-                <div className="flex items-center gap-2 font-bold text-xs uppercase tracking-wider text-[#276ea5] mb-4">
-                  <Globe2 size={16} />
-                  <span>India Development Center</span>
-                </div>
-                <h3 className="text-lg font-bold mb-3 text-slate-900 dark:text-white">
-                  Shilsha Technologies
-                </h3>
-                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                  iThum Tower, Sector 62, Noida,
-                  <br />
-                  Uttar Pradesh 201301, INDIA
+        {/* Location */}
+        <section className="px-6 lg:px-12 py-20 border-t border-slate-200 dark:border-slate-800">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+              <motion.div
+                className="lg:col-span-4"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+              >
+                <p className="text-xs uppercase tracking-[0.25em] font-bold text-[#276ea5] dark:text-[#38bdf8] mb-4">
+                  Where We Are
                 </p>
-              </div>
 
-              <div className="mt-8 pt-4 border-t border-slate-200 dark:border-slate-800">
+                <h2 className="text-4xl font-black tracking-tight">
+                  Our India
+                  <br />
+                  Development Center.
+                </h2>
+
+                <div className="mt-8 flex items-start gap-3">
+                  <Globe2
+                    size={18}
+                    className="text-[#276ea5] dark:text-[#38bdf8] mt-0.5 shrink-0"
+                  />
+
+                  <div>
+                    <p className="text-sm font-bold">Shilsha Technologies</p>
+
+                    <p className="mt-2 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                      iThum Tower, Sector 62,
+                      <br />
+                      Noida, Uttar Pradesh 201301,
+                      <br />
+                      INDIA
+                    </p>
+                  </div>
+                </div>
+
                 <a
                   href="mailto:info@shilshatech.com"
-                  className="inline-flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-[#276ea5]"
+                  className="mt-6 inline-flex items-center gap-2 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[#276ea5] dark:hover:text-[#38bdf8] transition-colors"
                 >
                   <Mail size={14} />
-                  <span>info@shilshatech.com</span>
+                  info@shilshatech.com
                 </a>
-              </div>
-            </motion.div>
+              </motion.div>
 
-            <motion.div
-              className="lg:col-span-8 min-h-75 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm"
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <iframe
-                title="Shilsha Technologies Map"
-                className="w-full h-full min-h-75 border-0"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d875.494949419112!2d77.3783989695381!3d28.63036757560618!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cef8a45d37eeb%3A0xebd3d070a044e5f9!2sShilsha%20Technologies!5e0!3m2!1sen!2sus!4v1704460082333!5m2!1sen!2sus"
-                allowFullScreen=""
-                loading="lazy"
-              />
-            </motion.div>
+              <motion.div
+                className="lg:col-span-8 h-90 overflow-hidden border border-slate-200 dark:border-slate-800"
+                initial={{ opacity: 0, x: 25 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <iframe
+                  title="Shilsha Technologies Map"
+                  className="w-full h-full border-0"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d875.494949419112!2d77.3783989695381!3d28.63036757560618!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cef8a45d37eeb%3A0xebd3d070a044e5f9!2sShilsha%20Technologies!5e0!3m2!1sen!2sus!4v1704460082333!5m2!1sen!2sus"
+                  allowFullScreen=""
+                  loading="lazy"
+                />
+              </motion.div>
+            </div>
           </div>
         </section>
 
-        <section className="py-12 px-6 max-w-4xl mx-auto border-t border-slate-200 dark:border-slate-800">
-          <motion.h2
-            className="text-2xl font-bold text-center mb-10 text-slate-900 dark:text-white"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.5 }}
-          >
-            Frequently Asked Questions
-          </motion.h2>
+        {/* FAQ */}
+        <section className="px-6 lg:px-12 py-20 bg-white dark:bg-[#08111e]">
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              className="mb-10"
+            >
+              <p className="text-xs uppercase tracking-[0.25em] font-bold text-[#276ea5] dark:text-[#38bdf8] mb-4">
+                FAQ
+              </p>
 
-          <motion.div
-            className="space-y-3"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={staggerContainer}
-          >
-            {faqs.map((faq, idx) => {
-              const isOpen = openFaq === idx;
-              return (
-                <motion.div
-                  key={faq.q}
-                  variants={staggerItem}
-                  transition={{ duration: 0.4 }}
-                  className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 overflow-hidden"
-                >
-                  <button
-                    onClick={() => setOpenFaq(isOpen ? null : idx)}
-                    className="w-full px-6 py-4 text-left cursor-pointer font-semibold text-xs sm:text-sm flex items-center justify-between gap-4 text-slate-900 dark:text-white"
+              <h2 className="text-4xl sm:text-5xl font-black tracking-tight">
+                Frequently asked
+                <br />
+                questions.
+              </h2>
+            </motion.div>
+
+            <div className="border-t border-slate-200 dark:border-slate-800">
+              {faqs.map((faq, index) => {
+                const isOpen = openFaq === index;
+
+                return (
+                  <motion.div
+                    key={faq.q}
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.4,
+                      delay: index * 0.04,
+                    }}
+                    className="border-b border-slate-200 dark:border-slate-800"
                   >
-                    <span>{faq.q}</span>
-                    <ChevronDown
-                      size={16}
-                      className={`shrink-0 transition-transform duration-200 ${
-                        isOpen ? "rotate-180" : ""
-                      }`}
-                      style={{ color: "#276ea5" }}
-                    />
-                  </button>
+                    <button
+                      onClick={() => setOpenFaq(isOpen ? null : index)}
+                      className="w-full py-6 flex items-center justify-between gap-6 text-left cursor-pointer"
+                    >
+                      <div className="flex items-start gap-5">
+                        <span className="text-xs font-bold text-[#276ea5] dark:text-[#38bdf8] pt-1">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
 
-                  <AnimatePresence>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <div className="px-6 pb-4 text-xs text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800/60 pt-3">
-                          {faq.a}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              );
-            })}
-          </motion.div>
+                        <span className="text-sm sm:text-base font-bold">
+                          {faq.q}
+                        </span>
+                      </div>
+
+                      <ChevronDown
+                        size={18}
+                        className={`shrink-0 text-[#276ea5] dark:text-[#38bdf8] transition-transform duration-300 ${
+                          isOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          initial={{
+                            height: 0,
+                            opacity: 0,
+                          }}
+                          animate={{
+                            height: "auto",
+                            opacity: 1,
+                          }}
+                          exit={{
+                            height: 0,
+                            opacity: 0,
+                          }}
+                          transition={{
+                            duration: 0.25,
+                          }}
+                        >
+                          <p className="pb-6 pl-10 pr-10 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                            {faq.a}
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
         </section>
       </main>
+
       <Footer />
     </>
   );

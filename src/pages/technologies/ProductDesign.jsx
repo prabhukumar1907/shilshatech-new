@@ -1,221 +1,221 @@
 import React from "react";
-import { Box, Cpu, Layers, ArrowRight, Workflow } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Box, Cpu, Workflow } from "lucide-react";
 import { motion } from "framer-motion";
 import AwardsSection from "../../components/AwardsSection";
 import ReasonsWhySection from "../../components/ReasonsWhySection";
-import ServicesSection from "../../components/ServiceSection";
 import Footer from "../../components/Footer";
 
 const theme = {
-  primary: "#F59E0B", // Amber
+  primary: "#F59E0B",
   secondary: "#D97706",
   glow: "#fde68a",
 };
 
 const ProductDesignServicesPage = () => {
-  const brandTheme = {
-    primaryBlue: "#F59E0B",
-    secondaryIndigo: "#D97706",
-    electricCyan: "#fde68a",
-  };
+  const features = [
+    {
+      icon: <Workflow size={18} />,
+      title: "Product Strategy & Discovery",
+      desc: "Define product-market fit, user personas, and core value propositions.",
+    },
+    {
+      icon: <Box size={18} />,
+      title: "MVP Prototyping",
+      desc: "Build focused prototypes to validate concepts with users and stakeholders.",
+    },
+    {
+      icon: <Cpu size={18} />,
+      title: "Design Systems & Scale",
+      desc: "Create scalable systems that connect product design with engineering.",
+    },
+  ];
 
   return (
-    <div className="min-h-screen pt-28 pb-16 bg-slate-50 dark:bg-[#070d18] text-slate-800 dark:text-slate-100 transition-colors duration-200 font-sans selection:bg-[#fde68a] selection:text-slate-900 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Hero Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="relative rounded-3xl border border-slate-200/80 dark:border-amber-500/20 bg-white dark:bg-[#0b1528] p-8 sm:p-12 shadow-xl overflow-hidden mb-12"
-        >
+    <div className="min-h-screen bg-slate-50 dark:bg-[#070d18] text-slate-800 dark:text-slate-100 font-sans overflow-hidden">
+      {/* HERO */}
+      <section className="pt-24 sm:pt-28 pb-10">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="absolute top-0 left-0 h-1 w-full origin-left"
-            style={{
-              background: `linear-gradient(90deg, #F59E0B, ${theme.glow})`,
-            }}
-          />
-
-          <div
-            className="absolute -top-24 -right-24 w-72 h-72 rounded-full blur-3xl opacity-10 pointer-events-none"
-            style={{ background: theme.glow }}
-          />
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col gap-4"
-            >
-              <div className="inline-flex items-center gap-2 w-fit px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 dark:bg-amber-500/10 dark:text-amber-300 border border-amber-200 dark:border-amber-500/20 shadow-sm">
-                <Box size={20} className="shrink-0" />
-                <span>Shilsha Technologies Expert Services</span>
-              </div>
-              <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
-                End-to-End Digital Product Design & Strategy Services in India
-              </h1>
-              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-                Shilsha Technologies transforms innovative business ideas into
-                market-ready, scalable digital products through comprehensive
-                product design and engineering.
-              </p>
-              <motion.div
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                className="flex flex-wrap gap-3 pt-2"
-              >
-                <Link
-                  to="/contact-us"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white text-xs font-semibold shadow-md transition-shadow duration-200 hover:shadow-lg"
-                  style={{
-                    background: `linear-gradient(90deg, #F59E0B, ${theme.secondary})`,
-                  }}
-                >
-                  <span>Hire Product Designers</span>
-                  <ArrowRight size={15} />
-                </Link>
-              </motion.div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex justify-center"
-            >
-              <div className="p-10 rounded-2xl border border-slate-100 dark:border-amber-500/10 bg-slate-50 dark:bg-[#070d18] flex items-center justify-center shadow-inner relative group">
-                <div className="absolute inset-0 rounded-2xl bg-amber-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <Workflow
-                  className="text-[#F59E0B] dark:text-[#fde68a] transition-transform duration-500 group-hover:scale-110"
-                  size={120}
-                />
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {[
-            {
-              icon: <Workflow size={20} />,
-              title: "Product Strategy & Discovery",
-              desc: "Define product-market fit, user personas, and core value propositions.",
-            },
-            {
-              icon: <Box size={20} />,
-              title: "MVP Prototyping",
-              desc: "Build clickable minimum viable products to validate concepts with investors and users.",
-            },
-            {
-              icon: <Cpu size={20} />,
-              title: "Design Systems & Scale",
-              desc: "Architect scalable design systems that bridge product design and development seamlessly.",
-            },
-          ].map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-              whileHover={{ y: -5 }}
-              className="p-6 rounded-2xl border border-slate-200/80 dark:border-amber-500/20 bg-white dark:bg-[#0b1528] shadow-sm transition-shadow duration-300 hover:shadow-xl group"
-            >
-              <div className="h-10 w-10 rounded-xl bg-amber-50 dark:bg-amber-500/10 flex items-center justify-center text-amber-800 dark:text-amber-300 mb-4 transition-transform duration-300 group-hover:scale-110">
-                {feature.icon}
-              </div>
-              <h3 className="text-base font-bold mb-2 group-hover:text-amber-600 transition-colors duration-200">
-                {feature.title}
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                {feature.desc}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      {/* Main Intro Section */}
-      <section className="py-16 px-6 max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
-        >
-          <div className="lg:col-span-12 space-y-8">
-            <h2
-              className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-snug"
-              style={{ color: brandTheme.primaryBlue }}
-            >
-              Build Market-Leading Products with Holistic Product Design
-            </h2>
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55 }}
+            className="relative"
+          >
+            {/* Accent */}
             <div
-              className="w-full h-1 rounded-full my-6 opacity-40"
+              className="absolute left-0 top-0 w-20 h-1 rounded-full"
               style={{
-                background: `linear-gradient(to right, ${brandTheme.primaryBlue}, ${brandTheme.electricCyan})`,
+                background: `linear-gradient(90deg, ${theme.primary}, ${theme.glow})`,
               }}
             />
-            <div className="p-8 rounded-3xl bg-white dark:bg-[#0b1528] backdrop-blur-xl border border-slate-200 dark:border-amber-500/20 shadow-xl space-y-6">
-              <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-base sm:text-lg">
+
+            <div className="grid lg:grid-cols-[1.4fr_.6fr] gap-10 lg:gap-16 items-end pt-7">
+              <div>
+                {/* Label */}
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-amber-600 dark:text-amber-300 mb-5">
+                  <Workflow size={17} />
+                  <span>Product Design & Strategy</span>
+                </div>
+
+                {/* Heading */}
+                <h1 className="max-w-4xl text-4xl sm:text-5xl lg:text-6xl font-black tracking-[-0.04em] leading-[1.02]">
+                  End-to-End Digital Product Design
+                  <span className="block" style={{ color: theme.primary }}>
+                    Built for Real-World Growth
+                  </span>
+                </h1>
+
+                <p className="max-w-2xl mt-6 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-7">
+                  Shilsha Technologies transforms innovative business ideas into
+                  market-ready digital products through strategy, UX,
+                  prototyping, design systems, and product engineering.
+                </p>
+              </div>
+
+              {/* Visual */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="hidden lg:flex justify-end"
+              >
+                <div className="relative w-44 h-44">
+                  <div
+                    className="absolute inset-5 rounded-full blur-3xl opacity-25"
+                    style={{ background: theme.glow }}
+                  />
+
+                  <div className="relative h-full flex items-center justify-center">
+                    <Workflow
+                      size={120}
+                      strokeWidth={1}
+                      style={{ color: theme.primary }}
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+
+          {/* FEATURES — NO CARDS */}
+          <div className="mt-12 border-y border-slate-200 dark:border-slate-800">
+            <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-200 dark:divide-slate-800">
+              {features.map((feature, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="py-5 md:px-6 first:pl-0 last:pr-0"
+                >
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-amber-600 dark:text-amber-300">
+                      {feature.icon}
+                    </span>
+
+                    <h3 className="text-sm font-bold">{feature.title}</h3>
+                  </div>
+
+                  <p className="text-xs leading-5 text-slate-500 dark:text-slate-400">
+                    {feature.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* INTRO */}
+      <section className="py-10 sm:py-12">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="max-w-5xl"
+          >
+            <div className="flex items-center gap-3 mb-5">
+              <span
+                className="w-8 h-px"
+                style={{ background: theme.primary }}
+              />
+
+              <span
+                className="text-xs font-bold uppercase tracking-[0.18em]"
+                style={{ color: theme.primary }}
+              >
+                Product Strategy
+              </span>
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.035em] leading-tight">
+              Build Market-Leading Products with Holistic Product Design
+            </h2>
+
+            <div className="grid lg:grid-cols-2 gap-8 mt-7">
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-7">
                 Successful digital products require a seamless fusion of
                 business strategy, user experience, and technical feasibility.
                 Shilsha Technologies guides your product from ideation to launch
                 and beyond.
               </p>
-              <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-base sm:text-lg">
-                Partner with our product design experts today to turn your
-                vision into a successful digital business!
+
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-7">
+                Our product specialists combine strategic thinking, UX
+                expertise, prototyping, and engineering to turn complex ideas
+                into useful, scalable digital experiences.
               </p>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </section>
 
-      {/* Software & Application Benefits Section */}
-      <section className="py-16 px-6 bg-slate-100/60 dark:bg-[#0b1528]/40 border-y border-slate-200 dark:border-amber-500/20">
-        <div className="max-w-7xl mx-auto space-y-8">
-          <motion.h2
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-3xl sm:text-5xl font-extrabold tracking-tight"
-            style={{ color: brandTheme.primaryBlue }}
-          >
-            Bridge Vision and Execution with Expert Product Engineering
-          </motion.h2>
-          <div className="space-y-6 text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+      <section className="py-10 sm:py-12 border-y border-slate-200 dark:border-slate-800 bg-slate-100/50 dark:bg-white/2">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-[.8fr_1.2fr] gap-8 lg:gap-16">
+            <motion.h2
+              initial={{ opacity: 0, x: -15 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              whileHover={{ y: -2 }}
-              className="p-8 rounded-3xl bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-amber-500/20 shadow-lg transition-transform duration-300"
+              transition={{ duration: 0.45 }}
+              className="text-3xl sm:text-4xl font-extrabold tracking-[-0.03em] leading-tight"
             >
-              As a full-service technology agency, Shilsha Technologies
-              integrates strategic product design with rigorous software
-              development to guarantee sustainable market success.
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              whileHover={{ y: -2 }}
-              className="p-8 rounded-3xl bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-amber-500/20 shadow-lg transition-transform duration-300"
-            >
-              Contact our product strategists today to architect your next
-              software innovation.
-            </motion.p>
+              Bridge Vision and Execution with Expert Product Engineering
+            </motion.h2>
+
+            <div className="space-y-6">
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-7"
+              >
+                As a full-service technology agency, Shilsha Technologies
+                integrates strategic product design with rigorous software
+                development to create sustainable digital products.
+              </motion.p>
+
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-7"
+              >
+                From early discovery and UX validation to design systems and
+                engineering handoff, every stage is designed around usability,
+                scalability, and measurable business outcomes.
+              </motion.p>
+
+              <div
+                className="w-16 h-1 rounded-full"
+                style={{
+                  background: `linear-gradient(90deg, ${theme.primary}, ${theme.glow})`,
+                }}
+              />
+            </div>
           </div>
         </div>
       </section>

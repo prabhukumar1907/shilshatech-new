@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Globe,
@@ -9,7 +9,7 @@ import {
   Building2,
   Cpu,
   Megaphone,
-  ArrowRight,
+  ArrowUpRight,
   Sparkles,
 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -22,6 +22,7 @@ const theme = {
 
 const services = [
   {
+    number: "01",
     icon: Globe,
     title: "Web Development & Portals",
     description:
@@ -29,6 +30,7 @@ const services = [
     tags: ["Business Websites", "Web Portals", "React", "Next.js"],
   },
   {
+    number: "02",
     icon: Smartphone,
     title: "Mobile App Development",
     description:
@@ -36,6 +38,7 @@ const services = [
     tags: ["Android Apps", "iPhone Apps", "Native Mobile", "Cross-Platform"],
   },
   {
+    number: "03",
     icon: Palette,
     title: "UI / UX Designing",
     description:
@@ -43,6 +46,7 @@ const services = [
     tags: ["Figma", "Prototypes", "User Research", "Wireframing"],
   },
   {
+    number: "04",
     icon: ShieldCheck,
     title: "QA & Testing Services",
     description:
@@ -50,6 +54,7 @@ const services = [
     tags: ["Automation", "Security", "Performance", "Manual QA"],
   },
   {
+    number: "05",
     icon: Code2,
     title: "Custom Software Development",
     description:
@@ -57,6 +62,7 @@ const services = [
     tags: ["SaaS", "Microservices", "API Integration", "Cloud"],
   },
   {
+    number: "06",
     icon: Building2,
     title: "Offshore Development Center",
     description:
@@ -64,6 +70,7 @@ const services = [
     tags: ["Dedicated Team", "Agile", "24/7 Support", "Cost Effective"],
   },
   {
+    number: "07",
     icon: Cpu,
     title: "AI Development Services",
     description:
@@ -71,6 +78,7 @@ const services = [
     tags: ["LLMs", "Machine Learning", "Automation", "NLP"],
   },
   {
+    number: "08",
     icon: Megaphone,
     title: "Digital Marketing Services",
     description:
@@ -79,148 +87,653 @@ const services = [
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.215, 0.61, 0.355, 1] },
-  },
-};
-
 const ServicesSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const checkDark = () => document.documentElement.classList.contains("dark");
-    setIsDarkMode(checkDark());
-    const observer = new MutationObserver(() => setIsDarkMode(checkDark()));
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
-    return () => observer.disconnect();
-  }, []);
+  const [activeService, setActiveService] = useState(null);
 
   return (
     <section
       id="services"
-      className="relative py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-500 overflow-hidden bg-slate-50 text-slate-900 dark:bg-[#070d18] dark:text-white"
+      className="
+        relative
+        overflow-hidden
+        bg-slate-50
+        text-slate-900
+        transition-colors
+        duration-500
+        dark:bg-[#050b14]
+        dark:text-white
+      "
     >
       <div
-        className="absolute inset-0 opacity-20 pointer-events-none transition-opacity duration-500"
+        className="
+          pointer-events-none
+          absolute
+          -left-40
+          top-40
+          h-125
+          w-125
+          rounded-full
+          blur-[150px]
+        "
         style={{
-          backgroundImage: `radial-gradient(${isDarkMode ? theme.glow : theme.primary} 1px, transparent 1px)`,
-          backgroundSize: "36px 36px",
-          maskImage: "radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 80%)",
-          WebkitMaskImage: "radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 80%)",
+          background: `${theme.primary}18`,
         }}
       />
 
       <div
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 w-175 h-87.5 bg-[#276ea5]/15 rounded-full blur-[150px] pointer-events-none"
-        style={{ willChange: "transform" }}
+        className="
+          pointer-events-none
+          absolute
+          -right-40
+          bottom-20
+          h-125
+          w-125
+          rounded-full
+          blur-[150px]
+        "
+        style={{
+          background: `${theme.glow}12`,
+        }}
+      />
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          opacity-[0.035]
+          dark:opacity-[0.06]
+        "
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, currentColor 1px, transparent 1px),
+            linear-gradient(to bottom, currentColor 1px, transparent 1px)
+          `,
+          backgroundSize: "70px 70px",
+        }}
       />
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-bold uppercase tracking-wider mb-4 transition-colors border-[#276ea5]/30 bg-blue-50 text-[#276ea5] dark:border-[#276ea5]/40 dark:bg-[#276ea5]/25 dark:text-[#60a5fa]">
-            <Sparkles size={14} className="shrink-0" />
-            <span>Our Core Capabilities</span>
+      <div
+        className="
+          relative
+          z-10
+          mx-auto
+          max-w-350
+          px-5
+          py-12
+          sm:px-8
+          lg:px-12
+          lg:py-22
+        "
+      >
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-20">
+          {/* Left */}
+          <div className="lg:col-span-3">
+            <div className="sticky top-22">
+              <div
+                className="
+                  flex
+                  items-center
+                  gap-3
+                  text-sm
+                  font-bold
+                  uppercase
+                  tracking-[0.2em]
+                  text-[#276ea5]
+                  dark:text-[#60a5fa]
+                "
+              >
+                <span className="h-px w-10 bg-current" />
+
+                <span>Our Services</span>
+              </div>
+
+              <div className="mt-8 hidden lg:block">
+                <p
+                  className="
+                    -mt-5
+                    max-w-55
+                    text-sm
+                    leading-relaxed
+                    text-slate-500
+                    dark:text-slate-400
+                  "
+                >
+                  Technology, creativity and engineering brought together to
+                  build digital products that move businesses forward.
+                </p>
+              </div>
+            </div>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
-            Comprehensive Digital &{" "}
-            <span
-              className="bg-clip-text text-transparent"
-              style={{
-                backgroundImage: isDarkMode
-                  ? `linear-gradient(135deg, #ffffff 20%, ${theme.glow} 100%)`
-                  : `linear-gradient(135deg, ${theme.primary} 0%, ${theme.secondary} 100%)`,
+          {/* Right */}
+          <div className="lg:col-span-9">
+            <motion.h2
+              initial={{
+                opacity: 0,
+                y: 30,
               }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                duration: 0.7,
+              }}
+              className="
+                max-w-5xl
+                text-4xl
+                font-black
+                leading-[1.05]
+                tracking-[-0.045em]
+                sm:text-6xl
+                lg:text-[78px]
+              "
             >
-              Software Solutions
-            </span>
-          </h2>
-
-          <p className="mt-4 text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300">
-            We design and build high-impact enterprise applications, web portals,
-            and AI solutions. We empower industries worldwide including Healthcare, Retail,
-            Finance, and Manufacturing.
-          </p>
-        </div>
-
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
-          {services.map((service) => {
-            const IconComponent = service.icon;
-            return (
-              <motion.div
-                key={service.title}
-                variants={cardVariants}
-                className="group relative h-full"
-              >
-                <div
-                  className="absolute -inset-0.5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md pointer-events-none"
+              We build digital
+              <br />
+              <span className="relative inline-block">
+                <span
+                  className="
+                    bg-clip-text
+                    text-transparent
+                  "
                   style={{
-                    background: `linear-gradient(135deg, ${theme.primary}, ${theme.glow})`,
+                    backgroundImage: `linear-gradient(
+                      100deg,
+                      ${theme.primary},
+                      ${theme.secondary},
+                      ${theme.glow}
+                    )`,
+                  }}
+                >
+                  experiences
+                </span>
+
+                <span
+                  className="
+                    absolute
+                    -right-5
+                    -top-1
+                    h-3
+                    w-3
+                    rounded-full
+                    sm:-right-7
+                    sm:-top-2
+                    sm:h-4
+                    sm:w-4
+                  "
+                  style={{
+                    background: theme.glow,
+                    boxShadow: `0 0 30px ${theme.glow}`,
                   }}
                 />
+              </span>
+              <br />
+              <span
+                className="
+                  text-slate-400
+                  dark:text-slate-500
+                "
+              >
+                engineered to perform.
+              </span>
+            </motion.h2>
 
-                <div className="relative flex flex-col justify-between h-full p-6 rounded-2xl border transition-all duration-300 group-hover:-translate-y-1.5 bg-white/95 border-slate-200/80 shadow-sm hover:shadow-xl shadow-slate-200/60 dark:bg-[#0b1528]/95 dark:border-blue-500/20 dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)] dark:group-hover:bg-[#0d1a32]">
-                  <div>
-                    <div className="inline-flex p-3 rounded-xl border mb-5 transition-all duration-300 group-hover:scale-110 bg-blue-50 border-blue-200 text-[#276ea5] group-hover:bg-[#276ea5] group-hover:text-white dark:bg-[#276ea5]/20 dark:border-[#276ea5]/40 dark:text-[#60a5fa] dark:group-hover:bg-[#276ea5] dark:group-hover:text-white dark:group-hover:border-[#60a5fa]">
-                      <IconComponent size={24} />
+            <motion.p
+              initial={{
+                opacity: 0,
+                y: 20,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                duration: 0.7,
+                delay: 0.15,
+              }}
+              className="
+                mt-8
+                max-w-2xl
+                text-base
+                leading-8
+                text-slate-600
+                dark:text-slate-400
+                sm:text-lg
+              "
+            >
+              We design and build high-impact enterprise applications, web
+              portals, and AI solutions. We empower industries worldwide
+              including Healthcare, Retail, Finance, and Manufacturing.
+            </motion.p>
+
+            <div className="mt-12 flex items-center gap-4">
+              <div
+                className="h-px w-24"
+                style={{
+                  background: `linear-gradient(
+                    90deg,
+                    ${theme.primary},
+                    transparent
+                  )`,
+                }}
+              />
+
+              <Sparkles
+                size={16}
+                className="
+                  text-[#276ea5]
+                  dark:text-[#60a5fa]
+                "
+              />
+
+              <span
+                className="
+                  text-xs
+                  font-semibold
+                  uppercase
+                  tracking-[0.18em]
+                  text-slate-400
+                "
+              >
+                Explore our capabilities
+              </span>
+            </div>
+          </div>
+        </div>
+        {/* Service grid */}
+        <div className="mt-12 lg:mt-14">
+          <div
+            className="
+              grid
+              grid-cols-1
+              border-t
+              border-slate-200
+              dark:border-white/10
+              md:grid-cols-3
+              md:divide-x
+              md:divide-slate-200
+              dark:md:divide-white/10
+            "
+          >
+            {services.map((service, index) => {
+              const Icon = service.icon;
+              const isActive = activeService === index;
+
+              return (
+                <motion.div
+                  key={service.title}
+                  initial={{
+                    opacity: 0,
+                    y: 35,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  viewport={{
+                    once: true,
+                    margin: "-80px",
+                  }}
+                  transition={{
+                    duration: 0.65,
+                    delay: index * 0.035,
+                  }}
+                  onMouseEnter={() => setActiveService(index)}
+                  onMouseLeave={() => setActiveService(null)}
+                  className="
+                    group
+                    relative
+                    min-w-0
+                    border-b
+                    border-slate-200
+                    dark:border-white/10
+                  "
+                >
+                  <motion.div
+                    initial={false}
+                    animate={{
+                      opacity: isActive ? 1 : 0,
+                      scaleY: isActive ? 1 : 0,
+                    }}
+                    transition={{
+                      duration: 0.45,
+                    }}
+                    className="
+                      pointer-events-none
+                      absolute
+                      inset-y-0
+                      left-0
+                      z-0
+                      w-px
+                      origin-top
+                      bg-[#276ea5]
+                      dark:bg-[#60a5fa]
+                    "
+                  />
+
+                  <div
+                    className="
+                      relative
+                      z-10
+                      flex
+                      min-h-105
+                      flex-col
+                      px-6
+                      py-9
+                      transition-all
+                      duration-500
+                      sm:px-8
+                      sm:py-10
+                      lg:min-h-115
+                      lg:px-10
+                      lg:py-12
+                      xl:px-12
+                    "
+                  >
+                    {/* Top line */}
+                    <div className="flex items-center justify-between">
+                      <span
+                        className={`
+                          text-xs
+                          font-bold
+                          tracking-[0.15em]
+                          transition-colors
+                          duration-300
+                          ${
+                            isActive
+                              ? "text-[#276ea5] dark:text-[#60a5fa]"
+                              : "text-slate-400 dark:text-slate-600"
+                          }
+                        `}
+                      >
+                        {service.number}
+                      </span>
+
+                      <motion.div
+                        animate={{
+                          x: isActive ? 0 : -8,
+                          opacity: isActive ? 1 : 0.35,
+                          rotate: isActive ? 0 : -10,
+                        }}
+                        transition={{
+                          duration: 0.3,
+                        }}
+                        className="
+                          text-[#276ea5]
+                          dark:text-[#60a5fa]
+                        "
+                      >
+                        <ArrowUpRight size={20} />
+                      </motion.div>
                     </div>
 
-                    <h3 className="text-lg font-bold tracking-tight mb-2 transition-colors dark:group-hover:text-[#60a5fa]">
-                      {service.title}
-                    </h3>
+                    <motion.div
+                      animate={{
+                        y: isActive ? -4 : 0,
+                        rotate: isActive ? -6 : 0,
+                      }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 20,
+                      }}
+                      className="relative mt-10 w-fit"
+                    >
+                      <div
+                        className={`
+                          absolute
+                          inset-0
+                          rounded-full
+                          blur-xl
+                          transition-opacity
+                          duration-500
+                          ${isActive ? "opacity-50" : "opacity-0"}
+                        `}
+                        style={{
+                          background: theme.glow,
+                        }}
+                      />
 
-                    <p className="text-xs sm:text-sm leading-relaxed mb-6 text-slate-600 dark:text-slate-300">
+                      <Icon
+                        size={32}
+                        strokeWidth={1.5}
+                        className={`
+                          relative
+                          z-10
+                          transition-colors
+                          duration-300
+                          ${
+                            isActive
+                              ? "text-[#276ea5] dark:text-[#60a5fa]"
+                              : "text-slate-400 dark:text-slate-600"
+                          }
+                        `}
+                      />
+                    </motion.div>
+
+                    <motion.h3
+                      animate={{
+                        x: isActive ? 6 : 0,
+                      }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 25,
+                      }}
+                      className={`
+                        mt-7
+                        max-w-md
+                        text-2xl
+                        font-bold
+                        tracking-tight
+                        transition-colors
+                        duration-300
+                        sm:text-3xl
+                        lg:text-[30px]
+                        ${
+                          isActive
+                            ? "text-[#276ea5] dark:text-white"
+                            : "text-slate-900 dark:text-white"
+                        }
+                      `}
+                    >
+                      {service.title}
+                    </motion.h3>
+
+                    <p
+                      className="
+                        mt-5
+                        max-w-xl
+                        text-sm
+                        leading-7
+                        text-slate-500
+                        transition-colors
+                        duration-300
+                        dark:text-slate-400
+                      "
+                    >
                       {service.description}
                     </p>
-                  </div>
 
-                  <div>
-                    <div className="flex flex-wrap gap-1.5 mb-5">
+                    <div
+                      className={`
+                        mt-auto
+                        flex
+                        flex-wrap
+                        gap-x-4
+                        gap-y-2
+                        pt-8
+                        transition-all
+                        duration-500
+                        ${isActive ? "opacity-100" : "opacity-70"}
+                      `}
+                    >
                       {service.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="text-[10px] font-semibold px-2 py-0.5 rounded-md border bg-blue-50 border-blue-200/60 text-[#276ea5] dark:bg-blue-950/40 dark:border-blue-500/20 dark:text-blue-300"
+                          className="
+                            flex
+                            items-center
+                            gap-2
+                            text-[10px]
+                            font-semibold
+                            uppercase
+                            tracking-wide
+                            text-slate-400
+                            dark:text-slate-500
+                          "
                         >
+                          <span
+                            className="
+                              h-1
+                              w-1
+                              rounded-full
+                              bg-slate-400
+                              transition-colors
+                              duration-300
+                              dark:bg-slate-600
+                            "
+                          />
+
                           {tag}
                         </span>
                       ))}
                     </div>
 
-                    <Link
-                      to="/services"
-                      className="inline-flex items-center gap-1.5 text-xs font-bold transition-all group/link text-[#276ea5] hover:text-blue-900 dark:text-[#60a5fa] dark:hover:text-white"
-                    >
-                      <span>Explore Service</span>
-                      <ArrowRight
-                        size={14}
-                        className="transition-transform duration-300 group-hover/link:translate-x-1"
-                      />
-                    </Link>
+                    <motion.div
+                      initial={false}
+                      animate={{
+                        width: isActive ? "64px" : "0px",
+                        opacity: isActive ? 1 : 0,
+                      }}
+                      transition={{
+                        duration: 0.4,
+                      }}
+                      className="
+                        absolute
+                        bottom-0
+                        left-0
+                        h-px
+                        bg-[#276ea5]
+                        dark:bg-[#60a5fa]
+                      "
+                    />
                   </div>
-                </div>
-              </motion.div>
-            );
-          })}
+
+                  <motion.div
+                    initial={false}
+                    animate={{
+                      opacity: isActive ? 1 : 0,
+                      scaleX: isActive ? 1 : 0,
+                    }}
+                    transition={{
+                      duration: 0.45,
+                    }}
+                    className="
+                      pointer-events-none
+                      absolute
+                      inset-0
+                      z-0
+                      origin-left
+                      bg-[linear-gradient(135deg,rgba(39,110,165,0.055),transparent_60%)]
+                      dark:bg-[linear-gradient(135deg,rgba(39,110,165,0.08),transparent_60%)]
+                    "
+                  />
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 25,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+          }}
+          transition={{
+            duration: 0.7,
+          }}
+          className="
+            mt-20
+            flex
+            flex-col
+            items-start
+            justify-between
+            gap-8
+            sm:flex-row
+            sm:items-center
+          "
+        >
+          <div>
+            <p
+              className="
+                text-sm
+                font-semibold
+                uppercase
+                tracking-[0.18em]
+                text-slate-400
+              "
+            >
+              Have a project in mind?
+            </p>
+
+            <h3
+              className="
+                mt-2
+                text-2xl
+                font-bold
+                tracking-tight
+                sm:text-3xl
+              "
+            >
+              Let's build something remarkable.
+            </h3>
+          </div>
+
+          <Link
+            to="/services"
+            className="
+              group
+              inline-flex
+              items-center
+              gap-3
+              border-b-2
+              border-[#276ea5]
+              pb-2
+              text-sm
+              font-bold
+              text-[#276ea5]
+              transition-all
+              hover:gap-5
+              dark:border-[#60a5fa]
+              dark:text-[#60a5fa]
+            "
+          >
+            Explore all services
+            <ArrowUpRight
+              size={18}
+              className="
+                transition-transform
+                duration-300
+                group-hover:translate-x-1
+                group-hover:-translate-y-1
+              "
+            />
+          </Link>
         </motion.div>
       </div>
     </section>

@@ -1,294 +1,663 @@
 import React from "react";
-import { Zap, ShieldCheck, Workflow, ArrowRight, Server } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ShieldCheck, Zap, Server, Database, ArrowUpRight } from "lucide-react";
 import { SiPostgresql } from "react-icons/si";
 import { motion } from "framer-motion";
 import AwardsSection from "../../components/AwardsSection";
 import ReasonsWhySection from "../../components/ReasonsWhySection";
-import ServicesSection from "../../components/ServiceSection";
 import Footer from "../../components/Footer";
 
-const theme = {
-  primary: "#4169E1", // PostgreSQL Royal Blue
-  secondary: "#2c4d9e",
-  glow: "#93c5fd",
-};
-
 const PostgresqlServicesPage = () => {
-  const brandTheme = {
-    primaryBlue: "#336791",
-    secondaryIndigo: "#20415d",
-    electricCyan: "#93c5fd",
-  };
+  const accent = "#336791";
+  const lightAccent = "#93c5fd";
 
-  const whyChooseItems = [
+  const capabilities = [
     {
-      title: "Advanced SQL Specialists",
-      desc: "Leverage PostgreSQL's rich type system, custom functions, and advanced indexing capabilities.",
+      number: "01",
+      icon: <Server size={19} />,
+      title: "Advanced SQL Architecture",
+      desc: "Design robust relational systems using PostgreSQL's extensibility, advanced data types, constraints, and powerful SQL capabilities.",
     },
     {
-      title: "JSONB & Relational Hybrid",
-      desc: "Combine strict relational integrity with flexible semi-structured JSONB data querying.",
+      number: "02",
+      icon: <Zap size={19} />,
+      title: "Query Performance",
+      desc: "Identify bottlenecks, optimize execution plans, and implement B-Tree, GIN, GiST, and specialized indexing strategies.",
     },
     {
-      title: "High Performance & Concurrency",
-      desc: "Implement Multi-Version Concurrency Control (MVCC) tuning for high-throughput enterprise systems.",
+      number: "03",
+      icon: <Database size={19} />,
+      title: "JSONB & Hybrid Data",
+      desc: "Combine structured relational data with flexible JSONB workloads without compromising consistency or performance.",
     },
     {
-      title: "Complex Migration Services",
-      desc: "Migrate legacy databases (Oracle, SQL Server, MySQL) safely to PostgreSQL without downtime.",
-    },
-    {
-      title: "Partitioning & Sharding",
-      desc: "Scale multi-terabyte datasets efficiently using declarative table partitioning.",
-    },
-    {
-      title: "Enterprise Security & Auditing",
-      desc: "Configure row-level security (RLS), SSL connections, and rigorous role-based access management.",
+      number: "04",
+      icon: <ShieldCheck size={19} />,
+      title: "Security & Multi-Tenancy",
+      desc: "Implement row-level security, role-based access, encryption, and isolated multi-tenant database architectures.",
     },
   ];
 
-  const servicesList = [
-    {
-      title: "PostgreSQL Architecture & Schema Design",
-      desc: "Design robust relational schemas utilizing advanced types, enums, foreign keys, and constraints.",
-    },
-    {
-      title: "JSONB & Semi-Structured Data Integration",
-      desc: "Store and query flexible JSON documents efficiently alongside structured relational data.",
-    },
-    {
-      title: "Query Optimization & Execution Tuning",
-      desc: "Analyze slow queries using EXPLAIN ANALYZE and implement B-Tree, GIN, or GiST indexes.",
-    },
-    {
-      title: "Table Partitioning & Scaling",
-      desc: "Implement declarative table partitioning to maintain high query speeds on massive datasets.",
-    },
-    {
-      title: "Cloud Migration & Managed Setup",
-      desc: "Transition workloads to managed PostgreSQL on AWS RDS/Aurora, Azure, or GCP Cloud SQL.",
-    },
-    {
-      title: "Replication & High Availability",
-      desc: "Set up streaming replication, connection pooling (PgBouncer), and automated failover architectures.",
-    },
-    {
-      title: "Row-Level Security & Access Control",
-      desc: "Enforce strict multi-tenant data isolation using native PostgreSQL row-level security policies.",
-    },
-    {
-      title: "Ongoing Maintenance & Support",
-      desc: "Monitor database health, vacuum routines, index bloat, and perform routine security patching.",
-    },
+  const services = [
+    "PostgreSQL Architecture & Schema Design",
+    "Query Optimization & Execution Tuning",
+    "JSONB & Semi-Structured Data",
+    "Database Migration & Modernization",
+    "Partitioning & Large-Scale Data",
+    "Replication & High Availability",
+    "Cloud PostgreSQL Deployment",
+    "Database Security & Hardening",
   ];
 
   return (
-    <div className="min-h-screen pt-28 pb-16 bg-slate-50 dark:bg-[#070d18] text-slate-800 dark:text-slate-100 transition-colors duration-200 font-sans selection:bg-[#93c5fd] selection:text-slate-900 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Hero Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="relative rounded-3xl border border-slate-200/80 dark:border-blue-500/20 bg-white dark:bg-[#0b1528] p-8 sm:p-12 shadow-xl overflow-hidden mb-12"
-        >
+    <main
+      className="
+        min-h-screen
+        bg-slate-50 dark:bg-[#070d18]
+        text-slate-900 dark:text-slate-100
+        font-sans
+        overflow-hidden
+        selection:bg-blue-200
+        selection:text-slate-900
+      "
+    >
+      <section className="relative pt-28 sm:pt-32 pb-14 sm:pb-20">
+        {/* Background glow */}
+        <div
+          className="
+            absolute
+            -top-40
+            -right-30
+            w-105
+            h-105
+            rounded-full
+            blur-[120px]
+            opacity-20
+            pointer-events-none
+          "
+          style={{ background: lightAccent }}
+        />
+
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
           <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="absolute top-0 left-0 h-1 w-full origin-left"
-            style={{
-              background: `linear-gradient(90deg, #4169E1, ${theme.glow})`,
-            }}
-          />
-
-          <div
-            className="absolute -top-24 -right-24 w-72 h-72 rounded-full blur-3xl opacity-10 pointer-events-none"
-            style={{ background: theme.glow }}
-          />
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col gap-4"
-            >
-              <div className="inline-flex items-center gap-2 w-fit px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-400 border border-blue-200 dark:border-blue-500/20 shadow-sm">
-                <SiPostgresql size={22} className="shrink-0" />
-                <span>Shilsha Technologies Expert Services</span>
-              </div>
-              <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
-                PostgreSQL Consulting & Advanced Database Services in India
-              </h1>
-              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-                Shilsha Technologies delivers enterprise-grade PostgreSQL
-                architecture, complex query optimization, JSONB hybrid storage,
-                and high-availability clustering.
-              </p>
-              <motion.div
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                className="flex flex-wrap gap-3 pt-2"
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="relative"
+          >
+            {/* Top eyebrow */}
+            <div className="flex items-center gap-3 mb-7">
+              <div
+                className="
+                  flex items-center justify-center
+                  w-10 h-10
+                  text-white
+                  rounded-xl
+                "
+                style={{ backgroundColor: accent }}
               >
-                <Link
-                  to="/contact-us"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white text-xs font-semibold shadow-md transition-shadow duration-200 hover:shadow-lg"
-                  style={{
-                    background: `linear-gradient(90deg, #4169E1, ${theme.secondary})`,
-                  }}
+                <SiPostgresql size={22} />
+              </div>
+
+              <div>
+                <p
+                  className="text-xs font-bold uppercase tracking-[0.2em]"
+                  style={{ color: accent }}
                 >
-                  <span>Hire PostgreSQL Experts</span>
-                  <ArrowRight size={15} />
-                </Link>
+                  PostgreSQL Engineering
+                </p>
+
+                <p className="text-xs text-slate-500 dark:text-slate-500 mt-1">
+                  Shilsha Technologies
+                </p>
+              </div>
+            </div>
+
+            {/* Hero content */}
+            <div className="grid lg:grid-cols-[1.25fr_0.75fr] gap-10 lg:gap-20 items-end">
+              <div>
+                <h1
+                  className="
+                    text-4xl
+                    sm:text-5xl
+                    lg:text-7xl
+                    font-black
+                    tracking-[-0.04em]
+                    leading-[0.98]
+                    max-w-5xl
+                  "
+                >
+                  PostgreSQL
+                  <span className="block" style={{ color: accent }}>
+                    built for scale.
+                  </span>
+                </h1>
+              </div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 25 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7, delay: 0.2 }}
+                className="
+                  pb-1
+                  lg:border-l
+                  lg:border-slate-300
+                  lg:dark:border-slate-700
+                  lg:pl-8
+                "
+              >
+                <p className="text-sm sm:text-base leading-7 text-slate-600 dark:text-slate-400">
+                  Enterprise PostgreSQL architecture, optimization, security,
+                  migration, and high-availability engineering for applications
+                  that demand reliability and speed.
+                </p>
               </motion.div>
-            </motion.div>
+            </div>
 
+            {/* Accent line */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex justify-center"
-            >
-              <div className="p-8 rounded-2xl border border-slate-100 dark:border-blue-500/10 bg-slate-50 dark:bg-[#070d18] flex items-center justify-center shadow-inner relative group">
-                <div className="absolute inset-0 rounded-2xl bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <SiPostgresql
-                  className="text-[#336791] dark:text-[#93c5fd] transition-transform duration-500 group-hover:scale-110"
-                  size={130}
-                />
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {[
-            {
-              icon: <Server size={20} />,
-              title: "Advanced SQL Architecture",
-              desc: "Build highly robust relational schemas leveraging PostgreSQL's powerful extensibility.",
-            },
-            {
-              icon: <Zap size={20} />,
-              title: "JSONB Flexibility",
-              desc: "Combine strict ACID relational structures with high-speed semi-structured JSON querying.",
-            },
-            {
-              icon: <ShieldCheck size={20} />,
-              title: "Row-Level Security",
-              desc: "Enforce multi-tenant data isolation and strict access control policies natively.",
-            },
-          ].map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-              whileHover={{ y: -5 }}
-              className="p-6 rounded-2xl border border-slate-200/80 dark:border-blue-500/20 bg-white dark:bg-[#0b1528] shadow-sm transition-shadow duration-300 hover:shadow-xl group"
-            >
-              <div className="h-10 w-10 rounded-xl bg-blue-50 dark:bg-blue-500/10 flex items-center justify-center text-blue-700 dark:text-blue-400 mb-4 transition-transform duration-300 group-hover:scale-110">
-                {feature.icon}
-              </div>
-              <h3 className="text-base font-bold mb-2 group-hover:text-blue-600 transition-colors duration-200">
-                {feature.title}
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                {feature.desc}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      {/* Main Intro Section */}
-      <section className="py-16 px-6 max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
-        >
-          <div className="lg:col-span-12 space-y-8">
-            <h2
-              className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-snug"
-              style={{ color: brandTheme.primaryBlue }}
-            >
-              Empower Enterprise Applications with Expert PostgreSQL Solutions
-            </h2>
-            <div
-              className="w-full h-1 rounded-full my-6 opacity-40"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.9, delay: 0.4 }}
+              className="mt-10 origin-left h-0.5 w-full"
               style={{
-                background: `linear-gradient(to right, ${brandTheme.primaryBlue}, ${brandTheme.electricCyan})`,
+                background: `linear-gradient(90deg, ${accent}, ${lightAccent}, transparent)`,
               }}
             />
-            <div className="p-8 rounded-3xl bg-white dark:bg-[#0b1528] backdrop-blur-xl border border-slate-200 dark:border-blue-500/20 shadow-xl space-y-6">
-              <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-base sm:text-lg">
-                PostgreSQL is the world's most advanced open-source relational
-                database, renowned for its bulletproof reliability,
-                extensibility, and complex query performance. Shilsha
-                Technologies designs, optimizes, and scales PostgreSQL
-                infrastructures for modern enterprises.
-              </p>
-              <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-base sm:text-lg">
-                Contact our database engineering team today to elevate your data
-                architecture and unlock maximum throughput!
-              </p>
-            </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </section>
 
-      {/* Software & Application Benefits Section */}
-      <section className="py-16 px-6 bg-slate-100/60 dark:bg-[#0b1528]/40 border-y border-slate-200 dark:border-blue-500/20">
-        <div className="max-w-7xl mx-auto space-y-8">
-          <motion.h2
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-3xl sm:text-5xl font-extrabold tracking-tight"
-            style={{ color: brandTheme.primaryBlue }}
-          >
-            Unmatched Concurrency and Data Reliability
-          </motion.h2>
-          <div className="space-y-6 text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-            <motion.p
+      <section className="py-12 sm:py-16">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-4"
+            >
+              <span
+                className="
+                  text-xs
+                  font-bold
+                  uppercase
+                  tracking-[0.2em]
+                "
+                style={{ color: accent }}
+              >
+                Data Infrastructure
+              </span>
+
+              <h2
+                className="
+                mt-4
+                text-3xl
+                sm:text-4xl
+                font-extrabold
+                tracking-tight
+                leading-tight
+              "
+              >
+                A stronger foundation for modern applications.
+              </h2>
+            </motion.div>
+
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              whileHover={{ y: -2 }}
-              className="p-8 rounded-3xl bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-blue-500/20 shadow-lg transition-transform duration-300"
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="lg:col-span-8"
             >
-              As an expert software development agency, we integrate
-              high-performance PostgreSQL backends into complex enterprise
-              applications, ensuring strict ACID compliance, secure
-              multi-tenancy, and rapid query response times.
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              whileHover={{ y: -2 }}
-              className="p-8 rounded-3xl bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-blue-500/20 shadow-lg transition-transform duration-300"
-            >
-              Get in touch with our certified engineers to architect or optimize
-              your PostgreSQL database environment today.
-            </motion.p>
+              <p
+                className="
+                text-lg
+                sm:text-xl
+                leading-8
+                text-slate-600
+                dark:text-slate-300
+                max-w-4xl
+              "
+              >
+                PostgreSQL is one of the world's most capable open-source
+                relational databases. Shilsha Technologies designs and optimizes
+                PostgreSQL environments for high-throughput applications,
+                complex queries, multi-tenant systems, analytics workloads, and
+                mission-critical enterprise platforms.
+              </p>
+
+              <p
+                className="
+                mt-5
+                text-sm
+                sm:text-base
+                leading-7
+                text-slate-500
+                dark:text-slate-500
+                max-w-3xl
+              "
+              >
+                From schema architecture and indexing to cloud migration,
+                replication, partitioning, and security, our engineers build
+                database environments that remain dependable as workloads grow.
+              </p>
+            </motion.div>
           </div>
         </div>
       </section>
 
+      <section
+        className="
+          py-12
+          sm:py-16
+          border-y
+          border-slate-200
+          dark:border-slate-800
+        "
+      >
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+          <div
+            className="
+            flex
+            flex-col
+            sm:flex-row
+            sm:items-end
+            sm:justify-between
+            gap-4
+            mb-10
+          "
+          >
+            <div>
+              <span
+                className="text-xs font-bold uppercase tracking-[0.2em]"
+                style={{ color: accent }}
+              >
+                Core capabilities
+              </span>
+
+              <h2
+                className="
+                mt-3
+                text-3xl
+                sm:text-4xl
+                font-extrabold
+                tracking-tight
+              "
+              >
+                Engineering PostgreSQL without compromise.
+              </h2>
+            </div>
+
+            <p
+              className="
+              text-sm
+              text-slate-500
+              dark:text-slate-500
+              max-w-sm
+              sm:text-right
+            "
+            >
+              Performance, flexibility, security, and reliability engineered
+              around your workload.
+            </p>
+          </div>
+
+          {/* No cards — clean rows */}
+          <div
+            className="
+            border-t
+            border-slate-200
+            dark:border-slate-800
+          "
+          >
+            {capabilities.map((item, index) => (
+              <motion.div
+                key={item.number}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.08,
+                }}
+                className="
+                  group
+                  grid
+                  grid-cols-[42px_1fr]
+                  sm:grid-cols-[55px_1fr_2fr]
+                  gap-4
+                  sm:gap-8
+                  py-6
+                  border-b
+                  border-slate-200
+                  dark:border-slate-800
+                  transition-all
+                  duration-300
+                  hover:px-2
+                "
+              >
+                <div
+                  className="
+                    text-xs
+                    font-bold
+                    pt-1
+                  "
+                  style={{ color: accent }}
+                >
+                  {item.number}
+                </div>
+
+                <div>
+                  <div
+                    className="
+                      flex
+                      items-center
+                      gap-2
+                      text-slate-900
+                      dark:text-white
+                      font-bold
+                      text-base
+                      sm:text-lg
+                    "
+                  >
+                    <span
+                      className="
+                        sm:hidden
+                        text-slate-500
+                        dark:text-slate-500
+                      "
+                    >
+                      {item.icon}
+                    </span>
+
+                    {item.title}
+                  </div>
+                </div>
+
+                <p
+                  className="
+                  col-span-2
+                  sm:col-span-1
+                  text-sm
+                  leading-6
+                  text-slate-500
+                  dark:text-slate-400
+                  max-w-xl
+                "
+                >
+                  {item.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-14 sm:py-20">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-20">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-5"
+            >
+              <span
+                className="text-xs font-bold uppercase tracking-[0.2em]"
+                style={{ color: accent }}
+              >
+                What we deliver
+              </span>
+
+              <h2
+                className="
+                mt-4
+                text-3xl
+                sm:text-5xl
+                font-black
+                tracking-tight
+                leading-tight
+              "
+              >
+                PostgreSQL services designed around your data.
+              </h2>
+
+              <p
+                className="
+                mt-5
+                text-sm
+                sm:text-base
+                leading-7
+                text-slate-500
+                dark:text-slate-400
+                max-w-md
+              "
+              >
+                Build a new database foundation, modernize an existing
+                environment, or solve performance and scalability challenges
+                with focused PostgreSQL engineering.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-7"
+            >
+              <div
+                className="
+                divide-y
+                divide-slate-200
+                dark:divide-slate-800
+                border-t
+                border-slate-200
+                dark:border-slate-800
+              "
+              >
+                {services.map((service, index) => (
+                  <motion.div
+                    key={service}
+                    whileHover={{ x: 6 }}
+                    transition={{ duration: 0.2 }}
+                    className="
+                      group
+                      flex
+                      items-center
+                      justify-between
+                      gap-4
+                      py-4
+                      sm:py-5
+                    "
+                  >
+                    <div className="flex items-center gap-4">
+                      <span
+                        className="
+                          text-[11px]
+                          font-bold
+                          text-slate-400
+                          dark:text-slate-600
+                        "
+                      >
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+
+                      <span
+                        className="
+                        text-sm
+                        sm:text-base
+                        font-semibold
+                        text-slate-700
+                        dark:text-slate-300
+                        group-hover:text-slate-950
+                        dark:group-hover:text-white
+                        transition-colors
+                      "
+                      >
+                        {service}
+                      </span>
+                    </div>
+
+                    <ArrowUpRight
+                      size={17}
+                      className="
+                        shrink-0
+                        text-slate-300
+                        dark:text-slate-700
+                        group-hover:text-blue-500
+                        transition-all
+                        duration-300
+                      "
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="
+          py-14
+          sm:py-20
+          bg-[#336791]
+          text-white
+          relative
+          overflow-hidden
+        "
+      >
+        <div
+          className="
+            absolute
+            -right-25
+            -top-25
+            w-80
+            h-80
+            rounded-full
+            bg-blue-300/20
+            blur-[100px]
+          "
+        />
+
+        <div
+          className="
+            absolute
+            -left-25
+            -bottom-37.5
+            w-96
+            h-96
+            rounded-full
+            bg-blue-900/30
+            blur-[120px]
+          "
+        />
+
+        <div
+          className="
+          relative
+          max-w-7xl
+          mx-auto
+          px-5
+          sm:px-8
+        "
+        >
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="lg:col-span-5"
+            >
+              <p
+                className="
+                text-xs
+                font-bold
+                uppercase
+                tracking-[0.2em]
+                text-blue-200
+              "
+              >
+                Why PostgreSQL
+              </p>
+
+              <h2
+                className="
+                mt-4
+                text-3xl
+                sm:text-5xl
+                font-black
+                tracking-tight
+                leading-tight
+              "
+              >
+                Reliability for data that matters.
+              </h2>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="lg:col-span-7"
+            >
+              <p
+                className="
+                text-base
+                sm:text-xl
+                leading-8
+                text-blue-50/90
+              "
+              >
+                We integrate high-performance PostgreSQL backends into
+                enterprise applications where consistency, concurrency,
+                security, and predictable performance are essential.
+              </p>
+
+              <div
+                className="
+                mt-8
+                grid
+                sm:grid-cols-3
+                gap-6
+                border-t
+                border-white/20
+                pt-6
+              "
+              >
+                <div>
+                  <p className="text-2xl font-black">ACID</p>
+                  <p className="mt-1 text-xs text-blue-100/70">
+                    Transaction reliability
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-2xl font-black">JSONB</p>
+                  <p className="mt-1 text-xs text-blue-100/70">
+                    Flexible data modeling
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-2xl font-black">RLS</p>
+                  <p className="mt-1 text-xs text-blue-100/70">
+                    Fine-grained security
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
       <ReasonsWhySection />
       <AwardsSection />
       <Footer />
-    </div>
+    </main>
   );
 };
 

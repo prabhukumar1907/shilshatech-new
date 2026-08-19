@@ -1,293 +1,399 @@
 import React from "react";
-import { CheckCircle2, ShieldCheck, Cpu, ArrowRight, Bug } from "lucide-react";
-import { Link } from "react-router-dom";
+import {
+  CheckCircle2,
+  ShieldCheck,
+  Cpu,
+  Bug,
+  ArrowUpRight,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import AwardsSection from "../../components/AwardsSection";
 import ReasonsWhySection from "../../components/ReasonsWhySection";
-import ServicesSection from "../../components/ServiceSection";
 import Footer from "../../components/Footer";
 
 const theme = {
-  primary: "#7C3AED", // Violet
+  primary: "#7C3AED",
   secondary: "#5B21B6",
   glow: "#c4b5fd",
 };
 
 const QaAutomationServicesPage = () => {
-  const brandTheme = {
-    primaryBlue: "#7C3AED",
-    secondaryIndigo: "#5B21B6",
-    electricCyan: "#c4b5fd",
-  };
-
-  const whyChooseItems = [
+  const features = [
     {
-      title: "End-to-End Quality Assurance",
-      desc: "We cover the entire software lifecycle from requirement analysis to production release monitoring.",
+      icon: CheckCircle2,
+      number: "01",
+      title: "Bug-Free Releases",
+      desc: "Identify critical defects early with structured testing and continuous validation throughout the development lifecycle.",
     },
     {
-      title: "Reduced Time-to-Market",
-      desc: "Accelerate release cycles by up to 60% through intelligent test automation frameworks.",
+      icon: Cpu,
+      number: "02",
+      title: "Smart Automation",
+      desc: "Accelerate regression testing with scalable automation frameworks integrated directly into your CI/CD workflows.",
     },
     {
-      title: "Comprehensive Test Coverage",
-      desc: "Rigorous functional, performance, security, and usability testing to ensure bulletproof software.",
-    },
-    {
-      title: "Certified QA Engineers",
-      desc: "Our testing specialists bring years of domain expertise across fintech, healthcare, and enterprise apps.",
-    },
-    {
-      title: "CI/CD Pipeline Integration",
-      desc: "Seamlessly integrate automated test suites into Jenkins, GitHub Actions, and GitLab pipelines.",
-    },
-    {
-      title: "Cost-Effective Defect Prevention",
-      desc: "Catch critical bugs early in the development phase to drastically lower post-release maintenance costs.",
-    },
-  ];
-
-  const servicesList = [
-    {
-      title: "Full-Cycle Quality Assurance Strategy",
-      desc: "Design custom QA roadmaps, test plans, and governance models tailored to your business goals.",
-    },
-    {
-      title: "Automated Regression Testing",
-      desc: "Build robust test automation scripts to validate core functionality on every code commit.",
-    },
-    {
-      title: "Manual & Exploratory Testing",
-      desc: "Leverage human intuition and user experience testing to uncover complex edge-case defects.",
-    },
-    {
-      title: "Performance & Load Testing",
-      desc: "Simulate heavy user traffic using JMeter or k6 to test system responsiveness and breaking points.",
-    },
-    {
-      title: "API & Microservices Testing",
-      desc: "Validate RESTful and GraphQL APIs for security, data accuracy, and response time efficiency.",
-    },
-    {
-      title: "Mobile App Testing (iOS & Android)",
-      desc: "Ensure seamless cross-device performance, responsiveness, and gesture handling on real devices.",
-    },
-    {
-      title: "Security & Vulnerability Assessment",
-      desc: "Identify potential security gaps, OWASP Top 10 vulnerabilities, and authorization flaws.",
-    },
-    {
-      title: "CI/CD Test Automation Setup",
-      desc: "Embed continuous testing into your continuous integration workflows for rapid, safe deployments.",
+      icon: ShieldCheck,
+      number: "03",
+      title: "Enterprise Reliability",
+      desc: "Validate performance, security, usability, and reliability across applications, devices, and environments.",
     },
   ];
 
   return (
-    <div className="min-h-screen pt-28 pb-16 bg-slate-50 dark:bg-[#070d18] text-slate-800 dark:text-slate-100 transition-colors duration-200 font-sans selection:bg-[#c4b5fd] selection:text-slate-900 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Hero Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="relative rounded-3xl border border-slate-200/80 dark:border-violet-500/20 bg-white dark:bg-[#0b1528] p-8 sm:p-12 shadow-xl overflow-hidden mb-12"
-        >
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="absolute top-0 left-0 h-1 w-full origin-left"
-            style={{
-              background: `linear-gradient(90deg, #7C3AED, ${theme.glow})`,
-            }}
-          />
+    <main
+      className="min-h-screen overflow-hidden bg-slate-50 dark:bg-[#070d18] text-slate-800 dark:text-slate-100 font-sans"
+      style={{
+        "--qa-primary": theme.primary,
+        "--qa-secondary": theme.secondary,
+        "--qa-glow": theme.glow,
+      }}
+    >
+      <section className="relative pt-24 sm:pt-28 pb-14 sm:pb-20">
+        <div
+          className="absolute top-0 right-0 w-105 h-105 rounded-full blur-[130px] opacity-20 pointer-events-none"
+          style={{ background: theme.glow }}
+        />
 
-          <div
-            className="absolute -top-24 -right-24 w-72 h-72 rounded-full blur-3xl opacity-10 pointer-events-none"
-            style={{ background: theme.glow }}
-          />
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-10 lg:gap-16 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col gap-4"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
             >
-              <div className="inline-flex items-center gap-2 w-fit px-3 py-1 rounded-full text-xs font-semibold bg-violet-50 text-violet-700 dark:bg-violet-500/10 dark:text-violet-300 border border-violet-200 dark:border-violet-500/20 shadow-sm">
-                <ShieldCheck size={20} className="shrink-0" />
-                <span>Shilsha Technologies Expert Services</span>
+              {/* Label */}
+              <div className="flex items-center gap-3 mb-5">
+                <span className="h-px w-8 bg-violet-500" />
+
+                <span className="text-xs sm:text-sm font-semibold tracking-[0.18em] uppercase text-violet-600 dark:text-violet-400">
+                  Shilsha Technologies
+                </span>
               </div>
-              <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
-                Enterprise QA & Test Automation Services in India
+
+              {/* Heading */}
+              <h1 className="max-w-5xl text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black tracking-[-0.04em] leading-[0.98]">
+                Enterprise QA &{" "}
+                <span className="text-violet-600 dark:text-violet-400">
+                  Test Automation
+                </span>{" "}
+                Services
               </h1>
-              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-                Shilsha Technologies delivers rigorous manual and automated
-                quality assurance solutions to ensure your software applications
-                are secure, scalable, and flawless.
+
+              {/* Description */}
+              <p className="mt-6 max-w-2xl text-base sm:text-lg leading-8 text-slate-600 dark:text-slate-300">
+                Build software that users can trust. Our QA specialists combine
+                intelligent automation, manual testing, performance validation,
+                API testing, and security testing to deliver reliable digital
+                experiences.
               </p>
-              <motion.div
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                className="flex flex-wrap gap-3 pt-2"
-              >
-                <Link
-                  to="/contact-us"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white text-xs font-semibold shadow-md transition-shadow duration-200 hover:shadow-lg"
-                  style={{
-                    background: `linear-gradient(90deg, #7C3AED, ${theme.secondary})`,
-                  }}
-                >
-                  <span>Hire QA Experts</span>
-                  <ArrowRight size={15} />
-                </Link>
-              </motion.div>
+
+              {/* Small stats */}
+              <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
+                <div>
+                  <p className="text-2xl font-bold text-violet-600 dark:text-violet-400">
+                    QA
+                  </p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                    Quality Engineering
+                  </p>
+                </div>
+
+                <div className="h-8 w-px bg-slate-300 dark:bg-slate-700" />
+
+                <div>
+                  <p className="text-2xl font-bold text-violet-600 dark:text-violet-400">
+                    CI/CD
+                  </p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                    Continuous Testing
+                  </p>
+                </div>
+
+                <div className="h-8 w-px bg-slate-300 dark:bg-slate-700" />
+
+                <div>
+                  <p className="text-2xl font-bold text-violet-600 dark:text-violet-400">
+                    E2E
+                  </p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                    End-to-End Coverage
+                  </p>
+                </div>
+              </div>
             </motion.div>
 
+            {/* Hero visual */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex justify-center"
+              transition={{ duration: 0.8, delay: 0.15 }}
+              className="relative flex justify-center lg:justify-end"
             >
-              <div className="p-10 rounded-2xl border border-slate-100 dark:border-violet-500/10 bg-slate-50 dark:bg-[#070d18] flex items-center justify-center shadow-inner relative group">
-                <div className="absolute inset-0 rounded-2xl bg-violet-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <Bug
-                  className="text-[#7C3AED] dark:text-[#c4b5fd] transition-transform duration-500 group-hover:scale-110"
-                  size={120}
+              <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center">
+                {/* Outer rings */}
+                <div className="absolute inset-0 rounded-full border border-violet-500/20" />
+                <div className="absolute inset-6 rounded-full border border-violet-500/20" />
+                <div className="absolute inset-12 rounded-full border border-violet-500/20" />
+
+                {/* Glow */}
+                <div
+                  className="absolute w-40 h-40 rounded-full blur-3xl opacity-30"
+                  style={{ background: theme.glow }}
                 />
+
+                {/* Icon */}
+                <div className="relative">
+                  <Bug
+                    size={105}
+                    strokeWidth={1.4}
+                    className="text-violet-600 dark:text-violet-400"
+                  />
+                </div>
+
+                {/* Floating labels */}
+                <div className="absolute top-5 right-3 sm:right-0 px-3 py-2 text-[10px] font-semibold tracking-wide uppercase bg-white/80 dark:bg-[#0b1528]/80 backdrop-blur border border-violet-500/20 text-violet-600 dark:text-violet-400">
+                  Automated Testing
+                </div>
+
+                <div className="absolute bottom-8 left-0 px-3 py-2 text-[10px] font-semibold tracking-wide uppercase bg-white/80 dark:bg-[#0b1528]/80 backdrop-blur border border-violet-500/20 text-violet-600 dark:text-violet-400">
+                  Continuous QA
+                </div>
               </div>
             </motion.div>
           </div>
-        </motion.div>
-
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {[
-            {
-              icon: <CheckCircle2 size={20} />,
-              title: "Bug-Free Releases",
-              desc: "Catch critical defects before deployment with meticulous test execution protocols.",
-            },
-            {
-              icon: <Cpu size={20} />,
-              title: "Smart Automation",
-              desc: "Speed up delivery cycles using advanced script frameworks and CI/CD integration.",
-            },
-            {
-              icon: <ShieldCheck size={20} />,
-              title: "Enterprise Reliability",
-              desc: "Guarantee high performance, security compliance, and exceptional user experience.",
-            },
-          ].map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-              whileHover={{ y: -5 }}
-              className="p-6 rounded-2xl border border-slate-200/80 dark:border-violet-500/20 bg-white dark:bg-[#0b1528] shadow-sm transition-shadow duration-300 hover:shadow-xl group"
-            >
-              <div className="h-10 w-10 rounded-xl bg-violet-50 dark:bg-violet-500/10 flex items-center justify-center text-violet-700 dark:text-violet-300 mb-4 transition-transform duration-300 group-hover:scale-110">
-                {feature.icon}
-              </div>
-              <h3 className="text-base font-bold mb-2 group-hover:text-violet-600 transition-colors duration-200">
-                {feature.title}
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                {feature.desc}
-              </p>
-            </motion.div>
-          ))}
         </div>
-      </div>
-
-      {/* Main Intro Section */}
-      <section className="py-16 px-6 max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
-        >
-          <div className="lg:col-span-12 space-y-8">
-            <h2
-              className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-snug"
-              style={{ color: brandTheme.primaryBlue }}
-            >
-              Deliver Flawless Software with Comprehensive QA & Automation
-            </h2>
-            <div
-              className="w-full h-1 rounded-full my-6 opacity-40"
-              style={{
-                background: `linear-gradient(to right, ${brandTheme.primaryBlue}, ${brandTheme.electricCyan})`,
-              }}
-            />
-            <div className="p-8 rounded-3xl bg-white dark:bg-[#0b1528] backdrop-blur-xl border border-slate-200 dark:border-violet-500/20 shadow-xl space-y-6">
-              <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-base sm:text-lg">
-                In today's fast-paced digital ecosystem, software quality
-                directly dictates user retention and brand reputation. Shilsha
-                Technologies offers end-to-end quality assurance services,
-                bridging manual testing precision with high-speed test
-                automation frameworks.
-              </p>
-              <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-base sm:text-lg">
-                Partner with our QA specialists today to safeguard your digital
-                assets and ensure flawless production rollouts!
-              </p>
-            </div>
-          </div>
-        </motion.div>
       </section>
 
-      {/* Software & Application Benefits Section */}
-      <section className="py-16 px-6 bg-slate-100/60 dark:bg-[#0b1528]/40 border-y border-slate-200 dark:border-violet-500/20">
-        <div className="max-w-7xl mx-auto space-y-8">
-          <motion.h2
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-3xl sm:text-5xl font-extrabold tracking-tight"
-            style={{ color: brandTheme.primaryBlue }}
-          >
-            Ensure Absolute Reliability Across Every Device
-          </motion.h2>
-          <div className="space-y-6 text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              whileHover={{ y: -2 }}
-              className="p-8 rounded-3xl bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-violet-500/20 shadow-lg transition-transform duration-300"
-            >
-              As a premier software development partner, Shilsha Technologies
-              embeds automated and manual testing methodologies into every
-              development lifecycle stage, guaranteeing exceptional reliability
-              and performance.
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              whileHover={{ y: -2 }}
-              className="p-8 rounded-3xl bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-violet-500/20 shadow-lg transition-transform duration-300"
-            >
-              Contact our testing engineers today to elevate your software
-              quality standards.
-            </motion.p>
+      {/* =========================================================
+          FEATURES
+      ========================================================= */}
+      <section className="border-y border-slate-200 dark:border-violet-500/15">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-3">
+            {features.map((feature, index) => {
+              const Icon = feature.icon;
+
+              return (
+                <motion.div
+                  key={feature.number}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.5,
+                    delay: index * 0.12,
+                  }}
+                  className={`
+                    relative py-8 sm:py-10
+                    md:px-7
+                    ${
+                      index !== 0
+                        ? "border-t md:border-t-0 md:border-l border-slate-200 dark:border-violet-500/15"
+                        : ""
+                    }
+                  `}
+                >
+                  <div className="flex items-start justify-between mb-5">
+                    <Icon
+                      size={23}
+                      strokeWidth={1.7}
+                      className="text-violet-600 dark:text-violet-400"
+                    />
+
+                    <span className="text-xs font-bold tracking-widest text-slate-400 dark:text-slate-600">
+                      {feature.number}
+                    </span>
+                  </div>
+
+                  <h3 className="text-lg font-bold tracking-tight">
+                    {feature.title}
+                  </h3>
+
+                  <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400 max-w-sm">
+                    {feature.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
           </div>
+        </div>
+      </section>
+
+      {/* =========================================================
+          INTRO
+      ========================================================= */}
+      <section className="py-16 sm:py-20">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-20">
+            {/* Heading */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <span className="h-px w-8 bg-violet-500" />
+                <span className="text-xs font-bold tracking-[0.2em] uppercase text-violet-600 dark:text-violet-400">
+                  Quality Engineering
+                </span>
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.035em] leading-tight">
+                Deliver flawless software with{" "}
+                <span className="text-violet-600 dark:text-violet-400">
+                  intelligent QA
+                </span>
+              </h2>
+            </motion.div>
+
+            {/* Content */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="space-y-6"
+            >
+              <p className="text-base sm:text-lg leading-8 text-slate-600 dark:text-slate-300">
+                In today's fast-moving digital ecosystem, software quality
+                directly impacts customer retention, revenue, and brand
+                reputation. Shilsha Technologies combines manual precision with
+                intelligent automation to create dependable testing strategies.
+              </p>
+
+              <p className="text-base sm:text-lg leading-8 text-slate-600 dark:text-slate-300">
+                From requirement analysis and functional testing to performance,
+                API, security, and end-to-end automation, our QA engineers help
+                identify issues earlier and make every release more predictable.
+              </p>
+
+              <div className="flex items-center gap-3 pt-2 text-sm font-semibold text-violet-600 dark:text-violet-400">
+                <span>Quality built into every release</span>
+                <ArrowUpRight size={17} />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================
+          BENEFITS / APPROACH
+      ========================================================= */}
+      <section className="relative py-16 sm:py-20 bg-slate-100/70 dark:bg-[#0b1528]/50 border-y border-slate-200 dark:border-violet-500/15">
+        <div
+          className="absolute left-0 top-0 w-72 h-72 blur-[120px] opacity-10 pointer-events-none"
+          style={{ background: theme.primary }}
+        />
+
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 relative">
+          <div className="grid lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-20">
+            {/* Section heading */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <span className="text-xs font-bold tracking-[0.2em] uppercase text-violet-600 dark:text-violet-400">
+                Our Approach
+              </span>
+
+              <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.035em] leading-tight">
+                Reliability across{" "}
+                <span className="text-violet-600 dark:text-violet-400">
+                  every release
+                </span>
+              </h2>
+            </motion.div>
+
+            {/* Content list */}
+            <div className="divide-y divide-slate-200 dark:divide-violet-500/15">
+              {[
+                {
+                  title: "Continuous Testing",
+                  desc: "Integrate automated validation into development pipelines so issues are discovered before they reach production.",
+                },
+                {
+                  title: "Performance & Scalability",
+                  desc: "Simulate real-world traffic and workloads to uncover bottlenecks, resource constraints, and system breaking points.",
+                },
+                {
+                  title: "Security & API Validation",
+                  desc: "Test authentication, authorization, API behavior, data integrity, and common application security risks.",
+                },
+                {
+                  title: "Cross-Platform Quality",
+                  desc: "Validate web and mobile applications across browsers, operating systems, devices, and real-world user scenarios.",
+                },
+              ].map((item, index) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.5,
+                    delay: index * 0.08,
+                  }}
+                  className="py-6 first:pt-0 last:pb-0"
+                >
+                  <div className="flex gap-5">
+                    <span className="text-xs font-bold text-violet-500 pt-1">
+                      0{index + 1}
+                    </span>
+
+                    <div>
+                      <h3 className="text-lg font-bold">{item.title}</h3>
+
+                      <p className="mt-2 text-sm sm:text-base leading-7 text-slate-600 dark:text-slate-400">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================
+          FINAL STATEMENT
+      ========================================================= */}
+      <section className="py-16 sm:py-20">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl"
+          >
+            <span className="text-xs font-bold tracking-[0.2em] uppercase text-violet-600 dark:text-violet-400">
+              Shilsha Technologies
+            </span>
+
+            <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.04em] leading-tight">
+              Turn quality assurance into a{" "}
+              <span className="text-violet-600 dark:text-violet-400">
+                competitive advantage.
+              </span>
+            </h2>
+
+            <p className="mt-5 max-w-3xl text-base sm:text-lg leading-8 text-slate-600 dark:text-slate-300">
+              Our QA engineering approach helps organizations release faster,
+              reduce production defects, improve application reliability, and
+              create digital products that users can confidently depend on.
+            </p>
+          </motion.div>
         </div>
       </section>
 
       <ReasonsWhySection />
       <AwardsSection />
       <Footer />
-    </div>
+    </main>
   );
 };
 

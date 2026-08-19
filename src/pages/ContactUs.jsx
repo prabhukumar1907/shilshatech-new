@@ -6,29 +6,33 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
-  MapPin,
+  ArrowRight,
+  ArrowUpRight,
+  CheckCircle2,
+  ChevronDown,
+  Clock3,
+  Globe2,
   Mail,
+  MapPin,
+  MessageCircle,
   Phone,
   Send,
+  ShieldCheck,
   Sparkles,
-  ArrowUpRight,
-  Clock,
-  MessageSquare,
-  Globe,
-  ChevronDown,
+  Users,
+  Zap,
 } from "lucide-react";
 import Footer from "../components/Footer";
 
 const brandTheme = {
-  primaryBlue: "#276ea5",
-  secondaryIndigo: "#1d4ed8",
-  electricCyan: "#60a5fa",
+  primary: "#276ea5",
+  secondary: "#1d4ed8",
+  cyan: "#38bdf8",
 };
 
-const COUNTRY_API =
-  "https://countriesnow.space/api/v0.1/countries/codes";
+const COUNTRY_API = "https://countriesnow.space/api/v0.1/countries/codes";
 
 const MAP_URL =
   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d875.494949419112!2d77.3783989695381!3d28.63036757560618!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cef8a45d37eeb%3A0xebd3d070a044e5f9!2sShilsha%20Technologies!5e0!3m2!1sen!2sus!4v1704460082333!5m2!1sen!2sus";
@@ -36,6 +40,25 @@ const MAP_URL =
 const MAP_LINK =
   "https://maps.google.com/?q=Shilsha+Technologies+H-15+Sector+63+Noida";
 
+const fadeUp = {
+  hidden: {
+    opacity: 0,
+    y: 24,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+  },
+};
+
+const stagger = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
 
 const LazyMap = memo(function LazyMap() {
   const containerRef = useRef(null);
@@ -59,7 +82,7 @@ const LazyMap = memo(function LazyMap() {
         }
       },
       {
-        rootMargin: "300px 0px",
+        rootMargin: "300px",
       },
     );
 
@@ -71,59 +94,46 @@ const LazyMap = memo(function LazyMap() {
   return (
     <div
       ref={containerRef}
-      className="relative overflow-hidden rounded-3xl border border-slate-200/80 shadow-lg dark:border-slate-800/80"
-      style={{ minHeight: 210 }}
+      className="group relative overflow-hidden rounded-[28px] border border-slate-200/80 bg-slate-100 shadow-xl dark:border-slate-800 dark:bg-slate-900"
     >
       {shouldLoad ? (
         <iframe
-          title="Shilsha Technologies Location Map"
+          title="Shilsha Technologies Location"
           src={MAP_URL}
-          width="100%"
-          height="210"
           loading="lazy"
           allowFullScreen
           referrerPolicy="no-referrer-when-downgrade"
-          className="block border-0 grayscale hover:grayscale-0 dark:invert dark:hue-rotate-180 dark:contrast-125 transition-all duration-700"
+          className="block h-70 w-full border-0 grayscale transition-all duration-700 group-hover:grayscale-0 dark:invert dark:hue-rotate-180 dark:contrast-125"
         />
       ) : (
-        <div
-          aria-hidden="true"
-          className="h-52.5 w-full bg-slate-200/70 dark:bg-slate-800/70"
-        >
-          <div className="h-full w-full bg-[radial-gradient(circle_at_30%_30%,rgba(39,110,165,.12),transparent_45%),radial-gradient(circle_at_70%_60%,rgba(29,78,216,.10),transparent_45%)]" />
+        <div className="h-70 w-full bg-slate-200 dark:bg-slate-800">
+          <div className="h-full w-full bg-[radial-gradient(circle_at_30%_30%,rgba(39,110,165,.18),transparent_40%),radial-gradient(circle_at_70%_70%,rgba(56,189,248,.14),transparent_40%)]" />
         </div>
       )}
+
+      <div className="absolute left-5 top-5 rounded-2xl border border-white/30 bg-white/90 px-4 py-3 shadow-lg backdrop-blur-xl dark:border-slate-700 dark:bg-slate-900/90">
+        <div className="flex items-center gap-2">
+          <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-emerald-500" />
+          <span className="text-xs font-bold text-slate-800 dark:text-white">
+            Our India Office
+          </span>
+        </div>
+      </div>
 
       <a
         href={MAP_LINK}
         target="_blank"
         rel="noopener noreferrer"
-        className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-xl bg-[#286b94] px-4 py-2 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#215b7d]"
+        className="absolute bottom-5 right-5 inline-flex items-center gap-2 rounded-xl bg-[#276ea5] px-4 py-2.5 text-xs font-bold text-white shadow-xl transition-all hover:-translate-y-0.5 hover:bg-[#215b7d]"
       >
-        View on Maps
-
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-4 w-4"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-          aria-hidden="true"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M17 7h-10m10 0v10m0-10L7 17"
-          />
-        </svg>
+        Open Maps
+        <ArrowUpRight size={14} />
       </a>
     </div>
   );
 });
 
 const CountrySelector = memo(function CountrySelector({
-  countries,
   loadingCountries,
   selectedCountry,
   countrySearch,
@@ -135,7 +145,7 @@ const CountrySelector = memo(function CountrySelector({
 }) {
   return (
     <div className="relative">
-      <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400">
+      <label className="mb-2.5 block text-[11px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">
         Country
       </label>
 
@@ -143,80 +153,59 @@ const CountrySelector = memo(function CountrySelector({
         type="button"
         onClick={onToggle}
         disabled={loadingCountries}
-        aria-haspopup="listbox"
-        aria-expanded={isDropdownOpen}
-        className="flex w-full items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-900 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#276ea5] dark:border-slate-800 dark:bg-[#060b13]/80 dark:text-white"
+        className="flex w-full items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm transition-all hover:border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-slate-700 dark:bg-slate-950/70 dark:hover:border-slate-600"
       >
-        <span className="flex items-center gap-2 truncate">
-          <Globe
-            className="h-4 w-4 shrink-0 text-slate-400"
-            aria-hidden="true"
-          />
+        <span className="flex min-w-0 items-center gap-2.5">
+          <Globe2 className="h-4 w-4 shrink-0 text-[#276ea5]" />
 
-          {loadingCountries ? (
-            <span className="text-slate-400">
-              Loading countries...
-            </span>
-          ) : selectedCountry ? (
-            `${selectedCountry.name} (${selectedCountry.dial_code})`
-          ) : (
-            "Select Country"
-          )}
+          <span className="truncate">
+            {loadingCountries
+              ? "Loading countries..."
+              : selectedCountry
+                ? `${selectedCountry.name} (${selectedCountry.dial_code})`
+                : "Select Country"}
+          </span>
         </span>
 
         <ChevronDown
-          className="h-4 w-4 shrink-0 text-slate-400"
-          aria-hidden="true"
+          className={`h-4 w-4 text-slate-400 transition-transform ${
+            isDropdownOpen ? "rotate-180" : ""
+          }`}
         />
       </button>
 
-      <input
-        type="hidden"
-        name="country"
-        value={selectedCountry?.name || ""}
-      />
-
       {isDropdownOpen && !loadingCountries && (
-        <div className="absolute left-0 right-0 top-full z-50 mt-2 flex max-h-60 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-2xl dark:border-slate-800 dark:bg-slate-900">
+        <div className="absolute left-0 right-0 top-full z-50 mt-2 overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-2xl dark:border-slate-700 dark:bg-slate-900">
           <input
             type="text"
-            placeholder="Search country or code..."
             value={countrySearch}
             onChange={onSearch}
-            className="mb-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-900 focus:outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white"
             autoFocus
-            aria-label="Search country"
+            placeholder="Search country..."
+            className="mb-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-xs outline-none focus:border-blue-400 dark:border-slate-700 dark:bg-slate-950"
           />
 
-          <div
-            className="custom-scrollbar flex-1 space-y-1 overflow-y-auto"
-            role="listbox"
-          >
+          <div className="max-h-56 overflow-y-auto">
             {filteredCountries.length > 0 ? (
               filteredCountries.map((item) => (
                 <button
                   key={`${item.code}-${item.name}`}
                   type="button"
                   onClick={() => onSelect(item)}
-                  role="option"
-                  aria-selected={
+                  className={`flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-left text-xs transition-colors ${
                     selectedCountry?.name === item.name
-                  }
-                  className={`flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-xs transition-colors ${
-                    selectedCountry?.name === item.name
-                      ? "bg-blue-50 font-semibold text-[#276ea5] dark:bg-blue-950/40 dark:text-sky-400"
-                      : "text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800/60"
+                      ? "bg-blue-50 font-bold text-[#276ea5] dark:bg-blue-950/40 dark:text-sky-400"
+                      : "text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
                   }`}
                 >
-                  <span className="truncate">{item.name}</span>
-
-                  <span className="ml-2 shrink-0 font-mono text-[11px] text-slate-400">
+                  <span>{item.name}</span>
+                  <span className="font-mono text-[10px] text-slate-400">
                     {item.dial_code}
                   </span>
                 </button>
               ))
             ) : (
-              <div className="p-3 text-center text-xs text-slate-400">
+              <div className="p-4 text-center text-xs text-slate-400">
                 No country found
               </div>
             )}
@@ -227,133 +216,131 @@ const CountrySelector = memo(function CountrySelector({
   );
 });
 
-const ContactInformation = memo(function ContactInformation() {
-  return (
-    <div className="space-y-6 rounded-3xl border border-slate-200/80 bg-white/70 p-8 shadow-xl shadow-slate-200/40 backdrop-blur-2xl dark:border-slate-800/80 dark:bg-slate-900/60 dark:shadow-none">
-      <div>
-        <h3 className="flex items-center gap-2 text-xl font-bold text-slate-900 dark:text-white">
-          <MessageSquare
-            className="h-5 w-5"
-            style={{ color: brandTheme.electricCyan }}
-            aria-hidden="true"
-          />
-
-          Contact Information
-        </h3>
-
-        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-          Reach out directly via email, phone, or stop by our office.
-        </p>
+const ContactCard = memo(function ContactCard({
+  icon: Icon,
+  label,
+  children,
+  href,
+}) {
+  const content = (
+    <div className="group flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white/60 p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white hover:shadow-lg dark:border-slate-800 dark:bg-slate-900/50 dark:hover:border-slate-700 dark:hover:bg-slate-900">
+      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-[#276ea5] to-[#1d4ed8] text-white shadow-lg shadow-blue-500/20">
+        <Icon size={19} />
       </div>
 
-      <div className="space-y-4 pt-2">
-        {/* Email */}
-        <a
-          href="mailto:Info@shilshatech.com"
-          className="group flex items-center justify-between rounded-2xl border border-slate-100 bg-slate-50/50 p-4 transition-all duration-300 hover:border-blue-200 hover:bg-blue-50/50 dark:border-slate-800/60 dark:bg-slate-800/30 dark:hover:border-slate-700 dark:hover:bg-slate-800/80"
-        >
-          <div className="flex items-center gap-4">
-            <div
-              className="shrink-0 rounded-xl p-3 text-white shadow-md"
-              style={{
-                backgroundImage: `linear-gradient(to bottom right, ${brandTheme.primaryBlue}, ${brandTheme.secondaryIndigo})`,
-              }}
-            >
-              <Mail size={20} aria-hidden="true" />
-            </div>
+      <div className="min-w-0 flex-1">
+        <span className="mb-1 block text-[10px] font-bold uppercase tracking-[0.16em] text-slate-400">
+          {label}
+        </span>
 
-            <div>
-              <span className="block text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                Email Us
-              </span>
-
-              <span className="text-sm font-semibold text-slate-800 transition-colors group-hover:text-[#276ea5] dark:text-slate-200 dark:group-hover:text-sky-400">
-                Info@shilshatech.com
-              </span>
-            </div>
-          </div>
-
-          <ArrowUpRight
-            className="h-4 w-4 text-slate-400 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#276ea5] dark:group-hover:text-sky-400"
-            aria-hidden="true"
-          />
-        </a>
-
-        {/* Phone */}
-        <a
-          href="tel:+911204120113"
-          className="group flex items-center justify-between rounded-2xl border border-slate-100 bg-slate-50/50 p-4 transition-all duration-300 hover:border-blue-200 hover:bg-blue-50/50 dark:border-slate-800/60 dark:bg-slate-800/30 dark:hover:border-slate-700 dark:hover:bg-slate-800/80"
-        >
-          <div className="flex items-center gap-4">
-            <div
-              className="shrink-0 rounded-xl p-3 text-white shadow-md"
-              style={{
-                backgroundImage: `linear-gradient(to bottom right, ${brandTheme.primaryBlue}, ${brandTheme.secondaryIndigo})`,
-              }}
-            >
-              <Phone size={20} aria-hidden="true" />
-            </div>
-
-            <div>
-              <span className="block text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                Call Us
-              </span>
-
-              <span className="text-sm font-semibold text-slate-800 transition-colors group-hover:text-[#276ea5] dark:text-slate-200 dark:group-hover:text-sky-400">
-                +91 - 120- 412- 0113
-              </span>
-            </div>
-          </div>
-
-          <ArrowUpRight
-            className="h-4 w-4 text-slate-400 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#276ea5] dark:group-hover:text-sky-400"
-            aria-hidden="true"
-          />
-        </a>
-
-        {/* Location */}
-        <div className="flex items-start gap-4 rounded-2xl border border-slate-100 bg-slate-50/50 p-4 dark:border-slate-800/60 dark:bg-slate-800/30">
-          <div
-            className="shrink-0 rounded-xl p-3 text-white shadow-md"
-            style={{
-              backgroundImage: `linear-gradient(to bottom right, ${brandTheme.primaryBlue}, ${brandTheme.secondaryIndigo})`,
-            }}
-          >
-            <MapPin size={20} aria-hidden="true" />
-          </div>
-
-          <div>
-            <span className="block text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-              Location
-            </span>
-
-            <p className="mt-0.5 text-sm font-semibold leading-relaxed text-slate-800 dark:text-slate-200">
-              Shilsha Technologies,
-              <br />
-              iThum Tower, Sector 62, Noida,
-              <br />
-              Uttar Pradesh 201301, INDIA
-            </p>
-          </div>
+        <div className="text-sm font-semibold text-slate-800 dark:text-slate-200">
+          {children}
         </div>
       </div>
 
-      <div className="flex items-center justify-between border-t border-slate-100 pt-2 text-xs text-slate-500 dark:border-slate-800/60 dark:text-slate-400">
-        <span className="flex items-center gap-1.5">
-          <Clock
-            className="h-3.5 w-3.5 text-slate-400"
-            aria-hidden="true"
-          />
-          Mon - Fri: 9AM - 7PM IST
-        </span>
+      {href && (
+        <ArrowUpRight
+          size={16}
+          className="text-slate-400 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#276ea5]"
+        />
+      )}
+    </div>
+  );
 
-        <span className="font-medium text-emerald-600 dark:text-emerald-400">
-          • Active Now
-        </span>
+  return href ? (
+    <a href={href} target={href.startsWith("http") ? "_blank" : undefined}>
+      {content}
+    </a>
+  ) : (
+    content
+  );
+});
+
+/* -------------------------------------------------------------------------- */
+/* Contact Information                                                        */
+/* -------------------------------------------------------------------------- */
+
+const ContactInformation = memo(function ContactInformation() {
+  return (
+    <div className="relative overflow-hidden rounded-[30px] border border-slate-200/80 bg-white/70 p-7 shadow-xl shadow-slate-200/30 backdrop-blur-2xl dark:border-slate-800 dark:bg-slate-900/70 dark:shadow-none">
+      <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-blue-500/10 blur-3xl" />
+
+      <div className="relative">
+        <div className="mb-7">
+          <div className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#276ea5]">
+            <MessageCircle size={15} />
+            Let's Connect
+          </div>
+
+          <h2 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white">
+            We would love to
+            <span className="block text-[#276ea5]">hear from you.</span>
+          </h2>
+
+          <p className="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400">
+            Have an idea, project, or challenge? Talk with our team and let's
+            turn it into a scalable digital solution.
+          </p>
+        </div>
+
+        <div className="space-y-3">
+          <ContactCard
+            icon={Mail}
+            label="Email"
+            href="mailto:info@shilshatech.com"
+          >
+            info@shilshatech.com
+          </ContactCard>
+
+          <ContactCard icon={Phone} label="Phone" href="tel:+911204120113">
+            +91 - 120- 412- 0113
+          </ContactCard>
+
+          <ContactCard icon={MapPin} label="Office">
+            <span className="leading-relaxed">
+              iThum Tower, Sector 62,
+              <br />
+              Noida, Uttar Pradesh 201301
+            </span>
+          </ContactCard>
+        </div>
+
+        <div className="mt-6 flex items-center justify-between rounded-2xl border border-emerald-100 bg-emerald-50/70 px-4 py-3 dark:border-emerald-900/30 dark:bg-emerald-950/20">
+          <div className="flex items-center gap-2">
+            <Clock3 size={15} className="text-emerald-600" />
+            <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+              Mon - Fri · 9AM - 7PM IST
+            </span>
+          </div>
+
+          <span className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-600">
+            <span className="h-2 w-2 rounded-full bg-emerald-500" />
+            Available
+          </span>
+        </div>
       </div>
     </div>
   );
 });
+
+/* -------------------------------------------------------------------------- */
+/* Contact Form                                                               */
+/* -------------------------------------------------------------------------- */
+
+const InputField = ({ label, ...props }) => {
+  return (
+    <div>
+      <label className="mb-2.5 block text-[11px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">
+        {label}
+      </label>
+
+      <input
+        {...props}
+        className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-900 outline-none transition-all placeholder:text-slate-400 hover:border-slate-300 focus:border-[#276ea5] focus:bg-white focus:ring-4 focus:ring-blue-500/10 dark:border-slate-700 dark:bg-slate-950/70 dark:text-white dark:hover:border-slate-600 dark:focus:bg-slate-950"
+      />
+    </div>
+  );
+};
 
 const ContactForm = memo(function ContactForm({
   formData,
@@ -368,70 +355,71 @@ const ContactForm = memo(function ContactForm({
   onSelectCountry,
 }) {
   return (
-    <div className="rounded-3xl border border-slate-200/80 bg-white/80 p-8 shadow-2xl shadow-slate-200/50 backdrop-blur-2xl dark:border-slate-800/80 dark:bg-slate-900/60 dark:shadow-none sm:p-12">
+    <div className="relative overflow-hidden rounded-[30px] border border-slate-200/80 bg-white p-7 shadow-2xl shadow-slate-200/50 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none sm:p-9">
+      {/* Top gradient */}
+      <div className="absolute left-0 right-0 top-0 h-1 bg-linear-to-r from-[#276ea5] via-[#38bdf8] to-[#1d4ed8]" />
+
+      <div className="mb-8 flex items-start justify-between gap-5">
+        <div>
+          <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#276ea5]">
+            <Sparkles size={14} />
+            Start a conversation
+          </div>
+
+          <h2 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white sm:text-3xl">
+            Tell us about your project
+          </h2>
+
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-slate-500 dark:text-slate-400">
+            Share your requirements and our specialists will get back to you
+            shortly.
+          </p>
+        </div>
+
+        <div className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-[#276ea5] dark:bg-blue-950/40 sm:flex">
+          <Send size={19} />
+        </div>
+      </div>
+
       <form
         action="https://formsubmit.co/info@shilshatech.com"
         method="POST"
         className="space-y-6"
       >
-        <div>
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-            Send us a Message
-          </h2>
+        <input
+          type="hidden"
+          name="_subject"
+          value="New Website Contact Form Submission"
+        />
 
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-            Fill out the form below and the team at Shilsha Technologies
-            will reply shortly.
-          </p>
+        <input type="hidden" name="_captcha" value="false" />
+
+        <div className="grid gap-5 md:grid-cols-2">
+          <InputField
+            label="Your Name"
+            type="text"
+            name="name"
+            placeholder="John Doe"
+            required
+            autoComplete="name"
+            value={formData.name}
+            onChange={onChange}
+          />
+
+          <InputField
+            label="Email Address"
+            type="email"
+            name="email"
+            placeholder="john@example.com"
+            required
+            autoComplete="email"
+            value={formData.email}
+            onChange={onChange}
+          />
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <div>
-            <label
-              htmlFor="name"
-              className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400"
-            >
-              Your Name
-            </label>
-
-            <input
-              type="text"
-              name="name"
-              id="name"
-              placeholder="John Doe"
-              required
-              autoComplete="name"
-              value={formData.name}
-              onChange={onChange}
-              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 transition-all duration-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#276ea5] dark:border-slate-800 dark:bg-[#060b13]/80 dark:text-white dark:placeholder-slate-500 dark:focus:border-sky-400 dark:focus:ring-sky-400"
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="email"
-              className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400"
-            >
-              Email Address
-            </label>
-
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="john@example.com"
-              required
-              autoComplete="email"
-              value={formData.email}
-              onChange={onChange}
-              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 transition-all duration-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#276ea5] dark:border-slate-800 dark:bg-[#060b13]/80 dark:text-white dark:placeholder-slate-500 dark:focus:border-sky-400 dark:focus:ring-sky-400"
-            />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="grid gap-5 md:grid-cols-2">
           <CountrySelector
-            countries={[]}
             loadingCountries={loadingCountries}
             selectedCountry={selectedCountry}
             countrySearch={countrySearch}
@@ -443,86 +431,69 @@ const ContactForm = memo(function ContactForm({
           />
 
           <div>
-            <label
-              htmlFor="phone"
-              className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400"
-            >
+            <label className="mb-2.5 block text-[11px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">
               Phone Number
             </label>
 
-            <div className="flex items-center overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 focus-within:bg-white focus-within:ring-2 focus-within:ring-[#276ea5] dark:border-slate-800 dark:bg-[#060b13]/80 dark:focus-within:ring-sky-400">
-              <span className="shrink-0 border-r border-slate-200 bg-slate-100/70 px-3.5 py-3.5 font-mono text-sm font-semibold text-slate-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400">
+            <div className="flex overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 transition-all focus-within:border-[#276ea5] focus-within:bg-white focus-within:ring-4 focus-within:ring-blue-500/10 dark:border-slate-700 dark:bg-slate-950/70 dark:focus-within:bg-slate-950">
+              <span className="flex items-center border-r border-slate-200 bg-slate-100 px-4 font-mono text-sm font-bold text-slate-500 dark:border-slate-700 dark:bg-slate-900">
                 {formData.dialCode}
               </span>
 
               <input
                 type="tel"
                 name="phone"
-                id="phone"
                 placeholder="98765 43210"
                 required
                 autoComplete="tel"
                 value={formData.phone}
                 onChange={onChange}
-                className="w-full bg-transparent px-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none dark:text-white dark:placeholder-slate-500"
+                className="w-full bg-transparent px-4 py-3.5 text-sm outline-none dark:text-white"
               />
             </div>
           </div>
         </div>
 
-        <div>
-          <label
-            htmlFor="subject"
-            className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400"
-          >
-            Subject
-          </label>
-
-          <input
-            type="text"
-            name="subject"
-            id="subject"
-            placeholder="App / Web Development"
-            required
-            value={formData.subject}
-            onChange={onChange}
-            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 transition-all duration-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#276ea5] dark:border-slate-800 dark:bg-[#060b13]/80 dark:text-white dark:placeholder-slate-500 dark:focus:border-sky-400 dark:focus:ring-sky-400"
-          />
-        </div>
+        <InputField
+          label="Project Subject"
+          type="text"
+          name="subject"
+          placeholder="App / Web Development"
+          required
+          value={formData.subject}
+          onChange={onChange}
+        />
 
         <div>
-          <label
-            htmlFor="message"
-            className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400"
-          >
+          <label className="mb-2.5 block text-[11px] font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">
             Your Message
           </label>
 
           <textarea
             name="message"
-            id="message"
-            rows="4"
-            placeholder="Tell us about your project goals, scope, and timeline..."
+            rows={5}
+            placeholder="Tell us about your project goals, scope, budget, and timeline..."
             required
             value={formData.message}
             onChange={onChange}
-            className="w-full resize-none rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 transition-all duration-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#276ea5] dark:border-slate-800 dark:bg-[#060b13]/80 dark:text-white dark:placeholder-slate-500 dark:focus:border-sky-400 dark:focus:ring-sky-400"
+            className="w-full resize-none rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm outline-none transition-all placeholder:text-slate-400 hover:border-slate-300 focus:border-[#276ea5] focus:bg-white focus:ring-4 focus:ring-blue-500/10 dark:border-slate-700 dark:bg-slate-950/70 dark:text-white dark:focus:bg-slate-950"
           />
         </div>
 
-        <div className="pt-2">
+        <div className="flex flex-col gap-4 border-t border-slate-100 pt-5 dark:border-slate-800 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+            <ShieldCheck size={15} className="text-emerald-500" />
+            Your information stays confidential.
+          </div>
+
           <button
             type="submit"
-            className="inline-flex w-full cursor-pointer items-center justify-center gap-3 rounded-2xl px-8 py-4 text-sm font-bold text-white shadow-lg shadow-blue-500/20 transition-all duration-300 hover:scale-[1.02] hover:opacity-95 active:scale-[0.98] sm:w-auto"
-            style={{
-              backgroundImage: `linear-gradient(to right, ${brandTheme.primaryBlue}, ${brandTheme.secondaryIndigo})`,
-            }}
+            className="group inline-flex items-center cursor-pointer justify-center gap-3 rounded-2xl bg-linear-to-r from-[#276ea5] to-[#1d4ed8] px-7 py-3.5 text-sm font-bold text-white shadow-xl shadow-blue-500/20 transition-all hover:-translate-y-0.5 hover:shadow-blue-500/30 active:translate-y-0"
           >
-            <span>Send Message</span>
-
-            <Send
-              className="h-4 w-4"
-              aria-hidden="true"
+            Send Message
+            <ArrowRight
+              size={16}
+              className="transition-transform group-hover:translate-x-1"
             />
           </button>
         </div>
@@ -530,6 +501,10 @@ const ContactForm = memo(function ContactForm({
     </div>
   );
 });
+
+/* -------------------------------------------------------------------------- */
+/* Contact Us Page                                                            */
+/* -------------------------------------------------------------------------- */
 
 const ContactUs = () => {
   const [countries, setCountries] = useState([]);
@@ -548,50 +523,48 @@ const ContactUs = () => {
     message: "",
   });
 
+  /* Fetch countries */
   useEffect(() => {
     const controller = new AbortController();
 
-    const fetchCountryCodes = async () => {
+    const fetchCountries = async () => {
       try {
         const response = await fetch(COUNTRY_API, {
           signal: controller.signal,
         });
 
         if (!response.ok) {
-          throw new Error(
-            `Country API failed: ${response.status}`,
-          );
+          throw new Error("Country API failed");
         }
 
         const result = await response.json();
 
         if (!result.error && Array.isArray(result.data)) {
-          const sortedData = [...result.data].sort((a, b) =>
+          const sorted = [...result.data].sort((a, b) =>
             a.name.localeCompare(b.name),
           );
 
-          setCountries(sortedData);
+          setCountries(sorted);
 
-          const defaultCountry =
-            sortedData.find(
+          const india =
+            sorted.find(
               (country) =>
-                country.name.toLowerCase() === "india" ||
-                country.code === "IN",
-            ) || sortedData[0];
+                country.code === "IN" || country.name.toLowerCase() === "india",
+            ) || sorted[0];
 
-          if (defaultCountry) {
-            setSelectedCountry(defaultCountry);
+          if (india) {
+            setSelectedCountry(india);
 
             setFormData((prev) => ({
               ...prev,
-              country: defaultCountry.name,
-              dialCode: defaultCountry.dial_code,
+              country: india.name,
+              dialCode: india.dial_code,
             }));
           }
         }
       } catch (error) {
         if (error.name !== "AbortError") {
-          console.error("Error fetching countries:", error);
+          console.error(error);
         }
       } finally {
         if (!controller.signal.aborted) {
@@ -600,7 +573,7 @@ const ContactUs = () => {
       }
     };
 
-    fetchCountryCodes();
+    fetchCountries();
 
     return () => controller.abort();
   }, []);
@@ -608,32 +581,15 @@ const ContactUs = () => {
   const normalizedSearch = countrySearch.trim().toLowerCase();
 
   const filteredCountries = useMemo(() => {
-    if (!normalizedSearch) {
-      return countries;
-    }
+    if (!normalizedSearch) return countries;
 
-    return countries.filter((item) => {
-      const name = item.name.toLowerCase();
-
+    return countries.filter((country) => {
       return (
-        name.includes(normalizedSearch) ||
-        item.dial_code.includes(normalizedSearch)
+        country.name.toLowerCase().includes(normalizedSearch) ||
+        country.dial_code.includes(normalizedSearch)
       );
     });
   }, [countries, normalizedSearch]);
-
-  const handleSelectCountry = useCallback((item) => {
-    setSelectedCountry(item);
-
-    setFormData((prev) => ({
-      ...prev,
-      country: item.name,
-      dialCode: item.dial_code,
-    }));
-
-    setIsDropdownOpen(false);
-    setCountrySearch("");
-  }, []);
 
   const handleChange = useCallback((event) => {
     const { name, value } = event.target;
@@ -642,6 +598,19 @@ const ContactUs = () => {
       ...prev,
       [name]: value,
     }));
+  }, []);
+
+  const handleSelectCountry = useCallback((country) => {
+    setSelectedCountry(country);
+
+    setFormData((prev) => ({
+      ...prev,
+      country: country.name,
+      dialCode: country.dial_code,
+    }));
+
+    setCountrySearch("");
+    setIsDropdownOpen(false);
   }, []);
 
   const handleToggleCountry = useCallback(() => {
@@ -654,112 +623,237 @@ const ContactUs = () => {
 
   return (
     <>
-    <main
-      id="main"
-      className="relative min-h-screen overflow-hidden bg-slate-50 font-sans text-slate-900 transition-colors duration-500 dark:bg-[#060b13] dark:text-slate-100"
-    >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-0 h-96 w-full max-w-7xl -translate-x-1/2 blur-[120px]"
-        style={{
-          opacity: 0.2,
-          backgroundImage: `radial-gradient(ellipse at top, ${brandTheme.primaryBlue}, ${brandTheme.secondaryIndigo}, transparent)`,
-        }}
-      />
+      <main className="relative min-h-screen overflow-hidden bg-[#f7faff] font-sans text-slate-900 dark:bg-[#050a12] dark:text-white">
+        {/* ---------------------------------------------------------------- */}
+        {/* Background                                                        */}
+        {/* ---------------------------------------------------------------- */}
 
-      <section className="relative px-4 pb-16 pt-24 sm:px-6 lg:px-8">
-        <div className="relative z-10 mx-auto max-w-5xl space-y-6 py-6 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4 }}
-            className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-[#276ea5] shadow-sm backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/80 dark:text-sky-400"
-          >
-            <Sparkles
-              size={14}
-              style={{ color: brandTheme.electricCyan }}
-              className="animate-pulse"
-              aria-hidden="true"
-            />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-0 h-150 w-250 -translate-x-1/2 rounded-full blur-[140px]"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(39,110,165,.18), rgba(56,189,248,.08), transparent 65%)",
+          }}
+        />
 
-            <span>Let’s Build Something Great</span>
-          </motion.div>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-50 top-125 h-125 w-125 rounded-full bg-blue-500/5 blur-[120px]"
+        />
 
-          <motion.h1
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-6xl dark:text-white"
-          >
-            Get in touch with{" "}
-            <span
-              className="bg-clip-text text-transparent"
-              style={{
-                backgroundImage: `linear-gradient(to right, ${brandTheme.electricCyan}, ${brandTheme.primaryBlue}, ${brandTheme.secondaryIndigo})`,
-              }}
-            >
-              Shilsha Technologies
-            </span>
-          </motion.h1>
+        {/* ---------------------------------------------------------------- */}
+        {/* Hero                                                             */}
+        {/* ---------------------------------------------------------------- */}
 
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mx-auto max-w-2xl text-base font-normal leading-relaxed text-slate-600 sm:text-xl dark:text-slate-400"
-          >
-            Contact Shilsha Technologies for web and mobile app development
-            services. We create innovative digital solutions to elevate your
-            business.
-          </motion.p>
-        </div>
-      </section>
-
-      <section
-        id="contact"
-        className="relative z-10 px-4 pb-24 sm:px-6 lg:px-8"
-      >
-        <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
-            {/* LEFT */}
+        <section className="relative px-5 pb-16 pt-32 sm:px-6 lg:px-8 lg:pb-20">
+          <div className="mx-auto max-w-7xl">
             <motion.div
-              initial={{ opacity: 0, x: -25 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="space-y-6 lg:col-span-5"
+              initial="hidden"
+              animate="visible"
+              variants={stagger}
+              className="grid items-center gap-12 lg:grid-cols-12"
             >
-              <ContactInformation />
+              <div className="lg:col-span-8">
+                <motion.div
+                  variants={fadeUp}
+                  className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.15em] text-[#276ea5] shadow-sm dark:border-blue-900/60 dark:bg-blue-950/30 dark:text-sky-400"
+                >
+                  <Sparkles size={14} />
+                  Let's build something great
+                </motion.div>
 
-              <LazyMap />
-            </motion.div>
+                <motion.h1
+                  variants={fadeUp}
+                  className="max-w-4xl text-4xl font-black tracking-[-0.04em] text-slate-950 sm:text-6xl lg:text-7xl dark:text-white"
+                >
+                  Let's turn your
+                  <span className="block bg-linear-to-r from-[#276ea5] via-[#38bdf8] to-[#1d4ed8] bg-clip-text text-transparent">
+                    idea into reality.
+                  </span>
+                </motion.h1>
 
-            {/* RIGHT */}
-            <motion.div
-              initial={{ opacity: 0, x: 25 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="lg:col-span-7"
-            >
-              <ContactForm
-                formData={formData}
-                loadingCountries={loadingCountries}
-                selectedCountry={selectedCountry}
-                countrySearch={countrySearch}
-                isDropdownOpen={isDropdownOpen}
-                filteredCountries={filteredCountries}
-                onChange={handleChange}
-                onToggleCountry={handleToggleCountry}
-                onSearchCountry={handleSearchCountry}
-                onSelectCountry={handleSelectCountry}
-              />
+                <motion.p
+                  variants={fadeUp}
+                  className="mt-6 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg dark:text-slate-400"
+                >
+                  Tell us what you're building. Our product strategists,
+                  designers, and engineers will help you create a digital
+                  experience that drives real business growth.
+                </motion.p>
+
+                <motion.div
+                  variants={fadeUp}
+                  className="mt-8 flex flex-wrap gap-3"
+                >
+                  {["Fast response", "Expert consultation", "Confidential"].map(
+                    (item) => (
+                      <div
+                        key={item}
+                        className="flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-3.5 py-2 text-xs font-semibold text-slate-600 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-300"
+                      >
+                        <CheckCircle2 size={14} className="text-emerald-500" />
+                        {item}
+                      </div>
+                    ),
+                  )}
+                </motion.div>
+              </div>
+
+              {/* Hero visual */}
+              <motion.div
+                variants={fadeUp}
+                className="relative hidden lg:col-span-4 lg:block"
+              >
+                <div className="relative mx-auto h-72.5 w-72.5">
+                  <div className="absolute inset-0 rounded-full border border-blue-200/60 dark:border-blue-900/50" />
+
+                  <div className="absolute inset-7 rounded-full border border-dashed border-blue-300/60 dark:border-blue-800" />
+
+                  <div className="absolute inset-14 flex items-center justify-center rounded-full bg-linear-to-br from-[#276ea5] to-[#1d4ed8] shadow-2xl shadow-blue-500/30">
+                    <MessageCircle
+                      size={65}
+                      strokeWidth={1.5}
+                      className="text-white"
+                    />
+                  </div>
+
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: 18,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                    className="absolute inset-0"
+                  >
+                    <div className="absolute left-1/2 top-0 h-3 w-3 -translate-x-1/2 rounded-full bg-sky-400 shadow-lg shadow-sky-400/60" />
+                    <div className="absolute bottom-8 right-2 h-2.5 w-2.5 rounded-full bg-blue-600" />
+                    <div className="absolute bottom-10 left-3 h-2 w-2 rounded-full bg-cyan-400" />
+                  </motion.div>
+
+                  <div className="absolute -right-3 top-8 rounded-2xl border border-white/60 bg-white/90 px-4 py-3 shadow-xl backdrop-blur-xl dark:border-slate-700 dark:bg-slate-900/90">
+                    <div className="flex items-center gap-2">
+                      <Zap size={14} className="text-amber-500" />
+                      <span className="text-xs font-bold">Let's Talk</span>
+                    </div>
+                  </div>
+
+                  <div className="absolute -bottom-2 -left-8 rounded-2xl border border-white/60 bg-white/90 px-4 py-3 shadow-xl backdrop-blur-xl dark:border-slate-700 dark:bg-slate-900/90">
+                    <div className="flex items-center gap-2">
+                      <Users size={14} className="text-[#276ea5]" />
+                      <span className="text-xs font-bold">Expert Team</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
-        </div>
-      </section>
-    </main>
-    <Footer/>
+        </section>
+
+        {/* ---------------------------------------------------------------- */}
+        {/* Main Contact Area                                                */}
+        {/* ---------------------------------------------------------------- */}
+
+        <section className="relative px-5 pb-20 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="grid items-start gap-7 lg:grid-cols-12">
+              {/* LEFT */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.6 }}
+                className="space-y-7 lg:col-span-5"
+              >
+                <ContactInformation />
+
+                <LazyMap />
+              </motion.div>
+
+              {/* RIGHT */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.6 }}
+                className="lg:col-span-7"
+              >
+                <ContactForm
+                  formData={formData}
+                  loadingCountries={loadingCountries}
+                  selectedCountry={selectedCountry}
+                  countrySearch={countrySearch}
+                  isDropdownOpen={isDropdownOpen}
+                  filteredCountries={filteredCountries}
+                  onChange={handleChange}
+                  onToggleCountry={handleToggleCountry}
+                  onSearchCountry={handleSearchCountry}
+                  onSelectCountry={handleSelectCountry}
+                />
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* ---------------------------------------------------------------- */}
+        {/* Trust Section                                                    */}
+        {/* ---------------------------------------------------------------- */}
+
+        <section className="border-y border-slate-200/80 bg-white/60 px-5 py-16 dark:border-slate-800 dark:bg-slate-900/30 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={stagger}
+              className="grid gap-5 md:grid-cols-3"
+            >
+              {[
+                {
+                  icon: Zap,
+                  title: "Fast Communication",
+                  text: "Get a quick response from our business and technical team.",
+                },
+                {
+                  icon: ShieldCheck,
+                  title: "Complete Confidentiality",
+                  text: "Your project ideas and business information remain secure.",
+                },
+                {
+                  icon: Users,
+                  title: "Dedicated Experts",
+                  text: "Connect directly with specialists who understand your goals.",
+                },
+              ].map((item) => {
+                const Icon = item.icon;
+
+                return (
+                  <motion.div
+                    key={item.title}
+                    variants={fadeUp}
+                    className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900"
+                  >
+                    <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 text-[#276ea5] transition-transform group-hover:scale-110 dark:bg-blue-950/40">
+                      <Icon size={20} />
+                    </div>
+
+                    <h3 className="text-base font-bold text-slate-900 dark:text-white">
+                      {item.title}
+                    </h3>
+
+                    <p className="mt-2 text-sm leading-relaxed text-slate-500 dark:text-slate-400">
+                      {item.text}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
     </>
   );
 };

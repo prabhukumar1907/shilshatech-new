@@ -1,288 +1,314 @@
 import React from "react";
-import { Zap, ShieldCheck, Workflow, ArrowRight, Layers } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Zap, ShieldCheck, Layers, CheckCircle2 } from "lucide-react";
 import { SiSelenium } from "react-icons/si";
 import { motion } from "framer-motion";
-import ServicesSection from "../../components/ServiceSection";
-import Footer from "../../components/Footer";
 import AwardsSection from "../../components/AwardsSection";
 import ReasonsWhySection from "../../components/ReasonsWhySection";
+import Footer from "../../components/Footer";
 
 const theme = {
-  primary: "#43B02A", // Selenium Green
+  primary: "#43B02A",
   secondary: "#2E8B1C",
   glow: "#a3e635",
 };
 
 const SeleniumServicesPage = () => {
-  const brandTheme = {
-    primaryBlue: "#43B02A",
-    secondaryIndigo: "#2E8B1C",
-    electricCyan: "#a3e635",
-  };
-
-  const whyChooseItems = [
+  const features = [
     {
-      title: "Selenium Framework Experts",
-      desc: "Our automation engineers specialize in building robust Page Object Model (POM) architectures using Selenium WebDriver.",
+      icon: <Layers size={19} />,
+      title: "POM Architecture",
+      desc: "Build clean, modular Page Object Model frameworks for long-term maintainability.",
     },
     {
-      title: "Cross-Browser Compatibility",
-      desc: "Execute parallel tests seamlessly across Chrome, Firefox, Safari, Edge, and headless browsers.",
+      icon: <Zap size={19} />,
+      title: "Parallel Execution",
+      desc: "Run extensive test suites concurrently across Selenium Grid and cloud environments.",
     },
     {
-      title: "CI/CD Integration Specialists",
-      desc: "Trigger Selenium test suites automatically via Jenkins, GitHub Actions, and Maven/Gradle builds.",
-    },
-    {
-      title: "Advanced Wait Strategies",
-      desc: "Implement smart explicit and fluent waits to eliminate flaky tests and synchronization issues.",
-    },
-    {
-      title: "Cloud Grid Execution",
-      desc: "Scale test execution across distributed grids like Selenium Grid, BrowserStack, or Sauce Labs.",
-    },
-    {
-      title: "Robust Reporting & Logging",
-      desc: "Configure ExtentReports or Allure reports with automated failure screenshots and step logs.",
+      icon: <ShieldCheck size={19} />,
+      title: "CI/CD Ready",
+      desc: "Integrate automated Selenium testing into modern development and deployment pipelines.",
     },
   ];
 
-  const servicesList = [
-    {
-      title: "Selenium WebDriver Framework Development",
-      desc: "Design clean, modular Java/Python/C# Selenium frameworks using the Page Object Model design pattern.",
-    },
-    {
-      title: "Cross-Browser Test Automation",
-      desc: "Validate web applications across multiple browser engines and OS environments simultaneously.",
-    },
-    {
-      title: "Selenium Grid & Parallel Execution",
-      desc: "Set up distributed test grids to execute hundreds of test cases concurrently in record time.",
-    },
-    {
-      title: "CI/CD Automated Test Pipelines",
-      desc: "Integrate Selenium scripts into continuous integration pipelines for automated regression gating.",
-    },
-    {
-      title: "Dynamic Element Handling & Waits",
-      desc: "Resolve complex dynamic DOM elements, AJAX calls, and iframe interactions flawlessly.",
-    },
-    {
-      title: "Migration to Modern Selenium",
-      desc: "Upgrade legacy test scripts to the latest Selenium 4 standards and W3C protocol.",
-    },
-    {
-      title: "Data-Driven & Keyword Testing",
-      desc: "Implement external data providers (Excel, CSV, Databases) to drive comprehensive test variations.",
-    },
-    {
-      title: "Maintenance & Flaky Test Fixing",
-      desc: "Optimize fragile locator strategies and refactor legacy test suites for high reliability.",
-    },
+  const capabilities = [
+    "Selenium WebDriver Framework Development",
+    "Cross-Browser Test Automation",
+    "Selenium Grid & Parallel Execution",
+    "CI/CD Automated Test Pipelines",
+    "Dynamic Element Handling & Wait Strategies",
+    "Migration to Modern Selenium 4",
+    "Data-Driven & Keyword Testing",
+    "Maintenance & Flaky Test Optimization",
   ];
 
   return (
-    <div className="min-h-screen pt-28 pb-16 bg-slate-50 dark:bg-[#070d18] text-slate-800 dark:text-slate-100 transition-colors duration-200 font-sans selection:bg-[#a3e635] selection:text-slate-900 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Hero Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="relative rounded-3xl border border-slate-200/80 dark:border-lime-500/20 bg-white dark:bg-[#0b1528] p-8 sm:p-12 shadow-xl overflow-hidden mb-12"
-        >
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="absolute top-0 left-0 h-1 w-full origin-left"
-            style={{
-              background: `linear-gradient(90deg, #43B02A, ${theme.glow})`,
-            }}
-          />
-
+    <div className="min-h-screen bg-slate-50 dark:bg-[#070d18] text-slate-800 dark:text-slate-100 font-sans overflow-hidden selection:bg-lime-300 selection:text-slate-900">
+      <section className="relative pt-24 sm:pt-28 pb-12 sm:pb-16">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div
-            className="absolute -top-24 -right-24 w-72 h-72 rounded-full blur-3xl opacity-10 pointer-events-none"
+            className="absolute top-16 right-0 w-80 h-80 rounded-full blur-3xl opacity-10 pointer-events-none"
             style={{ background: theme.glow }}
           />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col gap-4"
-            >
-              <div className="inline-flex items-center gap-2 w-fit px-3 py-1 rounded-full text-xs font-semibold bg-lime-50 text-lime-800 dark:bg-lime-500/10 dark:text-lime-300 border border-lime-200 dark:border-lime-500/20 shadow-sm">
-                <SiSelenium size={22} className="shrink-0" />
-                <span>Shilsha Technologies Expert Services</span>
-              </div>
-              <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
-                Selenium WebDriver Consulting & Test Automation Services in
-                India
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="relative"
+          >
+            {/* Eyebrow */}
+            <div className="flex items-center gap-2 mb-5">
+              <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-lime-500/10 text-[#43B02A] dark:text-lime-400">
+                <SiSelenium size={19} />
+              </span>
+
+              <span className="text-xs sm:text-sm font-semibold uppercase tracking-wide text-[#43B02A] dark:text-lime-400">
+                Shilsha Technologies · Selenium Engineering
+              </span>
+            </div>
+
+            {/* Hero heading */}
+            <div className="max-w-5xl">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05]">
+                Selenium WebDriver{" "}
+                <span className="text-[#43B02A] dark:text-lime-400">
+                  Test Automation
+                </span>{" "}
+                Services
               </h1>
-              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-                Shilsha Technologies delivers enterprise-grade Selenium
-                WebDriver automation frameworks, cross-browser test grids, and
-                CI/CD testing pipelines.
-              </p>
-              <motion.div
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                className="flex flex-wrap gap-3 pt-2"
-              >
-                <Link
-                  to="/contact-us"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white text-xs font-semibold shadow-md transition-shadow duration-200 hover:shadow-lg"
-                  style={{
-                    background: `linear-gradient(90deg, #43B02A, ${theme.secondary})`,
-                  }}
-                >
-                  <span>Hire Selenium Experts</span>
-                  <ArrowRight size={15} />
-                </Link>
-              </motion.div>
-            </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex justify-center"
-            >
-              <div className="p-8 rounded-2xl border border-slate-100 dark:border-lime-500/10 bg-slate-50 dark:bg-[#070d18] flex items-center justify-center shadow-inner relative group">
-                <div className="absolute inset-0 rounded-2xl bg-lime-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <SiSelenium
-                  className="text-[#43B02A] dark:text-[#a3e635] transition-transform duration-500 group-hover:scale-110"
-                  size={130}
-                />
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {[
-            {
-              icon: <Layers size={20} />,
-              title: "POM Architecture",
-              desc: "Build clean, modular Page Object Model frameworks for high maintainability.",
-            },
-            {
-              icon: <Zap size={20} />,
-              title: "Parallel Execution",
-              desc: "Run thousands of test scripts concurrently across Selenium Grids and cloud nodes.",
-            },
-            {
-              icon: <ShieldCheck size={20} />,
-              title: "CI/CD Pipeline Ready",
-              desc: "Automate test triggers effortlessly on every Git commit via Jenkins or GitHub Actions.",
-            },
-          ].map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-              whileHover={{ y: -5 }}
-              className="p-6 rounded-2xl border border-slate-200/80 dark:border-lime-500/20 bg-white dark:bg-[#0b1528] shadow-sm transition-shadow duration-300 hover:shadow-xl group"
-            >
-              <div className="h-10 w-10 rounded-xl bg-lime-50 dark:bg-lime-500/10 flex items-center justify-center text-lime-800 dark:text-lime-300 mb-4 transition-transform duration-300 group-hover:scale-110">
-                {feature.icon}
-              </div>
-              <h3 className="text-base font-bold mb-2 group-hover:text-lime-600 transition-colors duration-200">
-                {feature.title}
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                {feature.desc}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      {/* Main Intro Section */}
-      <section className="py-16 px-6 max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
-        >
-          <div className="lg:col-span-12 space-y-8">
-            <h2
-              className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-snug"
-              style={{ color: brandTheme.primaryBlue }}
-            >
-              Automate Web Applications with Expert Selenium Solutions
-            </h2>
-            <div
-              className="w-full h-1 rounded-full my-6 opacity-40"
-              style={{
-                background: `linear-gradient(to right, ${brandTheme.primaryBlue}, ${brandTheme.electricCyan})`,
-              }}
-            />
-            <div className="p-8 rounded-3xl bg-white dark:bg-[#0b1528] backdrop-blur-xl border border-slate-200 dark:border-lime-500/20 shadow-xl space-y-6">
-              <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-base sm:text-lg">
-                Selenium remains the industry standard for web browser
-                automation. Shilsha Technologies designs advanced Selenium
-                WebDriver frameworks that execute high-speed cross-browser
-                regression tests, ensuring flawless web application performance
-                under any condition.
-              </p>
-              <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-base sm:text-lg">
-                Contact our Selenium automation experts today to scale your web
-                testing infrastructure!
+              <p className="mt-5 max-w-3xl text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+                Build reliable browser automation systems with Selenium
+                WebDriver, scalable test frameworks, cross-browser execution,
+                and continuous CI/CD validation.
               </p>
             </div>
+
+            {/* Accent */}
+            <div className="mt-8 flex items-center gap-3">
+              <div
+                className="h-1 w-20 rounded-full"
+                style={{
+                  background: `linear-gradient(90deg, ${theme.primary}, ${theme.glow})`,
+                }}
+              />
+              <div className="h-px flex-1 max-w-md bg-slate-200 dark:bg-slate-800" />
+            </div>
+          </motion.div>
+
+          {/* Feature row */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-6 mt-12">
+            {features.map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.45,
+                  delay: index * 0.1,
+                }}
+                className="relative pl-11"
+              >
+                <div className="absolute left-0 top-0 w-8 h-8 rounded-lg bg-lime-500/10 text-[#43B02A] dark:text-lime-400 flex items-center justify-center">
+                  {feature.icon}
+                </div>
+
+                <h3 className="font-bold text-sm sm:text-base">
+                  {feature.title}
+                </h3>
+
+                <p className="mt-1.5 text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                  {feature.desc}
+                </p>
+              </motion.div>
+            ))}
           </div>
-        </motion.div>
+        </div>
       </section>
 
-      {/* Software & Application Benefits Section */}
-      <section className="py-16 px-6 bg-slate-100/60 dark:bg-[#0b1528]/40 border-y border-slate-200 dark:border-lime-500/20">
-        <div className="max-w-7xl mx-auto space-y-8">
-          <motion.h2
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+      <section className="py-12 sm:py-14 border-y border-slate-200 dark:border-slate-800/80">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-3xl sm:text-5xl font-extrabold tracking-tight"
-            style={{ color: brandTheme.primaryBlue }}
+            className="grid lg:grid-cols-12 gap-8 lg:gap-14"
           >
-            Ensure Cross-Browser Excellence and Stability
-          </motion.h2>
-          <div className="space-y-6 text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              whileHover={{ y: -2 }}
-              className="p-8 rounded-3xl bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-lime-500/20 shadow-lg transition-transform duration-300"
-            >
-              As a premier software engineering agency, Shilsha Technologies
-              integrates Selenium automation suites into enterprise web
-              solutions, guaranteeing absolute stability across all modern
-              browsers and devices.
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              whileHover={{ y: -2 }}
-              className="p-8 rounded-3xl bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-lime-500/20 shadow-lg transition-transform duration-300"
-            >
-              Get in touch with our engineers to architect or optimize your
-              Selenium test automation framework today.
-            </motion.p>
-          </div>
+            {/* Heading */}
+            <div className="lg:col-span-5">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#43B02A] dark:text-lime-400 mb-3">
+                Selenium Automation
+              </p>
+
+              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">
+                Automate web applications with powerful Selenium solutions
+              </h2>
+            </div>
+
+            {/* Content */}
+            <div className="lg:col-span-7 space-y-5 text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-7">
+              <p>
+                Selenium remains one of the most widely adopted technologies for
+                browser-based test automation. Shilsha Technologies develops
+                maintainable WebDriver frameworks designed for functional,
+                regression, and cross-browser testing.
+              </p>
+
+              <p>
+                Our engineers combine Page Object Model architecture, robust
+                locator strategies, intelligent wait handling, parallel
+                execution, and CI/CD integration to create dependable automation
+                pipelines.
+              </p>
+
+              <p className="font-medium text-slate-800 dark:text-slate-200">
+                The result is faster regression cycles, fewer flaky tests, and
+                greater confidence across every release.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="py-12 sm:py-14">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#43B02A] dark:text-lime-400 mb-2">
+                  What We Deliver
+                </p>
+
+                <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+                  Selenium capabilities
+                </h2>
+              </div>
+
+              <p className="max-w-md text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                From framework architecture to distributed execution, we build
+                Selenium automation systems that remain stable as applications
+                evolve.
+              </p>
+            </div>
+
+            {/* Minimal list */}
+            <div className="border-t border-slate-200 dark:border-slate-800">
+              {capabilities.map((item, index) => (
+                <motion.div
+                  key={item}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.35,
+                    delay: index * 0.05,
+                  }}
+                  className="group flex items-center justify-between gap-5 py-4 border-b border-slate-200 dark:border-slate-800"
+                >
+                  <div className="flex items-center gap-4">
+                    <span className="text-xs font-mono text-[#43B02A] dark:text-lime-400">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+
+                    <h3 className="text-sm sm:text-base font-semibold group-hover:text-[#43B02A] dark:group-hover:text-lime-400 transition-colors">
+                      {item}
+                    </h3>
+                  </div>
+
+                  <CheckCircle2
+                    size={17}
+                    className="shrink-0 text-slate-300 dark:text-slate-700 group-hover:text-[#43B02A] transition-colors"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="py-12 sm:py-14 bg-lime-500/[0.035] border-y border-lime-500/10">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="grid lg:grid-cols-12 gap-8 lg:gap-14 items-start"
+          >
+            <div className="lg:col-span-5">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#43B02A] dark:text-lime-400 mb-3">
+                Business Impact
+              </p>
+
+              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">
+                Ensure cross-browser excellence and stability
+              </h2>
+            </div>
+
+            <div className="lg:col-span-7 space-y-5">
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-7">
+                Shilsha Technologies integrates Selenium automation into
+                enterprise web applications to validate functionality across
+                browsers, operating systems, and deployment environments.
+              </p>
+
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-7">
+                Our approach combines scalable test execution with intelligent
+                synchronization, reliable selectors, reusable components, and
+                automated reporting to minimize flaky test behavior.
+              </p>
+
+              <div className="pt-2 flex flex-wrap gap-x-6 gap-y-3">
+                {[
+                  "Cross-browser coverage",
+                  "Parallel execution",
+                  "Reduced regression time",
+                  "CI/CD integration",
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#43B02A]" />
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="py-12 sm:py-14">
+        <div className="max-w-5xl mx-auto px-5 sm:px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <SiSelenium
+              size={32}
+              className="mx-auto mb-4 text-[#43B02A] dark:text-lime-400"
+            />
+
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+              Build a more reliable Selenium automation pipeline
+            </h2>
+
+            <p className="mt-3 max-w-2xl mx-auto text-sm sm:text-base text-slate-500 dark:text-slate-400 leading-relaxed">
+              Create maintainable browser automation that scales with your
+              application and fits naturally into your development workflow.
+            </p>
+          </motion.div>
         </div>
       </section>
 

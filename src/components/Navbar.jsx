@@ -467,9 +467,6 @@ const Navbar = () => {
 
   const navbarRef = React.useRef(null);
 
-  /* ---------------------------------------------
-     Scroll Detection
-  --------------------------------------------- */
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -486,9 +483,6 @@ const Navbar = () => {
     };
   }, []);
 
-  /* ---------------------------------------------
-     Close menus on outside click
-  --------------------------------------------- */
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (navbarRef.current && !navbarRef.current.contains(event.target)) {
@@ -504,9 +498,6 @@ const Navbar = () => {
     };
   }, []);
 
-  /* ---------------------------------------------
-     Escape key
-  --------------------------------------------- */
   useEffect(() => {
     const handleEscape = (event) => {
       if (event.key === "Escape") {
@@ -522,9 +513,6 @@ const Navbar = () => {
     };
   }, []);
 
-  /* ---------------------------------------------
-     Prevent body scroll when mobile menu opens
-  --------------------------------------------- */
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -537,9 +525,6 @@ const Navbar = () => {
     };
   }, [isOpen]);
 
-  /* ---------------------------------------------
-     Helpers
-  --------------------------------------------- */
   const closeAllMenus = () => {
     setDesktopDropdown(null);
     setIsOpen(false);
@@ -569,9 +554,6 @@ const Navbar = () => {
             : "border-slate-200/60 bg-white/85 dark:border-blue-500/20 dark:bg-[#070d18]/85"
         }`}
       >
-        {/* =====================================================
-            LOGO
-        ====================================================== */}
         <Link
           to="/"
           onClick={closeAllMenus}
@@ -781,6 +763,7 @@ const Navbar = () => {
 
                 {technologies.map((group) => {
                   const Icon = group.icon;
+
                   return (
                     <div
                       key={group.category}
@@ -825,6 +808,7 @@ const Navbar = () => {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
+          {/* Dark Mode */}
           <button
             type="button"
             onClick={toggleDarkMode}
@@ -867,7 +851,7 @@ const Navbar = () => {
           </button>
         </div>
       </div>
-
+      {/* Mobile Menus */}
       <div
         className={`mx-1 mt-2 overflow-hidden rounded-2xl border shadow-xl backdrop-blur-md transition-all duration-300 sm:mx-4 ${
           isOpen

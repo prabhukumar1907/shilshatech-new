@@ -4,37 +4,58 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
 import PageLoader from "./lib/PageLoader";
-import FullStackDeveloper from "./pages/hireDeveloper/FullStackDeveloper";
-import AIMLDeveloper from "./pages/hireDeveloper/AIMLDeveloper";
-import ReactDeveloper from "./pages/hireDeveloper/ReactDeveloper";
-import NodejsDeveloper from "./pages/hireDeveloper/NodejsDeveloper";
-import FrontendDeveloper from "./pages/hireDeveloper/FrontendDeveloper";
-import DevOpsEngineer from "./pages/hireDeveloper/DevOpsEngineer";
-import DotnetDeveloper from "./pages/hireDeveloper/DotnetDeveloper";
-import MEANStackDeveloper from "./pages/hireDeveloper/MEANStackDeveloper";
-import BackendDeveloper from "./pages/hireDeveloper/BackendDeveloper";
-import MERNStackDeveloper from "./pages/hireDeveloper/MERNStackDeveloper";
-import MobileAppDeveloper from "./pages/hireDeveloper/MobileAppDeveloper";
-import PythonDeveloper from "./pages/hireDeveloper/PythonDeveloper";
 import Home from "./pages/Home";
+const HireADeveloper = lazy(() => import("./pages/HireADeveloper"));
+const FullStackDeveloper = lazy(
+  () => import("./pages/hireDeveloper/FullStackDeveloper"),
+);
+const AIMLDeveloper = lazy(() => import("./pages/hireDeveloper/AIMLDeveloper"));
+const ReactDeveloper = lazy(
+  () => import("./pages/hireDeveloper/ReactDeveloper"),
+);
+const NodejsDeveloper = lazy(
+  () => import("./pages/hireDeveloper/NodejsDeveloper"),
+);
+
+const FrontendDeveloper = lazy(
+  () => import("./pages/hireDeveloper/FrontendDeveloper"),
+);
+
+const DevOpsEngineer = lazy(
+  () => import("./pages/hireDeveloper/DevOpsEngineer"),
+);
+
+const DotnetDeveloper = lazy(
+  () => import("./pages/hireDeveloper/DotnetDeveloper"),
+);
+
+const MEANStackDeveloper = lazy(
+  () => import("./pages/hireDeveloper/MEANStackDeveloper"),
+);
+const BackendDeveloper = lazy(
+  () => import("./pages/hireDeveloper/BackendDeveloper"),
+);
+const MERNStackDeveloper = lazy(
+  () => import("./pages/hireDeveloper/MERNStackDeveloper"),
+);
+
+const MobileAppDeveloper = lazy(
+  () => import("./pages/hireDeveloper/MobileAppDeveloper"),
+);
+
+const PythonDeveloper = lazy(
+  () => import("./pages/hireDeveloper/PythonDeveloper"),
+);
+
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
-const HireADeveloper = lazy(() => import("./pages/HireADeveloper"));
 const AboutUs = lazy(() => import("./pages/AboutUs"));
 const ContactUs = lazy(() => import("./pages/ContactUs"));
 const ServicesPage = lazy(() => import("./pages/Services"));
 const ReactServicesPage = lazy(() => import("./pages/technologies/ReactJs"));
 const AngularServicesPage = lazy(() => import("./pages/technologies/Angular"));
-const NextJsServicePage = lazy(() =>
-  import("./pages/technologies/NextJs").then((module) => ({
-    default: module.NextJsServicePage,
-  })),
-);
-const VueJsServicePage = lazy(() =>
-  import("./pages/technologies/VueJs").then((module) => ({
-    default: module.VueJsServicePage,
-  })),
-);
+const NextJsServicePage = lazy(() => import("./pages/technologies/NextJs"));
+const VueJsServicePage = lazy(() => import("./pages/technologies/VueJs"));
 const JavaServicesPage = lazy(() => import("./pages/technologies/Java"));
 const NodeJsServicesPage = lazy(() => import("./pages/technologies/NodeJs"));
 const DotNetServicesPage = lazy(() => import("./pages/technologies/DotNet"));

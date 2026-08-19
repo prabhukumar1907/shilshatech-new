@@ -1,16 +1,26 @@
-import React, { useState, useEffect, useRef, useMemo, memo } from "react";
+import React, {
+  memo,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowUpRight,
   Sparkles,
   Terminal,
+  Check,
   GitBranch,
   Rocket,
-  Check,
-  ChevronRight,
   Layers,
+  ChevronRight,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+
+/* =========================================================
+   THEME
+========================================================= */
 
 const theme = {
   primary: "#286b94",
@@ -19,11 +29,27 @@ const theme = {
   accent: "#38bdf8",
 };
 
+/* =========================================================
+   DATA
+========================================================= */
+
 const stats = [
-  { value: "100+", label: "Projects Delivered" },
-  { value: "50+", label: "Global Clients" },
-  { value: "99.9%", label: "Uptime Guaranteed" },
-  { value: "24/7", label: "Dedicated Support" },
+  {
+    value: "100+",
+    label: "Projects Delivered",
+  },
+  {
+    value: "50+",
+    label: "Global Clients",
+  },
+  {
+    value: "99.9%",
+    label: "Uptime Guaranteed",
+  },
+  {
+    value: "24/7",
+    label: "Dedicated Support",
+  },
 ];
 
 const techMarquee = [
@@ -41,29 +67,89 @@ const techMarquee = [
   "PostgreSQL",
 ];
 
+/* =========================================================
+   DELIVERY PIPELINE
+========================================================= */
+
 const pipelineStages = [
-  { label: "Build", Icon: Terminal },
-  { label: "Test", Icon: Check },
-  { label: "Deploy", Icon: GitBranch },
-  { label: "Ship", Icon: Rocket },
+  {
+    label: "Build",
+    description: "Design & develop",
+    Icon: Terminal,
+  },
+  {
+    label: "Test",
+    description: "Validate & refine",
+    Icon: Check,
+  },
+  {
+    label: "Deploy",
+    description: "Release to cloud",
+    Icon: GitBranch,
+  },
+  {
+    label: "Ship",
+    description: "Launch & scale",
+    Icon: Rocket,
+  },
 ];
 
+/* =========================================================
+   FLOATING TAGS
+========================================================= */
+
 const leftTagsPool = [
-  { label: "LLM Integrations", offset: "top-1/4" },
-  { label: "Cloud Architecture", offset: "top-1/2" },
-  { label: "Automated CI/CD", offset: "top-3/4" },
-  { label: "Neural Search", offset: "top-1/4" },
-  { label: "Microservices", offset: "top-1/2" },
-  { label: "Enterprise Security", offset: "top-3/4" },
+  {
+    label: "LLM Integrations",
+    offset: "top-[24%]",
+  },
+  {
+    label: "Cloud Architecture",
+    offset: "top-[50%]",
+  },
+  {
+    label: "Automated CI/CD",
+    offset: "top-[76%]",
+  },
+  {
+    label: "Neural Search",
+    offset: "top-[24%]",
+  },
+  {
+    label: "Microservices",
+    offset: "top-[50%]",
+  },
+  {
+    label: "Enterprise Security",
+    offset: "top-[76%]",
+  },
 ];
 
 const rightTagsPool = [
-  { label: "Fullstack Apps", offset: "top-1/4" },
-  { label: "Kubernetes", offset: "top-1/2" },
-  { label: "Enterprise MLOps", offset: "top-3/4" },
-  { label: "Real-time Analytics", offset: "top-1/4" },
-  { label: "Cross-Platform", offset: "top-1/2" },
-  { label: "Automated Testing", offset: "top-3/4" },
+  {
+    label: "Fullstack Apps",
+    offset: "top-[24%]",
+  },
+  {
+    label: "Kubernetes",
+    offset: "top-[50%]",
+  },
+  {
+    label: "Enterprise MLOps",
+    offset: "top-[76%]",
+  },
+  {
+    label: "Real-time Analytics",
+    offset: "top-[24%]",
+  },
+  {
+    label: "Cross-Platform",
+    offset: "top-[50%]",
+  },
+  {
+    label: "Automated Testing",
+    offset: "top-[76%]",
+  },
 ];
 
 const typingPhrases = [
@@ -74,332 +160,1442 @@ const typingPhrases = [
   "App Development",
 ];
 
-const TypingHeadline = memo(function TypingHeadline({ isDarkMode }) {
+/* =========================================================
+   TYPING HEADLINE
+========================================================= */
+
+const TypingHeadline = memo(function TypingHeadline() {
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const fullText = typingPhrases[phraseIndex];
-    const speed = isDeleting ? 45 : 90;
 
-    const timer = setTimeout(() => {
-      if (!isDeleting) {
-        const next = fullText.substring(0, currentText.length + 1);
-        setCurrentText(next);
-        if (next === fullText) setTimeout(() => setIsDeleting(true), 1800);
-      } else {
-        const next = fullText.substring(0, currentText.length - 1);
-        setCurrentText(next);
-        if (next === "") {
-          setIsDeleting(false);
-          setPhraseIndex((p) => (p + 1) % typingPhrases.length);
+    if (!fullText) return;
+
+    const typingSpeed = isDeleting ? 45 : 85;
+
+    const timer = window.setTimeout(
+      () => {
+        if (!isDeleting) {
+          const nextText = fullText.slice(
+            0,
+            currentText.length + 1,
+          );
+
+          setCurrentText(nextText);
+
+          if (nextText === fullText) {
+            setIsDeleting(true);
+          }
+        } else {
+          const nextText = fullText.slice(
+            0,
+            Math.max(0, currentText.length - 1),
+          );
+
+          setCurrentText(nextText);
+
+          if (nextText === "") {
+            setIsDeleting(false);
+
+            setPhraseIndex(
+              (previous) =>
+                (previous + 1) % typingPhrases.length,
+            );
+          }
         }
-      }
-    }, speed);
+      },
+      currentText === fullText && !isDeleting
+        ? 1600
+        : typingSpeed,
+    );
 
-    return () => clearTimeout(timer);
+    return () => window.clearTimeout(timer);
   }, [currentText, isDeleting, phraseIndex]);
 
   return (
-    <span
-      className="bg-clip-text text-transparent inline-block drop-shadow-lg"
-      style={{
-        backgroundImage: isDarkMode
-          ? `linear-gradient(135deg, #a5f3fc 0%, ${theme.glow} 40%, #818cf8 100%)`
-          : `linear-gradient(135deg, ${theme.primary} 0%, #1d4ed8 50%, ${theme.secondary} 100%)`,
-      }}
-    >
-      {currentText}
-      <span className="animate-pulse font-light ml-0.5 text-blue-500">|</span>
+    <span className="relative inline-block">
+      <span
+        className="
+          bg-linear-to-r
+          from-[#286b94]
+          via-[#2563eb]
+          to-[#1e3a8a]
+          bg-clip-text
+          text-transparent
+          dark:from-[#d7f1ff]
+          dark:via-[#8bb8ff]
+          dark:to-[#a5b4fc]
+        "
+      >
+        {currentText}
+      </span>
+
+      <span
+        className="
+          ml-1
+          inline-block
+          animate-pulse
+          font-light
+          text-[#286b94]
+          dark:text-[#8bb8ff]
+        "
+        aria-hidden="true"
+      >
+        |
+      </span>
     </span>
   );
 });
 
-const PipelineStrip = memo(function PipelineStrip({ inView }) {
-  const [activeStage, setActiveStage] = useState(0);
+/* =========================================================
+   FLOATING TAG CLOUD
+========================================================= */
+
+const TagCloud = memo(function TagCloud({
+  pool,
+  side,
+  inView,
+}) {
+  const [tags, setTags] = useState([
+    pool[0],
+    pool[1],
+    pool[2],
+  ]);
 
   useEffect(() => {
     if (!inView) return;
-    const id = setInterval(() => {
-      setActiveStage((s) => (s + 1) % pipelineStages.length);
-    }, 2200);
-    return () => clearInterval(id);
-  }, [inView]);
 
-  return (
-    <div className="mt-14 inline-flex flex-wrap items-center justify-center gap-2.5 rounded-3xl border p-3 shadow-2xl transition-colors border-slate-200/80 bg-white/90 shadow-slate-200/50 dark:border-blue-500/25 dark:bg-[#0a1325]/95">
-      {pipelineStages.map(({ label, Icon }, i) => {
-        const isActive = i === activeStage;
-        return (
-          <React.Fragment key={label}>
-            <div
-              className={`flex items-center gap-2.5 rounded-2xl px-5 py-2.5 text-xs font-bold transition-colors duration-500 ${
-                isActive
-                  ? "text-white shadow-xl shadow-blue-900/40"
-                  : "text-slate-500 dark:text-slate-400"
-              }`}
-              style={{
-                background: isActive
-                  ? `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`
-                  : "transparent",
-              }}
-            >
-              <Icon size={15} />
-              {label}
-            </div>
-            {i < pipelineStages.length - 1 && (
-              <div className="h-px w-4 sm:w-8 bg-slate-300 dark:bg-blue-500/20" />
-            )}
-          </React.Fragment>
+    const interval = window.setInterval(() => {
+      setTags((previous) => {
+        const offsets = previous.map(
+          (item) => item.offset,
         );
-      })}
-    </div>
-  );
-});
 
-const TagCloud = memo(function TagCloud({ pool, side, inView }) {
-  const [tags, setTags] = useState([pool[0], pool[1], pool[2]]);
-
-  useEffect(() => {
-    if (!inView) return;
-    const id = setInterval(() => {
-      setTags((prev) => {
-        const offsets = prev.map((t) => t.offset);
         const available = pool.filter(
-          (t) => !prev.some((p) => p.label === t.label),
+          (item) =>
+            !previous.some(
+              (current) =>
+                current.label === item.label,
+            ),
         );
-        const shuffled = [...available].sort(() => 0.5 - Math.random());
-        return offsets.map((offset, i) => ({
-          ...(shuffled[i] || pool[i]),
+
+        const shuffled = [...available].sort(
+          () => Math.random() - 0.5,
+        );
+
+        return offsets.map((offset, index) => ({
+          ...(shuffled[index] || pool[index]),
           offset,
         }));
       });
-    }, 6000);
-    return () => clearInterval(id);
+    }, 5000);
+
+    return () => window.clearInterval(interval);
   }, [pool, inView]);
 
-  const sideClass =
-    side === "left" ? "left-8 2xl:left-16" : "right-8 2xl:right-16";
+  const isLeft = side === "left";
 
   return (
     <AnimatePresence mode="popLayout">
       {tags.map(({ label, offset }) => (
         <motion.div
           key={label}
-          initial={{ opacity: 0, x: side === "left" ? -40 : 40, scale: 0.85 }}
-          animate={{ opacity: 1, x: 0, scale: 1 }}
-          exit={{ opacity: 0, x: side === "left" ? -40 : 40, scale: 0.85 }}
-          transition={{ type: "spring", stiffness: 200, damping: 24 }}
-          className={`absolute ${offset} ${sideClass} flex items-center gap-3 rounded-2xl border px-5 py-2.5 text-xs font-semibold shadow-2xl border-slate-200/80 bg-white/90 text-slate-700 shadow-slate-300/40 dark:border-blue-500/30 dark:bg-[#0e182d]/95 dark:text-slate-200`}
+          initial={{
+            opacity: 0,
+            x: isLeft ? -20 : 20,
+          }}
+          animate={{
+            opacity: 0.85,
+            x: 0,
+          }}
+          exit={{
+            opacity: 0,
+            x: isLeft ? -20 : 20,
+          }}
+          transition={{
+            duration: 0.65,
+            ease: "easeOut",
+          }}
+          className={`
+            absolute
+            ${offset}
+            ${
+              isLeft
+                ? "left-4 2xl:left-12"
+                : "right-4 2xl:right-12"
+            }
+            hidden
+            items-center
+            gap-3
+            xl:flex
+            ${isLeft ? "flex-row" : "flex-row-reverse"}
+            text-[10px]
+            font-semibold
+            tracking-wide
+            text-slate-600
+            dark:text-slate-300
+            drop-shadow-[0_1px_2px_rgba(255,255,255,0.5)]
+            dark:drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)]
+          `}
         >
           <span
-            className="h-2.5 w-2.5 rounded-full"
-            style={{ background: theme.glow }}
+            className="
+              h-1.5
+              w-1.5
+              shrink-0
+              rounded-full
+              bg-[#286b94]
+              shadow-[0_0_10px_rgba(110,161,255,0.7)]
+              dark:bg-[#8bb8ff]
+            "
           />
-          {label}
+
+          <span>{label}</span>
+
+          <span
+            className={`
+              h-px
+              w-10
+              ${
+                isLeft
+                  ? "bg-linear-to-r from-[#286b94]/60 to-transparent"
+                  : "bg-linear-to-l from-[#286b94]/60 to-transparent"
+              }
+            `}
+          />
         </motion.div>
       ))}
     </AnimatePresence>
   );
 });
 
+/* =========================================================
+   DELIVERY PIPELINE
+========================================================= */
+
+const DeliveryPipeline = memo(function DeliveryPipeline({
+  inView,
+}) {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+
+    const interval = window.setInterval(() => {
+      setActive(
+        (current) =>
+          (current + 1) % pipelineStages.length,
+      );
+    }, 2200);
+
+    return () => window.clearInterval(interval);
+  }, [inView]);
+
+  return (
+    <div className="mt-14 w-full max-w-4xl px-2 sm:px-4">
+      {/* Heading */}
+      <div className="mb-8 flex items-center justify-center gap-3">
+        <span
+          className="
+            h-px
+            w-8
+            bg-[#286b94]/30
+            sm:w-12
+            dark:bg-[#8bb8ff]/30
+          "
+        />
+
+        <span
+          className="
+            text-[9px]
+            font-bold
+            uppercase
+            tracking-[0.25em]
+            text-slate-600
+            dark:text-slate-300
+          "
+        >
+          How We Deliver
+        </span>
+
+        <span
+          className="
+            h-px
+            w-8
+            bg-[#286b94]/30
+            sm:w-12
+            dark:bg-[#8bb8ff]/30
+          "
+        />
+      </div>
+
+      {/* Pipeline */}
+      <div className="flex w-full items-start justify-center">
+        {pipelineStages.map((stage, index) => {
+          const Icon = stage.Icon;
+
+          const isActive = index === active;
+          const isComplete = index < active;
+
+          return (
+            <React.Fragment key={stage.label}>
+              {/* Stage */}
+              <motion.div
+                animate={{
+                  opacity: isActive ? 1 : 0.78,
+                  y: isActive ? -4 : 0,
+                }}
+                transition={{
+                  duration: 0.4,
+                  ease: "easeOut",
+                }}
+                className="
+                  flex
+                  min-w-0
+                  flex-1
+                  flex-col
+                  items-center
+                  text-center
+                "
+              >
+                {/* Icon */}
+                <div className="relative">
+                  {isActive && (
+                    <>
+                      <motion.span
+                        initial={{
+                          opacity: 0,
+                          scale: 0.7,
+                        }}
+                        animate={{
+                          opacity: [0.15, 0.35, 0.15],
+                          scale: [0.9, 1.3, 0.9],
+                        }}
+                        transition={{
+                          duration: 1.8,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                        className="
+                          absolute
+                          -inset-3
+                          rounded-full
+                          bg-[#6ea1ff]/20
+                          blur-lg
+                        "
+                      />
+
+                      <motion.span
+                        animate={{
+                          scale: [1, 1.45, 1],
+                          opacity: [0.4, 0, 0.4],
+                        }}
+                        transition={{
+                          duration: 1.8,
+                          repeat: Infinity,
+                        }}
+                        className="
+                          absolute
+                          -inset-1.25
+                          rounded-full
+                          border
+                          border-[#6ea1ff]/40
+                        "
+                      />
+                    </>
+                  )}
+
+                  {/* Icon circle */}
+                  <motion.div
+                    animate={{
+                      scale: isActive ? 1.1 : 1,
+                    }}
+                    transition={{
+                      duration: 0.35,
+                    }}
+                    className={`
+                      relative
+                      flex
+                      h-11
+                      w-11
+                      items-center
+                      justify-center
+                      rounded-full
+                      border
+                      transition-all
+                      duration-500
+                      ${
+                        isActive
+                          ? `
+                            border-[#286b94]
+                            bg-[#286b94]
+                            text-white
+                            shadow-[0_8px_28px_rgba(40,107,148,0.3)]
+                            dark:border-[#8bb8ff]
+                            dark:bg-[#286b94]
+                          `
+                          : isComplete
+                            ? `
+                              border-[#286b94]/40
+                              bg-[#286b94]/10
+                              text-[#286b94]
+                              dark:border-[#8bb8ff]/40
+                              dark:bg-[#6ea1ff]/10
+                              dark:text-[#8bb8ff]
+                            `
+                            : `
+                              border-slate-300
+                              bg-white
+                              text-slate-500
+                              shadow-sm
+                              dark:border-white/10
+                              dark:bg-white/5
+                              dark:text-slate-300
+                            `
+                      }
+                    `}
+                  >
+                    <Icon
+                      size={17}
+                      strokeWidth={2}
+                    />
+
+                    {isComplete && (
+                      <motion.span
+                        initial={{
+                          scale: 0,
+                        }}
+                        animate={{
+                          scale: 1,
+                        }}
+                        className="
+                          absolute
+                          -right-0.5
+                          -top-0.5
+                          h-2
+                          w-2
+                          rounded-full
+                          bg-[#286b94]
+                          shadow-[0_0_8px_rgba(110,161,255,0.7)]
+                          dark:bg-[#8bb8ff]
+                        "
+                      />
+                    )}
+                  </motion.div>
+                </div>
+
+                {/* Label */}
+                <motion.span
+                  animate={{
+                    opacity: isActive
+                      ? 1
+                      : isComplete
+                        ? 0.9
+                        : 0.8,
+                  }}
+                  className={`
+                    mt-3
+                    text-[10px]
+                    font-bold
+                    uppercase
+                    tracking-[0.12em]
+                    sm:text-[11px]
+                    ${
+                      isActive
+                        ? "text-[#286b94] dark:text-[#8bb8ff]"
+                        : "text-slate-600 dark:text-slate-300"
+                    }
+                  `}
+                >
+                  {stage.label}
+                </motion.span>
+
+                {/* Description */}
+                <span
+                  className="
+                    mt-1
+                    hidden
+                    text-[9px]
+                    font-medium
+                    leading-4
+                    text-slate-500
+                    dark:text-slate-400
+                    sm:block
+                  "
+                >
+                  {stage.description}
+                </span>
+              </motion.div>
+
+              {/* Connector */}
+              {index < pipelineStages.length - 1 && (
+                <div
+                  className="
+                    flex
+                    shrink-0
+                    items-center
+                    pt-4
+                    sm:pt-3
+                  "
+                >
+                  <motion.div
+                    animate={{
+                      x:
+                        index === active
+                          ? [0, 3, 0]
+                          : 0,
+                      opacity:
+                        index < active
+                          ? 0.9
+                          : 0.35,
+                    }}
+                    transition={{
+                      duration: 1.2,
+                      repeat:
+                        index === active
+                          ? Infinity
+                          : 0,
+                      ease: "easeInOut",
+                    }}
+                    className="
+                      flex
+                      h-6
+                      w-6
+                      items-center
+                      justify-center
+                      rounded-full
+                      text-[#286b94]
+                      dark:text-[#8bb8ff]
+                      sm:h-7
+                      sm:w-7
+                    "
+                  >
+                    <ChevronRight
+                      size={16}
+                      strokeWidth={1.8}
+                    />
+                  </motion.div>
+                </div>
+              )}
+            </React.Fragment>
+          );
+        })}
+      </div>
+
+      {/* Active status */}
+      <div className="mt-7 flex items-center justify-center gap-2">
+        <motion.span
+          animate={{
+            scale: [1, 1.5, 1],
+            opacity: [0.35, 1, 0.35],
+          }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+          }}
+          className="
+            h-1.5
+            w-1.5
+            rounded-full
+            bg-[#286b94]
+            dark:bg-[#8bb8ff]
+          "
+        />
+
+        <AnimatePresence mode="wait">
+          <motion.span
+            key={pipelineStages[active].label}
+            initial={{
+              opacity: 0,
+              y: 4,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            exit={{
+              opacity: 0,
+              y: -4,
+            }}
+            transition={{
+              duration: 0.25,
+            }}
+            className="
+              text-[10px]
+              font-medium
+              text-slate-600
+              dark:text-slate-400
+            "
+          >
+            Currently focused on{" "}
+            <span
+              className="
+                font-bold
+                text-[#286b94]
+                dark:text-[#8bb8ff]
+              "
+            >
+              {pipelineStages[active].label}
+            </span>
+          </motion.span>
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+});
+
+/* =========================================================
+   HERO
+========================================================= */
+
 const Hero = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [inView, setInView] = useState(true);
+
   const sectionRef = useRef(null);
   const glowRef = useRef(null);
   const rafRef = useRef(null);
-  const targetPos = useRef({ x: 0, y: 0 });
+
+  const targetPosition = useRef({
+    x: 0,
+    y: 0,
+  });
+
+  /* =======================================================
+     INTERSECTION OBSERVER
+  ======================================================= */
 
   useEffect(() => {
-    if (!sectionRef.current) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      { threshold: 0.1 },
-    );
+    if (
+      typeof window === "undefined" ||
+      !sectionRef.current
+    ) {
+      return;
+    }
+
+    const observer =
+      new IntersectionObserver(
+        ([entry]) => {
+          setInView(entry.isIntersecting);
+        },
+        {
+          threshold: 0.1,
+        },
+      );
+
     observer.observe(sectionRef.current);
+
     return () => observer.disconnect();
   }, []);
 
+  /* =======================================================
+     MOUSE PARALLAX
+  ======================================================= */
+
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      const { innerWidth, innerHeight } = window;
-      targetPos.current = {
-        x: (e.clientX / innerWidth - 0.5) * 30,
-        y: (e.clientY / innerHeight - 0.5) * -30,
+    if (typeof window === "undefined") return;
+
+    const handleMouseMove = (event) => {
+      const { innerWidth, innerHeight } =
+        window;
+
+      targetPosition.current = {
+        x:
+          (event.clientX / innerWidth - 0.5) *
+          40,
+
+        y:
+          (event.clientY / innerHeight - 0.5) *
+          -30,
       };
+
       if (rafRef.current) return;
-      rafRef.current = requestAnimationFrame(() => {
-        rafRef.current = null;
-        if (glowRef.current) {
-          glowRef.current.style.setProperty("--mx", `${targetPos.current.x}px`);
-          glowRef.current.style.setProperty("--my", `${targetPos.current.y}px`);
-        }
-      });
+
+      rafRef.current =
+        window.requestAnimationFrame(() => {
+          rafRef.current = null;
+
+          if (!glowRef.current) return;
+
+          glowRef.current.style.setProperty(
+            "--mx",
+            `${targetPosition.current.x}px`,
+          );
+
+          glowRef.current.style.setProperty(
+            "--my",
+            `${targetPosition.current.y}px`,
+          );
+        });
     };
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+
+    window.addEventListener(
+      "mousemove",
+      handleMouseMove,
+      {
+        passive: true,
+      },
+    );
+
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      window.removeEventListener(
+        "mousemove",
+        handleMouseMove,
+      );
+
+      if (rafRef.current) {
+        window.cancelAnimationFrame(
+          rafRef.current,
+        );
+      }
     };
   }, []);
 
-  const marqueeItems = useMemo(() => [...techMarquee, ...techMarquee], []);
+  /* =======================================================
+     MARQUEE
+  ======================================================= */
+
+  const marqueeItems = useMemo(
+    () => [...techMarquee, ...techMarquee],
+    [],
+  );
 
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 pt-32 pb-20 transition-colors duration-500 selection:bg-blue-500 selection:text-white bg-slate-50 text-slate-900 dark:bg-[#070d18] dark:text-slate-100"
+      className="
+        relative
+        flex
+        min-h-screen
+        w-full
+        flex-col
+        items-center
+        justify-center
+        overflow-hidden
+        bg-slate-50
+        px-5
+        pb-20
+        pt-32
+        text-slate-900
+        transition-colors
+        duration-500
+        dark:bg-[#050b14]
+        dark:text-white
+        sm:px-8
+        lg:pt-36
+      "
     >
+      {/* ===================================================
+          BACKGROUND GLOW
+      =================================================== */}
+
       <div
         ref={glowRef}
-        className="absolute pointer-events-none w-96 h-96 rounded-full blur-[90px] opacity-25 dark:opacity-35 z-0"
+        className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-[42%]
+          z-0
+          h-105
+          w-105
+          -translate-x-1/2
+          -translate-y-1/2
+          rounded-full
+          blur-[110px]
+          opacity-20
+          dark:opacity-30
+        "
         style={{
-          background: `radial-gradient(circle, ${theme.glow} 0%, ${theme.primary} 60%, transparent 100%)`,
-          left: "50%",
-          top: "50%",
+          background: `
+            radial-gradient(
+              circle,
+              ${theme.glow} 0%,
+              ${theme.primary} 38%,
+              transparent 72%
+            )
+          `,
           transform:
             "translate3d(calc(-50% + var(--mx, 0px)), calc(-50% + var(--my, 0px)), 0)",
           willChange: "transform",
         }}
       />
 
+      {/* ===================================================
+          TECH GRID
+      =================================================== */}
+
       <div
-        className="absolute inset-0 opacity-20 pointer-events-none z-0"
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          z-0
+          opacity-[0.28]
+          dark:opacity-[0.15]
+        "
         style={{
-          backgroundImage: `radial-gradient(${isDarkMode ? theme.glow : theme.primary} 1.3px, transparent 1.3px)`,
-          backgroundSize: "36px 36px",
+          backgroundImage: `
+            linear-gradient(
+              to right,
+              rgba(40,107,148,0.09) 1px,
+              transparent 1px
+            ),
+            linear-gradient(
+              to bottom,
+              rgba(40,107,148,0.09) 1px,
+              transparent 1px
+            )
+          `,
+          backgroundSize: "72px 72px",
           maskImage:
-            "radial-gradient(ellipse 70% 60% at 50% 40%, black 25%, transparent 80%)",
+            "radial-gradient(ellipse 75% 65% at 50% 42%, black 15%, transparent 80%)",
           WebkitMaskImage:
-            "radial-gradient(ellipse 70% 60% at 50% 40%, black 25%, transparent 80%)",
+            "radial-gradient(ellipse 75% 65% at 50% 42%, black 15%, transparent 80%)",
         }}
       />
 
-      <div className="hidden xl:block z-10">
-        <TagCloud pool={leftTagsPool} side="left" inView={inView} />
-        <TagCloud pool={rightTagsPool} side="right" inView={inView} />
-      </div>
+      {/* ===================================================
+          TOP ACCENT
+      =================================================== */}
 
-      <div className="relative z-20 mx-auto max-w-5xl text-center flex flex-col items-center">
-        <div className="inline-flex items-center gap-3 rounded-full border px-5 py-2.5 text-xs font-bold tracking-wide border-blue-200 bg-blue-50/90 text-blue-900 dark:border-blue-400/40 dark:bg-blue-950/70 dark:text-blue-300 shadow-xl shadow-blue-500/10">
-          <Sparkles
-            size={15}
-            className={`text-blue-500 ${inView ? "animate-spin" : ""}`}
-            style={{ animationDuration: "4s" }}
+      <motion.div
+        initial={{
+          scaleX: 0,
+          opacity: 0,
+        }}
+        animate={{
+          scaleX: 1,
+          opacity: 1,
+        }}
+        transition={{
+          duration: 1,
+          ease: "easeOut",
+        }}
+        className="
+          absolute
+          left-1/2
+          top-0
+          h-px
+          w-[min(700px,70vw)]
+          -translate-x-1/2
+          origin-center
+          bg-linear-to-r
+          from-transparent
+          via-[#286b94]
+          to-transparent
+          opacity-60
+          dark:via-[#6ea1ff]
+        "
+      />
+
+      {/* ===================================================
+          FLOATING TAGS
+      =================================================== */}
+
+      <TagCloud
+        pool={leftTagsPool}
+        side="left"
+        inView={inView}
+      />
+
+      <TagCloud
+        pool={rightTagsPool}
+        side="right"
+        inView={inView}
+      />
+
+      {/* ===================================================
+          MAIN CONTENT
+      =================================================== */}
+
+      <div
+        className="
+          relative
+          z-20
+          mx-auto
+          flex
+          w-full
+          max-w-6xl
+          flex-col
+          items-center
+          text-center
+        "
+      >
+        {/* Eyebrow */}
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 15,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 0.7,
+          }}
+          className="
+            flex
+            items-center
+            gap-3
+            text-[10px]
+            font-bold
+            uppercase
+            tracking-[0.22em]
+            text-[#286b94]
+            dark:text-[#8bb8ff]
+          "
+        >
+          <span
+            className="
+              h-1.5
+              w-1.5
+              animate-pulse
+              rounded-full
+              bg-[#286b94]
+              shadow-[0_0_12px_rgba(110,161,255,0.8)]
+              dark:bg-[#8bb8ff]
+            "
           />
-          <span>Next-Gen Software Development</span>
-          <ChevronRight size={13} className="text-blue-500 opacity-80" />
-        </div>
 
-        <h1 className="mt-8 text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.12] max-w-4xl">
-          Engineering Excellence for{" "}
-          <span className="block sm:inline min-h-[1.2em]">
-            <TypingHeadline isDarkMode={isDarkMode} />
+          <Sparkles
+            size={14}
+            className="
+              text-[#286b94]
+              dark:text-[#8bb8ff]
+            "
+          />
+
+          <span>
+            Next-Gen Software Development
           </span>
-        </h1>
 
-        <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed font-normal text-slate-600 dark:text-slate-300/90">
-          We engineer high-performance web platforms, intelligent mobile
-          applications, and scalable cloud infrastructure designed to accelerate
+          <span
+            className="
+              h-px
+              w-8
+              bg-[#286b94]/50
+              sm:w-14
+              dark:bg-[#8bb8ff]/50
+            "
+          />
+        </motion.div>
+
+        {/* Heading */}
+        <motion.h1
+          initial={{
+            opacity: 0,
+            y: 30,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 0.9,
+            delay: 0.15,
+            ease: "easeOut",
+          }}
+          className="
+            mt-7
+            max-w-5xl
+            text-4xl
+            font-black
+            leading-[1.06]
+            tracking-[-0.045em]
+            text-slate-950
+            dark:text-white
+            sm:text-6xl
+            lg:text-7xl
+            xl:text-[84px]
+          "
+        >
+          Engineering Excellence
+          <br />
+
+          <span className="relative">
+            <span
+              className="
+                text-slate-950
+                dark:text-white
+              "
+            >
+              for{" "}
+            </span>
+
+            <TypingHeadline />
+          </span>
+        </motion.h1>
+
+        {/* Description */}
+        <motion.p
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 0.8,
+            delay: 0.35,
+          }}
+          className="
+            mt-7
+            max-w-2xl
+            text-sm
+            font-medium
+            leading-7
+            text-slate-700
+            dark:text-slate-200
+            sm:text-base
+            lg:text-lg
+          "
+        >
+          We engineer high-performance web
+          platforms, intelligent mobile
+          applications, and scalable cloud
+          infrastructure designed to accelerate
           enterprise growth.
-        </p>
+        </motion.p>
 
-        <div className="mt-10 flex flex-wrap justify-center items-center gap-5">
+        {/* CTA */}
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 0.8,
+            delay: 0.5,
+          }}
+          className="
+            mt-9
+            flex
+            flex-wrap
+            items-center
+            justify-center
+            gap-6
+          "
+        >
+          {/* Primary CTA */}
           <Link
             to="/contact-us"
-            className="group relative inline-flex items-center gap-3 rounded-2xl px-8 py-4 text-sm font-bold text-white shadow-2xl transition-transform hover:scale-105 active:scale-95"
-            style={{
-              background: `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`,
-              boxShadow: `0 20px 40px -10px ${theme.primary}99, inset 0 1px 0 rgba(255,255,255,0.4)`,
-            }}
+            className="
+              group
+              relative
+              inline-flex
+              items-center
+              gap-3
+              overflow-hidden
+              rounded-full
+              bg-linear-to-r
+              from-[#286b94]
+              to-[#1e3a8a]
+              px-7
+              py-3.5
+              text-sm
+              font-bold
+              text-white
+              shadow-[0_16px_40px_rgba(30,58,138,0.25)]
+              transition-all
+              duration-300
+              hover:-translate-y-1
+              hover:shadow-[0_22px_50px_rgba(30,58,138,0.35)]
+              active:translate-y-0
+            "
           >
-            <span>Get Started</span>
+            <span
+              className="
+                absolute
+                inset-0
+                -translate-x-full
+                bg-linear-to-r
+                from-transparent
+                via-white/20
+                to-transparent
+                transition-transform
+                duration-700
+                group-hover:translate-x-full
+              "
+            />
+
+            <span className="relative">
+              Get Started
+            </span>
+
             <ArrowUpRight
-              size={18}
-              className="transition-transform duration-300 group-hover:translate-x-1.5 group-hover:-translate-y-1.5"
+              size={17}
+              className="
+                relative
+                transition-transform
+                duration-300
+                group-hover:-translate-y-1
+                group-hover:translate-x-1
+              "
             />
           </Link>
 
+          {/* Secondary CTA */}
           <Link
             to="/services"
-            className="group flex items-center gap-3 rounded-2xl border px-7 py-4 text-sm font-bold shadow-xl border-slate-200/80 bg-white/90 text-slate-800 hover:border-slate-300 hover:bg-slate-100 dark:border-blue-500/25 dark:bg-[#0c1629]/90 dark:text-slate-200 dark:hover:border-blue-500/50 dark:hover:bg-[#121f3a] transition-transform hover:scale-105 active:scale-95"
+            className="
+              group
+              inline-flex
+              items-center
+              gap-2
+              rounded-full
+              px-2
+              py-3
+              text-sm
+              font-bold
+              text-slate-800
+              transition-all
+              duration-300
+              hover:text-[#286b94]
+              dark:text-slate-200
+              dark:hover:text-[#8bb8ff]
+            "
           >
-            <span className="flex h-8 w-8 items-center justify-center rounded-full transition-colors duration-300 bg-blue-100 text-[#286b94] group-hover:bg-[#286b94] group-hover:text-white dark:bg-blue-500/20 dark:text-blue-400 dark:group-hover:bg-blue-500 dark:group-hover:text-white">
-              <Layers size={15} />
-            </span>
-            Explore Our Services
-          </Link>
-        </div>
-
-        <PipelineStrip inView={inView} />
-      </div>
-
-      <div className="relative z-20 mt-16 w-full max-w-4xl">
-        <div className="grid grid-cols-2 gap-4 rounded-3xl border p-7 sm:grid-cols-4 sm:gap-8 shadow-2xl border-slate-200/80 bg-white/90 shadow-slate-200/50 dark:border-blue-500/25 dark:bg-[#0a1325]/95">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="flex flex-col items-center text-center group cursor-default"
+            <span
+              className="
+                flex
+                h-8
+                w-8
+                items-center
+                justify-center
+                rounded-full
+                border
+                border-slate-400
+                text-[#286b94]
+                transition-all
+                duration-300
+                group-hover:border-[#286b94]
+                group-hover:bg-[#286b94]
+                group-hover:text-white
+                dark:border-[#8bb8ff]/40
+                dark:text-[#8bb8ff]
+                dark:group-hover:border-[#8bb8ff]
+              "
             >
-              <span
-                className="text-3xl sm:text-4xl font-black tracking-tight bg-clip-text text-transparent"
-                style={{
-                  backgroundImage: isDarkMode
-                    ? `linear-gradient(90deg, #93c5fd, ${theme.glow})`
-                    : `linear-gradient(90deg, ${theme.primary}, ${theme.secondary})`,
-                }}
-              >
-                {stat.value}
-              </span>
-              <span className="mt-1.5 text-xs font-semibold text-slate-600 dark:text-slate-300/80">
-                {stat.label}
-              </span>
-            </div>
-          ))}
-        </div>
+              <Layers size={14} />
+            </span>
+
+            <span>
+              Explore Our Services
+            </span>
+
+            <ChevronRight
+              size={15}
+              className="
+                transition-transform
+                duration-300
+                group-hover:translate-x-1
+              "
+            />
+          </Link>
+        </motion.div>
+
+        {/* Delivery Pipeline */}
+        <DeliveryPipeline
+          inView={inView}
+        />
       </div>
+
+      {/* ===================================================
+          STATS
+      =================================================== */}
+
+      <motion.div
+        initial={{
+          opacity: 0,
+          y: 25,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          duration: 0.8,
+          delay: 0.7,
+        }}
+        className="
+          relative
+          z-20
+          mt-16
+          grid
+          w-full
+          max-w-5xl
+          grid-cols-2
+          divide-x
+          divide-y
+          divide-slate-300
+          border-y
+          border-slate-300
+          dark:divide-[#6ea1ff]/20
+          dark:border-[#6ea1ff]/20
+          sm:grid-cols-4
+          sm:divide-y-0
+        "
+      >
+        {stats.map(({ value, label }) => (
+          <motion.div
+            key={label}
+            whileHover={{
+              y: -3,
+            }}
+            className="
+              group
+              relative
+              flex
+              flex-col
+              items-center
+              justify-center
+              px-4
+              py-6
+              text-center
+              transition-colors
+              sm:py-7
+            "
+          >
+            <span
+              className="
+                pointer-events-none
+                absolute
+                left-1/2
+                top-0
+                h-px
+                w-0
+                -translate-x-1/2
+                bg-[#286b94]
+                transition-all
+                duration-500
+                group-hover:w-16
+                dark:bg-[#8bb8ff]
+              "
+            />
+
+            <span
+              className="
+                bg-linear-to-r
+                from-[#286b94]
+                to-[#1e3a8a]
+                bg-clip-text
+                text-3xl
+                font-black
+                tracking-[-0.04em]
+                text-transparent
+                dark:from-[#d7f1ff]
+                dark:to-[#8bb8ff]
+                sm:text-4xl
+              "
+            >
+              {value}
+            </span>
+
+            <span
+              className="
+                mt-1
+                text-[10px]
+                font-bold
+                uppercase
+                tracking-[0.12em]
+                text-slate-600
+                dark:text-slate-300
+              "
+            >
+              {label}
+            </span>
+          </motion.div>
+        ))}
+      </motion.div>
+
+      {/* ===================================================
+          TECHNOLOGY MARQUEE
+      =================================================== */}
 
       <div
-        className="relative z-20 mt-16 w-full max-w-5xl overflow-hidden"
+        className="
+          relative
+          z-20
+          mt-14
+          w-full
+          overflow-hidden
+        "
         style={{
           maskImage:
-            "linear-gradient(90deg, transparent 0%, black 15%, black 85%, transparent 100%)",
+            "linear-gradient(90deg, transparent, black 12%, black 88%, transparent)",
           WebkitMaskImage:
-            "linear-gradient(90deg, transparent 0%, black 15%, black 85%, transparent 100%)",
+            "linear-gradient(90deg, transparent, black 12%, black 88%, transparent)",
         }}
       >
+        <div
+          className="
+            mb-5
+            flex
+            items-center
+            justify-center
+            gap-3
+            text-[9px]
+            font-bold
+            uppercase
+            tracking-[0.25em]
+            text-slate-600
+            dark:text-slate-300
+          "
+        >
+          <span
+            className="
+              h-px
+              w-10
+              bg-slate-300
+              dark:bg-[#8bb8ff]/30
+            "
+          />
+
+          Technologies We Build With
+
+          <span
+            className="
+              h-px
+              w-10
+              bg-slate-300
+              dark:bg-[#8bb8ff]/30
+            "
+          />
+        </div>
+
         <style>{`
-          @keyframes crossBrowserMarquee {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-50%, 0, 0); }
+          @keyframes heroMarquee {
+            from {
+              transform: translate3d(0, 0, 0);
+            }
+
+            to {
+              transform: translate3d(-50%, 0, 0);
+            }
           }
-          .firefox-safe-marquee {
+
+          .hero-marquee {
             display: flex;
             width: max-content;
+            animation: heroMarquee 28s linear infinite;
             will-change: transform;
-            animation: crossBrowserMarquee 25s linear infinite;
-            animation-play-state: ${inView ? "running" : "paused"};
           }
-          .firefox-safe-marquee:hover {
+
+          .hero-marquee:hover {
             animation-play-state: paused;
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            .hero-marquee {
+              animation: none;
+            }
           }
         `}</style>
 
-        <div className="firefox-safe-marquee gap-3.5 mt-2">
-          {marqueeItems.map((tech, i) => (
-            <span
-              key={`${tech}-${i}`}
-              className="whitespace-nowrap rounded-full border border-slate-200/80 dark:border-blue-500/25 bg-white/90 dark:bg-[#0a1325]/90 px-6 py-2.5 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-xl transition-transform duration-300 ease-out hover:-translate-y-1.5 hover:scale-110 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-700 dark:hover:border-blue-400 dark:hover:bg-blue-950/50 dark:hover:text-white cursor-pointer"
-            >
-              {tech}
-            </span>
-          ))}
+        <div
+          className="hero-marquee gap-8"
+          style={{
+            animationPlayState: inView
+              ? "running"
+              : "paused",
+          }}
+        >
+          {marqueeItems.map(
+            (tech, index) => (
+              <div
+                key={`${tech}-${index}`}
+                className="
+                  group
+                  flex
+                  items-center
+                  gap-3
+                  whitespace-nowrap
+                  text-sm
+                  font-semibold
+                  text-slate-600
+                  transition-colors
+                  duration-300
+                  hover:text-[#286b94]
+                  dark:text-slate-300
+                  dark:hover:text-[#8bb8ff]
+                "
+              >
+                <span
+                  className="
+                    h-1.5
+                    w-1.5
+                    rounded-full
+                    bg-slate-400
+                    transition-all
+                    duration-300
+                    group-hover:bg-[#286b94]
+                    group-hover:shadow-[0_0_10px_rgba(110,161,255,0.8)]
+                    dark:bg-slate-600
+                    dark:group-hover:bg-[#8bb8ff]
+                  "
+                />
+
+                {tech}
+              </div>
+            ),
+          )}
         </div>
+      </div>
+
+      {/* ===================================================
+          BOTTOM GLOW
+      =================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          bottom-0
+          left-1/2
+          h-32
+          w-[min(900px,100vw)]
+          -translate-x-1/2
+          bg-linear-to-t
+          from-[#286b94]/5
+          to-transparent
+        "
+      />
+
+      {/* Bottom label */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          bottom-7
+          left-1/2
+          flex
+          -translate-x-1/2
+          items-center
+          gap-2
+          text-[8px]
+          font-bold
+          uppercase
+          tracking-[0.3em]
+          text-slate-500
+          dark:text-slate-400
+        "
+      >
+        <span>+</span>
+        <span>Built for Scale</span>
+        <span>+</span>
       </div>
     </section>
   );
 };
 
-export default Hero;
+export default memo(Hero);

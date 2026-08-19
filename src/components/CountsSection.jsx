@@ -1,56 +1,90 @@
-import React, { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
-import { Users, CheckCircle2, MapPin, Award, TrendingUp } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import {
+  Users,
+  CheckCircle2,
+  MapPin,
+  Award,
+  TrendingUp,
+  ArrowUpRight,
+} from "lucide-react";
 
 const theme = {
   primary: "#276ea5",
   secondary: "#1d4ed8",
   glow: "#60a5fa",
-  heroBg: "#070d18",
 };
 
 const stats = [
-  { icon: Users, endValue: 106, suffix: "+", label: "Satisfied Clients", subtitle: "Global Trust" },
-  { icon: CheckCircle2, endValue: 340, suffix: "+", label: "Projects Done", subtitle: "High Quality" },
-  { icon: MapPin, endValue: 3, suffix: "", label: "Office Locations", subtitle: "Worldwide Reach" },
-  { icon: Award, endValue: 75, suffix: "+", label: "Hard Workers", subtitle: "Expert Team" },
+  {
+    icon: Users,
+    endValue: 106,
+    suffix: "+",
+    label: "Satisfied Clients",
+    subtitle: "Global Trust",
+  },
+  {
+    icon: CheckCircle2,
+    endValue: 340,
+    suffix: "+",
+    label: "Projects Delivered",
+    subtitle: "High Quality",
+  },
+  {
+    icon: MapPin,
+    endValue: 3,
+    suffix: "",
+    label: "Office Locations",
+    subtitle: "Worldwide Reach",
+  },
+  {
+    icon: Award,
+    endValue: 75,
+    suffix: "+",
+    label: "Expert Team",
+    subtitle: "Skilled Professionals",
+  },
 ];
 
 const AnimatedCounter = ({ end, duration = 1800, suffix = "" }) => {
+  const ref = useRef(null);
+
+  const isInView = useInView(ref, {
+    once: true,
+    amount: 0.6,
+  });
+
   const [count, setCount] = useState(0);
-  const countRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true);
-      },
-      { threshold: 0.3 },
-    );
-    if (countRef.current) observer.observe(countRef.current);
-    return () => observer.disconnect();
-  }, []);
+    if (!isInView) return;
 
-  useEffect(() => {
-    if (!isVisible) return;
     let startTime = null;
-    let animationFrame;
+    let frame;
 
-    const step = (timestamp) => {
+    const easeOut = (t) => 1 - Math.pow(1 - t, 4);
+
+    const update = (timestamp) => {
       if (!startTime) startTime = timestamp;
+
       const progress = Math.min((timestamp - startTime) / duration, 1);
-      const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
-      setCount(Math.floor(easeOutCubic(progress) * end));
-      if (progress < 1) animationFrame = requestAnimationFrame(step);
+
+      setCount(Math.floor(easeOut(progress) * end));
+
+      if (progress < 1) {
+        frame = requestAnimationFrame(update);
+      }
     };
 
-    animationFrame = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(animationFrame);
-  }, [isVisible, end, duration]);
+    frame = requestAnimationFrame(update);
+
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, [isInView, end, duration]);
 
   return (
-    <span ref={countRef}>
+    <span ref={ref}>
       {count}
       {suffix}
     </span>
@@ -58,105 +92,741 @@ const AnimatedCounter = ({ end, duration = 1800, suffix = "" }) => {
 };
 
 const CountsSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const checkDark = () => document.documentElement.classList.contains("dark");
-    setIsDarkMode(checkDark());
-    const observer = new MutationObserver(() => setIsDarkMode(checkDark()));
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section
       id="counts"
-      className="relative py-12 px-4 transition-colors duration-500 overflow-hidden bg-slate-50 text-slate-900 dark:bg-[#070d18] dark:text-white"
+      className="
+        relative
+        isolate
+        overflow-hidden
+        bg-slate-50
+        text-slate-900
+        transition-colors
+        duration-500
+        dark:bg-[#050b14]
+        dark:text-white
+      "
     >
       <div
-        className="absolute inset-0 opacity-15 pointer-events-none transition-opacity duration-500"
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          opacity-[0.025]
+          dark:opacity-[0.045]
+        "
         style={{
-          backgroundImage: `radial-gradient(${isDarkMode ? theme.glow : theme.primary} 1px, transparent 1px)`,
-          backgroundSize: "32px 32px",
-          maskImage: "radial-gradient(ellipse 80% 50% at 50% 50%, black 30%, transparent 80%)",
-          WebkitMaskImage: "radial-gradient(ellipse 80% 50% at 50% 50%, black 30%, transparent 80%)",
+          backgroundImage: `
+            linear-gradient(
+              to right,
+              currentColor 1px,
+              transparent 1px
+            ),
+            linear-gradient(
+              to bottom,
+              currentColor 1px,
+              transparent 1px
+            )
+          `,
+          backgroundSize: "80px 80px",
         }}
       />
 
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-75 bg-[#276ea5]/15 rounded-full blur-[140px] pointer-events-none"
-        style={{ willChange: "transform" }}
-      />
-      <div
-        className="absolute bottom-0 right-1/4 w-87.5 h-50 bg-[#60a5fa]/10 rounded-full blur-[120px] pointer-events-none"
-        style={{ willChange: "transform" }}
+      <motion.div
+        animate={{
+          x: [0, 55, 0],
+          y: [0, -35, 0],
+          scale: [1, 1.08, 1],
+        }}
+        transition={{
+          duration: 14,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="
+          pointer-events-none
+          absolute
+          left-[30%]
+          top-[10%]
+          h-125
+          w-125
+          rounded-full
+          bg-[#276ea5]/8
+          blur-[150px]
+          dark:bg-[#276ea5]/15
+        "
       />
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <motion.div
+        animate={{
+          x: [0, -45, 0],
+          y: [0, 30, 0],
+          scale: [1, 1.05, 1],
+        }}
+        transition={{
+          duration: 11,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="
+          pointer-events-none
+          absolute
+          -bottom-30s
+          right-[5%]
+          h-100
+          w-100
+          rounded-full
+          bg-[#60a5fa]/8
+          blur-[130px]
+          dark:bg-[#60a5fa]/10
+        "
+      />
 
-        <div className="flex flex-col items-center text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-bold uppercase tracking-wider mb-3 transition-colors border-[#276ea5]/30 bg-blue-50 text-[#276ea5] dark:border-[#276ea5]/40 dark:bg-[#276ea5]/25 dark:text-[#60a5fa]">
-            <TrendingUp size={14} className="shrink-0" />
-            <span>Our Impact in Numbers</span>
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-            Proven Track Record of Excellence
-          </h2>
+      <div
+        className="
+          relative
+          z-10
+          mx-auto
+          max-w-350
+          px-5
+          py-16
+          sm:px-8
+          sm:py-20
+          lg:px-12
+          lg:py-28
+        "
+      >
+        {/* ===================================================
+            HEADER
+        ==================================================== */}
+
+        <div
+          className="
+            grid
+            grid-cols-1
+            gap-10
+            lg:grid-cols-12
+            lg:gap-16
+          "
+        >
+          {/* LEFT */}
+
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: -30,
+            }}
+            whileInView={{
+              opacity: 1,
+              x: 0,
+            }}
+            viewport={{
+              once: true,
+            }}
+            transition={{
+              duration: 0.7,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="lg:col-span-3"
+          >
+            <div
+              className="
+                flex
+                items-center
+                gap-3
+                text-xs
+                font-bold
+                uppercase
+                tracking-[0.22em]
+                text-[#276ea5]
+                dark:text-[#60a5fa]
+              "
+            >
+              <motion.span
+                initial={{ width: 0 }}
+                whileInView={{ width: 40 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.7,
+                  delay: 0.2,
+                }}
+                className="h-px bg-current"
+              />
+
+              <TrendingUp size={14} />
+
+              <span>Our Impact</span>
+            </div>
+
+            <p
+              className="
+                mt-6
+                max-w-xs
+                text-sm
+                leading-7
+                text-slate-500
+                dark:text-slate-400
+              "
+            >
+              Numbers that reflect the trust, experience and relationships we've
+              built with businesses worldwide.
+            </p>
+          </motion.div>
+
+          {/* RIGHT */}
+
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 35,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+            }}
+            transition={{
+              duration: 0.8,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="lg:col-span-9"
+          >
+            <h2
+              className="
+                max-w-5xl
+                text-4xl
+                font-black
+                leading-[1.02]
+                tracking-[-0.055em]
+                sm:text-5xl
+                lg:text-[68px]
+              "
+            >
+              Experience that
+              <br />
+              <span
+                className="
+                  bg-linear-to-r
+                  from-[#276ea5]
+                  via-[#1d4ed8]
+                  to-[#60a5fa]
+                  bg-clip-text
+                  text-transparent
+                "
+              >
+                speaks for itself.
+              </span>
+            </h2>
+          </motion.div>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {stats.map((stat, idx) => {
-            const IconComponent = stat.icon;
+        {/* ===================================================
+            HEADER DIVIDER
+        ==================================================== */}
+
+        <motion.div
+          initial={{
+            scaleX: 0,
+          }}
+          whileInView={{
+            scaleX: 1,
+          }}
+          viewport={{
+            once: true,
+          }}
+          transition={{
+            duration: 1,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="
+            mt-14
+            h-px
+            origin-left
+            bg-slate-200
+            dark:bg-white/10
+            lg:mt-20
+          "
+        />
+
+        {/* ===================================================
+            STATS GRID
+        ==================================================== */}
+
+        <div
+          className="
+            mt-3
+            grid
+            grid-cols-1
+            sm:grid-cols-2
+            lg:grid-cols-4
+          "
+        >
+          {stats.map((stat, index) => {
+            const Icon = stat.icon;
+
             return (
               <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="group relative"
+                key={stat.label}
+                initial={{
+                  opacity: 0,
+                  y: 45,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                viewport={{
+                  once: true,
+                  amount: 0.2,
+                }}
+                transition={{
+                  duration: 0.7,
+                  delay: index * 0.1,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className={`
+                  group
+                  relative
+                  min-h-72
+                  overflow-hidden
+                  border-b
+                  border-slate-200
+                  py-10
+                  pr-6
+                  dark:border-white/10
+                  sm:min-h-80
+                  sm:pr-8
+                  lg:min-h-90
+                  lg:px-8
+                  lg:first:pl-0
+                  lg:last:border-r-0
+                  lg:last:pr-0
+                  ${index !== stats.length - 1 ? "lg:border-r" : ""}
+                  ${index % 2 === 0 ? "sm:border-r" : "sm:border-r-0"}
+                  ${index === 2 || index === 3 ? "sm:border-b" : ""}
+                  lg:border-b
+                `}
               >
-                <div
-                  className="absolute -inset-0.5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md pointer-events-none"
-                  style={{
-                    background: `linear-gradient(135deg, ${theme.primary}, ${theme.glow})`,
+                <motion.div
+                  initial={false}
+                  animate={{
+                    opacity: 0,
+                    scale: 0.7,
                   }}
+                  whileHover={{
+                    opacity: 1,
+                    scale: 1,
+                  }}
+                  transition={{
+                    duration: 0.6,
+                  }}
+                  className="
+                    pointer-events-none
+                    absolute
+                    -right-24
+                    -top-24
+                    h-72
+                    w-72
+                    rounded-full
+                    bg-[#276ea5]/10
+                    blur-[80px]
+                    dark:bg-[#60a5fa]/10
+                  "
                 />
 
-                <div className="relative h-full p-6 sm:p-8 rounded-2xl border text-center transition-all duration-300 group-hover:-translate-y-1.5 bg-white/95 border-slate-200/80 shadow-sm hover:shadow-xl shadow-slate-200/60 dark:bg-[#0b1528]/95 dark:border-blue-500/20 dark:shadow-[0_12px_35px_-15px_rgba(0,0,0,0.7)] dark:group-hover:bg-[#0c182e]">
-                  <div className="relative z-10 flex flex-col items-center justify-between h-full">
+                <div
+                  className="
+                    relative
+                    z-10
+                    flex
+                    items-center
+                    justify-between
+                  "
+                >
+                  <span
+                    className="
+                      rounded-full
+                      border
+                      border-slate-200
+                      bg-white/50
+                      px-3
+                      py-1
+                      text-[10px]
+                      font-bold
+                      tracking-[0.25em]
+                      text-slate-400
+                      transition-all
+                      duration-300
+                      group-hover:border-[#276ea5]/30
+                      group-hover:text-[#276ea5]
+                      dark:border-white/10
+                      dark:bg-white/2
+                      dark:text-slate-600
+                      dark:group-hover:border-[#60a5fa]/30
+                      dark:group-hover:text-[#60a5fa]
+                    "
+                  >
+                    0{index + 1}
+                  </span>
 
-                    <div className="p-3.5 rounded-2xl border mb-5 transition-all duration-300 group-hover:scale-110 bg-blue-50 border-blue-200 text-[#276ea5] group-hover:bg-[#276ea5] group-hover:text-white dark:bg-[#276ea5]/20 dark:border-[#276ea5]/40 dark:text-[#60a5fa] dark:group-hover:bg-[#276ea5] dark:group-hover:text-white dark:group-hover:border-[#60a5fa]">
-                      <IconComponent size={24} />
-                    </div>
+                  <motion.div
+                    whileHover={{
+                      x: 5,
+                      y: -5,
+                      rotate: 4,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 15,
+                    }}
+                    className="
+                      flex
+                      h-9
+                      w-9
+                      items-center
+                      justify-center
+                      rounded-full
+                      border
+                      border-slate-200
+                      text-slate-300
+                      transition-all
+                      duration-300
+                      group-hover:border-[#276ea5]/40
+                      group-hover:text-[#276ea5]
+                      dark:border-white/10
+                      dark:text-slate-700
+                      dark:group-hover:border-[#60a5fa]/40
+                      dark:group-hover:text-[#60a5fa]
+                    "
+                  >
+                    <ArrowUpRight size={17} strokeWidth={1.5} />
+                  </motion.div>
+                </div>
 
-                    <div
-                      className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight bg-clip-text text-transparent mb-1"
-                      style={{
-                        backgroundImage: isDarkMode
-                          ? `linear-gradient(135deg, #ffffff 30%, ${theme.glow} 100%)`
-                          : `linear-gradient(135deg, #0f172a 30%, ${theme.primary} 100%)`,
-                      }}
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                    scale: 0.6,
+                    rotate: -15,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    scale: 1,
+                    rotate: 0,
+                  }}
+                  viewport={{
+                    once: true,
+                  }}
+                  transition={{
+                    delay: 0.25 + index * 0.1,
+                    duration: 0.55,
+                    type: "spring",
+                    stiffness: 180,
+                  }}
+                  whileHover={{
+                    y: -6,
+                    rotate: -8,
+                    scale: 1.05,
+                  }}
+                  className="
+                    relative
+                    z-10
+                    mt-10
+                    w-fit
+                  "
+                >
+                  <motion.div
+                    animate={{
+                      opacity: [0.15, 0.4, 0.15],
+                      scale: [1, 1.3, 1],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      delay: index * 0.4,
+                      ease: "easeInOut",
+                    }}
+                    className="
+                      pointer-events-none
+                      absolute
+                      inset-0
+                      rounded-full
+                      bg-[#60a5fa]
+                      blur-xl
+                    "
+                  />
+                  <div
+                    className="
+                      relative
+                      flex
+                      h-14
+                      w-14
+                      items-center
+                      justify-center
+                      rounded-2xl
+                      border
+                      border-[#276ea5]/20
+                      bg-[#276ea5]/5
+                      text-[#276ea5]
+                      shadow-[0_8px_30px_-12px_rgba(39,110,165,0.5)]
+                      transition-all
+                      duration-500
+                      group-hover:rounded-xl
+                      group-hover:border-[#276ea5]
+                      group-hover:bg-[#276ea5]
+                      group-hover:text-white
+                      group-hover:shadow-[0_10px_35px_-10px_rgba(39,110,165,0.7)]
+                      dark:border-[#60a5fa]/20
+                      dark:bg-[#60a5fa]/5
+                      dark:text-[#60a5fa]
+                      dark:group-hover:border-[#60a5fa]
+                      dark:group-hover:bg-[#276ea5]
+                    "
+                  >
+                    <Icon size={23} strokeWidth={1.6} />
+                  </div>
+                </motion.div>
+
+                <div className="relative z-10 mt-9">
+                  <motion.div
+                    whileHover={{
+                      x: 3,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 20,
+                    }}
+                    className="
+                      text-[58px]
+                      font-black
+                      leading-none
+                      tracking-[-0.065em]
+                      sm:text-[68px]
+                      lg:text-[72px]
+                    "
+                  >
+                    <span
+                      className="
+                        bg-linear-to-br
+                        from-slate-950
+                        via-[#276ea5]
+                        to-[#60a5fa]
+                        bg-clip-text
+                        text-transparent
+                        dark:from-white
+                        dark:via-[#dbeafe]
+                        dark:to-[#60a5fa]
+                      "
                     >
-                      <AnimatedCounter end={stat.endValue} suffix={stat.suffix} duration={1800} />
-                    </div>
+                      <AnimatedCounter
+                        end={stat.endValue}
+                        suffix={stat.suffix}
+                      />
+                    </span>
+                  </motion.div>
 
-                    <div className="mt-1">
-                      <h3 className="text-xs sm:text-sm font-bold tracking-wider uppercase transition-colors text-slate-800 dark:text-slate-200 dark:group-hover:text-white">
-                        {stat.label}
-                      </h3>
-                      <p className="text-[11px] font-medium mt-0.5 text-slate-500 dark:text-slate-400">
-                        {stat.subtitle}
-                      </p>
-                    </div>
+                  <div className="mt-5">
+                    <h3
+                      className="
+                        text-sm
+                        font-bold
+                        uppercase
+                        tracking-[0.12em]
+                        text-slate-800
+                        transition-colors
+                        duration-300
+                        group-hover:text-[#276ea5]
+                        dark:text-slate-200
+                        dark:group-hover:text-[#60a5fa]
+                      "
+                    >
+                      {stat.label}
+                    </h3>
 
+                    <p
+                      className="
+                        mt-2
+                        text-xs
+                        text-slate-400
+                        dark:text-slate-500
+                      "
+                    >
+                      {stat.subtitle}
+                    </p>
                   </div>
                 </div>
+
+                <motion.div
+                  initial={{
+                    width: 0,
+                  }}
+                  whileInView={{
+                    width: "32px",
+                  }}
+                  viewport={{
+                    once: true,
+                  }}
+                  transition={{
+                    delay: 0.7 + index * 0.1,
+                    duration: 0.5,
+                  }}
+                  className="
+                    absolute
+                    bottom-0
+                    left-0
+                    h-0.5
+                    rounded-full
+                    bg-linear-to-r
+                    from-[#276ea5]
+                    to-[#60a5fa]
+                    transition-all
+                    duration-500
+                    group-hover:w-20
+                  "
+                />
+
+                <motion.div
+                  initial={{
+                    scaleY: 0,
+                  }}
+                  whileHover={{
+                    scaleY: 1,
+                  }}
+                  transition={{
+                    duration: 0.4,
+                  }}
+                  className="
+                    absolute
+                    bottom-5
+                    left-0
+                    top-5
+                    w-0.5
+                    origin-center
+                    rounded-full
+                    bg-linear-to-b
+                    from-transparent
+                    via-[#276ea5]
+                    to-[#60a5fa]
+                    dark:via-[#60a5fa]
+                  "
+                />
               </motion.div>
             );
           })}
         </div>
 
+        {/* ===================================================
+            BOTTOM STATEMENT
+        ==================================================== */}
+
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 15,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+          }}
+          transition={{
+            duration: 0.8,
+            delay: 0.3,
+          }}
+          className="
+            mt-12
+            flex
+            flex-col
+            gap-5
+            sm:flex-row
+            sm:items-center
+            sm:justify-between
+          "
+        >
+          {/* Status */}
+
+          <div className="flex items-center gap-3">
+            <span className="relative flex h-2 w-2">
+              <motion.span
+                animate={{
+                  scale: [1, 2.5, 1],
+                  opacity: [0.8, 0, 0.8],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeOut",
+                }}
+                className="
+                  absolute
+                  inset-0
+                  rounded-full
+                  bg-[#60a5fa]
+                "
+              />
+
+              <span
+                className="
+                  relative
+                  h-2
+                  w-2
+                  rounded-full
+                  bg-[#276ea5]
+                  dark:bg-[#60a5fa]
+                "
+              />
+            </span>
+
+            <span
+              className="
+                text-xs
+                font-semibold
+                uppercase
+                tracking-[0.16em]
+                text-slate-400
+              "
+            >
+              Building what comes next
+            </span>
+          </div>
+
+          {/* Line */}
+
+          <div
+            className="
+              hidden
+              h-px
+              flex-1
+              bg-linear-to-r
+              from-slate-200
+              via-slate-200
+              to-transparent
+              sm:ml-8
+              sm:block
+              dark:from-white/10
+              dark:via-white/10
+            "
+          />
+
+          {/* Right text */}
+
+          <span
+            className="
+              text-xs
+              font-medium
+              text-slate-400
+              dark:text-slate-500
+            "
+          >
+            Trusted by businesses worldwide
+          </span>
+        </motion.div>
       </div>
     </section>
   );
