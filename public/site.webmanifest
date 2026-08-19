@@ -1,0 +1,24 @@
+{
+  "name": "Shilsha Technologies",
+  "short_name": "Shilsha",
+  "description": "Shilsha Technologies - Custom Software Development and AI Solutions Company",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f8fbff",
+  "theme_color": "#286b94",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/shilshalogofinal.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ]
+}
