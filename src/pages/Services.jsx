@@ -21,7 +21,7 @@ const ServicesPage = () => {
       category: "Web & Digital",
       icon: (
         <svg
-          className="w-6 h-6 text-sky-600 dark:text-sky-400"
+          className="w-5 h-5 text-sky-600 dark:text-sky-400"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -42,7 +42,7 @@ const ServicesPage = () => {
       category: "Core Engineering",
       icon: (
         <svg
-          className="w-6 h-6 text-indigo-600 dark:text-indigo-400"
+          className="w-5 h-5 text-indigo-600 dark:text-indigo-400"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -62,7 +62,7 @@ const ServicesPage = () => {
       category: "Core Engineering",
       icon: (
         <svg
-          className="w-6 h-6 text-blue-600 dark:text-blue-400"
+          className="w-5 h-5 text-blue-600 dark:text-blue-400"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -82,7 +82,7 @@ const ServicesPage = () => {
       category: "Web & Digital",
       icon: (
         <svg
-          className="w-6 h-6 text-sky-600 dark:text-sky-400"
+          className="w-5 h-5 text-sky-600 dark:text-sky-400"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -102,7 +102,7 @@ const ServicesPage = () => {
       category: "Web & Digital",
       icon: (
         <svg
-          className="w-6 h-6 text-cyan-600 dark:text-cyan-400"
+          className="w-5 h-5 text-cyan-600 dark:text-cyan-400"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -122,7 +122,7 @@ const ServicesPage = () => {
       category: "Core Engineering",
       icon: (
         <svg
-          className="w-6 h-6 text-indigo-600 dark:text-indigo-400"
+          className="w-5 h-5 text-indigo-600 dark:text-indigo-400"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -282,33 +282,6 @@ const ServicesPage = () => {
     },
   ];
 
-  const testimonials = [
-    {
-      name: "Saul Goodman",
-      role: "CEO & Founder",
-      initials: "SG",
-      text: "Shilsha Technologies exceeded my expectations with their web and mobile app services. Their engineering rigor delivered a visually stunning platform.",
-    },
-    {
-      name: "Sara Wilsson",
-      role: "Design Director",
-      initials: "SW",
-      text: "Extremely pleased with the exceptional platform execution. Architectural expertise and team professionalism made all the difference.",
-    },
-    {
-      name: "Jena Karlis",
-      role: "Chief Marketing Officer",
-      initials: "JK",
-      text: "Delighted with their work! The high-performing web application perfectly showcases our global enterprise solutions.",
-    },
-    {
-      name: "Matt Brandon",
-      role: "Tech Lead",
-      initials: "MB",
-      text: "A seamless collaboration. Engineering standards, rapid delivery cycles, and transparent workflows set Shilsha Technologies apart.",
-    },
-  ];
-
   const faqs = [
     {
       q: "What full-stack web engineering services does Shilsha Technologies offer?",
@@ -336,335 +309,227 @@ const ServicesPage = () => {
     activeCategory === "All"
       ? services
       : services.filter(
-          (s) =>
-            s.category === activeCategory ||
+          (service) =>
+            service.category === activeCategory ||
             (activeCategory === "AI & Data" &&
-              s.category === "Core Engineering"),
+              service.category === "Core Engineering"),
         );
 
   return (
     <>
-      <main className="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen font-sans selection:bg-sky-500 selection:text-white overflow-hidden transition-colors duration-300">
-        {/* Glow Ambient Background Layers */}
-        <div className="fixed top-0 left-1/2 -translate-x-1/2 w-250 h-125 bg-linear-to-tr from-sky-400/25 via-indigo-400/25 to-transparent dark:from-sky-600/15 dark:via-indigo-600/15 rounded-full blur-[140px] pointer-events-none -z-10" />
+      <main className="min-h-screen overflow-hidden bg-slate-50 font-sans text-slate-800 selection:bg-sky-500 selection:text-white dark:bg-slate-950 dark:text-slate-100">
+        <div className="pointer-events-none fixed left-1/2 top-0 -z-10 h-96 w-3xl -translate-x-1/2 rounded-full bg-linear-to-r from-sky-400/15 via-indigo-400/15 to-transparent blur-[120px] dark:from-sky-600/10 dark:via-indigo-600/10" />
 
-        {/* Hero Section */}
-        <section className="relative pt-36 pb-20 px-6 max-w-7xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-wide uppercase border border-sky-500/30 bg-sky-100/70 dark:bg-sky-950/40 text-sky-700 dark:text-sky-300 backdrop-blur-xl mb-8 shadow-md dark:shadow-lg dark:shadow-sky-950/50">
-            <span className="w-2 h-2 rounded-full bg-sky-500 dark:bg-sky-400 animate-pulse" />
-            Shilsha Technologies • Software & AI Engineering
+        {/* HERO */}
+        <section className="mx-auto max-w-7xl px-5 pb-10 pt-28 sm:px-6 sm:pt-32">
+          <div className="mx-auto max-w-4xl text-center">
+            <div className="mb-5 inline-flex items-center gap-2 border-b border-sky-500/30 pb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-sky-500" />
+              Shilsha Technologies • Software & AI Engineering
+            </div>
+
+            <h1 className="text-4xl font-black leading-[1.08] tracking-tight text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">
+              Architecting{" "}
+              <span className="bg-linear-to-r from-sky-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent dark:from-sky-400 dark:via-blue-400 dark:to-indigo-400">
+                Digital Breakthroughs
+              </span>{" "}
+              For Tomorrow
+            </h1>
+
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-400 sm:text-base">
+              High-velocity full-stack engineering, cloud architectures, and
+              modern enterprise AI systems designed for scale and resilience.
+            </p>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white max-w-5xl mx-auto leading-[1.1]">
-            Architecting{" "}
-            <span className="bg-linear-to-r from-sky-600 via-blue-600 to-indigo-600 dark:from-sky-400 dark:via-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
-              Digital Breakthroughs
-            </span>{" "}
-            For Tomorrow
-          </h1>
-
-          <p className="mt-6 text-base sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-normal leading-relaxed">
-            High-velocity full-stack engineering, cloud architectures, and
-            modern enterprise AI systems designed for scale and resilience.
-          </p>
-
-          {/* Key Metrics Banner */}
-          <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto p-4 rounded-2xl bg-white/70 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 backdrop-blur-md shadow-lg dark:shadow-none">
-            <div className="p-3">
-              <p className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
-                99.9%
-              </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                Uptime Reliability
-              </p>
-            </div>
-            <div className="p-3 border-l border-slate-200 dark:border-slate-800/80">
-              <p className="text-2xl sm:text-3xl font-black text-sky-600 dark:text-sky-400">
-                100+
-              </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                Projects Shipped
-              </p>
-            </div>
-            <div className="p-3 border-l border-slate-200 dark:border-slate-800/80">
-              <p className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
-                24/7
-              </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                Dedicated Support
-              </p>
-            </div>
-            <div className="p-3 border-l border-slate-200 dark:border-slate-800/80">
-              <p className="text-2xl sm:text-3xl font-black text-indigo-600 dark:text-indigo-400">
-                10x
-              </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                Faster Velocity
-              </p>
-            </div>
+          {/* Metrics — compact grid instead of card */}
+          <div className="mx-auto mt-9 grid max-w-4xl grid-cols-2 border-y border-slate-200 py-4 dark:border-slate-800 sm:grid-cols-4">
+            {[
+              ["99.9%", "Uptime Reliability", "text-slate-900 dark:text-white"],
+              ["100+", "Projects Shipped", "text-sky-600 dark:text-sky-400"],
+              ["24/7", "Dedicated Support", "text-slate-900 dark:text-white"],
+              ["10x", "Faster Velocity", "text-indigo-600 dark:text-indigo-400"],
+            ].map(([value, label, color], index) => (
+              <div
+                key={label}
+                className={`px-3 py-2 text-center ${
+                  index !== 0
+                    ? "border-l border-slate-200 dark:border-slate-800"
+                    : ""
+                }`}
+              >
+                <p className={`text-2xl font-black sm:text-3xl ${color}`}>
+                  {value}
+                </p>
+                <p className="mt-0.5 text-[10px] text-slate-500 dark:text-slate-400 sm:text-xs">
+                  {label}
+                </p>
+              </div>
+            ))}
           </div>
         </section>
 
-        <section className="max-w-7xl mx-auto px-6 py-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        {/* CORE SERVICES */}
+        <section className="mx-auto max-w-7xl px-5 py-8 sm:px-6">
+          <div className="mb-7 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <span className="text-xs font-bold text-sky-600 dark:text-sky-400 uppercase tracking-widest">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">
                 Capabilities
               </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-1">
+
+              <h2 className="mt-1 text-2xl font-extrabold text-slate-950 dark:text-white sm:text-3xl">
                 Core Engineering Services
               </h2>
             </div>
 
-            {/* Filter Tabs */}
-            <div className="flex flex-wrap gap-2 p-1.5 rounded-xl bg-slate-200/80 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-800">
-              {categories.map((cat, i) => (
+            {/* Filters */}
+            <div className="flex flex-wrap gap-1 border-b border-slate-200 dark:border-slate-800">
+              {categories.map((category) => (
                 <button
-                  key={i}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-2 cursor-pointer rounded-lg text-xs font-semibold transition-all ${
-                    activeCategory === cat
-                      ? "bg-sky-500 text-white dark:text-slate-950 shadow-md shadow-sky-500/20 font-bold"
-                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-300/50 dark:hover:bg-slate-800/50"
+                  key={category}
+                  onClick={() => setActiveCategory(category)}
+                  className={`cursor-pointer border-b-2 px-3 py-2 text-xs font-semibold transition ${
+                    activeCategory === category
+                      ? "border-sky-500 text-sky-600 dark:text-sky-400"
+                      : "border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
                   }`}
                 >
-                  {cat}
+                  {category}
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Bento-Style Layout Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            {/* Left Feature Column: Dynamic Grid Cards */}
-            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {filteredServices.map((service, idx) => (
-                <div
-                  key={idx}
-                  className={`group relative p-6 rounded-2xl border transition-all duration-300 flex flex-col justify-between shadow-sm dark:shadow-none ${
-                    service.featured
-                      ? "sm:col-span-2 bg-linear-to-br from-white via-sky-50/60 to-indigo-50/40 dark:from-slate-900/90 dark:via-slate-900/60 dark:to-sky-950/30 border-sky-300 dark:border-sky-500/40 hover:border-sky-500 dark:hover:border-sky-500 shadow-xl shadow-sky-500/5 dark:shadow-sky-950/20"
-                      : "bg-white dark:bg-slate-900/40 border-slate-200 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-900/80"
-                  }`}
-                >
-                  <div>
-                    <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 flex items-center justify-center mb-6 group-hover:border-sky-500/50 transition duration-300">
-                      {service.icon}
-                    </div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-sky-700 dark:text-sky-400 bg-sky-100 dark:bg-sky-950/80 px-2.5 py-1 rounded-md border border-sky-200 dark:border-sky-800/40 inline-block mb-3">
-                      {service.category}
-                    </span>
-                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
-                      {service.desc}
-                    </p>
+          {/* Service Grid */}
+          <div className="grid grid-cols-1 gap-x-8 gap-y-0 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredServices.map((service, index) => (
+              <article
+                key={index}
+                className={`group border-b border-slate-200 py-6 dark:border-slate-800 ${
+                  service.featured
+                    ? "sm:col-span-2 lg:col-span-1 lg:border-l-2 lg:border-sky-500/50 lg:pl-6"
+                    : ""
+                }`}
+              >
+                <div className="mb-4 flex items-start justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-sky-50 dark:bg-sky-950/40">
+                    {service.icon}
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800/50 flex items-center text-xs font-semibold text-sky-600 dark:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity">
-                    Explore Technical Stack <span className="ml-1">→</span>
-                  </div>
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">
+                    {service.category}
+                  </span>
                 </div>
-              ))}
+
+                <h3 className="text-lg font-bold text-slate-950 transition-colors group-hover:text-sky-600 dark:text-white dark:group-hover:text-sky-400">
+                  {service.title}
+                </h3>
+
+                <p className="mt-2 max-w-md text-xs leading-5 text-slate-600 dark:text-slate-400">
+                  {service.desc}
+                </p>
+
+                <div className="mt-4 text-[10px] font-bold uppercase tracking-wider text-sky-600 opacity-0 transition-opacity group-hover:opacity-100 dark:text-sky-400">
+                  Explore Technical Stack →
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {/* Mobile Showcase */}
+          <div className="mt-8 grid grid-cols-1 items-center gap-6 border-t border-slate-200 pt-8 dark:border-slate-800 lg:grid-cols-[1fr_360px]">
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">
+                Mobile First
+              </span>
+
+              <h3 className="mt-1 text-2xl font-extrabold text-slate-950 dark:text-white">
+                Cross-Platform Application Suite
+              </h3>
+
+              <p className="mt-2 max-w-xl text-sm leading-6 text-slate-600 dark:text-slate-400">
+                High-efficiency native iOS & Android applications built for
+                seamless enterprise deployment.
+              </p>
             </div>
 
-            {/* Right Feature Column: Visual Interactive Frame */}
-            <div className="lg:col-span-5 p-4 rounded-2xl bg-linear-to-b from-white to-slate-100 dark:from-slate-900/80 dark:to-slate-950 border border-slate-200 dark:border-slate-800 relative overflow-hidden group shadow-sm dark:shadow-none">
-              <div className="absolute top-0 right-0 w-28 h-28 bg-sky-500/10 rounded-full blur-2xl group-hover:bg-sky-500/20 transition duration-500" />
-
-              {/* Header */}
-              <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-2.5 mb-3">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-                </div>
-
-                <span className="text-[11px] font-mono text-slate-400 dark:text-slate-500">
-                  mobile_suite.v2.png
-                </span>
-              </div>
-
-              {/* Image */}
-              <div className="relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 shadow-lg">
-                <img
-                  src={img2}
-                  alt="Shilsha Technologies Mobile Showcase"
-                  className="
-                              w-full
-                              h-52
-                              sm:h-60
-                              object-cover
-                              object-top
-                              group-hover:scale-105
-                              transition-transform
-                              duration-700
-                            "
-                />
-
-                <div className="absolute inset-0 bg-linear-to-t from-slate-950/20 dark:from-slate-950/40 via-transparent" />
-              </div>
-
-              {/* Content */}
-              <div className="mt-3 space-y-1.5">
-                <span className="text-[11px] font-bold text-sky-600 dark:text-sky-400 uppercase tracking-widest">
-                  Mobile First
-                </span>
-
-                <h4 className="text-base font-bold text-slate-900 dark:text-white">
-                  Cross-Platform Application Suite
-                </h4>
-
-                <p className="text-xs leading-relaxed text-slate-600 dark:text-slate-400">
-                  High-efficiency native iOS & Android applications built for
-                  seamless enterprise deployment.
-                </p>
-              </div>
+            <div className="overflow-hidden border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+              <img
+                src={img2}
+                alt="Shilsha Technologies Mobile Showcase"
+                className="h-48 w-full object-cover object-top transition-transform duration-700 hover:scale-105"
+              />
             </div>
           </div>
         </section>
 
-        {/* Next-Gen AI Section */}
-        <section className="max-w-7xl mx-auto px-6 py-12">
-          <div className="p-8 sm:p-12 rounded-3xl bg-linear-to-br from-white via-sky-50/50 to-indigo-50/30 dark:from-slate-900 dark:via-sky-950/20 dark:to-slate-900 border border-sky-200 dark:border-sky-500/20 relative overflow-hidden shadow-xl dark:shadow-none">
-            <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
-
-            <div className="max-w-2xl space-y-3 mb-12">
-              <span className="px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest text-sky-700 dark:text-sky-300 bg-sky-100 dark:bg-sky-950 border border-sky-200 dark:border-sky-800/60">
+        {/* AI SECTION */}
+        <section className="mx-auto max-w-7xl px-5 py-8 sm:px-6">
+          <div className="border-y border-sky-200 py-9 dark:border-sky-500/20">
+            <div className="mb-7 max-w-2xl">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">
                 AI & Intelligence Stack
               </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+
+              <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-3xl">
                 Empowering Platforms With Intelligent Automation
               </h2>
-              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                Deploy proprietary predictive models, custom LLM agents, and NLP
-                engines tailored specifically for real-time enterprise
+
+              <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                Deploy proprietary predictive models, custom LLM agents, and
+                NLP engines tailored specifically for real-time enterprise
                 performance.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {aiServices.map((ai, idx) => (
-                <div
-                  key={idx}
-                  className="p-6 rounded-2xl bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/80 hover:border-sky-500/40 backdrop-blur-md transition duration-300 flex flex-col justify-between shadow-sm dark:shadow-none"
+            <div className="grid grid-cols-1 divide-y divide-slate-200 dark:divide-slate-800 sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
+              {aiServices.map((ai, index) => (
+                <article
+                  key={index}
+                  className="group px-0 py-5 first:pt-0 last:pb-0 sm:px-5 sm:first:pl-0 sm:last:pr-0 sm:first:pt-5 sm:last:pb-5"
                 >
-                  <div>
-                    <div className="flex justify-between items-start mb-4">
-                      <div className="p-2.5 rounded-xl bg-sky-100 dark:bg-sky-950/80 border border-sky-200 dark:border-sky-800/40">
-                        {ai.icon}
-                      </div>
-                      <span className="text-[10px] font-bold text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-900 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-800">
-                        {ai.badge}
-                      </span>
+                  <div className="mb-4 flex items-center justify-between">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-sky-50 dark:bg-sky-950/40">
+                      {ai.icon}
                     </div>
-                    <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2">
-                      {ai.title}
-                    </h3>
-                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                      {ai.desc}
-                    </p>
+
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                      {ai.badge}
+                    </span>
                   </div>
-                </div>
+
+                  <h3 className="text-base font-bold text-slate-950 dark:text-white">
+                    {ai.title}
+                  </h3>
+
+                  <p className="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">
+                    {ai.desc}
+                  </p>
+                </article>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="py-12 px-6 max-w-7xl mx-auto">
-          <div
-            className="
-                        relative overflow-hidden rounded-3xl
-                        bg-linear-to-br
-                        from-[#286b94]
-                        via-[#1f587d]
-                        to-[#12344d]
-                        p-8 sm:p-12
-                        shadow-2xl
-                        shadow-[#286b94]/30
-                        dark:shadow-[#286b94]/20
-                        "
-          >
-            <div
-              className="
-                        absolute -top-32 -right-20
-                        h-72 w-72
-                        rounded-full
-                        bg-white/20
-                        blur-3xl
-                        "
-            />
+        {/* CTA */}
+        <section className="mx-auto max-w-7xl px-5 py-8 sm:px-6">
+          <div className="relative overflow-hidden bg-linear-to-br from-[#286b94] via-[#1f587d] to-[#12344d] px-6 py-8 shadow-xl sm:px-10 sm:py-9">
+            <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
 
-            <div
-              className="
-                        absolute -bottom-40 -left-20
-                        h-80 w-80
-                        rounded-full
-                        bg-[#60a5fa]/20
-                        blur-3xl
-                        "
-            />
-
-            {/* Grid Overlay */}
-            <div
-              className="absolute inset-0
-                        opacity-[0.08]
-                        bg-[linear-gradient(rgba(255,255,255,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.15)_1px,transparent_1px)]
-                        bg-size-[40px_40px]"
-            />
-
-            <div
-              className="
-      relative z-10
-      flex flex-col lg:flex-row
-      items-center justify-between
-      gap-8
-      text-center lg:text-left
-      "
-            >
-              <div className="max-w-3xl space-y-4">
-                <span
-                  className="
-                            inline-flex items-center
-                            rounded-full
-                            bg-white/15
-                            border border-white/20
-                            px-4 py-1.5
-                            text-xs
-                            font-bold
-                            uppercase
-                            tracking-widest
-                            text-white
-                            backdrop-blur-md
-                            "
-                >
+            <div className="relative z-10 flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
+              <div className="max-w-3xl">
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-sky-200">
                   Enterprise Solutions
                 </span>
 
-                <h3
-                  className="
-                            text-3xl sm:text-5xl
-                            font-black
-                            leading-tight
-                            text-white
-                            "
-                >
-                  Ready To Build
-                  <span className="block text-sky-200">
+                <h3 className="mt-2 text-2xl font-black leading-tight text-white sm:text-4xl">
+                  Ready To Build{" "}
+                  <span className="text-sky-200">
                     Next-Gen Digital Solutions?
                   </span>
                 </h3>
 
-                <p
-                  className="
-                            max-w-2xl
-                            text-sm sm:text-base
-                            font-medium
-                            leading-relaxed
-                            text-blue-100
-                            "
-                >
+                <p className="mt-3 max-w-2xl text-sm leading-6 text-blue-100">
                   Partner with Shilsha Technologies' expert engineers to
                   transform innovative ideas into scalable software, AI-powered
                   platforms, and enterprise-grade solutions.
@@ -673,206 +538,143 @@ const ServicesPage = () => {
 
               <Link
                 to="/contact-us"
-                className="
-                            group relative
-                            inline-flex
-                            items-center
-                            justify-center
-                            overflow-hidden
-                            rounded-2xl
-                            bg-white
-                            px-8 py-4
-                            text-sm
-                            font-black
-                            uppercase
-                            tracking-widest
-                            text-[#286b94]
-                            shadow-xl
-                            transition-all
-                            duration-300
-                            hover:-translate-y-1
-                            hover:shadow-2xl
-                            shrink-0
-                            "
+                className="inline-flex shrink-0 items-center justify-center bg-white px-6 py-3 text-xs font-black uppercase tracking-widest text-[#286b94] transition hover:-translate-y-0.5 hover:bg-slate-100"
               >
-                <span className="relative z-10">Schedule Consultation</span>
-
-                <div
-                  className="absolute inset-0
-                                  translate-y-full
-                                  bg-slate-100
-                                  transition-transform
-                                  duration-300
-                                  group-hover:translate-y-0
-                                  "
-                />
+                Schedule Consultation →
               </Link>
             </div>
           </div>
         </section>
 
-        {/* Process Framework Section */}
-        <section className="max-w-7xl mx-auto px-6 py-12">
-          <div className="text-center max-w-2xl mx-auto space-y-3 mb-16">
-            <span className="text-xs font-bold text-sky-600 dark:text-sky-400 uppercase tracking-widest">
+        {/* PROCESS */}
+        <section className="mx-auto max-w-7xl px-5 py-8 sm:px-6">
+          <div className="mb-8 max-w-2xl">
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">
               Execution Methodology
             </span>
-            <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+
+            <h2 className="mt-1 text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-3xl">
               Our 7-Stage Engineering Framework
             </h2>
-            <p className="text-slate-600 dark:text-slate-400 text-sm">
+
+            <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
               Structured agile execution pipelines optimized for transparency,
               quality, and fast delivery.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {processSteps.map((step, idx) => (
-              <div
-                key={idx}
-                className={`p-6 rounded-2xl border transition-all duration-300 flex flex-col justify-between shadow-sm dark:shadow-none ${
-                  idx === 0
-                    ? "bg-sky-50 dark:bg-sky-950/20 border-sky-300 dark:border-sky-500/40"
-                    : "bg-white dark:bg-slate-900/30 border-slate-200 dark:border-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-900/60"
-                }`}
+          <div className="grid grid-cols-1 gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
+            {processSteps.map((step, index) => (
+              <article
+                key={index}
+                className="group border-b border-slate-200 py-5 dark:border-slate-800"
               >
-                <div>
-                  <span className="text-2xl font-black text-sky-600 dark:text-sky-400 font-mono mb-4 block">
+                <div className="flex items-start gap-4">
+                  <span className="font-mono text-xl font-black text-sky-600 dark:text-sky-400">
                     {step.num}
                   </span>
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                    {step.desc}
-                  </p>
+
+                  <div>
+                    <h3 className="text-sm font-bold text-slate-950 dark:text-white">
+                      {step.title}
+                    </h3>
+
+                    <p className="mt-1.5 text-xs leading-5 text-slate-600 dark:text-slate-400">
+                      {step.desc}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </section>
 
-        {/* Why Choose Us */}
-        <section className="border-y border-slate-200 dark:border-slate-800/80 bg-slate-100/60 dark:bg-slate-900/20 py-24">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              {/* Image Frame */}
-              <div className="lg:col-span-5 relative group">
-                <div className="absolute -inset-1 bg-linear-to-r from-sky-500 to-indigo-500 rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition duration-500" />
-                <div className="relative rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
-                  <img
-                    src={img1}
-                    alt="Why Choose Shilsha Technologies"
-                    className="w-full h-auto object-cover rounded-2xl"
-                  />
-                </div>
+        {/* WHY CHOOSE US */}
+        <section className="border-y border-slate-200 py-10 dark:border-slate-800">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-5 sm:px-6 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-5">
+              <div className="overflow-hidden border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">
+                <img
+                  src={img1}
+                  alt="Why Choose Shilsha Technologies"
+                  className="h-auto w-full object-cover"
+                />
               </div>
+            </div>
 
-              {/* Reasons List */}
-              <div className="lg:col-span-7 space-y-6">
-                <div>
-                  <span className="text-xs font-bold text-sky-600 dark:text-sky-400 uppercase tracking-widest">
-                    Why Partner With Us
-                  </span>
-                  <h3 className="text-3xl font-extrabold text-slate-900 dark:text-white mt-1 leading-tight">
-                    Engineered for high-performing technology leaders.
-                  </h3>
-                </div>
+            <div className="lg:col-span-7">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">
+                Why Partner With Us
+              </span>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {whyChooseUs.map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="p-4 rounded-xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 shadow-sm dark:shadow-none"
-                    >
-                      <div className="w-8 h-8 rounded-lg bg-sky-100 dark:bg-sky-950 text-sky-600 dark:text-sky-400 flex items-center justify-center font-bold text-xs mb-3 border border-sky-200 dark:border-sky-800/40">
-                        0{idx + 1}
-                      </div>
-                      <h4 className="text-sm font-bold text-slate-900 dark:text-white mb-1">
+              <h3 className="mt-1 text-2xl font-extrabold leading-tight text-slate-950 dark:text-white sm:text-3xl">
+                Engineered for high-performing technology leaders.
+              </h3>
+
+              <div className="mt-6 grid grid-cols-1 gap-x-8 sm:grid-cols-2">
+                {whyChooseUs.map((item, index) => (
+                  <article
+                    key={index}
+                    className="border-b border-slate-200 py-4 dark:border-slate-800"
+                  >
+                    <div className="mb-2 flex items-center gap-3">
+                      <span className="font-mono text-[10px] font-bold text-sky-600 dark:text-sky-400">
+                        0{index + 1}
+                      </span>
+
+                      <h4 className="text-sm font-bold text-slate-950 dark:text-white">
                         {item.title}
                       </h4>
-                      <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                        {item.desc}
-                      </p>
                     </div>
-                  ))}
-                </div>
+
+                    <p className="pl-7 text-xs leading-5 text-slate-600 dark:text-slate-400">
+                      {item.desc}
+                    </p>
+                  </article>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        {/* Testimonials */}
-        {/* <section className="py-12 max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-xl mx-auto space-y-2 mb-16">
-            <span className="text-xs font-bold text-sky-600 dark:text-sky-400 uppercase tracking-widest">
-              Client Feedback
+        {/* FAQ */}
+        <section className="mx-auto max-w-4xl px-5 py-12 sm:px-6">
+          <div className="mb-7">
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">
+              Knowledge Base
             </span>
-            <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white">
-              What Our Partners Say
-            </h2>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {testimonials.map((t, idx) => (
-              <div
-                key={idx}
-                className="p-8 rounded-2xl bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 flex flex-col justify-between space-y-6 shadow-sm dark:shadow-none"
-              >
-                <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed font-normal italic">
-                  "{t.text}"
-                </p>
-                <div className="pt-4 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-sky-100 dark:bg-sky-950 text-sky-600 dark:text-sky-400 font-bold border border-sky-200 dark:border-sky-800/50 flex items-center justify-center text-xs">
-                      {t.initials}
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-slate-900 dark:text-white text-sm">
-                        {t.name}
-                      </h4>
-                      <span className="text-xs text-slate-500 dark:text-slate-400">
-                        {t.role}
-                      </span>
-                    </div>
-                  </div>
-                  <span className="text-[10px] font-semibold px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-sky-700 dark:text-sky-400 border border-slate-200 dark:border-slate-700">
-                    Verified Partner
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section> */}
-
-        {/* FAQs */}
-        <section className="max-w-3xl mx-auto px-6 pb-24">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white">
+            <h2 className="mt-1 text-2xl font-extrabold text-slate-950 dark:text-white sm:text-3xl">
               Frequently Asked Questions
             </h2>
           </div>
 
-          <div className="space-y-4">
-            {faqs.map((faq, idx) => {
-              const isOpen = activeFaq === idx;
+          <div className="border-t border-slate-200 dark:border-slate-800">
+            {faqs.map((faq, index) => {
+              const isOpen = activeFaq === index;
+
               return (
                 <div
-                  key={idx}
-                  className="bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 rounded-2xl overflow-hidden transition-all duration-200 shadow-sm dark:shadow-none"
+                  key={index}
+                  className="border-b border-slate-200 dark:border-slate-800"
                 >
                   <button
-                    onClick={() => toggleFaq(idx)}
-                    className="w-full text-left p-5 flex justify-between items-center hover:bg-slate-50 dark:hover:bg-slate-900/80 transition"
+                    onClick={() => toggleFaq(index)}
+                    className="flex w-full cursor-pointer items-center justify-between gap-6 py-4 text-left"
                   >
-                    <span className="font-semibold text-slate-900 dark:text-white text-sm pr-4">
+                    <span className="text-sm font-semibold text-slate-950 dark:text-white">
                       {faq.q}
                     </span>
+
                     <span
-                      className={`p-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 transition-transform duration-300 ${isOpen ? "rotate-180 text-sky-600 dark:text-sky-400" : ""}`}
+                      className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition-all dark:border-slate-800 dark:text-slate-400 ${
+                        isOpen
+                          ? "rotate-180 border-sky-500 text-sky-600 dark:text-sky-400"
+                          : ""
+                      }`}
                     >
                       <svg
-                        className="w-4 h-4"
+                        className="h-4 w-4"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -886,8 +688,9 @@ const ServicesPage = () => {
                       </svg>
                     </span>
                   </button>
+
                   {isOpen && (
-                    <div className="p-5 pt-0 text-slate-600 dark:text-slate-400 text-xs leading-relaxed border-t border-slate-100 dark:border-slate-800/40">
+                    <div className="max-w-3xl pb-5 pr-12 text-xs leading-5 text-slate-600 dark:text-slate-400">
                       {faq.a}
                     </div>
                   )}
