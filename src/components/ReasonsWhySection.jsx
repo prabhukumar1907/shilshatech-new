@@ -102,7 +102,7 @@ const ReasonsWhySection = () => {
   return (
     <section
       id="reason-why"
-      className="relative overflow-hidden py-12 sm:py-14 lg:py-18 px-4 sm:px-6 lg:px-8 font-sans bg-slate-50 text-slate-900 dark:bg-[#070d18] dark:text-white"
+      className="relative overflow-hidden py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 font-sans bg-slate-50 text-slate-900 dark:bg-[#070d18] dark:text-white"
     >
       <div
         className="absolute -top-32 left-1/3 w-125 h-125 rounded-full blur-[180px] opacity-10 pointer-events-none"
@@ -166,6 +166,7 @@ const ReasonsWhySection = () => {
             className="lg:col-span-5 relative group"
           >
             <div className="relative h-full min-h-125 overflow-hidden rounded-4xl border border-slate-200 dark:border-white/10 bg-[#0b1528] shadow-xl">
+              {/* Image */}
               <img
                 src={askingImg}
                 alt="Engineering team collaboration"
@@ -181,6 +182,15 @@ const ReasonsWhySection = () => {
 
               <div className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-[#070d18]/60 to-transparent" />
 
+              {/* Number */}
+              {/*
+              <div className="absolute top-7 left-7">
+                <span className="text-sm font-bold tracking-[0.2em] text-sky-300">
+                  {featuredReason.id}
+                </span>
+              </div> */}
+
+              {/* Top badge */}
               <div className="absolute top-6 right-6 flex items-center gap-2 px-3 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
                 <Sparkles size={14} className="text-sky-300" />
 
@@ -189,6 +199,7 @@ const ReasonsWhySection = () => {
                 </span>
               </div>
 
+              {/* Content */}
               <div className="absolute bottom-0 left-0 right-0 p-7 sm:p-9">
                 <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center mb-6">
                   <featuredReason.icon size={26} className="text-sky-300" />
@@ -234,19 +245,26 @@ const ReasonsWhySection = () => {
 
                   <div className="relative">
                     <div className="flex items-center justify-between mb-6">
+                      {/* <span className="text-xs font-bold tracking-[0.18em] text-slate-500 dark:text-slate-600 group-hover:text-[#276ea5] dark:group-hover:text-sky-400 transition-colors">
+                        {item.id}
+                      </span> */}
+
                       <div className="w-11 h-11 rounded-xl border border-slate-200 dark:border-white/10 flex items-center justify-center bg-white dark:bg-[#0b1528] text-[#276ea5] dark:text-sky-400 transition-all duration-300 group-hover:border-[#276ea5]/30 group-hover:scale-105">
                         <IconComponent size={20} />
                       </div>
                     </div>
 
+                    {/* Title */}
                     <h3 className="text-lg sm:text-xl font-bold mb-3 tracking-tight group-hover:text-[#276ea5] dark:group-hover:text-sky-400 transition-colors">
                       {item.title}
                     </h3>
 
+                    {/* Description */}
                     <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
                       {item.description}
                     </p>
 
+                    {/* Arrow */}
                     <div className="mt-5 flex justify-end">
                       <ArrowUpRight
                         size={18}
@@ -260,6 +278,7 @@ const ReasonsWhySection = () => {
           </motion.div>
         </div>
 
+       
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
