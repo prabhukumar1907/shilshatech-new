@@ -12,7 +12,6 @@ import {
   CheckCircle2,
   BrainCircuit,
   Search,
-  GitBranch,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -77,14 +76,14 @@ const LlmDevelopmentPage = () => {
         selection:text-slate-900
       "
     >
-      <main className="pt-28 sm:pt-32">
+      <main className="pt-24 sm:pt-28">
         <section className="relative max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
           <div
             className="
               absolute
               inset-x-0
               top-0
-              h-162.5
+              h-145
               pointer-events-none
               opacity-40
               dark:opacity-20
@@ -96,11 +95,23 @@ const LlmDevelopmentPage = () => {
               `,
               backgroundSize: "55px 55px",
               maskImage: "linear-gradient(to bottom, black, transparent)",
-              WebkitMaskImage: "linear-gradient(to bottom, black, transparent)",
+              WebkitMaskImage:
+                "linear-gradient(to bottom, black, transparent)",
             }}
           />
 
-          <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-8 items-center min-h-162.5">
+          <div
+            className="
+              relative
+              grid
+              grid-cols-1
+              lg:grid-cols-12
+              gap-10
+              lg:gap-6
+              items-center
+              min-h-145
+            "
+          >
             <motion.div
               initial={{ opacity: 0, x: -35 }}
               animate={{ opacity: 1, x: 0 }}
@@ -129,6 +140,7 @@ const LlmDevelopmentPage = () => {
                   <span className="absolute inset-0 rounded-full bg-blue-400 animate-ping opacity-60" />
                   <span className="relative w-2 h-2 rounded-full bg-[#276ea5]" />
                 </span>
+
                 AI Engineering · LLM Development
               </motion.div>
 
@@ -139,11 +151,11 @@ const LlmDevelopmentPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25, duration: 0.7 }}
                 className="
-                  mt-7
-                  text-[3.2rem]
+                  mt-5
+                  text-[3rem]
                   sm:text-6xl
-                  lg:text-[5.2rem]
-                  xl:text-[5.8rem]
+                  lg:text-[4.8rem]
+                  xl:text-[5.4rem]
                   leading-[0.94]
                   tracking-[-0.055em]
                   font-black
@@ -151,6 +163,7 @@ const LlmDevelopmentPage = () => {
                 "
               >
                 Build AI That
+
                 <span
                   className="
                     block
@@ -164,6 +177,7 @@ const LlmDevelopmentPage = () => {
                 >
                   Understands
                 </span>
+
                 Your Business.
               </motion.h1>
 
@@ -174,17 +188,17 @@ const LlmDevelopmentPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
                 className="
-                  mt-8
+                  mt-6
                   max-w-2xl
                   text-base
                   sm:text-lg
-                  leading-8
+                  leading-7
                   text-slate-600
                   dark:text-slate-400
                 "
               >
-                Shilsha Technologies designs and deploys enterprise-grade Large
-                Language Models, RAG systems, and intelligent AI agents
+                Shilsha Technologies designs and deploys enterprise-grade
+                Large Language Models, RAG systems, and intelligent AI agents
                 engineered around your proprietary data and workflows.
               </motion.p>
 
@@ -194,7 +208,7 @@ const LlmDevelopmentPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="mt-9 flex flex-wrap items-center gap-5"
+                className="mt-7 flex flex-wrap items-center gap-4"
               >
                 <Link
                   to="/contact-us"
@@ -218,6 +232,7 @@ const LlmDevelopmentPage = () => {
                   "
                 >
                   Build LLM Systems
+
                   <ArrowRight
                     size={16}
                     className="
@@ -233,15 +248,15 @@ const LlmDevelopmentPage = () => {
                 </div>
               </motion.div>
 
-              {/* Small stats */}
+              {/* Stats */}
 
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7 }}
                 className="
-                  mt-12
-                  pt-7
+                  mt-8
+                  pt-5
                   border-t
                   border-slate-200
                   dark:border-white/10
@@ -251,21 +266,24 @@ const LlmDevelopmentPage = () => {
                 "
               >
                 <div>
-                  <p className="text-xl font-black">RAG</p>
+                  <p className="text-lg font-black">RAG</p>
+
                   <p className="mt-1 text-[10px] text-slate-500 dark:text-slate-500">
                     Knowledge systems
                   </p>
                 </div>
 
                 <div className="border-l border-slate-200 dark:border-white/10 pl-5">
-                  <p className="text-xl font-black">LLMs</p>
+                  <p className="text-lg font-black">LLMs</p>
+
                   <p className="mt-1 text-[10px] text-slate-500 dark:text-slate-500">
                     Custom intelligence
                   </p>
                 </div>
 
                 <div className="border-l border-slate-200 dark:border-white/10 pl-5">
-                  <p className="text-xl font-black">Agents</p>
+                  <p className="text-lg font-black">Agents</p>
+
                   <p className="mt-1 text-[10px] text-slate-500 dark:text-slate-500">
                     Autonomous workflows
                   </p>
@@ -274,13 +292,20 @@ const LlmDevelopmentPage = () => {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.25 }}
+              initial={{ opacity: 0, x: 25, scale: 0.85 }}
+              animate={{
+                opacity: 1,
+                x: 0,
+                scale: 1,
+              }}
+              transition={{
+                duration: 0.8,
+                delay: 0.25,
+              }}
               className="
                 lg:col-span-5
                 relative
-                min-h-120
+                min-h-105
                 flex
                 items-center
                 justify-center
@@ -291,8 +316,8 @@ const LlmDevelopmentPage = () => {
               <div
                 className="
                   absolute
-                  w-70
-                  h-70
+                  w-64
+                  h-64
                   rounded-full
                   blur-[100px]
                   opacity-20
@@ -303,63 +328,133 @@ const LlmDevelopmentPage = () => {
                 }}
               />
 
-              {/* Orbit */}
-
               <motion.div
-                animate={{ rotate: 360 }}
+                animate={{
+                  rotate: 360,
+                }}
                 transition={{
-                  duration: 25,
+                  duration: 45,
                   repeat: Infinity,
                   ease: "linear",
                 }}
                 className="
                   absolute
-                  w-82.5
-                  h-82.5
+                  w-90
+                  h-90
                   rounded-full
                   border
                   border-blue-300/20
                   dark:border-blue-400/10
                 "
-              />
+              >
+                {/* Orbit markers */}
+
+                <span
+                  className="
+                    absolute
+                    top-4
+                    left-1/2
+                    -translate-x-1/2
+                    w-2
+                    h-2
+                    rounded-full
+                    bg-blue-400
+                    shadow-[0_0_15px_rgba(96,165,250,0.8)]
+                  "
+                />
+
+                <span
+                  className="
+                    absolute
+                    bottom-10
+                    right-8
+                    w-2.5
+                    h-2.5
+                    rounded-full
+                    bg-cyan-400
+                    shadow-[0_0_15px_rgba(34,211,238,0.8)]
+                  "
+                />
+              </motion.div>
 
               <motion.div
-                animate={{ rotate: -360 }}
+                animate={{
+                  rotate: -360,
+                }}
                 transition={{
-                  duration: 35,
+                  duration: 28,
                   repeat: Infinity,
                   ease: "linear",
                 }}
                 className="
                   absolute
-                  w-107.5
-                  h-107.5
+                  w-74
+                  h-74
                   rounded-full
                   border
                   border-dashed
                   border-blue-300/20
                   dark:border-blue-400/10
                 "
-              />
-
-              {/* Central AI */}
+              >
+                <span
+                  className="
+                    absolute
+                    left-0
+                    top-1/2
+                    -translate-y-1/2
+                    w-2
+                    h-2
+                    rounded-full
+                    bg-cyan-400
+                  "
+                />
+              </motion.div>
 
               <motion.div
                 animate={{
-                  y: [0, -8, 0],
+                  rotate: 360,
                 }}
                 transition={{
-                  duration: 4,
+                  duration: 70,
                   repeat: Infinity,
-                  ease: "easeInOut",
+                  ease: "linear",
+                }}
+                className="
+                  absolute
+                  w-105
+                  h-105
+                  rounded-full
+                  border
+                  border-blue-200/10
+                  dark:border-white/5
+                "
+              />
+
+              <motion.div
+                animate={{
+                  rotate: 360,
+                  y: [0, -7, 0],
+                }}
+                transition={{
+                  rotate: {
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: "linear",
+                  },
+                  y: {
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  },
                 }}
                 className="
                   relative
                   z-20
                   w-32
                   h-32
-                  sm:w-40
-                  sm:h-40
+                  sm:w-38
+                  sm:h-38
                   rounded-full
                   flex
                   items-center
@@ -371,30 +466,78 @@ const LlmDevelopmentPage = () => {
                   shadow-[0_25px_70px_rgba(39,110,165,0.35)]
                 "
               >
-                <Bot size={62} strokeWidth={1.3} className="text-white" />
+                {/* Inner counter rotation */}
+
+                <motion.div
+                  animate={{
+                    rotate: -360,
+                  }}
+                  transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  className="flex items-center justify-center"
+                >
+                  <Bot
+                    size={58}
+                    strokeWidth={1.3}
+                    className="text-white"
+                  />
+                </motion.div>
 
                 <div className="absolute inset-3 rounded-full border border-white/20" />
+
+                {/* Pulsing ring */}
+
+                <motion.div
+                  animate={{
+                    scale: [1, 1.15, 1],
+                    opacity: [0.5, 0, 0.5],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeOut",
+                  }}
+                  className="
+                    absolute
+                    inset-0
+                    rounded-full
+                    border
+                    border-blue-300/50
+                  "
+                />
               </motion.div>
 
-              {/* Floating node 1 */}
-
               <motion.div
-                animate={{ y: [0, -10, 0] }}
+                animate={{
+                  y: [0, -9, 0],
+                  rotate: [0, 1, 0, -1, 0],
+                }}
                 transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  delay: 0.5,
+                  y: {
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  },
+                  rotate: {
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  },
                 }}
                 className="
                   absolute
-                  top-8
-                  right-4
-                  sm:right-10
+                  z-30
+                  top-5
+                  right-2
+                  sm:right-8
                   flex
                   items-center
                   gap-3
-                  px-4
-                  py-3
+                  px-3.5
+                  py-2.5
                   rounded-2xl
                   bg-white/90
                   dark:bg-[#0b1528]/90
@@ -413,30 +556,38 @@ const LlmDevelopmentPage = () => {
                 </div>
 
                 <div>
-                  <p className="text-[10px] font-bold">Enterprise Data</p>
-                  <p className="text-[9px] text-slate-400">Private knowledge</p>
+                  <p className="text-[10px] font-bold">
+                    Enterprise Data
+                  </p>
+
+                  <p className="text-[9px] text-slate-400">
+                    Private knowledge
+                  </p>
                 </div>
               </motion.div>
 
-              {/* Floating node 2 */}
-
               <motion.div
-                animate={{ y: [0, 10, 0] }}
+                animate={{
+                  y: [0, 9, 0],
+                  x: [0, -3, 0],
+                }}
                 transition={{
                   duration: 4.5,
                   repeat: Infinity,
-                  delay: 0.8,
+                  ease: "easeInOut",
+                  delay: 0.5,
                 }}
                 className="
                   absolute
-                  bottom-12
+                  z-30
+                  bottom-7
                   left-0
-                  sm:left-3
+                  sm:left-2
                   flex
                   items-center
                   gap-3
-                  px-4
-                  py-3
+                  px-3.5
+                  py-2.5
                   rounded-2xl
                   bg-white/90
                   dark:bg-[#0b1528]/90
@@ -452,30 +603,38 @@ const LlmDevelopmentPage = () => {
                 </div>
 
                 <div>
-                  <p className="text-[10px] font-bold">RAG Retrieval</p>
-                  <p className="text-[9px] text-slate-400">Context aware</p>
+                  <p className="text-[10px] font-bold">
+                    RAG Retrieval
+                  </p>
+
+                  <p className="text-[9px] text-slate-400">
+                    Context aware
+                  </p>
                 </div>
               </motion.div>
 
-              {/* Floating node 3 */}
-
               <motion.div
-                animate={{ x: [0, 8, 0] }}
+                animate={{
+                  y: [0, -7, 0],
+                  x: [0, 8, 0],
+                }}
                 transition={{
                   duration: 4,
                   repeat: Infinity,
-                  delay: 1,
+                  ease: "easeInOut",
+                  delay: 0.8,
                 }}
                 className="
                   absolute
-                  bottom-24
+                  z-30
+                  bottom-20
                   right-0
-                  sm:right-4
+                  sm:right-3
                   flex
                   items-center
                   gap-3
-                  px-4
-                  py-3
+                  px-3.5
+                  py-2.5
                   rounded-2xl
                   bg-white/90
                   dark:bg-[#0b1528]/90
@@ -491,21 +650,84 @@ const LlmDevelopmentPage = () => {
                 </div>
 
                 <div>
-                  <p className="text-[10px] font-bold">AI Agents</p>
-                  <p className="text-[9px] text-slate-400">Automated actions</p>
+                  <p className="text-[10px] font-bold">
+                    AI Agents
+                  </p>
+
+                  <p className="text-[9px] text-slate-400">
+                    Automated actions
+                  </p>
                 </div>
               </motion.div>
 
-              {/* Tiny connection dots */}
+              {/* Tiny nodes */}
 
-              <div className="absolute top-32 left-12 w-2 h-2 rounded-full bg-blue-400" />
-              <div className="absolute top-20 left-24 w-1.5 h-1.5 rounded-full bg-cyan-400" />
-              <div className="absolute bottom-28 right-20 w-2 h-2 rounded-full bg-blue-400" />
+              <motion.div
+                animate={{
+                  scale: [1, 1.5, 1],
+                  opacity: [0.5, 1, 0.5],
+                }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                }}
+                className="
+                  absolute
+                  top-28
+                  left-10
+                  w-2
+                  h-2
+                  rounded-full
+                  bg-blue-400
+                "
+              />
+
+              <motion.div
+                animate={{
+                  scale: [1, 1.4, 1],
+                  opacity: [0.4, 1, 0.4],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  delay: 0.8,
+                }}
+                className="
+                  absolute
+                  top-20
+                  left-24
+                  w-1.5
+                  h-1.5
+                  rounded-full
+                  bg-cyan-400
+                "
+              />
+
+              <motion.div
+                animate={{
+                  scale: [1, 1.5, 1],
+                  opacity: [0.5, 1, 0.5],
+                }}
+                transition={{
+                  duration: 2.8,
+                  repeat: Infinity,
+                  delay: 1,
+                }}
+                className="
+                  absolute
+                  bottom-24
+                  right-20
+                  w-2
+                  h-2
+                  rounded-full
+                  bg-blue-400
+                "
+              />
             </motion.div>
           </div>
         </section>
 
-        <section className="relative max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 mt-10">
+        <section className="relative max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 mt-4">
           <div className="border-y border-slate-200 dark:border-white/10">
             {features.map((feature, index) => {
               const Icon = feature.icon;
@@ -525,11 +747,11 @@ const LlmDevelopmentPage = () => {
                     grid
                     grid-cols-1
                     md:grid-cols-12
-                    gap-6
-                    md:gap-10
+                    gap-5
+                    md:gap-8
                     items-center
-                    py-8
-                    sm:py-10
+                    py-6
+                    sm:py-7
                     border-b
                     last:border-b-0
                     border-slate-200
@@ -545,8 +767,8 @@ const LlmDevelopmentPage = () => {
                   <div className="md:col-span-1">
                     <div
                       className="
-                        w-11
-                        h-11
+                        w-10
+                        h-10
                         rounded-xl
                         flex
                         items-center
@@ -559,16 +781,18 @@ const LlmDevelopmentPage = () => {
                         transition-all
                       "
                     >
-                      <Icon size={20} />
+                      <Icon size={19} />
                     </div>
                   </div>
 
                   <div className="md:col-span-4">
-                    <h3 className="text-xl font-bold">{feature.title}</h3>
+                    <h3 className="text-lg font-bold">
+                      {feature.title}
+                    </h3>
                   </div>
 
                   <div className="md:col-span-5">
-                    <p className="text-sm leading-7 text-slate-500 dark:text-slate-400">
+                    <p className="text-sm leading-6 text-slate-500 dark:text-slate-400">
                       {feature.description}
                     </p>
                   </div>
@@ -591,9 +815,8 @@ const LlmDevelopmentPage = () => {
           </div>
         </section>
 
-        <section className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-28">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-14">
-            {/* Heading */}
+        <section className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             <motion.div
               initial={{ opacity: 0, x: -25 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -605,7 +828,7 @@ const LlmDevelopmentPage = () => {
                 Language Intelligence
               </div>
 
-              <h2 className="mt-6 text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+              <h2 className="mt-5 text-3xl sm:text-5xl font-black tracking-tight leading-tight">
                 From language models to{" "}
                 <span className="text-[#276ea5] dark:text-blue-400">
                   business intelligence.
@@ -613,16 +836,14 @@ const LlmDevelopmentPage = () => {
               </h2>
             </motion.div>
 
-            {/* Content */}
-
             <motion.div
               initial={{ opacity: 0, x: 25 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="lg:col-span-7"
             >
-              <div className="space-y-7">
-                <p className="text-lg leading-8 text-slate-600 dark:text-slate-400">
+              <div className="space-y-5">
+                <p className="text-base sm:text-lg leading-7 text-slate-600 dark:text-slate-400">
                   Standard chat interfaces only scratch the surface of what
                   Large Language Models can achieve. Shilsha Technologies
                   designs tailored LLM solutions equipped with custom vector
@@ -630,14 +851,14 @@ const LlmDevelopmentPage = () => {
                   pipelines, and optimized inference architectures.
                 </p>
 
-                <p className="text-lg leading-8 text-slate-600 dark:text-slate-400">
+                <p className="text-base sm:text-lg leading-7 text-slate-600 dark:text-slate-400">
                   Whether you need a confidential internal knowledge assistant,
                   automated code generation tools, intelligent customer
                   interaction layers, or autonomous AI agents, our engineers
                   build systems around your actual enterprise requirements.
                 </p>
 
-                <div className="pt-5 flex items-center gap-3 text-sm font-bold text-[#276ea5] dark:text-blue-300">
+                <div className="pt-2 flex items-center gap-3 text-sm font-bold text-[#276ea5] dark:text-blue-300">
                   <Sparkles size={17} />
                   Designed for real-world enterprise workloads
                 </div>
@@ -646,10 +867,9 @@ const LlmDevelopmentPage = () => {
           </div>
         </section>
 
-        <section className="relative py-24 border-y border-slate-200 dark:border-white/10">
+        <section className="relative py-20 border-y border-slate-200 dark:border-white/10">
           <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-14">
-              {/* Left */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
               <motion.div
                 initial={{ opacity: 0, x: -25 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -668,14 +888,12 @@ const LlmDevelopmentPage = () => {
                   </span>
                 </h2>
 
-                <p className="mt-6 text-slate-500 dark:text-slate-400 leading-7">
+                <p className="mt-5 text-slate-500 dark:text-slate-400 leading-7">
                   We combine foundation models, retrieval systems, vector
                   databases, evaluation frameworks, and secure deployment
                   infrastructure to create reliable enterprise AI.
                 </p>
               </motion.div>
-
-              {/* Right */}
 
               <motion.div
                 initial={{ opacity: 0, x: 25 }}
@@ -683,7 +901,7 @@ const LlmDevelopmentPage = () => {
                 viewport={{ once: true }}
                 className="lg:col-span-7"
               >
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
                   {capabilities.map((item, index) => (
                     <motion.div
                       key={item}
@@ -697,18 +915,20 @@ const LlmDevelopmentPage = () => {
                         flex
                         items-center
                         gap-3
-                        py-4
+                        py-3.5
                         border-b
                         border-slate-200
                         dark:border-white/10
                       "
                     >
                       <CheckCircle2
-                        size={17}
+                        size={16}
                         className="text-emerald-500 shrink-0"
                       />
 
-                      <span className="text-sm font-medium">{item}</span>
+                      <span className="text-sm font-medium">
+                        {item}
+                      </span>
                     </motion.div>
                   ))}
                 </div>
@@ -717,7 +937,7 @@ const LlmDevelopmentPage = () => {
           </div>
         </section>
 
-        <section className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-28">
+        <section className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-20">
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -728,27 +948,27 @@ const LlmDevelopmentPage = () => {
               className="
                 absolute
                 inset-0
-                rounded-[2.5rem]
+                rounded-4xl
                 bg-linear-to-r
                 from-[#276ea5]
                 to-[#123b5c]
               "
             />
 
-            <div className="relative px-7 py-14 sm:px-14 sm:py-16">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="relative px-6 py-10 sm:px-12 sm:py-12">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 <div className="lg:col-span-8">
                   <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-blue-100">
                     <Zap size={15} />
                     Production AI
                   </div>
 
-                  <h2 className="mt-5 text-3xl sm:text-5xl font-black text-white leading-tight">
+                  <h2 className="mt-4 text-3xl sm:text-4xl font-black text-white leading-tight">
                     Turn frontier language models into practical business
                     systems.
                   </h2>
 
-                  <p className="mt-5 max-w-2xl text-blue-100 leading-7">
+                  <p className="mt-4 max-w-2xl text-blue-100 leading-7">
                     From private enterprise assistants to autonomous AI
                     workflows, build secure language intelligence that creates
                     measurable operational value.
@@ -764,7 +984,7 @@ const LlmDevelopmentPage = () => {
                       items-center
                       gap-3
                       px-6
-                      py-4
+                      py-3.5
                       rounded-xl
                       bg-white
                       text-[#1d527d]
@@ -777,6 +997,7 @@ const LlmDevelopmentPage = () => {
                     "
                   >
                     Start Your AI Project
+
                     <ArrowRight
                       size={16}
                       className="group-hover:translate-x-1 transition-transform"
@@ -788,6 +1009,7 @@ const LlmDevelopmentPage = () => {
           </motion.div>
         </section>
       </main>
+
       <ReasonsWhySection />
       <AwardsSection />
       <Footer />

@@ -119,9 +119,6 @@ const PpcCampaignsPage = lazy(
 );
 const OrmServicesPage = lazy(() => import("./pages/technologies/ORM"));
 const AiDevelopmentPage = lazy(() => import("./pages/AiDevelopmentPage"));
-const AiConsultingAndDevelopmentPage = lazy(
-  () => import("./pages/AiConsultingPage"),
-);
 const GenerativeAiPage = lazy(() => import("./pages/GenerativeAI"));
 const ModelTrainingPage = lazy(() => import("./pages/ModelTrainingPage"));
 const NaturalLanguageProcessingPage = lazy(() => import("./pages/NLP"));

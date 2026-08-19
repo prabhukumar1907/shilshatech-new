@@ -97,7 +97,7 @@ const AiDevelopmentPage = () => {
       </div>
 
       <main className="relative">
-        <section className="relative pb-20 pt-28 sm:pt-32 lg:pb-28 lg:pt-36">
+        <section className="relative pb-20 pt-24 sm:pt-28 lg:pb-24 lg:pt-32">
           {/* Hero grid */}
           <div className="pointer-events-none absolute inset-0 opacity-[0.035] dark:opacity-[0.07]">
             <div
@@ -127,7 +127,7 @@ const AiDevelopmentPage = () => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.15 }}
-                  className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-blue-200 bg-white/80 px-4 py-2 backdrop-blur-xl shadow-sm dark:border-blue-400/20 dark:bg-blue-500/10"
+                  className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-blue-200 bg-white/80 px-3.5 py-1.5 backdrop-blur-xl shadow-sm dark:border-blue-400/20 dark:bg-blue-500/10"
                 >
                   <span className="relative flex h-2.5 w-2.5">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75" />
@@ -173,7 +173,6 @@ const AiDevelopmentPage = () => {
                 </p>
 
                 {/* CTA */}
-
                 <div className="mt-9 flex flex-wrap items-center gap-4">
                   <motion.div
                     whileHover={{ scale: 1.03 }}
@@ -181,7 +180,7 @@ const AiDevelopmentPage = () => {
                   >
                     <Link
                       to="/contact-us"
-                      className="group relative inline-flex items-center gap-3 overflow-hidden rounded-2xl bg-linear-to-r from-[#276ea5] to-[#1d527d] px-7 py-4 text-sm font-bold text-white shadow-xl shadow-blue-900/20 dark:shadow-blue-500/20"
+                      className="group relative inline-flex items-center gap-3 overflow-hidden rounded-2xl bg-linear-to-r from-[#276ea5] to-[#1d527d] px-6 py-3.5 text-sm font-bold text-white shadow-xl shadow-blue-900/20 dark:shadow-blue-500/20"
                     >
                       <span className="absolute inset-0 -translate-x-full bg-linear-to-r from-white/0 via-white/15 to-white/0 transition-transform duration-700 group-hover:translate-x-full" />
 
@@ -194,7 +193,7 @@ const AiDevelopmentPage = () => {
                     </Link>
                   </motion.div>
 
-                  <div className="flex items-center gap-2.5 rounded-2xl border border-slate-200 bg-white/70 px-4 py-3 backdrop-blur-md dark:border-slate-800 dark:bg-white/3">
+                  <div className="flex items-center gap-2.5 rounded-2xl border border-slate-200 bg-white/70 px-3.5 py-2.5 backdrop-blur-md dark:border-slate-800 dark:bg-white/3">
                     <ShieldCheck size={17} className="text-emerald-500" />
 
                     <span className="text-xs font-semibold text-slate-600 dark:text-slate-400">
@@ -204,8 +203,7 @@ const AiDevelopmentPage = () => {
                 </div>
 
                 {/* Trust Metrics */}
-
-                <div className="mt-10 max-w-2xl border-t border-slate-200 pt-7 dark:border-slate-800">
+                <div className="mt-10 max-w-2xl border-t border-slate-200 pt-6 dark:border-slate-800">
                   <div className="grid grid-cols-3 gap-5 sm:gap-6">
                     <div>
                       <div className="flex items-center gap-2">
@@ -281,7 +279,6 @@ const AiDevelopmentPage = () => {
                 </motion.div>
 
                 {/* Inner orbit */}
-
                 <motion.div
                   animate={{ rotate: -360 }}
                   transition={{
@@ -300,7 +297,7 @@ const AiDevelopmentPage = () => {
 
                   <div className="relative overflow-hidden rounded-[2.5rem] border border-white/70 bg-white/75 shadow-[0_30px_100px_rgba(39,110,165,0.18)] backdrop-blur-2xl dark:border-blue-400/20 dark:bg-[#091321]/90">
                     {/* Top Bar */}
-                    <div className="flex h-14 items-center justify-between border-b border-slate-200 px-5 dark:border-slate-800">
+                    <div className="flex h-14 items-center justify-between border-b border-slate-200 px-4 dark:border-slate-800">
                       <div className="flex items-center gap-2">
                         <div className="flex gap-1.5">
                           <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
@@ -322,9 +319,8 @@ const AiDevelopmentPage = () => {
                       </div>
                     </div>
 
-                    <div className="p-6 sm:p-7">
+                    <div className="p-5 sm:p-6">
                       {/* Core */}
-
                       <div className="flex items-center gap-4">
                         <motion.div
                           animate={{
@@ -365,8 +361,7 @@ const AiDevelopmentPage = () => {
                       </div>
 
                       {/* Model Pipeline */}
-
-                      <div className="mt-7 rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-[#050b14]">
+                      <div className="mt-7 rounded-2xl border border-slate-200 bg-slate-50 p-3.5 dark:border-slate-800 dark:bg-[#050b14]">
                         <div className="mb-4 flex items-center gap-2">
                           <Cpu size={14} className="text-blue-500" />
 
@@ -432,9 +427,8 @@ const AiDevelopmentPage = () => {
                       </div>
 
                       {/* Metrics */}
-
                       <div className="mt-4 grid grid-cols-2 gap-3">
-                        <div className="rounded-xl border border-slate-200 bg-white p-3.5 dark:border-slate-800 dark:bg-white/2.5">
+                        <div className="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-white/2.5">
                           <div className="flex items-center justify-between">
                             <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400">
                               Performance
@@ -463,7 +457,7 @@ const AiDevelopmentPage = () => {
                           </div>
                         </div>
 
-                        <div className="rounded-xl border border-slate-200 bg-white p-3.5 dark:border-slate-800 dark:bg-white/2.5">
+                        <div className="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-white/2.5">
                           <div className="flex items-center justify-between">
                             <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400">
                               Latency
@@ -498,7 +492,6 @@ const AiDevelopmentPage = () => {
                       </div>
 
                       {/* Bottom status */}
-
                       <div className="mt-5 flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           <CheckCircle2
@@ -519,7 +512,6 @@ const AiDevelopmentPage = () => {
                   </div>
 
                   {/* Floating Data Card */}
-
                   <motion.div
                     animate={{ y: [0, -8, 0] }}
                     transition={{
@@ -527,7 +519,7 @@ const AiDevelopmentPage = () => {
                       repeat: Infinity,
                       ease: "easeInOut",
                     }}
-                    className="absolute -left-5 top-24 rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 shadow-xl backdrop-blur-xl dark:border-slate-800 dark:bg-[#0b1528]/95 sm:-left-10"
+                    className="absolute -left-5 top-24 rounded-2xl border border-slate-200 bg-white/90 px-3.5 py-2.5 shadow-xl backdrop-blur-xl dark:border-slate-800 dark:bg-[#0b1528]/95 sm:-left-10"
                   >
                     <div className="flex items-center gap-3">
                       <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-500/10">
@@ -547,7 +539,6 @@ const AiDevelopmentPage = () => {
                   </motion.div>
 
                   {/* Floating Agent Card */}
-
                   <motion.div
                     animate={{ y: [0, 8, 0] }}
                     transition={{
@@ -555,7 +546,7 @@ const AiDevelopmentPage = () => {
                       repeat: Infinity,
                       ease: "easeInOut",
                     }}
-                    className="absolute -bottom-2 -right-4 rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 shadow-xl backdrop-blur-xl dark:border-slate-800 dark:bg-[#0b1528]/95 sm:-right-8 sm:bottom-8"
+                    className="absolute -bottom-2 -right-4 rounded-2xl border border-slate-200 bg-white/90 px-3.5 py-2.5 shadow-xl backdrop-blur-xl dark:border-slate-800 dark:bg-[#0b1528]/95 sm:-right-8 sm:bottom-8"
                   >
                     <div className="flex items-center gap-3">
                       <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan-500/10">
@@ -581,7 +572,7 @@ const AiDevelopmentPage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
-              className="mt-14 flex flex-col items-start justify-between gap-5 border-t border-slate-200 pt-7 dark:border-slate-800 sm:flex-row sm:items-center lg:mt-20"
+              className="mt-14 flex flex-col items-start justify-between gap-5 border-t border-slate-200 pt-6 dark:border-slate-800 sm:flex-row sm:items-center lg:mt-20"
             >
               <div className="flex items-center gap-3">
                 <div className="flex -space-x-2">
@@ -611,7 +602,7 @@ const AiDevelopmentPage = () => {
           </div>
         </section>
 
-        <section className="relative z-10 mx-auto max-w-7xl px-4 pb-28 sm:px-6 lg:px-8">
+        <section className="relative z-10 mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
           <div className="mb-12 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
             <div className="max-w-2xl">
               <div className="mb-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
@@ -647,7 +638,7 @@ const AiDevelopmentPage = () => {
                     delay: index * 0.1,
                   }}
                   whileHover={{ y: -7 }}
-                  className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-7 shadow-sm transition-all duration-300 hover:border-blue-300 hover:shadow-2xl hover:shadow-blue-500/10 dark:border-white/10 dark:bg-[#07101f] dark:hover:border-blue-500/30"
+                  className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-300 hover:shadow-2xl hover:shadow-blue-500/10 dark:border-white/10 dark:bg-[#07101f] dark:hover:border-blue-500/30"
                 >
                   <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-blue-500/5 blur-3xl transition-all group-hover:bg-blue-500/10" />
 
@@ -672,7 +663,7 @@ const AiDevelopmentPage = () => {
                       {service.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-[10px] font-bold text-slate-500 dark:border-white/10 dark:bg-white/3 dark:text-slate-400"
+                          className="rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1.5 text-[10px] font-bold text-slate-500 dark:border-white/10 dark:bg-white/3 dark:text-slate-400"
                         >
                           {tag}
                         </span>
@@ -693,12 +684,12 @@ const AiDevelopmentPage = () => {
           </div>
         </section>
 
-        <section className="relative z-10 mx-auto max-w-7xl px-4 pb-28 sm:px-6 lg:px-8">
+        <section className="relative z-10 mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
           <div className="relative overflow-hidden rounded-4xl border border-slate-200 bg-white dark:border-white/10 dark:bg-[#07101f]">
             <div className="absolute right-0 top-0 h-80 w-80 rounded-full bg-blue-500/10 blur-[100px]" />
 
             <div className="relative grid lg:grid-cols-2">
-              <div className="p-8 sm:p-12 lg:p-16">
+              <div className="p-7 sm:p-10 lg:p-12">
                 <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-500">
                   <Compass size={22} />
                 </div>
@@ -741,8 +732,7 @@ const AiDevelopmentPage = () => {
               </div>
 
               {/* Architecture */}
-
-              <div className="relative min-h-107.5 overflow-hidden border-t border-slate-200 bg-slate-50 p-8 dark:border-white/10 dark:bg-[#040a14] lg:border-l lg:border-t-0">
+              <div className="relative min-h-107.5 overflow-hidden border-t border-slate-200 bg-slate-50 p-7 dark:border-white/10 dark:bg-[#040a14] lg:border-l lg:border-t-0">
                 <div className="absolute inset-0 opacity-30 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] bg-size-[24px_24px]" />
 
                 <div className="relative flex h-full items-center justify-center">
@@ -793,9 +783,9 @@ const AiDevelopmentPage = () => {
           </div>
         </section>
 
-        <section className="relative z-10 mx-auto max-w-7xl px-4 pb-28 sm:px-6 lg:px-8">
+        <section className="relative z-10 mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
           <div className="mx-auto mb-12 max-w-3xl text-center">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-2 text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">
               <Zap size={14} />
               Built For Scale
             </div>
@@ -827,7 +817,7 @@ const AiDevelopmentPage = () => {
                     delay: index * 0.08,
                   }}
                   whileHover={{ y: -5 }}
-                  className="rounded-2xl border border-slate-200 bg-white p-6 transition-all hover:border-blue-300 hover:shadow-xl dark:border-white/10 dark:bg-[#07101f] dark:hover:border-blue-500/30"
+                  className="rounded-2xl border border-slate-200 bg-white p-5 transition-all hover:border-blue-300 hover:shadow-xl dark:border-white/10 dark:bg-[#07101f] dark:hover:border-blue-500/30"
                 >
                   <div className="mb-6 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-500/10 text-blue-500">
                     <Icon size={20} />
@@ -844,12 +834,12 @@ const AiDevelopmentPage = () => {
           </div>
         </section>
 
-        <section className="relative z-10 mx-auto max-w-7xl px-4 pb-28 sm:px-6 lg:px-8">
+        <section className="relative z-10 mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative overflow-hidden rounded-4xl bg-linear-to-br from-[#174f7b] via-[#276ea5] to-cyan-500 px-7 py-14 text-center text-white shadow-2xl shadow-blue-500/20 sm:px-12"
+            className="relative overflow-hidden rounded-4xl bg-linear-to-br from-[#174f7b] via-[#276ea5] to-cyan-500 px-6 py-11 text-center text-white shadow-2xl shadow-blue-500/20 sm:px-10"
           >
             <div className="absolute inset-0 opacity-20 bg-[radial-gradient(white_1px,transparent_1px)] bg-size-[22px_22px]" />
 
@@ -873,7 +863,7 @@ const AiDevelopmentPage = () => {
               <div className="mt-8">
                 <Link
                   to="/contact-us"
-                  className="group inline-flex items-center gap-3 rounded-xl bg-white px-7 py-4 text-sm font-bold text-[#174f7b] shadow-xl transition-all hover:-translate-y-1 hover:shadow-2xl"
+                  className="group inline-flex items-center gap-3 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-[#174f7b] shadow-xl transition-all hover:-translate-y-1 hover:shadow-2xl"
                 >
                   Talk to Our AI Team
                   <ArrowRight
@@ -900,7 +890,7 @@ const ArchitectureNode = ({ icon: Icon, title, className = "" }) => {
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
-      className={`flex min-w-28.75 items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2.5 shadow-lg dark:border-white/10 dark:bg-[#0a1629] ${className}`}
+      className={`flex min-w-28.75 items-center gap-2 rounded-xl border border-slate-200 bg-white px-2.5 py-2 shadow-lg dark:border-white/10 dark:bg-[#0a1629] ${className}`}
     >
       <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-500/10 text-blue-500">
         <Icon size={14} />

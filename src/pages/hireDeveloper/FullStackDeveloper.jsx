@@ -16,7 +16,6 @@ import {
   ChevronDown,
   Sparkles,
 } from "lucide-react";
-import { Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 import RequestForm from "../../components/RequestForm";
 
@@ -213,7 +212,6 @@ const FullStackDeveloper = () => {
             })}
           </motion.div>
 
-          {/* Engagement Models Section */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -265,7 +263,6 @@ const FullStackDeveloper = () => {
             </div>
           </motion.div>
 
-          {/* Comparison Section */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
