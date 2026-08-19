@@ -1,10 +1,4 @@
-import React, {
-  memo,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { memo, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowUpRight,
@@ -18,20 +12,12 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
-/* =========================================================
-   THEME
-========================================================= */
-
 const theme = {
   primary: "#286b94",
   secondary: "#1e3a8a",
   glow: "#6ea1ff",
   accent: "#38bdf8",
 };
-
-/* =========================================================
-   DATA
-========================================================= */
 
 const stats = [
   {
@@ -67,10 +53,6 @@ const techMarquee = [
   "PostgreSQL",
 ];
 
-/* =========================================================
-   DELIVERY PIPELINE
-========================================================= */
-
 const pipelineStages = [
   {
     label: "Build",
@@ -93,10 +75,6 @@ const pipelineStages = [
     Icon: Rocket,
   },
 ];
-
-/* =========================================================
-   FLOATING TAGS
-========================================================= */
 
 const leftTagsPool = [
   {
@@ -160,10 +138,6 @@ const typingPhrases = [
   "App Development",
 ];
 
-/* =========================================================
-   TYPING HEADLINE
-========================================================= */
-
 const TypingHeadline = memo(function TypingHeadline() {
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
@@ -179,10 +153,7 @@ const TypingHeadline = memo(function TypingHeadline() {
     const timer = window.setTimeout(
       () => {
         if (!isDeleting) {
-          const nextText = fullText.slice(
-            0,
-            currentText.length + 1,
-          );
+          const nextText = fullText.slice(0, currentText.length + 1);
 
           setCurrentText(nextText);
 
@@ -200,16 +171,11 @@ const TypingHeadline = memo(function TypingHeadline() {
           if (nextText === "") {
             setIsDeleting(false);
 
-            setPhraseIndex(
-              (previous) =>
-                (previous + 1) % typingPhrases.length,
-            );
+            setPhraseIndex((previous) => (previous + 1) % typingPhrases.length);
           }
         }
       },
-      currentText === fullText && !isDeleting
-        ? 1600
-        : typingSpeed,
+      currentText === fullText && !isDeleting ? 1600 : typingSpeed,
     );
 
     return () => window.clearTimeout(timer);
@@ -250,41 +216,21 @@ const TypingHeadline = memo(function TypingHeadline() {
   );
 });
 
-/* =========================================================
-   FLOATING TAG CLOUD
-========================================================= */
-
-const TagCloud = memo(function TagCloud({
-  pool,
-  side,
-  inView,
-}) {
-  const [tags, setTags] = useState([
-    pool[0],
-    pool[1],
-    pool[2],
-  ]);
+const TagCloud = memo(function TagCloud({ pool, side, inView }) {
+  const [tags, setTags] = useState([pool[0], pool[1], pool[2]]);
 
   useEffect(() => {
     if (!inView) return;
 
     const interval = window.setInterval(() => {
       setTags((previous) => {
-        const offsets = previous.map(
-          (item) => item.offset,
-        );
+        const offsets = previous.map((item) => item.offset);
 
         const available = pool.filter(
-          (item) =>
-            !previous.some(
-              (current) =>
-                current.label === item.label,
-            ),
+          (item) => !previous.some((current) => current.label === item.label),
         );
 
-        const shuffled = [...available].sort(
-          () => Math.random() - 0.5,
-        );
+        const shuffled = [...available].sort(() => Math.random() - 0.5);
 
         return offsets.map((offset, index) => ({
           ...(shuffled[index] || pool[index]),
@@ -322,11 +268,7 @@ const TagCloud = memo(function TagCloud({
           className={`
             absolute
             ${offset}
-            ${
-              isLeft
-                ? "left-4 2xl:left-12"
-                : "right-4 2xl:right-12"
-            }
+            ${isLeft ? "left-4 2xl:left-12" : "right-4 2xl:right-12"}
             hidden
             items-center
             gap-3
@@ -372,23 +314,14 @@ const TagCloud = memo(function TagCloud({
   );
 });
 
-/* =========================================================
-   DELIVERY PIPELINE
-========================================================= */
-
-const DeliveryPipeline = memo(function DeliveryPipeline({
-  inView,
-}) {
+const DeliveryPipeline = memo(function DeliveryPipeline({ inView }) {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
     if (!inView) return;
 
     const interval = window.setInterval(() => {
-      setActive(
-        (current) =>
-          (current + 1) % pipelineStages.length,
-      );
+      setActive((current) => (current + 1) % pipelineStages.length);
     }, 2200);
 
     return () => window.clearInterval(interval);
@@ -558,10 +491,7 @@ const DeliveryPipeline = memo(function DeliveryPipeline({
                       }
                     `}
                   >
-                    <Icon
-                      size={17}
-                      strokeWidth={2}
-                    />
+                    <Icon size={17} strokeWidth={2} />
 
                     {isComplete && (
                       <motion.span
@@ -590,11 +520,7 @@ const DeliveryPipeline = memo(function DeliveryPipeline({
                 {/* Label */}
                 <motion.span
                   animate={{
-                    opacity: isActive
-                      ? 1
-                      : isComplete
-                        ? 0.9
-                        : 0.8,
+                    opacity: isActive ? 1 : isComplete ? 0.9 : 0.8,
                   }}
                   className={`
                     mt-3
@@ -643,21 +569,12 @@ const DeliveryPipeline = memo(function DeliveryPipeline({
                 >
                   <motion.div
                     animate={{
-                      x:
-                        index === active
-                          ? [0, 3, 0]
-                          : 0,
-                      opacity:
-                        index < active
-                          ? 0.9
-                          : 0.35,
+                      x: index === active ? [0, 3, 0] : 0,
+                      opacity: index < active ? 0.9 : 0.35,
                     }}
                     transition={{
                       duration: 1.2,
-                      repeat:
-                        index === active
-                          ? Infinity
-                          : 0,
+                      repeat: index === active ? Infinity : 0,
                       ease: "easeInOut",
                     }}
                     className="
@@ -673,10 +590,7 @@ const DeliveryPipeline = memo(function DeliveryPipeline({
                       sm:w-7
                     "
                   >
-                    <ChevronRight
-                      size={16}
-                      strokeWidth={1.8}
-                    />
+                    <ChevronRight size={16} strokeWidth={1.8} />
                   </motion.div>
                 </div>
               )}
@@ -747,10 +661,6 @@ const DeliveryPipeline = memo(function DeliveryPipeline({
   );
 });
 
-/* =========================================================
-   HERO
-========================================================= */
-
 const Hero = () => {
   const [inView, setInView] = useState(true);
 
@@ -763,104 +673,70 @@ const Hero = () => {
     y: 0,
   });
 
-  /* =======================================================
-     INTERSECTION OBSERVER
-  ======================================================= */
-
   useEffect(() => {
-    if (
-      typeof window === "undefined" ||
-      !sectionRef.current
-    ) {
+    if (typeof window === "undefined" || !sectionRef.current) {
       return;
     }
 
-    const observer =
-      new IntersectionObserver(
-        ([entry]) => {
-          setInView(entry.isIntersecting);
-        },
-        {
-          threshold: 0.1,
-        },
-      );
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+      },
+      {
+        threshold: 0.1,
+      },
+    );
 
     observer.observe(sectionRef.current);
 
     return () => observer.disconnect();
   }, []);
 
-  /* =======================================================
-     MOUSE PARALLAX
-  ======================================================= */
-
   useEffect(() => {
     if (typeof window === "undefined") return;
 
     const handleMouseMove = (event) => {
-      const { innerWidth, innerHeight } =
-        window;
+      const { innerWidth, innerHeight } = window;
 
       targetPosition.current = {
-        x:
-          (event.clientX / innerWidth - 0.5) *
-          40,
+        x: (event.clientX / innerWidth - 0.5) * 40,
 
-        y:
-          (event.clientY / innerHeight - 0.5) *
-          -30,
+        y: (event.clientY / innerHeight - 0.5) * -30,
       };
 
       if (rafRef.current) return;
 
-      rafRef.current =
-        window.requestAnimationFrame(() => {
-          rafRef.current = null;
+      rafRef.current = window.requestAnimationFrame(() => {
+        rafRef.current = null;
 
-          if (!glowRef.current) return;
+        if (!glowRef.current) return;
 
-          glowRef.current.style.setProperty(
-            "--mx",
-            `${targetPosition.current.x}px`,
-          );
+        glowRef.current.style.setProperty(
+          "--mx",
+          `${targetPosition.current.x}px`,
+        );
 
-          glowRef.current.style.setProperty(
-            "--my",
-            `${targetPosition.current.y}px`,
-          );
-        });
+        glowRef.current.style.setProperty(
+          "--my",
+          `${targetPosition.current.y}px`,
+        );
+      });
     };
 
-    window.addEventListener(
-      "mousemove",
-      handleMouseMove,
-      {
-        passive: true,
-      },
-    );
+    window.addEventListener("mousemove", handleMouseMove, {
+      passive: true,
+    });
 
     return () => {
-      window.removeEventListener(
-        "mousemove",
-        handleMouseMove,
-      );
+      window.removeEventListener("mousemove", handleMouseMove);
 
       if (rafRef.current) {
-        window.cancelAnimationFrame(
-          rafRef.current,
-        );
+        window.cancelAnimationFrame(rafRef.current);
       }
     };
   }, []);
 
-  /* =======================================================
-     MARQUEE
-  ======================================================= */
-
-  const marqueeItems = useMemo(
-    () => [...techMarquee, ...techMarquee],
-    [],
-  );
+  const marqueeItems = useMemo(() => [...techMarquee, ...techMarquee], []);
 
   return (
     <section
@@ -887,10 +763,6 @@ const Hero = () => {
         lg:pt-36
       "
     >
-      {/* ===================================================
-          BACKGROUND GLOW
-      =================================================== */}
-
       <div
         ref={glowRef}
         className="
@@ -923,10 +795,6 @@ const Hero = () => {
         }}
       />
 
-      {/* ===================================================
-          TECH GRID
-      =================================================== */}
-
       <div
         className="
           pointer-events-none
@@ -956,10 +824,6 @@ const Hero = () => {
             "radial-gradient(ellipse 75% 65% at 50% 42%, black 15%, transparent 80%)",
         }}
       />
-
-      {/* ===================================================
-          TOP ACCENT
-      =================================================== */}
 
       <motion.div
         initial={{
@@ -991,25 +855,8 @@ const Hero = () => {
         "
       />
 
-      {/* ===================================================
-          FLOATING TAGS
-      =================================================== */}
-
-      <TagCloud
-        pool={leftTagsPool}
-        side="left"
-        inView={inView}
-      />
-
-      <TagCloud
-        pool={rightTagsPool}
-        side="right"
-        inView={inView}
-      />
-
-      {/* ===================================================
-          MAIN CONTENT
-      =================================================== */}
+      <TagCloud pool={leftTagsPool} side="left" inView={inView} />
+      <TagCloud pool={rightTagsPool} side="right" inView={inView} />
 
       <div
         className="
@@ -1069,9 +916,7 @@ const Hero = () => {
             "
           />
 
-          <span>
-            Next-Gen Software Development
-          </span>
+          <span>Next-Gen Software Development</span>
 
           <span
             className="
@@ -1115,7 +960,6 @@ const Hero = () => {
         >
           Engineering Excellence
           <br />
-
           <span className="relative">
             <span
               className="
@@ -1156,10 +1000,8 @@ const Hero = () => {
             lg:text-lg
           "
         >
-          We engineer high-performance web
-          platforms, intelligent mobile
-          applications, and scalable cloud
-          infrastructure designed to accelerate
+          We engineer high-performance web platforms, intelligent mobile
+          applications, and scalable cloud infrastructure designed to accelerate
           enterprise growth.
         </motion.p>
 
@@ -1228,9 +1070,7 @@ const Hero = () => {
               "
             />
 
-            <span className="relative">
-              Get Started
-            </span>
+            <span className="relative">Get Started</span>
 
             <ArrowUpRight
               size={17}
@@ -1289,9 +1129,7 @@ const Hero = () => {
               <Layers size={14} />
             </span>
 
-            <span>
-              Explore Our Services
-            </span>
+            <span>Explore Our Services</span>
 
             <ChevronRight
               size={15}
@@ -1305,14 +1143,8 @@ const Hero = () => {
         </motion.div>
 
         {/* Delivery Pipeline */}
-        <DeliveryPipeline
-          inView={inView}
-        />
+        <DeliveryPipeline inView={inView} />
       </div>
-
-      {/* ===================================================
-          STATS
-      =================================================== */}
 
       <motion.div
         initial={{
@@ -1418,10 +1250,6 @@ const Hero = () => {
         ))}
       </motion.div>
 
-      {/* ===================================================
-          TECHNOLOGY MARQUEE
-      =================================================== */}
-
       <div
         className="
           relative
@@ -1460,9 +1288,7 @@ const Hero = () => {
               dark:bg-[#8bb8ff]/30
             "
           />
-
           Technologies We Build With
-
           <span
             className="
               h-px
@@ -1505,16 +1331,13 @@ const Hero = () => {
         <div
           className="hero-marquee gap-8"
           style={{
-            animationPlayState: inView
-              ? "running"
-              : "paused",
+            animationPlayState: inView ? "running" : "paused",
           }}
         >
-          {marqueeItems.map(
-            (tech, index) => (
-              <div
-                key={`${tech}-${index}`}
-                className="
+          {marqueeItems.map((tech, index) => (
+            <div
+              key={`${tech}-${index}`}
+              className="
                   group
                   flex
                   items-center
@@ -1529,9 +1352,9 @@ const Hero = () => {
                   dark:text-slate-300
                   dark:hover:text-[#8bb8ff]
                 "
-              >
-                <span
-                  className="
+            >
+              <span
+                className="
                     h-1.5
                     w-1.5
                     rounded-full
@@ -1543,18 +1366,13 @@ const Hero = () => {
                     dark:bg-slate-600
                     dark:group-hover:bg-[#8bb8ff]
                   "
-                />
+              />
 
-                {tech}
-              </div>
-            ),
-          )}
+              {tech}
+            </div>
+          ))}
         </div>
       </div>
-
-      {/* ===================================================
-          BOTTOM GLOW
-      =================================================== */}
 
       <div
         className="

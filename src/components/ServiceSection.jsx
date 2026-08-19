@@ -24,6 +24,7 @@ const services = [
   {
     number: "01",
     icon: Globe,
+    color: "#4285F4",
     title: "Web Development & Portals",
     description:
       "Specialized in high-converting Business Websites, complex Web Portals, e-commerce platforms, and custom CMS architectures engineered for performance and speed.",
@@ -32,6 +33,7 @@ const services = [
   {
     number: "02",
     icon: Smartphone,
+    color: "#34A853",
     title: "Mobile App Development",
     description:
       "End-to-end mobile engineering covering Native Android Apps, Native iPhone Apps, and high-performance Cross-Platform mobile solutions.",
@@ -40,6 +42,7 @@ const services = [
   {
     number: "03",
     icon: Palette,
+    color: "#A855F7",
     title: "UI / UX Designing",
     description:
       "Our UI/UX design services prioritize user needs to create intuitive and engaging interfaces. Through research, prototyping, and testing, we craft seamless digital experiences.",
@@ -48,6 +51,7 @@ const services = [
   {
     number: "04",
     icon: ShieldCheck,
+    color: "#10B981",
     title: "QA & Testing Services",
     description:
       "Our comprehensive QA & Testing services provide meticulous analysis, rigorous automated testing, and security strategies to ensure software reliability and performance.",
@@ -56,6 +60,7 @@ const services = [
   {
     number: "05",
     icon: Code2,
+    color: "#F89820",
     title: "Custom Software Development",
     description:
       "End-to-end custom software solutions tailored to your unique enterprise needs. From conceptualization to deployment, we deliver scalable, secure, and innovative applications.",
@@ -64,6 +69,7 @@ const services = [
   {
     number: "06",
     icon: Building2,
+    color: "#06B6D4",
     title: "Offshore Development Center",
     description:
       "Dedicated tech teams, cost-effective scaling, agile methodologies, and 24/7 support. Maximize efficiency, minimize risks, and boost ROI with our offshore expertise.",
@@ -72,6 +78,7 @@ const services = [
   {
     number: "07",
     icon: Cpu,
+    color: "#EC4899",
     title: "AI Development Services",
     description:
       "Harness Machine Learning, Deep Learning, and Generative AI consulting to automate processes, derive deep business analytics, and unlock a competitive edge.",
@@ -80,6 +87,7 @@ const services = [
   {
     number: "08",
     icon: Megaphone,
+    color: "#EF4444",
     title: "Digital Marketing Services",
     description:
       "Encompassing SEO, PPC advertising, social media management, content marketing, and conversion analytics. Drive qualified traffic and maximize your online revenue.",
@@ -104,6 +112,7 @@ const ServicesSection = () => {
         dark:text-white
       "
     >
+      {/* Background glow */}
       <div
         className="
           pointer-events-none
@@ -135,6 +144,8 @@ const ServicesSection = () => {
           background: `${theme.glow}12`,
         }}
       />
+
+      {/* Grid background */}
       <div
         className="
           pointer-events-none
@@ -159,13 +170,15 @@ const ServicesSection = () => {
           mx-auto
           max-w-350
           px-5
-          py-12
+          py-8
           sm:px-8
+          sm:py-10
           lg:px-12
-          lg:py-22
+          lg:py-10
         "
       >
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-20">
+        {/* HEADER */}
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-20">
           {/* Left */}
           <div className="lg:col-span-3">
             <div className="sticky top-22">
@@ -187,10 +200,10 @@ const ServicesSection = () => {
                 <span>Our Services</span>
               </div>
 
-              <div className="mt-8 hidden lg:block">
+              <div className="mt-6 hidden lg:block">
                 <p
                   className="
-                    -mt-5
+                    -mt-4
                     max-w-55
                     text-sm
                     leading-relaxed
@@ -234,6 +247,7 @@ const ServicesSection = () => {
             >
               We build digital
               <br />
+
               <span className="relative inline-block">
                 <span
                   className="
@@ -271,7 +285,9 @@ const ServicesSection = () => {
                   }}
                 />
               </span>
+
               <br />
+
               <span
                 className="
                   text-slate-400
@@ -299,7 +315,7 @@ const ServicesSection = () => {
                 delay: 0.15,
               }}
               className="
-                mt-8
+                mt-6
                 max-w-2xl
                 text-base
                 leading-8
@@ -313,7 +329,7 @@ const ServicesSection = () => {
               including Healthcare, Retail, Finance, and Manufacturing.
             </motion.p>
 
-            <div className="mt-12 flex items-center gap-4">
+            <div className="mt-9 flex items-center gap-4">
               <div
                 className="h-px w-24"
                 style={{
@@ -347,8 +363,9 @@ const ServicesSection = () => {
             </div>
           </div>
         </div>
-        {/* Service grid */}
-        <div className="mt-12 lg:mt-14">
+
+        {/* SERVICE GRID */}
+        <div className="mt-10 lg:mt-12">
           <div
             className="
               grid
@@ -423,17 +440,17 @@ const ServicesSection = () => {
                       relative
                       z-10
                       flex
-                      min-h-105
+                      min-h-100
                       flex-col
                       px-6
-                      py-9
+                      py-7
                       transition-all
                       duration-500
                       sm:px-8
-                      sm:py-10
-                      lg:min-h-115
+                      sm:py-8
+                      lg:min-h-110
                       lg:px-10
-                      lg:py-12
+                      lg:py-10
                       xl:px-12
                     "
                   >
@@ -474,6 +491,7 @@ const ServicesSection = () => {
                       </motion.div>
                     </div>
 
+                    {/* Service Icon */}
                     <motion.div
                       animate={{
                         y: isActive ? -4 : 0,
@@ -484,7 +502,7 @@ const ServicesSection = () => {
                         stiffness: 300,
                         damping: 20,
                       }}
-                      className="relative mt-10 w-fit"
+                      className="relative mt-8 w-fit"
                     >
                       <div
                         className={`
@@ -497,27 +515,29 @@ const ServicesSection = () => {
                           ${isActive ? "opacity-50" : "opacity-0"}
                         `}
                         style={{
-                          background: theme.glow,
+                          background: service.color,
                         }}
                       />
 
                       <Icon
                         size={32}
                         strokeWidth={1.5}
-                        className={`
+                        className="
                           relative
                           z-10
-                          transition-colors
+                          transition-all
                           duration-300
-                          ${
-                            isActive
-                              ? "text-[#276ea5] dark:text-[#60a5fa]"
-                              : "text-slate-400 dark:text-slate-600"
-                          }
-                        `}
+                        "
+                        style={{
+                          color: service.color,
+                          filter: isActive
+                            ? `drop-shadow(0 0 10px ${service.color}55)`
+                            : "none",
+                        }}
                       />
                     </motion.div>
 
+                    {/* Title */}
                     <motion.h3
                       animate={{
                         x: isActive ? 6 : 0,
@@ -528,7 +548,7 @@ const ServicesSection = () => {
                         damping: 25,
                       }}
                       className={`
-                        mt-7
+                        mt-6
                         max-w-md
                         text-2xl
                         font-bold
@@ -547,9 +567,10 @@ const ServicesSection = () => {
                       {service.title}
                     </motion.h3>
 
+                    {/* Description */}
                     <p
                       className="
-                        mt-5
+                        mt-4
                         max-w-xl
                         text-sm
                         leading-7
@@ -562,6 +583,7 @@ const ServicesSection = () => {
                       {service.description}
                     </p>
 
+                    {/* Tags */}
                     <div
                       className={`
                         mt-auto
@@ -569,7 +591,7 @@ const ServicesSection = () => {
                         flex-wrap
                         gap-x-4
                         gap-y-2
-                        pt-8
+                        pt-6
                         transition-all
                         duration-500
                         ${isActive ? "opacity-100" : "opacity-70"}
@@ -607,6 +629,7 @@ const ServicesSection = () => {
                       ))}
                     </div>
 
+                    {/* Active line */}
                     <motion.div
                       initial={false}
                       animate={{
@@ -627,6 +650,7 @@ const ServicesSection = () => {
                     />
                   </div>
 
+                  {/* Hover background */}
                   <motion.div
                     initial={false}
                     animate={{
@@ -652,6 +676,7 @@ const ServicesSection = () => {
           </div>
         </div>
 
+        {/* CTA */}
         <motion.div
           initial={{
             opacity: 0,
@@ -668,12 +693,12 @@ const ServicesSection = () => {
             duration: 0.7,
           }}
           className="
-            mt-20
+            mt-14
             flex
             flex-col
             items-start
             justify-between
-            gap-8
+            gap-6
             sm:flex-row
             sm:items-center
           "
@@ -724,6 +749,7 @@ const ServicesSection = () => {
             "
           >
             Explore all services
+
             <ArrowUpRight
               size={18}
               className="

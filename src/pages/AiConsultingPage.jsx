@@ -681,10 +681,6 @@ const AiConsultingPage = () => {
           </div>
         </section>
 
-        {/* =========================================================
-            INTRO / CAPABILITIES
-        ========================================================== */}
-
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 items-center">
             <motion.div

@@ -793,10 +793,6 @@ const AiDevelopmentPage = () => {
           </div>
         </section>
 
-        {/* =========================================================
-            BENEFITS
-        ========================================================== */}
-
         <section className="relative z-10 mx-auto max-w-7xl px-4 pb-28 sm:px-6 lg:px-8">
           <div className="mx-auto mb-12 max-w-3xl text-center">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-2 text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">

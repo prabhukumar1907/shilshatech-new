@@ -9,8 +9,8 @@ import {
   Tag,
   Headphones,
   Sparkles,
-  HelpCircle,
   CheckCircle2,
+  ArrowUpRight,
 } from "lucide-react";
 import askingImg from "../assets/images/flat-people-asking-questions_23-2148919346.jpg";
 
@@ -24,49 +24,49 @@ const brandTheme = {
 
 const reasons = [
   {
-    id: 1,
+    id: "01",
     icon: Award,
     title: "Expertise & Experience",
     description:
       "We partner with enterprises globally as their trusted IT ally, focusing on long-term growth and association.",
   },
   {
-    id: 2,
+    id: "02",
     icon: Code2,
     title: "Expert Programmers",
     description:
       "Engineered strictly to global coding standards with clean, maintainable, and high-performance codebases.",
   },
   {
-    id: 3,
+    id: "03",
     icon: Globe2,
     title: "Offshore IT Partners",
     description:
       "Seamlessly extending your internal capabilities with tech talent kept continuously in sync with modern stacks.",
   },
   {
-    id: 4,
+    id: "04",
     icon: Clock,
     title: "Timely Delivery",
     description:
       "Punctual product delivery is our promise. We keep pace with the digital market to maximize your ROI.",
   },
   {
-    id: 5,
+    id: "05",
     icon: ShieldCheck,
     title: "Quality Assurance",
     description:
       "Rigorous testing protocols ensuring reliable, airtight security, and enterprise-grade speed.",
   },
   {
-    id: 6,
+    id: "06",
     icon: Tag,
     title: "Competitive Pricing",
     description:
       "Transparent and flexible engagement models delivering premium digital solutions without budget bloat.",
   },
   {
-    id: 7,
+    id: "07",
     icon: Headphones,
     title: "Ongoing Support",
     description:
@@ -74,152 +74,231 @@ const reasons = [
   },
 ];
 
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.08 } },
+const fadeUp = {
+  hidden: { opacity: 0, y: 25 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.55,
+      ease: "easeOut",
+    },
+  },
 };
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+const stagger = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
 };
 
 const ReasonsWhySection = () => {
+  const featuredReason = reasons[0];
+  const otherReasons = reasons.slice(1);
+
   return (
     <section
       id="reason-why"
-      className="relative py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-500 overflow-hidden font-sans bg-slate-50 text-slate-900 dark:bg-[#070d18] dark:text-white"
+      className="relative overflow-hidden py-12 sm:py-14 lg:py-18 px-4 sm:px-6 lg:px-8 font-sans bg-slate-50 text-slate-900 dark:bg-[#070d18] dark:text-white"
     >
       <div
-        className="absolute top-10 left-1/2 -translate-x-1/2 w-96 sm:w-150 h-80 rounded-full blur-[160px] opacity-20 pointer-events-none"
-        style={{ backgroundColor: brandTheme.primaryBlue, willChange: "transform" }}
-      />
-      <div
-        className="absolute bottom-10 right-10 w-80 sm:w-96 h-80 sm:h-96 rounded-full blur-[150px] opacity-15 pointer-events-none"
-        style={{ backgroundColor: brandTheme.electricCyan, willChange: "transform" }}
+        className="absolute -top-32 left-1/3 w-125 h-125 rounded-full blur-[180px] opacity-10 pointer-events-none"
+        style={{ backgroundColor: brandTheme.primaryBlue }}
       />
 
       <div
-        className="absolute inset-0 opacity-10 dark:opacity-20 pointer-events-none bg-[radial-gradient(#276ea5_1px,transparent_1px)] dark:bg-[radial-gradient(#60a5fa_1px,transparent_1px)] bg-size-[36px_36px] mask-[radial-gradient(ellipse_70%_60%_at_50%_50%,black_20%,transparent_80%)]"
+        className="absolute bottom-0 -right-40 w-112.5 h-112.5 rounded-full blur-[180px] opacity-10 pointer-events-none"
+        style={{ backgroundColor: brandTheme.electricCyan }}
       />
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16">
+      <div className="absolute inset-0 pointer-events-none opacity-[0.025] dark:opacity-[0.05] bg-[linear-gradient(#276ea5_1px,transparent_1px),linear-gradient(90deg,#276ea5_1px,transparent_1px)] bg-size-[45px_45px]" />
+
+      <div className="relative z-10 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-end mb-16 lg:mb-20">
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="lg:col-span-7 flex flex-col items-start gap-4"
+            className="lg:col-span-8"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border text-xs font-semibold tracking-wide uppercase bg-blue-50 border-blue-200 text-[#276ea5] dark:bg-[#276ea5]/20 dark:border-[#276ea5]/40 dark:text-sky-400">
-              <HelpCircle size={14} />
-              <span>Why Choose Shilsha Technologies</span>
+            <div className="flex items-center gap-3 mb-5">
+              <span className="w-10 h-0.5 bg-[#276ea5] dark:bg-sky-400" />
+
+              <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.18em] text-[#276ea5] dark:text-sky-400">
+                Why Choose Shilsha Technologies
+              </span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
-              Reasons Why We Are Your{" "}
-              <span className="bg-clip-text text-transparent bg-linear-to-r from-[#276ea5] to-[#1d4ed8] dark:from-white dark:via-sky-200 dark:to-sky-400">
-                Ideal Tech Partner
+            <h2 className="text-4xl sm:text-5xl lg:text-[4.25rem] font-black tracking-tight leading-[1.02]">
+              More Than a
+              <br />
+              <span className="bg-clip-text text-transparent bg-linear-to-r from-[#276ea5] via-[#1d4ed8] to-[#60a5fa]">
+                Technology Partner
               </span>
             </h2>
-
-            <p className="text-base sm:text-lg max-w-2xl leading-relaxed text-slate-600 dark:text-slate-400">
-              Shilsha Technologies is a premier web and mobile application engineering firm. We build high-performing Web Apps, iOS/Android solutions, and enterprise software designed to scale.
-            </p>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-5 relative flex justify-center items-center"
+            className="lg:col-span-4"
           >
-            <div className="relative w-full max-w-md group">
-              <div
-                className="absolute -inset-1 rounded-3xl opacity-20 blur-xl transition-opacity duration-500 group-hover:opacity-35"
-                style={{
-                  background: `linear-gradient(135deg, ${brandTheme.primaryBlue}, ${brandTheme.electricCyan})`,
-                }}
+            <p className="text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+              Shilsha Technologies is a premier web and mobile application
+              engineering firm. We build high-performing Web Apps, iOS/Android
+              solutions, and enterprise software designed to scale.
+            </p>
+          </motion.div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="lg:col-span-5 relative group"
+          >
+            <div className="relative h-full min-h-125 overflow-hidden rounded-4xl border border-slate-200 dark:border-white/10 bg-[#0b1528] shadow-xl">
+              <img
+                src={askingImg}
+                alt="Engineering team collaboration"
+                width={480}
+                height={360}
+                loading={ABOVE_FOLD ? "eager" : "lazy"}
+                fetchPriority={ABOVE_FOLD ? "high" : "auto"}
+                decoding="async"
+                className="absolute inset-0 w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
               />
 
-              {/* backdrop-blur-xl removed from image frame */}
-              <div className="relative rounded-3xl border overflow-hidden p-6 shadow-2xl bg-white border-slate-200 dark:bg-[#0b1528]/95 dark:border-white/10">
-                <img
-                  src={askingImg}
-                  alt="Engineering team collaboration"
-                  width={480}
-                  height={360}
-                  style={{ aspectRatio: "4 / 3" }}
-                  loading={ABOVE_FOLD ? "eager" : "lazy"}
-                  fetchPriority={ABOVE_FOLD ? "high" : "auto"}
-                  decoding="async"
-                  className="w-full h-auto object-contain rounded-2xl transition-transform duration-500 group-hover:scale-105"
-                />
+              <div className="absolute inset-0 bg-linear-to-b from-[#070d18]/20 via-[#070d18]/30 to-[#070d18]" />
 
-                <div className="absolute bottom-4 left-4 p-3 rounded-2xl border flex items-center gap-3 shadow-lg bg-white/95 border-slate-300 dark:bg-[#070d18]/95 dark:border-sky-400/30">
-                  <div className="p-2 rounded-xl bg-[#276ea5]/20 text-sky-400">
-                    <CheckCircle2 size={20} />
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold text-slate-900 dark:text-white">
-                      100% Quality Code
-                    </div>
-                    <div className="text-[10px] text-slate-500 dark:text-slate-400">
-                      Global Standards
-                    </div>
-                  </div>
+              <div className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-[#070d18]/60 to-transparent" />
+
+              <div className="absolute top-6 right-6 flex items-center gap-2 px-3 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+                <Sparkles size={14} className="text-sky-300" />
+
+                <span className="text-xs font-semibold text-white">
+                  Our Difference
+                </span>
+              </div>
+
+              <div className="absolute bottom-0 left-0 right-0 p-7 sm:p-9">
+                <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center mb-6">
+                  <featuredReason.icon size={26} className="text-sky-300" />
                 </div>
 
-                <div className="absolute top-4 right-4 px-3 py-2 rounded-xl border flex items-center gap-2 shadow-lg bg-white/95 border-slate-300 text-slate-900 dark:bg-[#070d18]/95 dark:border-sky-400/30 dark:text-white">
-                  <Sparkles size={14} style={{ color: brandTheme.electricCyan }} />
-                  <span className="text-xs font-bold">Agile Process</span>
+                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+                  {featuredReason.title}
+                </h3>
+
+                <p className="text-sm sm:text-base leading-relaxed text-slate-300 max-w-lg">
+                  {featuredReason.description}
+                </p>
+
+                <div className="flex items-center gap-2 mt-7 text-sm font-semibold text-sky-300">
+                  <CheckCircle2 size={17} />
+                  Trusted technology expertise
                 </div>
               </div>
             </div>
           </motion.div>
+
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-50px" }}
+            className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-x-8"
+          >
+            {otherReasons.map((item, index) => {
+              const IconComponent = item.icon;
+
+              return (
+                <motion.div
+                  key={item.id}
+                  variants={fadeUp}
+                  className={`
+                    group relative py-7
+                    border-b border-slate-200 dark:border-white/10
+                    ${index < 2 ? "sm:border-t-0" : ""}
+                  `}
+                >
+                  <div className="absolute -inset-x-3 inset-y-2 rounded-2xl bg-[#276ea5]/3 dark:bg-sky-400/3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  <div className="relative">
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="w-11 h-11 rounded-xl border border-slate-200 dark:border-white/10 flex items-center justify-center bg-white dark:bg-[#0b1528] text-[#276ea5] dark:text-sky-400 transition-all duration-300 group-hover:border-[#276ea5]/30 group-hover:scale-105">
+                        <IconComponent size={20} />
+                      </div>
+                    </div>
+
+                    <h3 className="text-lg sm:text-xl font-bold mb-3 tracking-tight group-hover:text-[#276ea5] dark:group-hover:text-sky-400 transition-colors">
+                      {item.title}
+                    </h3>
+
+                    <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                      {item.description}
+                    </p>
+
+                    <div className="mt-5 flex justify-end">
+                      <ArrowUpRight
+                        size={18}
+                        className="text-slate-300 dark:text-slate-700 group-hover:text-[#276ea5] dark:group-hover:text-sky-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300"
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
 
         <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mt-14 pt-8 border-t border-slate-200 dark:border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-6"
         >
-          {reasons.map((item) => {
-            const IconComponent = item.icon;
-            return (
-              <motion.div
-                key={item.id}
-                variants={cardVariants}
-                whileHover={{ y: -6 }}
-                className="relative rounded-2xl p-6 border transition-all duration-300 flex flex-col justify-between group shadow-sm hover:shadow-xl bg-white border-slate-200 dark:bg-[#0b1528]/95 dark:border-white/10"
-              >
-                <div
-                  className="absolute top-0 left-6 right-6 h-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{
-                    background: `linear-gradient(90deg, transparent, ${brandTheme.electricCyan}, transparent)`,
-                  }}
-                />
+          <div className="flex items-center gap-3">
+            <CheckCircle2
+              size={19}
+              className="text-[#276ea5] dark:text-sky-400 shrink-0"
+            />
 
-                <div>
-                  <div className="w-12 h-12 rounded-xl border flex items-center justify-center mb-5 transition-colors duration-300 bg-blue-50 border-blue-200 text-[#276ea5] dark:bg-[#276ea5]/15 dark:border-[#276ea5]/30 dark:text-sky-400">
-                    <IconComponent size={22} />
-                  </div>
+            <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+              Global Coding Standards
+            </span>
+          </div>
 
-                  <h3 className="text-lg font-bold mb-2 tracking-tight group-hover:text-blue-500 dark:group-hover:text-sky-400 transition-colors text-slate-900 dark:text-white">
-                    {item.title}
-                  </h3>
+          <div className="flex items-center gap-3">
+            <CheckCircle2
+              size={19}
+              className="text-[#276ea5] dark:text-sky-400 shrink-0"
+            />
 
-                  <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                    {item.description}
-                  </p>
-                </div>
-              </motion.div>
-            );
-          })}
+            <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+              Scalable Digital Solutions
+            </span>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <CheckCircle2
+              size={19}
+              className="text-[#276ea5] dark:text-sky-400 shrink-0"
+            />
+
+            <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+              Long-Term Technology Partnership
+            </span>
+          </div>
         </motion.div>
       </div>
     </section>

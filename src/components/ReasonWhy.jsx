@@ -253,10 +253,6 @@ const ReasonsWhySection = () => {
           </motion.div>
         </div>
 
-        {/* =========================================================
-            REASONS
-        ========================================================== */}
-
         <div className="mt-28 lg:mt-36">
           {/* section heading */}
           <div className="mb-12 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
@@ -275,10 +271,6 @@ const ReasonsWhySection = () => {
               technology decision we make.
             </p>
           </div>
-
-          {/* =====================================================
-              EDITORIAL LIST
-          ====================================================== */}
 
           <div className="border-t border-slate-200 dark:border-white/10">
             {reasons.map((item, index) => {
@@ -382,11 +374,7 @@ const ReasonsWhySection = () => {
             })}
           </div>
         </div>
-
-        {/* =========================================================
-            BOTTOM STATEMENT
-        ========================================================== */}
-
+        
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}

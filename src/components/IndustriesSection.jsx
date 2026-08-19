@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import {
   ShoppingBag,
@@ -11,340 +11,263 @@ import {
   Gamepad2,
   Sparkles,
   Building2,
-  CheckCircle2,
-  TrendingUp,
-  Layers,
   ArrowUpRight,
+  Layers,
 } from "lucide-react";
-
-const brandTheme = {
-  primaryBlue: "#276ea5",
-  secondaryIndigo: "#1d4ed8",
-  electricCyan: "#60a5fa",
-  accentGlow: "#38bdf8",
-};
 
 const industries = [
   {
     id: "retail",
     icon: ShoppingBag,
     title: "Retail & E-Commerce",
-    badge: "Omnichannel",
     description:
-      "High-converting storefronts, real-time inventory sync, AI recommendation engines, and low-friction payment flows.",
-    highlights: ["Custom E-Stores", "Inventory Systems", "Seamless Payments"],
-    stat: "3.5x",
-    statLabel: "Conversion Growth",
-    accentColor: "#60a5fa",
-    gradient: "from-blue-500/10 via-cyan-500/5 to-transparent",
+      "High-converting storefronts, inventory sync, AI recommendations and frictionless payments.",
+    accent: "#60a5fa",
   },
   {
     id: "media",
     icon: Tv,
     title: "Media & Entertainment",
-    badge: "Streaming",
     description:
-      "Low-latency streaming architectures, video portals, and dynamic content delivery backends built for global concurrency.",
-    highlights: ["OTT Video Platforms", "Interactive Portals", "Low Latency CDN"],
-    stat: "99.99%",
-    statLabel: "Platform Uptime",
-    accentColor: "#c084fc",
-    gradient: "from-purple-500/10 via-indigo-500/5 to-transparent",
+      "Streaming platforms, video portals and high-performance content delivery systems.",
+    accent: "#c084fc",
   },
   {
     id: "logistics",
     icon: Truck,
     title: "Transport & Logistics",
-    badge: "Telematics",
     description:
-      "Fleet management suites featuring AI route optimization algorithms, real-time GPS tracking, and supply chain telemetry.",
-    highlights: ["Fleet Telematics", "Route Optimization", "Supply Chain BI"],
-    stat: "-25%",
-    statLabel: "Transit Delays",
-    accentColor: "#2dd4bf",
-    gradient: "from-teal-500/10 via-emerald-500/5 to-transparent",
+      "Fleet management, GPS tracking, route optimization and supply-chain intelligence.",
+    accent: "#2dd4bf",
   },
   {
     id: "education",
     icon: GraduationCap,
     title: "Education & EdTech",
-    badge: "E-Learning",
     description:
-      "Interactive digital learning hubs, virtual classrooms, curriculum tools, and automated student performance analytics.",
-    highlights: ["Virtual Classrooms", "LMS Integration", "Learner Analytics"],
-    stat: "1M+",
-    statLabel: "Active Learners",
-    accentColor: "#34d399",
-    gradient: "from-emerald-500/10 via-green-500/5 to-transparent",
+      "Learning platforms, virtual classrooms and intelligent learner analytics.",
+    accent: "#34d399",
   },
   {
     id: "manufacturing",
     icon: Factory,
-    title: "Manufacturing & Industry 4.0",
-    badge: "Smart Factory",
+    title: "Manufacturing",
     description:
-      "Industrial software connecting IoT shop-floor sensors, automated QA workflows, and real-time inventory fulfillment.",
-    highlights: ["IoT Telemetry", "Production Tracking", "Automated QA"],
-    stat: "+40%",
-    statLabel: "Efficiency Gain",
-    accentColor: "#fbbf24",
-    gradient: "from-amber-500/10 via-orange-500/5 to-transparent",
+      "IoT telemetry, production monitoring, automated QA and smart factory systems.",
+    accent: "#fbbf24",
   },
   {
     id: "food",
     icon: UtensilsCrossed,
-    title: "Food Delivery & Hospitality",
-    badge: "Hyper-Fast",
+    title: "Food & Hospitality",
     description:
-      "Multi-tenant food ordering engines with real-time courier tracking, dynamic kitchen dispatch queues, and POS sync.",
-    highlights: ["Live Courier Maps", "Menu Automation", "POS Integration"],
-    stat: "< 30s",
-    statLabel: "Order Speed",
-    accentColor: "#fb7185",
-    gradient: "from-rose-500/10 via-pink-500/5 to-transparent",
+      "Ordering engines, courier tracking, kitchen dispatch and POS integrations.",
+    accent: "#fb7185",
   },
   {
     id: "health",
     icon: HeartPulse,
     title: "Healthcare & MedTech",
-    badge: "HIPAA Vault",
     description:
-      "HIPAA-compliant telemedicine platforms streamlining online consultations, encrypted health records, and smart booking.",
-    highlights: ["Telehealth Video", "HIPAA Compliant", "EHR Sync"],
-    stat: "100%",
-    statLabel: "Data Privacy",
-    accentColor: "#38bdf8",
-    gradient: "from-sky-500/10 via-blue-500/5 to-transparent",
+      "Telehealth, secure records, digital booking and healthcare integrations.",
+    accent: "#38bdf8",
   },
   {
     id: "gaming",
     icon: Gamepad2,
-    title: "Gaming & Interactive Media",
-    badge: "Web3 & 3D",
+    title: "Gaming & Interactive",
     description:
-      "Low-latency multiplayer server architectures, Web3 virtual asset marketplaces, and engaging digital store interfaces.",
-    highlights: ["Multiplayer Backends", "In-Game Commerce", "Asset Vaults"],
-    stat: "< 15ms",
-    statLabel: "Target Latency",
-    accentColor: "#a855f7",
-    gradient: "from-violet-500/10 via-purple-500/5 to-transparent",
+      "Multiplayer backends, digital commerce and immersive interactive experiences.",
+    accent: "#a855f7",
   },
   {
     id: "lifestyle",
     icon: Sparkles,
     title: "Lifestyle & Fashion",
-    badge: "Visual Commerce",
     description:
-      "Visually captivating web portals featuring 3D product lookbooks, personalized quizzes, and social commerce features.",
-    highlights: ["3D/AR Lookbooks", "Social Commerce", "Brand Portals"],
-    stat: "+85%",
-    statLabel: "User Engagement",
-    accentColor: "#f0abfc",
-    gradient: "from-fuchsia-500/10 via-pink-500/5 to-transparent",
+      "Visual commerce, 3D experiences, social shopping and brand platforms.",
+    accent: "#f0abfc",
   },
   {
     id: "finance",
     icon: Building2,
     title: "Banking & FinTech",
-    badge: "Bank-Grade",
     description:
-      "Resilient digital banking mobile apps and web portals with end-to-end encryption, fraud analytics, and instant ledger settlement.",
-    highlights: ["Bank Encryption", "Instant Settlement", "Fraud Analytics"],
-    stat: "0.0s",
-    statLabel: "Security Breaches",
-    accentColor: "#60a5fa",
-    gradient: "from-blue-600/10 via-indigo-500/5 to-transparent",
+      "Secure banking platforms, fraud analytics and instant financial settlement.",
+    accent: "#60a5fa",
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.08 } },
+const container = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.06,
+    },
+  },
 };
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.96 },
+const itemAnimation = {
+  hidden: {
+    opacity: 0,
+    y: 20,
+  },
   show: {
     opacity: 1,
     y: 0,
-    scale: 1,
-    transition: { type: "spring", stiffness: 220, damping: 20 },
+    transition: {
+      duration: 0.45,
+      ease: [0.22, 1, 0.36, 1],
+    },
   },
 };
 
 const UltraModernIndustries = () => {
-  const sectionRef = useRef(null);
-  const [inView, setInView] = useState(true);
-
-  useEffect(() => {
-    if (!sectionRef.current) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      { threshold: 0.05 },
-    );
-    observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section
-      ref={sectionRef}
       id="industries"
-      className="relative py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-500 overflow-hidden font-sans select-none bg-slate-50 text-slate-900 dark:bg-[#060b13] dark:text-white"
+      className="relative overflow-hidden bg-slate-50 py-20 text-slate-900 dark:bg-[#050a11] dark:text-white sm:py-16"
     >
-      <style>{`
-        @keyframes pulseGlowA {
-          0%, 100% { transform: scale(1); opacity: 0.15; }
-          50% { transform: scale(1.2); opacity: 0.25; }
-        }
-        @keyframes pulseGlowB {
-          0%, 100% { transform: scale(1.2); opacity: 0.2; }
-          50% { transform: scale(1); opacity: 0.3; }
-        }
-        .glow-a {
-          animation: pulseGlowA 12s ease-in-out infinite;
-          animation-play-state: ${inView ? "running" : "paused"};
-        }
-        .glow-b {
-          animation: pulseGlowB 15s ease-in-out infinite;
-          animation-play-state: ${inView ? "running" : "paused"};
-        }
-      `}</style>
+      {/* Background glow */}
+      <div className="pointer-events-none absolute -left-40 top-20 h-100 w-100 rounded-full bg-blue-500/10 blur-[140px] dark:bg-blue-500/10" />
 
-      <div
-        className="glow-a absolute top-1/4 left-10 w-96 h-96 rounded-full blur-[130px] pointer-events-none"
-        style={{ backgroundColor: brandTheme.primaryBlue, willChange: "transform, opacity" }}
-      />
-      <div
-        className="glow-b absolute bottom-10 right-10 w-88 h-88 rounded-full blur-[120px] pointer-events-none"
-        style={{ backgroundColor: brandTheme.electricCyan, willChange: "transform, opacity" }}
-      />
+      <div className="pointer-events-none absolute -right-40 bottom-20 h-100 w-100 rounded-full bg-cyan-400/10 blur-[140px]" />
 
-      <div
-        className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#276ea5_1.2px,transparent_1.2px)] dark:bg-[radial-gradient(#60a5fa_1.2px,transparent_1.2px)] bg-size-[32px_32px] mask-[radial-gradient(ellipse_90%_80%_at_50%_50%,black_30%,transparent_85%)]"
-      />
+      {/* Subtle grid */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.025] bg-[linear-gradient(to_right,#60a5fa_1px,transparent_1px),linear-gradient(to_bottom,#60a5fa_1px,transparent_1px)] bg-size-[70px_70px]" />
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-20 flex flex-col items-center gap-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border text-xs font-bold tracking-wider uppercase shadow-lg bg-blue-50 border-[#276ea5]/20 text-[#276ea5] dark:bg-[#276ea5]/20 dark:border-[#60a5fa]/30 dark:text-[#60a5fa]"
-          >
-            <Layers size={14} className="animate-pulse" />
-            <span>Cross-Industry Intelligence</span>
-          </motion.div>
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+        {/* Header */}
+        <div className="mb-14 flex flex-col justify-between gap-8 lg:mb-16 lg:flex-row lg:items-end">
+          <div className="max-w-3xl">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mb-5 flex items-center gap-3"
+            >
+              <span className="h-px w-10 bg-[#276ea5] dark:bg-sky-400" />
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+              <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#276ea5] dark:text-sky-400">
+                <Layers size={13} />
+                Cross-Industry Intelligence
+              </span>
+            </motion.div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-4xl font-black leading-none tracking-[-0.045em] sm:text-5xl lg:text-6xl"
+            >
+              Technology built for{" "}
+              <span className="bg-linear-to-r from-[#276ea5] via-[#1d4ed8] to-sky-400 bg-clip-text text-transparent">
+                every industry.
+              </span>
+            </motion.h2>
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight"
+            className="max-w-md text-sm leading-6 text-slate-500 dark:text-slate-400"
           >
-            Industries We{" "}
-            <span className="bg-clip-text text-transparent bg-linear-to-r from-[#276ea5] to-[#1d4ed8] dark:from-white dark:via-sky-300 dark:to-sky-400">
-              Engineered For
-            </span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-base sm:text-lg leading-relaxed max-w-2xl text-slate-600 dark:text-slate-400"
-          >
-            Empowering global companies with domain-specific architectures, scalable web applications, and high-performance software.
+            Domain-specific digital products engineered for complex operations,
+            ambitious businesses and scale.
           </motion.p>
         </div>
 
+        {/* Industry grid */}
         <motion.div
-          variants={containerVariants}
+          variants={container}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          viewport={{ once: true, margin: "-80px" }}
+          className="grid grid-cols-1 border-l border-t border-slate-200 dark:border-white/10 sm:grid-cols-2"
         >
-          {industries.map((item) => {
-            const Icon = item.icon;
+          {industries.map((industry, index) => {
+            const Icon = industry.icon;
 
             return (
               <motion.div
-                key={item.id}
-                variants={cardVariants}
-                whileHover={{ y: -6 }}
-                className="group relative rounded-3xl p-7 border transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-xl bg-white border-slate-200 dark:bg-[#0a1220]/95 dark:border-white/10"
+                key={industry.id}
+                variants={itemAnimation}
+                className="group relative min-h-47.5 border-b border-r border-slate-200 p-6 transition-colors duration-300 hover:bg-white dark:border-white/10 dark:hover:bg-white/2.5 sm:min-h-52.5 sm:p-7 lg:p-8"
               >
+                {/* Hover accent */}
                 <div
-                  className={`absolute inset-0 bg-linear-to-br ${item.gradient} opacity-50 pointer-events-none`}
+                  className="absolute left-0 top-0 h-full w-0.5 origin-top scale-y-0 transition-transform duration-500 group-hover:scale-y-100"
+                  style={{ backgroundColor: industry.accent }}
                 />
 
-                <div
-                  className="absolute top-0 left-0 right-0 h-0.5"
-                  style={{
-                    background: `linear-gradient(90deg, transparent, ${item.accentColor}, transparent)`,
-                  }}
-                />
-
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-5">
-                    <div
-                      className="w-13 h-13 p-3 rounded-2xl border flex items-center justify-center shadow-lg bg-sky-50 border-blue-200 dark:bg-[#0f1b30]/95 dark:border-white/10"
-                      style={{ color: item.accentColor }}
-                    >
-                      <Icon size={24} />
-                    </div>
-
-                    {/* backdrop-blur-md removed */}
-                    <div className="px-3 py-1 rounded-full border text-[11px] font-bold uppercase tracking-wider bg-slate-100 border-slate-300 text-slate-600 dark:bg-white/10 dark:border-white/10 dark:text-slate-300">
-                      {item.badge}
-                    </div>
+                {/* Top row */}
+                <div className="flex items-start justify-between">
+                  <div
+                    className="flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300"
+                    style={{
+                      color: industry.accent,
+                      borderColor: `${industry.accent}35`,
+                    }}
+                  >
+                    <Icon size={18} strokeWidth={1.8} />
                   </div>
 
-                  <h3 className="text-xl font-bold mb-3 tracking-tight flex items-center justify-between text-slate-900 dark:text-white">
-                    <span>{item.title}</span>
-                    <ArrowUpRight
-                      size={18}
-                      className="opacity-40 group-hover:opacity-100 transition-opacity"
-                      style={{ color: item.accentColor }}
-                    />
-                  </h3>
-
-                  <p className="text-sm leading-relaxed mb-6 text-slate-600 dark:text-slate-400">
-                    {item.description}
-                  </p>
-
-                  <div className="mb-6 space-y-2">
-                    {item.highlights.map((feat, idx) => (
-                      <div
-                        key={idx}
-                        className="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-300"
-                      >
-                        <CheckCircle2 size={14} className="shrink-0" style={{ color: item.accentColor }} />
-                        <span>{feat}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="relative z-10 pt-4 border-t border-dashed flex items-center justify-between border-slate-200 dark:border-white/10">
-                  <div className="flex items-center gap-2">
-                    <TrendingUp size={14} style={{ color: item.accentColor }} />
-                    <span className="text-xs font-medium uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                      {item.statLabel}
-                    </span>
-                  </div>
-
-                  <span className="text-lg font-black tracking-tight" style={{ color: item.accentColor }}>
-                    {item.stat}
+                  <span className="font-mono text-[10px] text-slate-400 dark:text-slate-600">
+                    {String(index + 1).padStart(2, "0")}
                   </span>
                 </div>
+
+                {/* Content */}
+                <div className="mt-8">
+                  <div className="flex items-center justify-between gap-4">
+                    <h3 className="text-xl font-bold tracking-tight text-slate-800 transition-colors group-hover:text-slate-950 dark:text-slate-200 dark:group-hover:text-white sm:text-2xl">
+                      {industry.title}
+                    </h3>
+
+                    <ArrowUpRight
+                      size={19}
+                      className="shrink-0 opacity-20 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:opacity-100"
+                      style={{ color: industry.accent }}
+                    />
+                  </div>
+
+                  <p className="mt-3 max-w-md text-sm leading-6 text-slate-500 dark:text-slate-500">
+                    {industry.description}
+                  </p>
+                </div>
+
+                {/* Bottom accent */}
+                <div
+                  className="absolute bottom-0 left-6 h-px w-0 transition-all duration-500 group-hover:w-16 lg:left-8"
+                  style={{ backgroundColor: industry.accent }}
+                />
               </motion.div>
             );
           })}
+        </motion.div>
+
+        {/* Bottom statement */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mt-10 flex flex-col gap-5 border-t border-slate-200 pt-7 dark:border-white/10 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <div className="flex items-center gap-3">
+            <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,.7)]" />
+
+            <span className="text-xs font-semibold uppercase tracking-[0.15em] text-slate-500 dark:text-slate-400">
+              One engineering partner
+            </span>
+          </div>
+
+          <span className="text-xs text-slate-400">
+            Built for scale. Designed for impact.
+          </span>
         </motion.div>
       </div>
     </section>

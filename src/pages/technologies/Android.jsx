@@ -339,9 +339,6 @@ const AndroidServicesPage = () => {
         </div>
       </section>
 
-      {/* =====================================================
-          FEATURE STRIP
-      ====================================================== */}
       <section className="py-10 sm:py-12">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div
@@ -439,9 +436,6 @@ const AndroidServicesPage = () => {
         </div>
       </section>
 
-      {/* =====================================================
-          INTRO
-      ====================================================== */}
       <section className="py-14 sm:py-18">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <motion.div
@@ -684,9 +678,6 @@ const AndroidServicesPage = () => {
         </div>
       </section>
 
-      {/* =====================================================
-          BUSINESS BENEFITS
-      ====================================================== */}
       <section className="py-14 sm:py-18">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <motion.div

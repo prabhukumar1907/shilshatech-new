@@ -278,10 +278,6 @@ const NaturalLanguageProcessingPage = () => {
                 </motion.div>
               </motion.div>
 
-              {/* =====================================================
-                  HERO VISUAL
-              ====================================================== */}
-
               <motion.div
                 initial={{ opacity: 0, x: 30, scale: 0.95 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -571,10 +567,6 @@ const NaturalLanguageProcessingPage = () => {
           </div>
         </section>
 
-        {/* =========================================================
-            FEATURES
-        ========================================================== */}
-
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
           <div
             className="
@@ -669,14 +661,9 @@ const NaturalLanguageProcessingPage = () => {
           </div>
         </section>
 
-        {/* =========================================================
-            INTRO / CAPABILITIES
-        ========================================================== */}
-
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 items-center">
             {/* Left */}
-
             <motion.div
               initial={{
                 opacity: 0,
@@ -864,14 +851,9 @@ const NaturalLanguageProcessingPage = () => {
           </div>
         </section>
 
-        {/* =========================================================
-            BENEFITS / PERFORMANCE
-        ========================================================== */}
-
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-28">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Card 1 */}
-
             <motion.div
               whileHover={{
                 y: -5,

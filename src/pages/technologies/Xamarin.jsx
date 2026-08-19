@@ -196,9 +196,6 @@ const DotNetMauiServicesPage = () => {
         </div>
       </section>
 
-      {/* =========================================================
-          INTRO
-      ========================================================== */}
       <section className="py-12 sm:py-14 border-y border-slate-200 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <motion.div
@@ -235,10 +232,7 @@ const DotNetMauiServicesPage = () => {
           </motion.div>
         </div>
       </section>
-
-      {/* =========================================================
-          FEATURES - NO CARDS
-      ========================================================== */}
+      
       <section className="py-12 sm:py-14">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-200 dark:divide-slate-800">

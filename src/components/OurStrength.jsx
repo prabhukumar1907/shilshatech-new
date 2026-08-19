@@ -69,7 +69,7 @@ const OurStrength = () => {
         relative isolate overflow-hidden
         bg-slate-50 text-slate-900
         dark:bg-[#070d18] dark:text-white
-        py-12 sm:py-12 lg:py-16
+        py-10 sm:py-10 lg:py-14
       "
     >
       {/* Background atmosphere */}
@@ -105,6 +105,7 @@ const OurStrength = () => {
 
       <div className="relative z-10 mx-auto max-w-350 px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
+          {/* LEFT */}
           <div className="lg:col-span-7">
             {/* Eyebrow */}
             <div className="mb-7 flex items-center gap-3">

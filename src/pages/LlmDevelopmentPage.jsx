@@ -273,10 +273,6 @@ const LlmDevelopmentPage = () => {
               </motion.div>
             </motion.div>
 
-            {/* ======================================================
-                RIGHT VISUAL
-            ======================================================= */}
-
             <motion.div
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -720,10 +716,6 @@ const LlmDevelopmentPage = () => {
             </div>
           </div>
         </section>
-
-        {/* ============================================================
-            PERFORMANCE / CTA
-        ============================================================ */}
 
         <section className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-28">
           <motion.div

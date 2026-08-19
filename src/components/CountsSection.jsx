@@ -189,24 +189,20 @@ const CountsSection = () => {
           mx-auto
           max-w-350
           px-5
-          py-16
+          py-12
           sm:px-8
-          sm:py-20
+          sm:py-14
           lg:px-12
-          lg:py-28
+          lg:py-12
         "
       >
-        {/* ===================================================
-            HEADER
-        ==================================================== */}
-
         <div
           className="
             grid
             grid-cols-1
-            gap-10
+            gap-7
             lg:grid-cols-12
-            lg:gap-16
+            lg:gap-12
           "
         >
           {/* LEFT */}
@@ -260,7 +256,7 @@ const CountsSection = () => {
 
             <p
               className="
-                mt-6
+                mt-4
                 max-w-xs
                 text-sm
                 leading-7
@@ -322,9 +318,7 @@ const CountsSection = () => {
           </motion.div>
         </div>
 
-        {/* ===================================================
-            HEADER DIVIDER
-        ==================================================== */}
+        {/* HEADER DIVIDER */}
 
         <motion.div
           initial={{
@@ -341,22 +335,20 @@ const CountsSection = () => {
             ease: [0.22, 1, 0.36, 1],
           }}
           className="
-            mt-14
+            mt-10
             h-px
             origin-left
             bg-slate-200
             dark:bg-white/10
-            lg:mt-20
+            lg:mt-14
           "
         />
 
-        {/* ===================================================
-            STATS GRID
-        ==================================================== */}
+        {/* STATS GRID */}
 
         <div
           className="
-            mt-3
+            mt-2
             grid
             grid-cols-1
             sm:grid-cols-2
@@ -389,18 +381,21 @@ const CountsSection = () => {
                 className={`
                   group
                   relative
-                  min-h-72
+                  min-h-60
                   overflow-hidden
                   border-b
                   border-slate-200
-                  py-10
-                  pr-6
+                  py-7
+                  pr-5
                   dark:border-white/10
-                  sm:min-h-80
-                  sm:pr-8
-                  lg:min-h-90
-                  lg:px-8
-                  lg:first:pl-0
+                  sm:min-h-68
+                  sm:pr-6
+                  lg:min-h-76
+                  lg:px-6
+
+                  /* FIX: give the first box a little left padding */
+                  lg:first:pl-4
+
                   lg:last:border-r-0
                   lg:last:pr-0
                   ${index !== stats.length - 1 ? "lg:border-r" : ""}
@@ -534,7 +529,7 @@ const CountsSection = () => {
                   className="
                     relative
                     z-10
-                    mt-10
+                    mt-7
                     w-fit
                   "
                 >
@@ -558,6 +553,7 @@ const CountsSection = () => {
                       blur-xl
                     "
                   />
+
                   <div
                     className="
                       relative
@@ -590,7 +586,7 @@ const CountsSection = () => {
                   </div>
                 </motion.div>
 
-                <div className="relative z-10 mt-9">
+                <div className="relative z-10 mt-6">
                   <motion.div
                     whileHover={{
                       x: 3,
@@ -629,7 +625,7 @@ const CountsSection = () => {
                     </span>
                   </motion.div>
 
-                  <div className="mt-5">
+                  <div className="mt-4">
                     <h3
                       className="
                         text-sm
@@ -649,7 +645,7 @@ const CountsSection = () => {
 
                     <p
                       className="
-                        mt-2
+                        mt-1
                         text-xs
                         text-slate-400
                         dark:text-slate-500
@@ -719,9 +715,7 @@ const CountsSection = () => {
           })}
         </div>
 
-        {/* ===================================================
-            BOTTOM STATEMENT
-        ==================================================== */}
+        {/* BOTTOM STATEMENT */}
 
         <motion.div
           initial={{
@@ -740,17 +734,15 @@ const CountsSection = () => {
             delay: 0.3,
           }}
           className="
-            mt-12
+            mt-8
             flex
             flex-col
-            gap-5
+            gap-4
             sm:flex-row
             sm:items-center
             sm:justify-between
           "
         >
-          {/* Status */}
-
           <div className="flex items-center gap-3">
             <span className="relative flex h-2 w-2">
               <motion.span
@@ -796,8 +788,6 @@ const CountsSection = () => {
             </span>
           </div>
 
-          {/* Line */}
-
           <div
             className="
               hidden
@@ -807,14 +797,12 @@ const CountsSection = () => {
               from-slate-200
               via-slate-200
               to-transparent
-              sm:ml-8
+              sm:ml-6
               sm:block
               dark:from-white/10
               dark:via-white/10
             "
           />
-
-          {/* Right text */}
 
           <span
             className="

@@ -164,9 +164,6 @@ const QaAutomationServicesPage = () => {
         </div>
       </section>
 
-      {/* =========================================================
-          FEATURES
-      ========================================================= */}
       <section className="border-y border-slate-200 dark:border-violet-500/15">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3">
@@ -219,9 +216,6 @@ const QaAutomationServicesPage = () => {
         </div>
       </section>
 
-      {/* =========================================================
-          INTRO
-      ========================================================= */}
       <section className="py-16 sm:py-20">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-20">
@@ -277,9 +271,6 @@ const QaAutomationServicesPage = () => {
         </div>
       </section>
 
-      {/* =========================================================
-          BENEFITS / APPROACH
-      ========================================================= */}
       <section className="relative py-16 sm:py-20 bg-slate-100/70 dark:bg-[#0b1528]/50 border-y border-slate-200 dark:border-violet-500/15">
         <div
           className="absolute left-0 top-0 w-72 h-72 blur-[120px] opacity-10 pointer-events-none"
@@ -357,10 +348,7 @@ const QaAutomationServicesPage = () => {
           </div>
         </div>
       </section>
-
-      {/* =========================================================
-          FINAL STATEMENT
-      ========================================================= */}
+      
       <section className="py-16 sm:py-20">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <motion.div
