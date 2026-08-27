@@ -11,6 +11,7 @@ import {
   Megaphone,
   ArrowUpRight,
   Sparkles,
+  CloudCog,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -67,6 +68,16 @@ const services = [
     tags: ["SaaS", "Microservices", "API Integration", "Cloud"],
   },
   {
+    number: "09",
+    icon: CloudCog,
+    color: "#8B5CF6",
+    title: "Cloud & DevOps Services",
+    description:
+      "Modern cloud infrastructure, CI/CD automation, containerization, monitoring and scalable deployment solutions built for reliability and performance.",
+    tags: ["AWS", "Azure", "Docker", "CI/CD"],
+  },
+
+  {
     number: "06",
     icon: Building2,
     color: "#06B6D4",
@@ -112,7 +123,6 @@ const ServicesSection = () => {
         dark:text-white
       "
     >
-      {/* Background glow */}
       <div
         className="
           pointer-events-none
@@ -145,13 +155,13 @@ const ServicesSection = () => {
         }}
       />
 
-      {/* Grid background */}
+      {/* Grid */}
       <div
         className="
           pointer-events-none
           absolute
           inset-0
-          opacity-[0.035]
+          opacity-[0.025]
           dark:opacity-[0.06]
         "
         style={{
@@ -177,9 +187,8 @@ const ServicesSection = () => {
           lg:py-10
         "
       >
-        {/* HEADER */}
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-20">
-          {/* Left */}
+        <div className="grid grid-cols-1 gap-7 lg:grid-cols-12 lg:gap-16">
+          {/* LEFT */}
           <div className="lg:col-span-3">
             <div className="sticky top-22">
               <div
@@ -203,7 +212,6 @@ const ServicesSection = () => {
               <div className="mt-6 hidden lg:block">
                 <p
                   className="
-                    -mt-4
                     max-w-55
                     text-sm
                     leading-relaxed
@@ -218,7 +226,8 @@ const ServicesSection = () => {
             </div>
           </div>
 
-          {/* Right */}
+          {/* RIGHT */}
+
           <div className="lg:col-span-9">
             <motion.h2
               initial={{
@@ -247,13 +256,9 @@ const ServicesSection = () => {
             >
               We build digital
               <br />
-
               <span className="relative inline-block">
                 <span
-                  className="
-                    bg-clip-text
-                    text-transparent
-                  "
+                  className="bg-clip-text text-transparent"
                   style={{
                     backgroundImage: `linear-gradient(
                       100deg,
@@ -266,7 +271,16 @@ const ServicesSection = () => {
                   experiences
                 </span>
 
-                <span
+                <motion.span
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    opacity: [0.7, 1, 0.7],
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                   className="
                     absolute
                     -right-5
@@ -285,9 +299,7 @@ const ServicesSection = () => {
                   }}
                 />
               </span>
-
               <br />
-
               <span
                 className="
                   text-slate-400
@@ -315,10 +327,10 @@ const ServicesSection = () => {
                 delay: 0.15,
               }}
               className="
-                mt-6
+                mt-5
                 max-w-2xl
                 text-base
-                leading-8
+                leading-7
                 text-slate-600
                 dark:text-slate-400
                 sm:text-lg
@@ -329,9 +341,9 @@ const ServicesSection = () => {
               including Healthcare, Retail, Finance, and Manufacturing.
             </motion.p>
 
-            <div className="mt-9 flex items-center gap-4">
+            <div className="mt-7 flex items-center gap-4">
               <div
-                className="h-px w-24"
+                className="h-px w-20"
                 style={{
                   background: `linear-gradient(
                     90deg,
@@ -364,8 +376,7 @@ const ServicesSection = () => {
           </div>
         </div>
 
-        {/* SERVICE GRID */}
-        <div className="mt-10 lg:mt-12">
+        <div className="mt-9 lg:mt-11">
           <div
             className="
               grid
@@ -388,7 +399,7 @@ const ServicesSection = () => {
                   key={service.title}
                   initial={{
                     opacity: 0,
-                    y: 35,
+                    y: 25,
                   }}
                   whileInView={{
                     opacity: 1,
@@ -396,23 +407,32 @@ const ServicesSection = () => {
                   }}
                   viewport={{
                     once: true,
-                    margin: "-80px",
+                    margin: "-60px",
                   }}
                   transition={{
-                    duration: 0.65,
+                    duration: 0.55,
                     delay: index * 0.035,
+                    ease: [0.22, 1, 0.36, 1],
                   }}
                   onMouseEnter={() => setActiveService(index)}
                   onMouseLeave={() => setActiveService(null)}
+                  whileHover={{
+                    backgroundColor: "rgba(39,110,165,0.025)",
+                  }}
                   className="
                     group
                     relative
                     min-w-0
+                    cursor-pointer
                     border-b
                     border-slate-200
+                    transition-colors
+                    duration-300
                     dark:border-white/10
+                    dark:hover:bg-white/[0.018]
                   "
                 >
+                  {/* Vertical active line */}
                   <motion.div
                     initial={false}
                     animate={{
@@ -420,16 +440,18 @@ const ServicesSection = () => {
                       scaleY: isActive ? 1 : 0,
                     }}
                     transition={{
-                      duration: 0.45,
+                      duration: 0.4,
+                      ease: [0.22, 1, 0.36, 1],
                     }}
                     className="
                       pointer-events-none
                       absolute
                       inset-y-0
                       left-0
-                      z-0
-                      w-px
+                      z-20
+                      w-0.5
                       origin-top
+                      rounded-full
                       bg-[#276ea5]
                       dark:bg-[#60a5fa]
                     "
@@ -439,26 +461,25 @@ const ServicesSection = () => {
                     className="
                       relative
                       z-10
-                      flex
-                      min-h-100
-                      flex-col
-                      px-6
-                      py-7
-                      transition-all
-                      duration-500
-                      sm:px-8
-                      sm:py-8
-                      lg:min-h-110
-                      lg:px-10
-                      lg:py-10
-                      xl:px-12
+                      px-5
+                      py-6
+                      sm:px-7
+                      sm:py-7
+                      lg:px-8
+                      lg:py-8
+                      xl:px-9
                     "
                   >
-                    {/* Top line */}
                     <div className="flex items-center justify-between">
-                      <span
+                      <motion.span
+                        animate={{
+                          x: isActive ? 3 : 0,
+                        }}
+                        transition={{
+                          duration: 0.25,
+                        }}
                         className={`
-                          text-xs
+                          text-[11px]
                           font-bold
                           tracking-[0.15em]
                           transition-colors
@@ -471,13 +492,14 @@ const ServicesSection = () => {
                         `}
                       >
                         {service.number}
-                      </span>
+                      </motion.span>
 
                       <motion.div
                         animate={{
-                          x: isActive ? 0 : -8,
-                          opacity: isActive ? 1 : 0.35,
-                          rotate: isActive ? 0 : -10,
+                          x: isActive ? 0 : -5,
+                          y: isActive ? -1 : 0,
+                          opacity: isActive ? 1 : 0.25,
+                          rotate: isActive ? 0 : -8,
                         }}
                         transition={{
                           duration: 0.3,
@@ -487,127 +509,156 @@ const ServicesSection = () => {
                           dark:text-[#60a5fa]
                         "
                       >
-                        <ArrowUpRight size={20} />
+                        <ArrowUpRight size={18} />
                       </motion.div>
                     </div>
 
-                    {/* Service Icon */}
-                    <motion.div
-                      animate={{
-                        y: isActive ? -4 : 0,
-                        rotate: isActive ? -6 : 0,
-                      }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 20,
-                      }}
-                      className="relative mt-8 w-fit"
-                    >
-                      <div
-                        className={`
-                          absolute
-                          inset-0
-                          rounded-full
-                          blur-xl
-                          transition-opacity
-                          duration-500
-                          ${isActive ? "opacity-50" : "opacity-0"}
-                        `}
-                        style={{
-                          background: service.color,
+                    <div className="mt-6 flex items-center gap-3.5">
+                      {/* ICON */}
+                      <motion.div
+                        animate={{
+                          scale: isActive ? 1.08 : 1,
+                          rotate: isActive ? -5 : 0,
+                          y: isActive ? -1 : 0,
                         }}
-                      />
-
-                      <Icon
-                        size={32}
-                        strokeWidth={1.5}
+                        transition={{
+                          type: "spring",
+                          stiffness: 320,
+                          damping: 18,
+                        }}
                         className="
                           relative
-                          z-10
+                          flex
+                          h-11
+                          w-11
+                          shrink-0
+                          items-center
+                          justify-center
+                          rounded-xl
+                          border
+                          bg-white/70
+                          shadow-sm
                           transition-all
                           duration-300
+                          dark:bg-white/[0.035]
                         "
                         style={{
                           color: service.color,
-                          filter: isActive
-                            ? `drop-shadow(0 0 10px ${service.color}55)`
-                            : "none",
+                          borderColor: `${service.color}35`,
+                          boxShadow: isActive
+                            ? `0 8px 25px ${service.color}18`
+                            : undefined,
                         }}
-                      />
-                    </motion.div>
+                      >
+                        <motion.span
+                          animate={{
+                            scale: isActive ? 1.2 : 0.8,
+                            opacity: isActive ? 0.18 : 0,
+                          }}
+                          transition={{
+                            duration: 0.4,
+                          }}
+                          className="
+                            pointer-events-none
+                            absolute
+                            inset-1
+                            rounded-lg
+                            blur-lg
+                          "
+                          style={{
+                            background: service.color,
+                          }}
+                        />
 
-                    {/* Title */}
-                    <motion.h3
+                        <Icon
+                          size={21}
+                          strokeWidth={1.7}
+                          className="relative z-10"
+                        />
+                      </motion.div>
+
+                      {/* TITLE */}
+
+                      <motion.h3
+                        animate={{
+                          x: isActive ? 3 : 0,
+                        }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 300,
+                          damping: 25,
+                        }}
+                        className={`
+                          min-w-0
+                          flex-1
+                          text-lg
+                          font-bold
+                          leading-tight
+                          tracking-tight
+                          transition-colors
+                          duration-300
+                          sm:text-xl
+                          lg:text-[21px]
+                          ${
+                            isActive
+                              ? "text-[#276ea5] dark:text-white"
+                              : "text-slate-900 dark:text-white"
+                          }
+                        `}
+                      >
+                        {service.title}
+                      </motion.h3>
+                    </div>
+
+                    <motion.p
                       animate={{
-                        x: isActive ? 6 : 0,
+                        opacity: isActive ? 1 : 0.82,
+                        x: isActive ? 3 : 0,
                       }}
                       transition={{
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 25,
+                        duration: 0.3,
                       }}
-                      className={`
-                        mt-6
-                        max-w-md
-                        text-2xl
-                        font-bold
-                        tracking-tight
-                        transition-colors
-                        duration-300
-                        sm:text-3xl
-                        lg:text-[30px]
-                        ${
-                          isActive
-                            ? "text-[#276ea5] dark:text-white"
-                            : "text-slate-900 dark:text-white"
-                        }
-                      `}
-                    >
-                      {service.title}
-                    </motion.h3>
-
-                    {/* Description */}
-                    <p
                       className="
                         mt-4
                         max-w-xl
-                        text-sm
-                        leading-7
+                        text-[13px]
+                        leading-6
                         text-slate-500
-                        transition-colors
-                        duration-300
                         dark:text-slate-400
                       "
                     >
                       {service.description}
-                    </p>
+                    </motion.p>
 
-                    {/* Tags */}
                     <div
-                      className={`
-                        mt-auto
+                      className="
+                        mt-5
                         flex
                         flex-wrap
-                        gap-x-4
-                        gap-y-2
-                        pt-6
-                        transition-all
-                        duration-500
-                        ${isActive ? "opacity-100" : "opacity-70"}
-                      `}
+                        gap-x-3.5
+                        gap-y-1.5
+                      "
                     >
-                      {service.tags.map((tag) => (
-                        <span
+                      {service.tags.map((tag, tagIndex) => (
+                        <motion.span
                           key={tag}
+                          initial={false}
+                          animate={{
+                            opacity: isActive ? 1 : 0.65,
+                            x: isActive ? 2 : 0,
+                          }}
+                          transition={{
+                            duration: 0.25,
+                            delay: tagIndex * 0.02,
+                          }}
                           className="
                             flex
                             items-center
-                            gap-2
-                            text-[10px]
+                            gap-1.5
+                            text-[9px]
                             font-semibold
                             uppercase
-                            tracking-wide
+                            tracking-[0.06em]
                             text-slate-400
                             dark:text-slate-500
                           "
@@ -616,24 +667,27 @@ const ServicesSection = () => {
                             className="
                               h-1
                               w-1
+                              shrink-0
                               rounded-full
-                              bg-slate-400
                               transition-colors
                               duration-300
-                              dark:bg-slate-600
                             "
+                            style={{
+                              backgroundColor: isActive
+                                ? service.color
+                                : undefined,
+                            }}
                           />
 
                           {tag}
-                        </span>
+                        </motion.span>
                       ))}
                     </div>
 
-                    {/* Active line */}
                     <motion.div
                       initial={false}
                       animate={{
-                        width: isActive ? "64px" : "0px",
+                        width: isActive ? "58px" : "0px",
                         opacity: isActive ? 1 : 0,
                       }}
                       transition={{
@@ -643,31 +697,32 @@ const ServicesSection = () => {
                         absolute
                         bottom-0
                         left-0
-                        h-px
+                        h-0.5
+                        rounded-full
                         bg-[#276ea5]
                         dark:bg-[#60a5fa]
                       "
                     />
                   </div>
 
-                  {/* Hover background */}
                   <motion.div
                     initial={false}
                     animate={{
                       opacity: isActive ? 1 : 0,
-                      scaleX: isActive ? 1 : 0,
                     }}
                     transition={{
-                      duration: 0.45,
+                      duration: 0.4,
                     }}
                     className="
                       pointer-events-none
                       absolute
-                      inset-0
+                      bottom-0
+                      right-0
+                      top-0
                       z-0
-                      origin-left
-                      bg-[linear-gradient(135deg,rgba(39,110,165,0.055),transparent_60%)]
-                      dark:bg-[linear-gradient(135deg,rgba(39,110,165,0.08),transparent_60%)]
+                      w-1/2
+                      bg-[radial-gradient(circle_at_bottom_right,rgba(39,110,165,0.08),transparent_65%)]
+                      dark:bg-[radial-gradient(circle_at_bottom_right,rgba(96,165,250,0.07),transparent_65%)]
                     "
                   />
                 </motion.div>
@@ -676,11 +731,10 @@ const ServicesSection = () => {
           </div>
         </div>
 
-        {/* CTA */}
         <motion.div
           initial={{
             opacity: 0,
-            y: 25,
+            y: 20,
           }}
           whileInView={{
             opacity: 1,
@@ -690,15 +744,19 @@ const ServicesSection = () => {
             once: true,
           }}
           transition={{
-            duration: 0.7,
+            duration: 0.6,
           }}
           className="
-            mt-14
+            mt-11
             flex
             flex-col
             items-start
             justify-between
-            gap-6
+            gap-5
+            border-t
+            border-slate-200
+            pt-6
+            dark:border-white/10
             sm:flex-row
             sm:items-center
           "
@@ -706,7 +764,7 @@ const ServicesSection = () => {
           <div>
             <p
               className="
-                text-sm
+                text-xs
                 font-semibold
                 uppercase
                 tracking-[0.18em]
@@ -718,11 +776,11 @@ const ServicesSection = () => {
 
             <h3
               className="
-                mt-2
-                text-2xl
+                mt-1.5
+                text-xl
                 font-bold
                 tracking-tight
-                sm:text-3xl
+                sm:text-2xl
               "
             >
               Let's build something remarkable.
@@ -734,24 +792,25 @@ const ServicesSection = () => {
             className="
               group
               inline-flex
+              cursor-pointer
               items-center
-              gap-3
+              gap-2.5
               border-b-2
               border-[#276ea5]
-              pb-2
+              pb-1.5
               text-sm
               font-bold
               text-[#276ea5]
               transition-all
-              hover:gap-5
+              duration-300
+              hover:gap-4
               dark:border-[#60a5fa]
               dark:text-[#60a5fa]
             "
           >
             Explore all services
-
             <ArrowUpRight
-              size={18}
+              size={17}
               className="
                 transition-transform
                 duration-300

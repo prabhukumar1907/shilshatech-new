@@ -273,7 +273,7 @@ const ContactInformation = memo(function ContactInformation() {
               </span>
 
               <span className="text-sm font-semibold text-slate-800 dark:text-slate-200">
-                +91 - 120- 412- 0113
+                +91-926-630-0671
               </span>
             </div>
 

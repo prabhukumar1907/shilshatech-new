@@ -5,6 +5,8 @@ import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
 import PageLoader from "./lib/PageLoader";
 import Home from "./pages/Home";
+import Careers from "./pages/careers/Careers";
+import AIRPASolutions from "./pages/services/AIRPASolutions";
 const HireADeveloper = lazy(() => import("./pages/HireADeveloper"));
 const FullStackDeveloper = lazy(
   () => import("./pages/hireDeveloper/FullStackDeveloper"),
@@ -124,6 +126,7 @@ const ModelTrainingPage = lazy(() => import("./pages/ModelTrainingPage"));
 const NaturalLanguageProcessingPage = lazy(() => import("./pages/NLP"));
 const LlmDevelopmentPage = lazy(() => import("./pages/LlmDevelopmentPage"));
 const AiConsultingPage = lazy(() => import("./pages/AiConsultingPage"));
+const Team = lazy(() => import("./pages/Team"));
 
 const App = () => {
   return (
@@ -137,6 +140,9 @@ const App = () => {
           <Route path="/ai-consulting-company" element={<AiConsultingPage />} />
           <Route path="/ai-modal-training" element={<ModelTrainingPage />} />
           <Route path="/generative-ai" element={<GenerativeAiPage />} />
+          <Route path="/careers" element={<Careers />} />
+           <Route path="/team" element={<Team />} />
+           <Route path="/services/ai-rpa-solutions" element={<AIRPASolutions />} />
           <Route
             path="/natural-language-processing"
             element={<NaturalLanguageProcessingPage />}

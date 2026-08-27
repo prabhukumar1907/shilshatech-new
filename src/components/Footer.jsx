@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import {
   MapPin,
   Phone,
   Mail,
-  Send,
   ArrowUpRight,
-  CheckCircle2,
   Sparkles,
   ShieldCheck,
   Code2,
+  Building2,
 } from "lucide-react";
 
 import { FaFacebook } from "react-icons/fa";
@@ -17,31 +16,96 @@ import { BsInstagram, BsTwitterX, BsLinkedin } from "react-icons/bs";
 import logo from "../assets/shilshalogofinal.webp";
 
 export default function Footer() {
-  const [submitted, setSubmitted] = useState(false);
+  const services = [
+    {
+      label: "AI & RPA Solutions",
+      url: "/services/ai-rpa-solutions",
+    },
+    {
+      label: "Mobile App Dev",
+      url: "/services",
+      // url: "/services/mobile-app-development",
+    },
+    {
+      label: "Web Applications",
+      url: "/services",
+      //  url: "/services/web-application-development",
+    },
+    {
+      label: "QA & Automation",
+      url: "/technologies/qa-automation",
+    },
+    {
+      label: "Application Support",
+      url: "/services",
+      // url: "/services/application-support",
+    },
+  ];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
-  };
+  const companyLinks = [
+    {
+      label: "About Us",
+      url: "/about-us",
+    },
+    {
+      label: "Careers",
+      url: "/careers",
+    },
+    {
+      label: "Our Team",
+      url: "/team",
+    },
+    {
+      label: "Contact Us",
+      url: "/contact-us",
+    },
+    // {
+    //   label: "Case Studies",
+    //   url: "/case-studies",
+    // },
+  ];
+
+  const developers = [
+    {
+      name: "ReactJS Developers",
+      path: "/hire-developers/react-developer",
+    },
+    {
+      name: "Node.js Developers",
+      path: "/hire-developers/nodejs-developer",
+    },
+    {
+      name: "Full Stack Experts",
+      path: "/hire-developers/full-stack-developer",
+    },
+    {
+      name: "Mobile App Engineers",
+      path: "/hire-developers/mobile-app-developer",
+    },
+    {
+      name: "AI & ML Specialists",
+      path: "/hire-developers/ai-ml-developer",
+    },
+  ];
 
   return (
-    <footer className="relative font-sans bg-slate-50 text-slate-700 dark:bg-[#060b13] dark:text-slate-200 border-t border-slate-200 dark:border-slate-800/80 transition-colors duration-500 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.08] bg-[radial-gradient(#276ea5_1px,transparent_1px)] dark:bg-[radial-gradient(#60a5fa_1px,transparent_1px)] bg-size-[24px_24px]" />
+    <footer className="relative overflow-hidden border-t border-slate-200 bg-slate-50 font-sans text-slate-700 transition-colors duration-500 dark:border-slate-800/80 dark:bg-[#060b13] dark:text-slate-200">
+      <div className="pointer-events-none absolute inset-0 opacity-[0.03] bg-[radial-gradient(#276ea5_1px,transparent_1px)] bg-size-[24px_24px] dark:opacity-[0.08] dark:bg-[radial-gradient(#60a5fa_1px,transparent_1px)]" />
 
       <div
-        className="absolute -top-32 left-1/4 w-125 h-75 rounded-full blur-[130px] pointer-events-none opacity-20 bg-[#276ea5]"
-        style={{ willChange: "transform" }}
-      />
-      <div
-        className="absolute bottom-0 right-1/4 w-100 h-62.5 rounded-full blur-[120px] pointer-events-none opacity-20 bg-[#276ea5]"
+        className="pointer-events-none absolute -top-32 left-1/4 h-75 w-125 rounded-full bg-[#276ea5] opacity-20 blur-[130px]"
         style={{ willChange: "transform" }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-16 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-slate-200 dark:border-slate-800/80">
-          <div className="lg:col-span-3 space-y-5">
-            <Link to="/" className="items-center group inline-block">
+      <div
+        className="pointer-events-none absolute bottom-0 right-1/4 h-62.5 w-100 rounded-full bg-[#276ea5] opacity-20 blur-[120px]"
+        style={{ willChange: "transform" }}
+      />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pb-8 pt-16 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-10 border-b border-slate-200 pb-12 dark:border-slate-800/80 sm:grid-cols-2 lg:grid-cols-12 lg:gap-7">
+          <div className="space-y-5 sm:col-span-2 lg:col-span-3">
+            <Link to="/" className="group inline-block">
               <div className="relative">
                 <img
                   src={logo}
@@ -55,15 +119,16 @@ export default function Footer() {
               </div>
             </Link>
 
-            <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300 pr-2">
+            <p className="max-w-sm pr-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
               Part of ATS USA,{" "}
-              <strong className="text-slate-900 dark:text-white font-semibold">
+              <strong className="font-semibold text-slate-900 dark:text-white">
                 Shilsha Technologies
               </strong>{" "}
               delivers enterprise software engineering, AI, RPA, Mobile App
               development, Web applications, and automated QA services.
             </p>
 
+            {/* Social Links */}
             <div className="flex items-center gap-2.5 pt-2">
               {[
                 {
@@ -90,113 +155,88 @@ export default function Footer() {
                   label: "Twitter",
                   color: "#000000",
                 },
-              ].map((item, i) => (
+              ].map((item) => (
                 <a
-                  key={i}
+                  key={item.label}
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={item.label}
-                  className="relative group w-9 h-9 rounded-xl bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-800 flex items-center justify-center transition-all duration-300 shadow-sm hover:scale-105 hover:bg-blue-50 dark:hover:bg-blue-950/30 hover:border-[#60a5fa]/50"
+                  className="group relative flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-white/95 shadow-sm transition-all duration-300 hover:scale-105 hover:border-[#60a5fa]/50 hover:bg-blue-50 dark:border-slate-800 dark:bg-slate-900/95 dark:hover:bg-blue-950/30"
                 >
                   <item.icon
                     size={15}
-                    color={`${item.color}`}
-                    className="relative z-10 transition-transform duration-300 group-hover:text-white group-hover:scale-110"
+                    color={item.color}
+                    className="relative z-10 transition-transform duration-300 group-hover:scale-110"
                   />
                 </a>
               ))}
             </div>
           </div>
 
-          <div className="lg:col-span-2 space-y-4">
-            <h4 className="text-xs font-bold uppercase tracking-widest flex items-center gap-1.5 text-[#276ea5] dark:text-[#60a5fa]">
+          <div className="space-y-4 lg:col-span-2">
+            <h4 className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-[#276ea5] dark:text-[#60a5fa]">
               <Sparkles size={13} />
               Services
             </h4>
+
             <ul className="space-y-2.5 text-sm text-slate-600 dark:text-slate-300">
-              {[
-                "AI & RPA Solutions",
-                "Mobile App Dev",
-                "Web Applications",
-                "QA & Automation",
-                "Application Support",
-              ].map((link, i) => (
-                <li key={i}>
-                  <Link
-                    to="/services"
-                    className="relative inline-flex items-center gap-1 group py-0.5 transition-colors duration-300 hover:text-[#276ea5] dark:hover:text-[#60a5fa]"
-                  >
-                    <span>{link}</span>
-                    <ArrowUpRight
-                      size={12}
-                      className="opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-300 text-[#60a5fa]"
-                    />
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 rounded-full transition-all duration-300 group-hover:w-full opacity-0 group-hover:opacity-100 bg-linear-to-r from-[#276ea5] to-[#60a5fa]" />
-                  </Link>
+              {services.map((item) => (
+                <li key={item.url}>
+                  <FooterLink to={item.url} label={item.label} />
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="lg:col-span-2 space-y-4">
-            <h4 className="text-xs font-bold uppercase tracking-widest flex items-center gap-1.5 text-[#276ea5] dark:text-[#60a5fa]">
+          <div className="space-y-4 lg:col-span-2">
+            <h4 className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-[#276ea5] dark:text-[#60a5fa]">
               <Code2 size={13} />
               Hire Developers
             </h4>
+
             <ul className="space-y-2.5 text-sm text-slate-600 dark:text-slate-300">
-              {[
-                {
-                  name: "ReactJS Developers",
-                  path: "/hire-developers/react-developer",
-                },
-                {
-                  name: "Node.js Developers",
-                  path: "/hire-developers/nodejs-developer",
-                },
-                {
-                  name: "Full Stack Experts",
-                  path: "/hire-developers/full-stack-developer",
-                },
-                {
-                  name: "Mobile App Engineers",
-                  path: "/hire-developers/mobile-app-developer",
-                },
-                {
-                  name: "AI & ML Specialists",
-                  path: "/hire-developers/ai-ml-developer",
-                },
-              ].map((item, i) => (
-                <li key={i}>
-                  <Link
-                    to={item.path}
-                    className="relative inline-flex items-center gap-1 group py-0.5 transition-colors duration-300 hover:text-[#276ea5] dark:hover:text-[#60a5fa]"
-                  >
-                    <span>{item.name}</span>
-                    <ArrowUpRight
-                      size={12}
-                      className="opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-300 text-[#60a5fa]"
-                    />
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 rounded-full transition-all duration-300 group-hover:w-full opacity-0 group-hover:opacity-100 bg-linear-to-r from-[#276ea5] to-[#60a5fa]" />
-                  </Link>
+              {developers.map((item) => (
+                <li key={item.path}>
+                  <FooterLink to={item.path} label={item.name} />
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="lg:col-span-2 space-y-4">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-[#276ea5] dark:text-[#60a5fa]">
-              Address
+          <div className="space-y-4 lg:col-span-2">
+            <h4 className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-[#276ea5] dark:text-[#60a5fa]">
+              <Building2 size={13} />
+              Company
             </h4>
 
-            <div className="space-y-3 text-sm text-slate-600 dark:text-slate-300">
+            <ul className="space-y-2.5 text-sm text-slate-600 dark:text-slate-300">
+              {companyLinks.map((item) => (
+                <li key={item.url}>
+                  <FooterLink to={item.url} label={item.label} />
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact us */}
+          <div className="space-y-4 lg:col-span-3">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-[#276ea5] dark:text-[#60a5fa]">
+              Contact Us
+            </h4>
+
+            <div className="space-y-4 text-sm text-slate-600 dark:text-slate-300">
+              {/* Address */}
               <div className="flex items-start gap-3">
                 <MapPin
                   size={18}
-                  className="shrink-0 mt-0.5 text-[#276ea5] dark:text-[#60a5fa]"
+                  className="mt-0.5 shrink-0 text-[#276ea5] dark:text-[#60a5fa]"
                 />
-                <address className="not-italic leading-relaxed text-xs sm:text-sm">
-                  Shilsha Technologies
+
+                <address className="not-italic text-xs leading-relaxed sm:text-sm">
+                  <strong className="font-semibold text-slate-800 dark:text-slate-200">
+                    Shilsha Technologies
+                  </strong>
                   <br />
                   iThum Tower, Sector 62, Noida
                   <br />
@@ -204,85 +244,49 @@ export default function Footer() {
                 </address>
               </div>
 
-              <div className="flex items-center gap-3 pt-1">
+              {/* Phone */}
+              <div className="flex items-center gap-3">
                 <Phone
                   size={16}
                   className="shrink-0 text-[#276ea5] dark:text-[#60a5fa]"
                 />
+
                 <a
-                  href="tel:+911204120113"
-                  className="relative inline-block group py-0.5 hover:text-[#276ea5] dark:hover:text-[#60a5fa] transition-colors text-xs sm:text-sm"
+                  href="tel:+919266300671"
+                  className="group relative inline-block py-0.5 text-xs transition-colors hover:text-[#276ea5] dark:hover:text-[#60a5fa] sm:text-sm"
                 >
-                  +91 - 120 - 412 - 0113
-                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 rounded-full transition-all duration-300 group-hover:w-full opacity-0 group-hover:opacity-100 bg-linear-to-r from-[#276ea5] to-[#60a5fa]" />
+                  +91 - 926 - 630 - 0671
+                  <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 rounded-full bg-linear-to-r from-[#276ea5] to-[#60a5fa] opacity-0 transition-all duration-300 group-hover:w-full group-hover:opacity-100" />
                 </a>
               </div>
 
+              {/* Email */}
               <div className="flex items-center gap-3">
                 <Mail
                   size={16}
                   className="shrink-0 text-[#276ea5] dark:text-[#60a5fa]"
                 />
+
                 <a
                   href="mailto:info@shilshatech.com"
-                  className="relative inline-block group py-0.5 hover:text-[#276ea5] dark:hover:text-[#60a5fa] transition-colors text-xs sm:text-sm"
+                  className="group relative inline-block py-0.5 text-xs transition-colors hover:text-[#276ea5] dark:hover:text-[#60a5fa] sm:text-sm"
                 >
                   info@shilshatech.com
-                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 rounded-full transition-all duration-300 group-hover:w-full opacity-0 group-hover:opacity-100 bg-linear-to-r from-[#276ea5] to-[#60a5fa]" />
+                  <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 rounded-full bg-linear-to-r from-[#276ea5] to-[#60a5fa] opacity-0 transition-all duration-300 group-hover:w-full group-hover:opacity-100" />
                 </a>
               </div>
             </div>
           </div>
-
-          <div className="lg:col-span-3 space-y-4">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-[#276ea5] dark:text-[#60a5fa]">
-              Want to ask something?
-            </h4>
-
-            {submitted ? (
-              <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center gap-2 text-xs">
-                <CheckCircle2 size={16} />
-                <span>Thank you! Your query has been submitted.</span>
-              </div>
-            ) : (
-              <form
-                action="https://formsubmit.co/info@shilshatech.com"
-                method="POST"
-                onSubmit={handleSubmit}
-                className="p-4 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-800 space-y-3 shadow-xl"
-              >
-                <input
-                  type="email"
-                  name="E-mail"
-                  placeholder="Your Email"
-                  required
-                  className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-[#060b13]/80 border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#276ea5] dark:focus:border-[#60a5fa] focus:ring-1 focus:ring-[#276ea5] dark:focus:ring-[#60a5fa] transition-all duration-300"
-                />
-                <input
-                  type="text"
-                  name="Message"
-                  placeholder="Your Query"
-                  required
-                  className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-[#060b13]/80 border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#276ea5] dark:focus:border-[#60a5fa] focus:ring-1 focus:ring-[#276ea5] dark:focus:ring-[#60a5fa] transition-all duration-300"
-                />
-                <button
-                  type="submit"
-                  className="w-full py-2.5 cursor-pointer text-white font-semibold text-xs rounded-xl transition-all duration-300 shadow-md shadow-[#276ea5]/20 flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95 bg-linear-to-r from-[#276ea5] to-[#1e527b]"
-                >
-                  <span>Submit</span>
-                  <Send size={12} />
-                </button>
-              </form>
-            )}
-          </div>
         </div>
 
-        <div className="py-6 border-b border-slate-200 dark:border-slate-800/80">
+        {/* Legal */}
+        <div className="border-b border-slate-200 py-6 dark:border-slate-800/80">
           <div className="flex items-start gap-2.5 text-[11px] leading-relaxed text-slate-500 dark:text-slate-400">
             <ShieldCheck
               size={14}
-              className="shrink-0 mt-0.5 text-slate-400 dark:text-slate-500"
+              className="mt-0.5 shrink-0 text-slate-400 dark:text-slate-500"
             />
+
             <p>
               <strong className="font-medium text-slate-700 dark:text-slate-300">
                 Legal & Trademark Notice:
@@ -298,30 +302,52 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+        {/* Copyright */}
+        <div className="flex flex-col items-center justify-between gap-4 pt-6 text-xs text-slate-500 dark:text-slate-400 sm:flex-row">
           <p>
             © {new Date().getFullYear()} Shilsha Technologies. All rights
             reserved.
           </p>
+
           <div className="flex items-center gap-6">
             <Link
               to="/privacy-policy"
-              className="relative py-0.5 group hover:text-slate-900 dark:hover:text-slate-200 transition-colors"
+              className="group relative py-0.5 transition-colors hover:text-slate-900 dark:hover:text-slate-200"
             >
               Privacy Policy
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 rounded-full transition-all duration-300 group-hover:w-full opacity-0 group-hover:opacity-100 bg-linear-to-r from-[#276ea5] to-[#60a5fa]" />
+              <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 rounded-full bg-linear-to-r from-[#276ea5] to-[#60a5fa] opacity-0 transition-all duration-300 group-hover:w-full group-hover:opacity-100" />
             </Link>
+
             <span className="text-slate-300 dark:text-slate-700">|</span>
+
             <Link
               to="/terms-and-conditions"
-              className="relative py-0.5 group hover:text-slate-900 dark:hover:text-slate-200 transition-colors"
+              className="group relative py-0.5 transition-colors hover:text-slate-900 dark:hover:text-slate-200"
             >
               Terms & Conditions
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 rounded-full transition-all duration-300 group-hover:w-full opacity-0 group-hover:opacity-100 bg-linear-to-r from-[#276ea5] to-[#60a5fa]" />
+              <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 rounded-full bg-linear-to-r from-[#276ea5] to-[#60a5fa] opacity-0 transition-all duration-300 group-hover:w-full group-hover:opacity-100" />
             </Link>
           </div>
         </div>
       </div>
     </footer>
+  );
+}
+
+function FooterLink({ to, label }) {
+  return (
+    <Link
+      to={to}
+      className="group relative inline-flex items-center gap-1 py-0.5 transition-colors duration-300 hover:text-[#276ea5] dark:hover:text-[#60a5fa]"
+    >
+      <span>{label}</span>
+
+      <ArrowUpRight
+        size={12}
+        className="text-[#60a5fa] opacity-0 -translate-x-1 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+      />
+
+      <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 rounded-full bg-linear-to-r from-[#276ea5] to-[#60a5fa] opacity-0 transition-all duration-300 group-hover:w-full group-hover:opacity-100" />
+    </Link>
   );
 }

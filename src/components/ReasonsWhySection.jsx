@@ -75,13 +75,16 @@ const reasons = [
 ];
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 25 },
+  hidden: {
+    opacity: 0,
+    y: 25,
+  },
   show: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.55,
-      ease: "easeOut",
+      ease: [0.22, 1, 0.36, 1],
     },
   },
 };
@@ -102,22 +105,101 @@ const ReasonsWhySection = () => {
   return (
     <section
       id="reason-why"
-      className="relative overflow-hidden py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 font-sans bg-slate-50 text-slate-900 dark:bg-[#070d18] dark:text-white"
+      className="
+        relative
+        overflow-hidden
+        bg-slate-50
+        px-4
+        py-16
+        font-sans
+        text-slate-900
+        transition-colors
+        duration-500
+        dark:bg-[#070d18]
+        dark:text-white
+        sm:px-6
+        sm:py-20
+        lg:px-8
+        lg:py-24
+      "
     >
-      <div
-        className="absolute -top-32 left-1/3 w-125 h-125 rounded-full blur-[180px] opacity-10 pointer-events-none"
-        style={{ backgroundColor: brandTheme.primaryBlue }}
+      <motion.div
+        animate={{
+          x: [0, 35, 0],
+          y: [0, -25, 0],
+          scale: [1, 1.08, 1],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="
+          pointer-events-none
+          absolute
+          -top-32
+          left-1/3
+          h-125
+          w-125
+          rounded-full
+          bg-[#276ea5]/10
+          blur-[180px]
+          dark:bg-[#276ea5]/15
+        "
+      />
+
+      <motion.div
+        animate={{
+          x: [0, -30, 0],
+          y: [0, 25, 0],
+          scale: [1, 1.06, 1],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="
+          pointer-events-none
+          absolute
+          -bottom-40
+          -right-40
+          h-125
+          w-125
+          rounded-full
+          bg-[#60a5fa]/10
+          blur-[180px]
+          dark:bg-[#60a5fa]/10
+        "
       />
 
       <div
-        className="absolute bottom-0 -right-40 w-112.5 h-112.5 rounded-full blur-[180px] opacity-10 pointer-events-none"
-        style={{ backgroundColor: brandTheme.electricCyan }}
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          bg-[linear-gradient(#276ea5_1px,transparent_1px),linear-gradient(90deg,#276ea5_1px,transparent_1px)]
+          bg-size-[45px_45px]
+          opacity-[0.025]
+          dark:opacity-[0.05]
+        "
       />
 
-      <div className="absolute inset-0 pointer-events-none opacity-[0.025] dark:opacity-[0.05] bg-[linear-gradient(#276ea5_1px,transparent_1px),linear-gradient(90deg,#276ea5_1px,transparent_1px)] bg-size-[45px_45px]" />
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <div
+          className="
+            mb-16
+            grid
+            grid-cols-1
+            items-end
+            gap-10
+            lg:mb-20
+            lg:grid-cols-12
+            lg:gap-16
+          "
+        >
+          {/* LEFT HEADER */}
 
-      <div className="relative z-10 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-end mb-16 lg:mb-20">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -125,22 +207,65 @@ const ReasonsWhySection = () => {
             viewport={{ once: true }}
             className="lg:col-span-8"
           >
-            <div className="flex items-center gap-3 mb-5">
-              <span className="w-10 h-0.5 bg-[#276ea5] dark:bg-sky-400" />
+            <div className="mb-5 flex items-center gap-3">
+              <motion.span
+                initial={{ width: 0 }}
+                whileInView={{ width: 40 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.7,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="
+                  h-0.5
+                  bg-[#276ea5]
+                  dark:bg-sky-400
+                "
+              />
 
-              <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.18em] text-[#276ea5] dark:text-sky-400">
+              <span
+                className="
+                  text-xs
+                  font-bold
+                  uppercase
+                  tracking-[0.18em]
+                  text-[#276ea5]
+                  dark:text-sky-400
+                  sm:text-sm
+                "
+              >
                 Why Choose Shilsha Technologies
               </span>
             </div>
 
-            <h2 className="text-4xl sm:text-5xl lg:text-[4.25rem] font-black tracking-tight leading-[1.02]">
+            <h2
+              className="
+                text-4xl
+                font-black
+                leading-[1.02]
+                tracking-[-0.045em]
+                sm:text-5xl
+                lg:text-[4.25rem]
+              "
+            >
               More Than a
               <br />
-              <span className="bg-clip-text text-transparent bg-linear-to-r from-[#276ea5] via-[#1d4ed8] to-[#60a5fa]">
+              <span
+                className="
+                  bg-linear-to-r
+                  from-[#276ea5]
+                  via-[#1d4ed8]
+                  to-[#60a5fa]
+                  bg-clip-text
+                  text-transparent
+                "
+              >
                 Technology Partner
               </span>
             </h2>
           </motion.div>
+
+          {/* RIGHT DESCRIPTION */}
 
           <motion.div
             variants={fadeUp}
@@ -149,7 +274,15 @@ const ReasonsWhySection = () => {
             viewport={{ once: true }}
             className="lg:col-span-4"
           >
-            <p className="text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+            <p
+              className="
+                text-base
+                leading-relaxed
+                text-slate-600
+                dark:text-slate-400
+                sm:text-lg
+              "
+            >
               Shilsha Technologies is a premier web and mobile application
               engineering firm. We build high-performing Web Apps, iOS/Android
               solutions, and enterprise software designed to scale.
@@ -157,17 +290,41 @@ const ReasonsWhySection = () => {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+        <div
+          className="
+            grid
+            grid-cols-1
+            gap-6
+            lg:grid-cols-12
+            lg:gap-8
+          "
+        >
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="lg:col-span-5 relative group"
+            className="group relative lg:col-span-5"
           >
-            <div className="relative h-full min-h-125 overflow-hidden rounded-4xl border border-slate-200 dark:border-white/10 bg-[#0b1528] shadow-xl">
-              {/* Image */}
-              <img
+            <div
+              className="
+                relative
+                min-h-125
+                h-full
+                overflow-hidden
+                rounded-4xl
+                border
+                border-slate-200
+                bg-[#0b1528]
+                shadow-xl
+                shadow-slate-300/20
+                dark:border-white/10
+                dark:shadow-black/30
+              "
+            >
+              {/* IMAGE */}
+
+              <motion.img
                 src={askingImg}
                 alt="Engineering team collaboration"
                 width={480}
@@ -175,45 +332,171 @@ const ReasonsWhySection = () => {
                 loading={ABOVE_FOLD ? "eager" : "lazy"}
                 fetchPriority={ABOVE_FOLD ? "high" : "auto"}
                 decoding="async"
-                className="absolute inset-0 w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
+                className="
+                  absolute
+                  inset-0
+                  h-full
+                  w-full
+                  object-cover
+                  opacity-80
+                  transition-transform
+                  duration-1000
+                  ease-out
+                  group-hover:scale-105
+                "
               />
 
-              <div className="absolute inset-0 bg-linear-to-b from-[#070d18]/20 via-[#070d18]/30 to-[#070d18]" />
+              {/* IMAGE OVERLAY */}
 
-              <div className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-[#070d18]/60 to-transparent" />
+              <div
+                className="
+                  absolute
+                  inset-0
+                  bg-linear-to-b
+                  from-[#070d18]/10
+                  via-[#070d18]/35
+                  to-[#070d18]
+                "
+              />
 
-              {/* Number */}
-              {/*
-              <div className="absolute top-7 left-7">
-                <span className="text-sm font-bold tracking-[0.2em] text-sky-300">
-                  {featuredReason.id}
-                </span>
-              </div> */}
+              <div
+                className="
+                  absolute
+                  inset-x-0
+                  top-0
+                  h-40
+                  bg-linear-to-b
+                  from-[#070d18]/60
+                  to-transparent
+                "
+              />
 
-              {/* Top badge */}
-              <div className="absolute top-6 right-6 flex items-center gap-2 px-3 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+              {/* TOP BADGE */}
+
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  y: -10,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                viewport={{
+                  once: true,
+                }}
+                transition={{
+                  delay: 0.25,
+                  duration: 0.5,
+                }}
+                className="
+                  absolute
+                  right-6
+                  top-6
+                  flex
+                  items-center
+                  gap-2
+                  rounded-full
+                  border
+                  border-white/20
+                  bg-white/10
+                  px-3
+                  py-2
+                  backdrop-blur-md
+                "
+              >
                 <Sparkles size={14} className="text-sky-300" />
 
                 <span className="text-xs font-semibold text-white">
                   Our Difference
                 </span>
-              </div>
+              </motion.div>
 
-              {/* Content */}
-              <div className="absolute bottom-0 left-0 right-0 p-7 sm:p-9">
-                <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center mb-6">
+              {/* FEATURED CONTENT */}
+
+              <div
+                className="
+                  absolute
+                  bottom-0
+                  left-0
+                  right-0
+                  p-7
+                  sm:p-9
+                "
+              >
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                    scale: 0.8,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    scale: 1,
+                  }}
+                  viewport={{
+                    once: true,
+                  }}
+                  transition={{
+                    delay: 0.2,
+                    type: "spring",
+                    stiffness: 180,
+                  }}
+                  whileHover={{
+                    scale: 1.06,
+                    rotate: -4,
+                  }}
+                  className="
+                    mb-6
+                    flex
+                    h-14
+                    w-14
+                    items-center
+                    justify-center
+                    rounded-2xl
+                    border
+                    border-white/20
+                    bg-white/10
+                    backdrop-blur-md
+                  "
+                >
                   <featuredReason.icon size={26} className="text-sky-300" />
-                </div>
+                </motion.div>
 
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+                <h3
+                  className="
+                    mb-4
+                    text-2xl
+                    font-bold
+                    text-white
+                    sm:text-3xl
+                  "
+                >
                   {featuredReason.title}
                 </h3>
 
-                <p className="text-sm sm:text-base leading-relaxed text-slate-300 max-w-lg">
+                <p
+                  className="
+                    max-w-lg
+                    text-sm
+                    leading-relaxed
+                    text-slate-300
+                    sm:text-base
+                  "
+                >
                   {featuredReason.description}
                 </p>
 
-                <div className="flex items-center gap-2 mt-7 text-sm font-semibold text-sky-300">
+                <div
+                  className="
+                    mt-7
+                    flex
+                    items-center
+                    gap-2
+                    text-sm
+                    font-semibold
+                    text-sky-300
+                  "
+                >
                   <CheckCircle2 size={17} />
                   Trusted technology expertise
                 </div>
@@ -225,52 +508,242 @@ const ReasonsWhySection = () => {
             variants={stagger}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: "-50px" }}
-            className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-x-8"
+            viewport={{
+              once: true,
+              margin: "-50px",
+            }}
+            className="
+              lg:col-span-7
+              grid
+              grid-cols-1
+              gap-x-8
+              sm:grid-cols-2
+            "
           >
-            {otherReasons.map((item, index) => {
+            {otherReasons.map((item) => {
               const IconComponent = item.icon;
 
               return (
                 <motion.div
                   key={item.id}
                   variants={fadeUp}
-                  className={`
-                    group relative py-7
-                    border-b border-slate-200 dark:border-white/10
-                    ${index < 2 ? "sm:border-t-0" : ""}
-                  `}
+                  whileHover={{
+                    y: -3,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 280,
+                    damping: 22,
+                  }}
+                  className="
+                    group
+                    relative
+                    border-b
+                    border-slate-200
+                    py-6
+                    dark:border-white/10
+                  "
                 >
-                  <div className="absolute -inset-x-3 inset-y-2 rounded-2xl bg-[#276ea5]/3 dark:bg-sky-400/3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  {/* HOVER BACKGROUND */}
 
-                  <div className="relative">
-                    <div className="flex items-center justify-between mb-6">
-                      {/* <span className="text-xs font-bold tracking-[0.18em] text-slate-500 dark:text-slate-600 group-hover:text-[#276ea5] dark:group-hover:text-sky-400 transition-colors">
-                        {item.id}
-                      </span> */}
+                  <motion.div
+                    initial={{
+                      opacity: 0,
+                      scaleX: 0.8,
+                    }}
+                    whileHover={{
+                      opacity: 1,
+                      scaleX: 1,
+                    }}
+                    transition={{
+                      duration: 0.3,
+                    }}
+                    className="
+                      pointer-events-none
+                      absolute
+                      inset-0
+                      origin-left
+                      rounded-2xl
+                      bg-[#276ea5]/[0.035]
+                      dark:bg-sky-400/[0.035]
+                    "
+                  />
 
-                      <div className="w-11 h-11 rounded-xl border border-slate-200 dark:border-white/10 flex items-center justify-center bg-white dark:bg-[#0b1528] text-[#276ea5] dark:text-sky-400 transition-all duration-300 group-hover:border-[#276ea5]/30 group-hover:scale-105">
-                        <IconComponent size={20} />
+                  {/* CONTENT */}
+
+                  <div className="relative z-10">
+                    {/* ICON + TITLE + ARROW */}
+
+                    <div
+                      className="
+                        flex
+                        items-center
+                        justify-between
+                        gap-4
+                      "
+                    >
+                      {/* ICON + TITLE */}
+
+                      <div
+                        className="
+                          flex
+                          min-w-0
+                          items-center
+                          gap-4
+                        "
+                      >
+                        {/* ICON */}
+
+                        <motion.div
+                          whileHover={{
+                            scale: 1.08,
+                            rotate: -5,
+                          }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 350,
+                            damping: 18,
+                          }}
+                          className="
+                            relative
+                            flex
+                            h-11
+                            w-11
+                            shrink-0
+                            items-center
+                            justify-center
+                            rounded-xl
+                            border
+                            border-slate-200
+                            bg-white
+                            text-[#276ea5]
+                            shadow-sm
+                            transition-all
+                            duration-300
+                            group-hover:border-[#276ea5]/30
+                            group-hover:bg-[#276ea5]/5
+                            group-hover:shadow-md
+                            dark:border-white/10
+                            dark:bg-[#0b1528]
+                            dark:text-sky-400
+                            dark:group-hover:border-sky-400/30
+                            dark:group-hover:bg-sky-400/5
+                          "
+                        >
+                          <span
+                            className="
+                              pointer-events-none
+                              absolute
+                              inset-0
+                              rounded-xl
+                              bg-[#276ea5]/20
+                              opacity-0
+                              blur-lg
+                              transition-opacity
+                              duration-300
+                              group-hover:opacity-70
+                              dark:bg-sky-400/20
+                            "
+                          />
+
+                          <IconComponent
+                            size={20}
+                            strokeWidth={1.8}
+                            className="relative z-10"
+                          />
+                        </motion.div>
+
+                        {/* TITLE */}
+
+                        <motion.h3
+                          whileHover={{
+                            x: 2,
+                          }}
+                          className="
+                            min-w-0
+                            text-base
+                            font-bold
+                            tracking-tight
+                            text-slate-900
+                            transition-colors
+                            duration-300
+                            group-hover:text-[#276ea5]
+                            dark:text-white
+                            dark:group-hover:text-sky-400
+                            sm:text-lg
+                          "
+                        >
+                          {item.title}
+                        </motion.h3>
                       </div>
+
+                      {/* ARROW */}
+
+                      <motion.div
+                        animate={{
+                          x: 0,
+                          y: 0,
+                          opacity: 0.3,
+                        }}
+                        whileHover={{
+                          x: 4,
+                          y: -4,
+                          opacity: 1,
+                        }}
+                        className="
+                          shrink-0
+                          text-slate-300
+                          transition-colors
+                          duration-300
+                          group-hover:text-[#276ea5]
+                          dark:text-slate-700
+                          dark:group-hover:text-sky-400
+                        "
+                      >
+                        <ArrowUpRight size={18} strokeWidth={1.8} />
+                      </motion.div>
                     </div>
 
-                    {/* Title */}
-                    <h3 className="text-lg sm:text-xl font-bold mb-3 tracking-tight group-hover:text-[#276ea5] dark:group-hover:text-sky-400 transition-colors">
-                      {item.title}
-                    </h3>
+                    {/* DESCRIPTION */}
 
-                    {/* Description */}
-                    <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                    <p
+                      className="
+                        mt-4
+                        pl-15
+                        text-sm
+                        leading-6.5
+                        text-slate-600
+                        dark:text-slate-400
+                      "
+                    >
                       {item.description}
                     </p>
 
-                    {/* Arrow */}
-                    <div className="mt-5 flex justify-end">
-                      <ArrowUpRight
-                        size={18}
-                        className="text-slate-300 dark:text-slate-700 group-hover:text-[#276ea5] dark:group-hover:text-sky-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300"
-                      />
-                    </div>
+                    {/* ACCENT LINE */}
+
+                    <motion.div
+                      initial={{
+                        width: 0,
+                        opacity: 0,
+                      }}
+                      whileHover={{
+                        width: 42,
+                        opacity: 1,
+                      }}
+                      transition={{
+                        duration: 0.3,
+                      }}
+                      className="
+                        absolute
+                        bottom-0
+                        left-0
+                        h-0.5
+                        rounded-full
+                        bg-linear-to-r
+                        from-[#276ea5]
+                        to-[#60a5fa]
+                      "
+                    />
                   </div>
                 </motion.div>
               );
@@ -278,46 +751,85 @@ const ReasonsWhySection = () => {
           </motion.div>
         </div>
 
-       
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mt-14 pt-8 border-t border-slate-200 dark:border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-6"
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+          }}
+          transition={{
+            duration: 0.6,
+          }}
+          className="
+            mt-14
+            grid
+            grid-cols-1
+            gap-6
+            border-t
+            border-slate-200
+            pt-8
+            dark:border-white/10
+            sm:grid-cols-3
+          "
         >
-          <div className="flex items-center gap-3">
-            <CheckCircle2
-              size={19}
-              className="text-[#276ea5] dark:text-sky-400 shrink-0"
-            />
+          {[
+            "Global Coding Standards",
+            "Scalable Digital Solutions",
+            "Long-Term Technology Partnership",
+          ].map((text, index) => (
+            <motion.div
+              key={text}
+              initial={{
+                opacity: 0,
+                x: -10,
+              }}
+              whileInView={{
+                opacity: 1,
+                x: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                delay: index * 0.1,
+                duration: 0.45,
+              }}
+              whileHover={{
+                x: 4,
+              }}
+              className="
+                flex
+                items-center
+                gap-3
+              "
+            >
+              <CheckCircle2
+                size={19}
+                className="
+                  shrink-0
+                  text-[#276ea5]
+                  dark:text-sky-400
+                "
+              />
 
-            <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
-              Global Coding Standards
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <CheckCircle2
-              size={19}
-              className="text-[#276ea5] dark:text-sky-400 shrink-0"
-            />
-
-            <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
-              Scalable Digital Solutions
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <CheckCircle2
-              size={19}
-              className="text-[#276ea5] dark:text-sky-400 shrink-0"
-            />
-
-            <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
-              Long-Term Technology Partnership
-            </span>
-          </div>
+              <span
+                className="
+                  text-sm
+                  font-semibold
+                  text-slate-700
+                  dark:text-slate-300
+                "
+              >
+                {text}
+              </span>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>

@@ -5,8 +5,10 @@ import {
   CheckCircle2,
   MapPin,
   Award,
-  TrendingUp,
   ArrowUpRight,
+  Globe2,
+  Sparkles,
+  MoveUpRight,
 } from "lucide-react";
 
 const theme = {
@@ -22,6 +24,7 @@ const stats = [
     suffix: "+",
     label: "Satisfied Clients",
     subtitle: "Global Trust",
+    color: "#60a5fa",
   },
   {
     icon: CheckCircle2,
@@ -29,6 +32,7 @@ const stats = [
     suffix: "+",
     label: "Projects Delivered",
     subtitle: "High Quality",
+    color: "#34d399",
   },
   {
     icon: MapPin,
@@ -36,6 +40,7 @@ const stats = [
     suffix: "",
     label: "Office Locations",
     subtitle: "Worldwide Reach",
+    color: "#a78bfa",
   },
   {
     icon: Award,
@@ -43,7 +48,17 @@ const stats = [
     suffix: "+",
     label: "Expert Team",
     subtitle: "Skilled Professionals",
+    color: "#fbbf24",
   },
+];
+
+const countries = [
+  "India",
+  "United States",
+  "United Kingdom",
+  "Australia",
+  "Canada",
+  "UAE",
 ];
 
 const AnimatedCounter = ({ end, duration = 1800, suffix = "" }) => {
@@ -51,7 +66,7 @@ const AnimatedCounter = ({ end, duration = 1800, suffix = "" }) => {
 
   const isInView = useInView(ref, {
     once: true,
-    amount: 0.6,
+    amount: 0.5,
   });
 
   const [count, setCount] = useState(0);
@@ -84,7 +99,7 @@ const AnimatedCounter = ({ end, duration = 1800, suffix = "" }) => {
   }, [isInView, end, duration]);
 
   return (
-    <span ref={ref}>
+    <span ref={ref} className="p-3">
       {count}
       {suffix}
     </span>
@@ -134,22 +149,22 @@ const CountsSection = () => {
 
       <motion.div
         animate={{
-          x: [0, 55, 0],
-          y: [0, -35, 0],
-          scale: [1, 1.08, 1],
+          x: [0, 60, 0],
+          y: [0, -30, 0],
+          scale: [1, 1.12, 1],
         }}
         transition={{
-          duration: 14,
+          duration: 15,
           repeat: Infinity,
           ease: "easeInOut",
         }}
         className="
           pointer-events-none
           absolute
-          left-[30%]
-          top-[10%]
-          h-125
-          w-125
+          left-[25%]
+          top-[5%]
+          h-150
+          w-150
           rounded-full
           bg-[#276ea5]/8
           blur-[150px]
@@ -159,28 +174,143 @@ const CountsSection = () => {
 
       <motion.div
         animate={{
-          x: [0, -45, 0],
-          y: [0, 30, 0],
-          scale: [1, 1.05, 1],
+          x: [0, -50, 0],
+          y: [0, 40, 0],
+          scale: [1, 1.08, 1],
         }}
         transition={{
-          duration: 11,
+          duration: 12,
           repeat: Infinity,
           ease: "easeInOut",
         }}
         className="
           pointer-events-none
           absolute
-          -bottom-30s
-          right-[5%]
-          h-100
-          w-100
+          -right-40
+          bottom-0
+          h-125
+          w-125
           rounded-full
           bg-[#60a5fa]/8
-          blur-[130px]
+          blur-[140px]
           dark:bg-[#60a5fa]/10
         "
       />
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -right-30
+          top-[8%]
+          hidden
+          h-105
+          w-105
+          lg:block
+        "
+      >
+        {/* Outer ring */}
+        <motion.div
+          animate={{
+            rotate: 360,
+          }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          className="
+            absolute
+            inset-0
+            rounded-full
+            border
+            border-[#276ea5]/10
+            dark:border-[#60a5fa]/10
+          "
+        />
+
+        {/* Middle ring */}
+        <motion.div
+          animate={{
+            rotate: -360,
+          }}
+          transition={{
+            duration: 22,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          className="
+            absolute
+            inset-10
+            rounded-full
+            border
+            border-dashed
+            border-[#276ea5]/10
+            dark:border-[#60a5fa]/10
+          "
+        />
+
+        {/* Globe */}
+
+        <motion.div
+          animate={{
+            scale: [1, 1.04, 1],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="
+            absolute
+            inset-25
+            flex
+            items-center
+            justify-center
+            rounded-full
+            border
+            border-[#276ea5]/20
+            bg-[#276ea5]/5
+            shadow-[0_0_80px_rgba(39,110,165,0.12)]
+            dark:border-[#60a5fa]/20
+            dark:bg-[#60a5fa]/5
+          "
+        >
+          <Globe2
+            size={100}
+            strokeWidth={0.6}
+            className="text-[#276ea5]/30 dark:text-[#60a5fa]/30"
+          />
+        </motion.div>
+
+        {/* Orbiting point */}
+
+        <motion.div
+          animate={{
+            rotate: 360,
+          }}
+          transition={{
+            duration: 9,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          className="absolute inset-0"
+        >
+          <span
+            className="
+              absolute
+              left-1/2
+              top-0
+              h-2.5
+              w-2.5
+              -translate-x-1/2
+              rounded-full
+              bg-[#60a5fa]
+              shadow-[0_0_20px_#60a5fa]
+            "
+          />
+        </motion.div>
+      </div>
 
       <div
         className="
@@ -193,16 +323,16 @@ const CountsSection = () => {
           sm:px-8
           sm:py-14
           lg:px-12
-          lg:py-12
+          lg:py-14
         "
       >
         <div
           className="
             grid
             grid-cols-1
-            gap-7
+            gap-8
             lg:grid-cols-12
-            lg:gap-12
+            lg:gap-16
           "
         >
           {/* LEFT */}
@@ -239,24 +369,29 @@ const CountsSection = () => {
               "
             >
               <motion.span
-                initial={{ width: 0 }}
-                whileInView={{ width: 40 }}
-                viewport={{ once: true }}
+                initial={{
+                  width: 0,
+                }}
+                whileInView={{
+                  width: 40,
+                }}
+                viewport={{
+                  once: true,
+                }}
                 transition={{
                   duration: 0.7,
-                  delay: 0.2,
                 }}
                 className="h-px bg-current"
               />
 
-              <TrendingUp size={14} />
+              <TrendingIcon />
 
               <span>Our Impact</span>
             </div>
 
             <p
               className="
-                mt-4
+                mt-5
                 max-w-xs
                 text-sm
                 leading-7
@@ -267,6 +402,73 @@ const CountsSection = () => {
               Numbers that reflect the trust, experience and relationships we've
               built with businesses worldwide.
             </p>
+
+            {/* Countries */}
+
+            <div className="mt-7">
+              <div
+                className="
+                  mb-3
+                  flex
+                  items-center
+                  gap-2
+                  text-[10px]
+                  font-bold
+                  uppercase
+                  tracking-[0.18em]
+                  text-slate-400
+                "
+              >
+                <Globe2 size={13} />
+                Serving worldwide
+              </div>
+
+              <div className="flex max-w-xs flex-wrap gap-2">
+                {countries.map((country, index) => (
+                  <motion.span
+                    key={country}
+                    initial={{
+                      opacity: 0,
+                      y: 8,
+                    }}
+                    whileInView={{
+                      opacity: 1,
+                      y: 0,
+                    }}
+                    viewport={{
+                      once: true,
+                    }}
+                    transition={{
+                      delay: 0.3 + index * 0.06,
+                    }}
+                    whileHover={{
+                      y: -2,
+                    }}
+                    className="
+                      rounded-full
+                      border
+                      border-slate-200
+                      bg-white/60
+                      px-2.5
+                      py-1
+                      text-[10px]
+                      font-medium
+                      text-slate-500
+                      transition-colors
+                      hover:border-[#276ea5]/30
+                      hover:text-[#276ea5]
+                      dark:border-white/10
+                      dark:bg-white/2.5
+                      dark:text-slate-500
+                      dark:hover:border-[#60a5fa]/30
+                      dark:hover:text-[#60a5fa]
+                    "
+                  >
+                    {country}
+                  </motion.span>
+                ))}
+              </div>
+            </div>
           </motion.div>
 
           {/* RIGHT */}
@@ -274,7 +476,7 @@ const CountsSection = () => {
           <motion.div
             initial={{
               opacity: 0,
-              y: 35,
+              y: 30,
             }}
             whileInView={{
               opacity: 1,
@@ -285,40 +487,64 @@ const CountsSection = () => {
             }}
             transition={{
               duration: 0.8,
-              ease: [0.22, 1, 0.36, 1],
             }}
-            className="lg:col-span-9"
+            className="relative lg:col-span-9"
           >
-            <h2
-              className="
-                max-w-5xl
-                text-4xl
-                font-black
-                leading-[1.02]
-                tracking-[-0.055em]
-                sm:text-5xl
-                lg:text-[68px]
-              "
-            >
-              Experience that
-              <br />
-              <span
+            <div className="relative">
+              <h2
                 className="
-                  bg-linear-to-r
-                  from-[#276ea5]
-                  via-[#1d4ed8]
-                  to-[#60a5fa]
-                  bg-clip-text
-                  text-transparent
+                  max-w-5xl
+                  text-4xl
+                  font-black
+                  leading-[1.02]
+                  tracking-[-0.055em]
+                  sm:text-5xl
+                  lg:text-[68px]
                 "
               >
-                speaks for itself.
-              </span>
-            </h2>
+                Experience that
+                <br />
+                <span
+                  className="
+                    bg-linear-to-r
+                    from-[#276ea5]
+                    via-[#1d4ed8]
+                    to-[#60a5fa]
+                    bg-clip-text
+                    text-transparent
+                  "
+                >
+                  speaks for itself.
+                </span>
+              </h2>
+
+              {/* Decorative line */}
+              <motion.div
+                initial={{
+                  width: 0,
+                }}
+                whileInView={{
+                  width: 110,
+                }}
+                viewport={{
+                  once: true,
+                }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.3,
+                }}
+                className="
+                  mt-6
+                  h-1
+                  rounded-full
+                  bg-linear-to-r
+                  from-[#276ea5]
+                  to-transparent
+                "
+              />
+            </div>
           </motion.div>
         </div>
-
-        {/* HEADER DIVIDER */}
 
         <motion.div
           initial={{
@@ -332,7 +558,6 @@ const CountsSection = () => {
           }}
           transition={{
             duration: 1,
-            ease: [0.22, 1, 0.36, 1],
           }}
           className="
             mt-10
@@ -344,11 +569,8 @@ const CountsSection = () => {
           "
         />
 
-        {/* STATS GRID */}
-
         <div
           className="
-            mt-2
             grid
             grid-cols-1
             sm:grid-cols-2
@@ -363,7 +585,7 @@ const CountsSection = () => {
                 key={stat.label}
                 initial={{
                   opacity: 0,
-                  y: 45,
+                  y: 40,
                 }}
                 whileInView={{
                   opacity: 1,
@@ -374,63 +596,57 @@ const CountsSection = () => {
                   amount: 0.2,
                 }}
                 transition={{
-                  duration: 0.7,
+                  duration: 0.65,
                   delay: index * 0.1,
                   ease: [0.22, 1, 0.36, 1],
                 }}
                 className={`
                   group
                   relative
-                  min-h-60
                   overflow-hidden
                   border-b
                   border-slate-200
-                  py-7
-                  pr-5
+                  py-8
+                  sm:px-6
                   dark:border-white/10
-                  sm:min-h-68
-                  sm:pr-6
-                  lg:min-h-76
-                  lg:px-6
 
-                  /* FIX: give the first box a little left padding */
-                  lg:first:pl-4
-
-                  lg:last:border-r-0
-                  lg:last:pr-0
-                  ${index !== stats.length - 1 ? "lg:border-r" : ""}
                   ${index % 2 === 0 ? "sm:border-r" : "sm:border-r-0"}
-                  ${index === 2 || index === 3 ? "sm:border-b" : ""}
+
+                  lg:border-r
                   lg:border-b
+
+                  ${index === stats.length - 1 ? "lg:border-r-0" : ""}
                 `}
               >
+                {/* Hover glow */}
                 <motion.div
-                  initial={false}
-                  animate={{
+                  initial={{
                     opacity: 0,
-                    scale: 0.7,
+                    scale: 0.5,
                   }}
                   whileHover={{
                     opacity: 1,
                     scale: 1,
                   }}
                   transition={{
-                    duration: 0.6,
+                    duration: 0.5,
                   }}
                   className="
                     pointer-events-none
                     absolute
-                    -right-24
-                    -top-24
-                    h-72
-                    w-72
+                    -right-20
+                    -top-20
+                    h-56
+                    w-56
                     rounded-full
-                    bg-[#276ea5]/10
-                    blur-[80px]
-                    dark:bg-[#60a5fa]/10
+                    blur-[70px]
                   "
+                  style={{
+                    background: `${stat.color}22`,
+                  }}
                 />
 
+                {/* TOP */}
                 <div
                   className="
                     relative
@@ -442,45 +658,27 @@ const CountsSection = () => {
                 >
                   <span
                     className="
-                      rounded-full
-                      border
-                      border-slate-200
-                      bg-white/50
-                      px-3
-                      py-1
+                      font-mono
                       text-[10px]
                       font-bold
-                      tracking-[0.25em]
+                      tracking-[0.2em]
                       text-slate-400
-                      transition-all
-                      duration-300
-                      group-hover:border-[#276ea5]/30
-                      group-hover:text-[#276ea5]
-                      dark:border-white/10
-                      dark:bg-white/2
                       dark:text-slate-600
-                      dark:group-hover:border-[#60a5fa]/30
-                      dark:group-hover:text-[#60a5fa]
                     "
                   >
-                    0{index + 1}
+                    {stat.label === "Office Locations" ? "03" : `0${index + 1}`}
                   </span>
 
                   <motion.div
                     whileHover={{
-                      x: 5,
-                      y: -5,
-                      rotate: 4,
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 300,
-                      damping: 15,
+                      rotate: 8,
+                      x: 3,
+                      y: -3,
                     }}
                     className="
                       flex
-                      h-9
-                      w-9
+                      h-8
+                      w-8
                       items-center
                       justify-center
                       rounded-full
@@ -488,121 +686,105 @@ const CountsSection = () => {
                       border-slate-200
                       text-slate-300
                       transition-all
-                      duration-300
-                      group-hover:border-[#276ea5]/40
+                      group-hover:border-[#276ea5]/30
                       group-hover:text-[#276ea5]
                       dark:border-white/10
-                      dark:text-slate-700
-                      dark:group-hover:border-[#60a5fa]/40
+                      dark:text-slate-600
+                      dark:group-hover:border-[#60a5fa]/30
                       dark:group-hover:text-[#60a5fa]
                     "
                   >
-                    <ArrowUpRight size={17} strokeWidth={1.5} />
+                    <ArrowUpRight size={15} />
                   </motion.div>
                 </div>
 
-                <motion.div
-                  initial={{
-                    opacity: 0,
-                    scale: 0.6,
-                    rotate: -15,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    scale: 1,
-                    rotate: 0,
-                  }}
-                  viewport={{
-                    once: true,
-                  }}
-                  transition={{
-                    delay: 0.25 + index * 0.1,
-                    duration: 0.55,
-                    type: "spring",
-                    stiffness: 180,
-                  }}
-                  whileHover={{
-                    y: -6,
-                    rotate: -8,
-                    scale: 1.05,
-                  }}
-                  className="
-                    relative
-                    z-10
-                    mt-7
-                    w-fit
-                  "
-                >
-                  <motion.div
-                    animate={{
-                      opacity: [0.15, 0.4, 0.15],
-                      scale: [1, 1.3, 1],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      delay: index * 0.4,
-                      ease: "easeInOut",
-                    }}
-                    className="
-                      pointer-events-none
-                      absolute
-                      inset-0
-                      rounded-full
-                      bg-[#60a5fa]
-                      blur-xl
-                    "
-                  />
-
-                  <div
-                    className="
-                      relative
-                      flex
-                      h-14
-                      w-14
-                      items-center
-                      justify-center
-                      rounded-2xl
-                      border
-                      border-[#276ea5]/20
-                      bg-[#276ea5]/5
-                      text-[#276ea5]
-                      shadow-[0_8px_30px_-12px_rgba(39,110,165,0.5)]
-                      transition-all
-                      duration-500
-                      group-hover:rounded-xl
-                      group-hover:border-[#276ea5]
-                      group-hover:bg-[#276ea5]
-                      group-hover:text-white
-                      group-hover:shadow-[0_10px_35px_-10px_rgba(39,110,165,0.7)]
-                      dark:border-[#60a5fa]/20
-                      dark:bg-[#60a5fa]/5
-                      dark:text-[#60a5fa]
-                      dark:group-hover:border-[#60a5fa]
-                      dark:group-hover:bg-[#276ea5]
-                    "
-                  >
-                    <Icon size={23} strokeWidth={1.6} />
-                  </div>
-                </motion.div>
-
-                <div className="relative z-10 mt-6">
+                <div className="relative z-10 mt-8 flex items-center gap-4">
                   <motion.div
                     whileHover={{
-                      x: 3,
+                      scale: 1.08,
+                      rotate: -5,
                     }}
                     transition={{
                       type: "spring",
                       stiffness: 300,
+                      damping: 18,
+                    }}
+                    className="
+                      flex
+                      h-12
+                      w-12
+                      shrink-0
+                      items-center
+                      justify-center
+                      rounded-xl
+                      border
+                      bg-white/70
+                      shadow-sm
+                      dark:bg-white/3"
+                    style={{
+                      color: stat.color,
+                      borderColor: `${stat.color}35`,
+                    }}
+                  >
+                    <Icon size={21} strokeWidth={1.6} />
+                  </motion.div>
+
+                  <div>
+                    <p
+                      className="
+                        text-[10px]
+                        font-bold
+                        uppercase
+                        tracking-[0.15em]
+                        text-slate-400
+                      "
+                    >
+                      {stat.subtitle}
+                    </p>
+
+                    <h3
+                      className="
+                        mt-1
+                        text-sm
+                        font-bold
+                        text-slate-700
+                        dark:text-slate-300
+                      "
+                    >
+                      {stat.label}
+                    </h3>
+                  </div>
+                </div>
+
+                {/* NUMBER */}
+
+                <div
+                  className="
+                    relative
+                    z-10
+                    mt-7
+                    overflow-visible
+                    whitespace-nowrap
+                  "
+                >
+                  <motion.div
+                    whileHover={{
+                      x: 4,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 250,
                       damping: 20,
                     }}
                     className="
+                      inline-flex
+                      items-baseline
                       text-[58px]
                       font-black
-                      leading-none
+                      leading-[0.9]
                       tracking-[-0.065em]
-                      sm:text-[68px]
-                      lg:text-[72px]
+                      sm:text-[64px]
+                      lg:text-[68px]
                     "
                   >
                     <span
@@ -624,50 +806,50 @@ const CountsSection = () => {
                       />
                     </span>
                   </motion.div>
-
-                  <div className="mt-4">
-                    <h3
-                      className="
-                        text-sm
-                        font-bold
-                        uppercase
-                        tracking-[0.12em]
-                        text-slate-800
-                        transition-colors
-                        duration-300
-                        group-hover:text-[#276ea5]
-                        dark:text-slate-200
-                        dark:group-hover:text-[#60a5fa]
-                      "
-                    >
-                      {stat.label}
-                    </h3>
-
-                    <p
-                      className="
-                        mt-1
-                        text-xs
-                        text-slate-400
-                        dark:text-slate-500
-                      "
-                    >
-                      {stat.subtitle}
-                    </p>
-                  </div>
                 </div>
+
+                {/* DESCRIPTION LINE */}
+
+                <div className="relative z-10 mt-7 flex items-center gap-2">
+                  <span
+                    className="
+                      h-1.5
+                      w-1.5
+                      rounded-full
+                    "
+                    style={{
+                      backgroundColor: stat.color,
+                      boxShadow: `0 0 10px ${stat.color}`,
+                    }}
+                  />
+
+                  <span
+                    className="
+                      text-[10px]
+                      font-medium
+                      uppercase
+                      tracking-[0.14em]
+                      text-slate-400
+                    "
+                  >
+                    Growing every day
+                  </span>
+                </div>
+
+                {/* ACTIVE BOTTOM LINE */}
 
                 <motion.div
                   initial={{
                     width: 0,
                   }}
                   whileInView={{
-                    width: "32px",
+                    width: "35px",
                   }}
                   viewport={{
                     once: true,
                   }}
                   transition={{
-                    delay: 0.7 + index * 0.1,
+                    delay: 0.6 + index * 0.1,
                     duration: 0.5,
                   }}
                   className="
@@ -684,38 +866,10 @@ const CountsSection = () => {
                     group-hover:w-20
                   "
                 />
-
-                <motion.div
-                  initial={{
-                    scaleY: 0,
-                  }}
-                  whileHover={{
-                    scaleY: 1,
-                  }}
-                  transition={{
-                    duration: 0.4,
-                  }}
-                  className="
-                    absolute
-                    bottom-5
-                    left-0
-                    top-5
-                    w-0.5
-                    origin-center
-                    rounded-full
-                    bg-linear-to-b
-                    from-transparent
-                    via-[#276ea5]
-                    to-[#60a5fa]
-                    dark:via-[#60a5fa]
-                  "
-                />
               </motion.div>
             );
           })}
         </div>
-
-        {/* BOTTOM STATEMENT */}
 
         <motion.div
           initial={{
@@ -730,17 +884,21 @@ const CountsSection = () => {
             once: true,
           }}
           transition={{
-            duration: 0.8,
-            delay: 0.3,
+            duration: 0.7,
+            delay: 0.2,
           }}
           className="
             mt-8
             flex
             flex-col
             gap-4
+            border-t
+            border-slate-200
+            pt-6
             sm:flex-row
             sm:items-center
             sm:justify-between
+            dark:border-white/10
           "
         >
           <div className="flex items-center gap-3">
@@ -748,12 +906,11 @@ const CountsSection = () => {
               <motion.span
                 animate={{
                   scale: [1, 2.5, 1],
-                  opacity: [0.8, 0, 0.8],
+                  opacity: [0.7, 0, 0.7],
                 }}
                 transition={{
                   duration: 2,
                   repeat: Infinity,
-                  ease: "easeOut",
                 }}
                 className="
                   absolute
@@ -788,36 +945,22 @@ const CountsSection = () => {
             </span>
           </div>
 
-          <div
-            className="
-              hidden
-              h-px
-              flex-1
-              bg-linear-to-r
-              from-slate-200
-              via-slate-200
-              to-transparent
-              sm:ml-6
-              sm:block
-              dark:from-white/10
-              dark:via-white/10
-            "
-          />
+          <div className="flex items-center gap-2 text-xs text-slate-400">
+            <Globe2 size={14} />
 
-          <span
-            className="
-              text-xs
-              font-medium
-              text-slate-400
-              dark:text-slate-500
-            "
-          >
-            Trusted by businesses worldwide
-          </span>
+            <span>Connecting businesses across the globe</span>
+
+            <MoveUpRight
+              size={13}
+              className="text-[#276ea5] dark:text-[#60a5fa]"
+            />
+          </div>
         </motion.div>
       </div>
     </section>
   );
 };
+
+const TrendingIcon = () => <Sparkles size={14} strokeWidth={1.8} />;
 
 export default CountsSection;

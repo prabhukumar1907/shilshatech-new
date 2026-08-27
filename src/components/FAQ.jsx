@@ -81,7 +81,7 @@ const faqData = [
     category: "process",
     question: "How do I get started with your web development services?",
     answer:
-      "Getting started takes just three quick steps: reach out via our contact form, email info@shilshatech.com, or call +91-120-412-0113. We will instantly schedule a technical discovery call to review your scope and provide a detailed timeline.",
+      "Getting started takes just three quick steps: reach out via our contact form, email info@shilshatech.com, or call +91-926-630-0671. We will instantly schedule a technical discovery call to review your scope and provide a detailed timeline.",
     icon: MessageCircle,
     color: "#A855F7",
     badge: "Onboarding",
@@ -106,9 +106,7 @@ export default function FAQSectionShilsha() {
 
   const toggleAccordion = (id) => {
     setOpenIds((prev) =>
-      prev.includes(id)
-        ? prev.filter((item) => item !== id)
-        : [...prev, id],
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
     );
   };
 
@@ -558,13 +556,8 @@ export default function FAQSectionShilsha() {
                         "
                         style={{
                           background:
-                            isHovered || isOpen
-                              ? `${item.color}18`
-                              : undefined,
-                          color:
-                            isHovered || isOpen
-                              ? item.color
-                              : undefined,
+                            isHovered || isOpen ? `${item.color}18` : undefined,
+                          color: isHovered || isOpen ? item.color : undefined,
                         }}
                       >
                         <div
@@ -575,11 +568,7 @@ export default function FAQSectionShilsha() {
                             blur-md
                             transition-opacity
                             duration-300
-                            ${
-                              isHovered || isOpen
-                                ? "opacity-30"
-                                : "opacity-0"
-                            }
+                            ${isHovered || isOpen ? "opacity-30" : "opacity-0"}
                           `}
                           style={{
                             background: item.color,
@@ -717,9 +706,7 @@ export default function FAQSectionShilsha() {
                             sm:text-base
                           "
                         >
-                          <div className="pl-0 sm:pl-15">
-                            {item.answer}
-                          </div>
+                          <div className="pl-0 sm:pl-15">{item.answer}</div>
                         </div>
                       </motion.div>
                     )}
@@ -831,7 +818,7 @@ export default function FAQSectionShilsha() {
               "
             >
               <Phone size={16} />
-              +91-120-412-0113
+              +91-926-630-0671
             </a>
 
             <a

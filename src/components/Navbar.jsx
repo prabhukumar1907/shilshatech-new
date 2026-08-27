@@ -448,7 +448,7 @@ const NavLink = ({ to, children, onClick }) => {
     <Link
       to={to}
       onClick={onClick}
-      className="group relative rounded-xl px-3.5 py-2 text-sm font-medium text-slate-700 transition-colors duration-200 hover:text-[#1e3a8a] dark:text-slate-200 dark:hover:text-white"
+      className="group relative cursor-pointer rounded-xl px-3.5 py-2 text-sm font-medium text-slate-700 transition-colors duration-200 hover:text-[#1e3a8a] dark:text-slate-200 dark:hover:text-white"
     >
       <span>{children}</span>
 
@@ -563,7 +563,7 @@ const Navbar = () => {
           to="/"
           onClick={closeMenus}
           aria-label="Shilsha Technologies Home"
-          className="group flex shrink-0 items-center"
+          className="group flex shrink-0 cursor-pointer items-center"
         >
           <img
             src={logo}
@@ -576,6 +576,8 @@ const Navbar = () => {
           />
         </Link>
 
+        {/* DESKTOP NAVIGATION */}
+
         <nav
           aria-label="Main navigation"
           className="hidden items-center gap-1 lg:flex"
@@ -585,13 +587,15 @@ const Navbar = () => {
           <NavLink to="/" onClick={closeMenus}>
             Home
           </NavLink>
+
+          {/* SERVICES */}
+
           <div className="relative flex items-center">
-            {/* MAIN SERVICES LINK */}
             <Link
               to="/services"
               onClick={closeMenus}
               onMouseEnter={() => setDesktopDropdown("services")}
-              className={`flex items-center rounded-l-xl px-3.5 py-2 text-sm font-medium transition-colors ${
+              className={`flex cursor-pointer items-center rounded-l-xl px-3.5 py-2 text-sm font-medium transition-colors ${
                 desktopDropdown === "services"
                   ? "bg-blue-50 text-[#1e3a8a] dark:bg-[#286b94]/25 dark:text-white"
                   : "text-slate-700 hover:text-[#1e3a8a] dark:text-slate-200 dark:hover:text-white"
@@ -600,8 +604,6 @@ const Navbar = () => {
               Services
             </Link>
 
-            {/* SERVICES DROPDOWN BUTTON */}
-
             <button
               type="button"
               aria-label="Open Services menu"
@@ -609,7 +611,7 @@ const Navbar = () => {
               aria-expanded={desktopDropdown === "services"}
               onClick={() => toggleDesktopDropdown("services")}
               onMouseEnter={() => setDesktopDropdown("services")}
-              className={`flex items-center rounded-r-xl px-1.5 py-2 text-sm font-medium transition-colors ${
+              className={`flex cursor-pointer items-center justify-center rounded-r-xl px-1.5 py-2 text-sm font-medium transition-colors ${
                 desktopDropdown === "services"
                   ? "bg-blue-50 text-[#1e3a8a] dark:bg-[#286b94]/25 dark:text-white"
                   : "text-slate-700 hover:text-[#1e3a8a] dark:text-slate-200 dark:hover:text-white"
@@ -617,8 +619,9 @@ const Navbar = () => {
             >
               <ChevronDown
                 size={14}
+                strokeWidth={2}
                 aria-hidden="true"
-                className={`transition-transform ${
+                className={`shrink-0 transition-transform duration-200 ${
                   desktopDropdown === "services"
                     ? "rotate-180 text-[#6ea1ff]"
                     : ""
@@ -627,6 +630,7 @@ const Navbar = () => {
             </button>
 
             {/* SERVICES DROPDOWN */}
+
             <div
               onMouseEnter={() => setDesktopDropdown("services")}
               onMouseLeave={() => setDesktopDropdown(null)}
@@ -638,7 +642,7 @@ const Navbar = () => {
             >
               <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-xl dark:border-blue-500/30 dark:bg-[#0b1528] dark:shadow-black/90">
                 <div className="mb-3 flex items-center gap-2 border-b border-slate-200 px-3 py-2 text-[#286b94] dark:border-[#286b94]/30 dark:text-[#6ea1ff]">
-                  <Sparkles size={14} />
+                  <Sparkles size={14} className="shrink-0" />
 
                   <span className="text-[11px] font-bold uppercase tracking-wider">
                     AI & Digital Services
@@ -651,9 +655,9 @@ const Navbar = () => {
                       key={service.label}
                       to={service.href}
                       onClick={closeMenus}
-                      className="group flex items-start gap-2.5 rounded-xl border border-transparent p-2.5 transition-all hover:border-[#286b94]/40 hover:bg-blue-50/80 dark:hover:border-[#6ea1ff]/40 dark:hover:bg-[#286b94]/20"
+                      className="group flex cursor-pointer items-start gap-2.5 rounded-xl border border-transparent p-2.5 transition-all hover:border-[#286b94]/40 hover:bg-blue-50/80 dark:hover:border-[#6ea1ff]/40 dark:hover:bg-[#286b94]/20"
                     >
-                      <div className="mt-0.5 shrink-0 rounded-lg bg-blue-50 p-1.5 dark:bg-[#286b94]/30">
+                      <div className="mt-0.5 flex shrink-0 items-center justify-center rounded-lg bg-blue-50 p-1.5 dark:bg-[#286b94]/30">
                         {service.icon}
                       </div>
 
@@ -673,12 +677,14 @@ const Navbar = () => {
             </div>
           </div>
 
+          {/* HIRE DEVELOPERS */}
+
           <div className="relative flex items-center">
             <Link
               to="/hire-developers"
               onClick={closeMenus}
               onMouseEnter={() => setDesktopDropdown("hire")}
-              className={`flex items-center rounded-l-xl px-3.5 py-2 text-sm font-medium transition-colors duration-200 ${
+              className={`flex cursor-pointer items-center rounded-l-xl px-3.5 py-2 text-sm font-medium transition-colors duration-200 ${
                 desktopDropdown === "hire"
                   ? "bg-blue-50 text-[#1e3a8a] dark:bg-[#286b94]/25 dark:text-white"
                   : "text-slate-700 hover:text-[#1e3a8a] dark:text-slate-200 dark:hover:text-white"
@@ -687,7 +693,6 @@ const Navbar = () => {
               Hire Developers
             </Link>
 
-            {/* DROPDOWN BUTTON */}
             <button
               type="button"
               aria-label="Open Hire Developers menu"
@@ -695,7 +700,7 @@ const Navbar = () => {
               aria-expanded={desktopDropdown === "hire"}
               onClick={() => toggleDesktopDropdown("hire")}
               onMouseEnter={() => setDesktopDropdown("hire")}
-              className={`flex items-center rounded-r-xl px-1.5 py-2 text-sm font-medium transition-colors duration-200 ${
+              className={`flex cursor-pointer items-center justify-center rounded-r-xl px-1.5 py-2 text-sm font-medium transition-colors duration-200 ${
                 desktopDropdown === "hire"
                   ? "bg-blue-50 text-[#1e3a8a] dark:bg-[#286b94]/25 dark:text-white"
                   : "text-slate-700 hover:text-[#1e3a8a] dark:text-slate-200 dark:hover:text-white"
@@ -703,14 +708,18 @@ const Navbar = () => {
             >
               <ChevronDown
                 size={14}
+                strokeWidth={2}
                 aria-hidden="true"
-                className={`transition-transform duration-200 ${
-                  desktopDropdown === "hire" ? "rotate-180 text-[#6ea1ff]" : ""
+                className={`shrink-0 transition-transform duration-200 ${
+                  desktopDropdown === "hire"
+                    ? "rotate-180 text-[#6ea1ff]"
+                    : ""
                 }`}
               />
             </button>
 
-            {/* HIRE DEVELOPERS DROPDOWN */}
+            {/* HIRE DROPDOWN */}
+
             <div
               onMouseEnter={() => setDesktopDropdown("hire")}
               onMouseLeave={() => setDesktopDropdown(null)}
@@ -721,11 +730,9 @@ const Navbar = () => {
               }`}
             >
               <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 text-slate-900 shadow-xl backdrop-blur-md dark:border-blue-500/30 dark:bg-[#0b1528] dark:text-white dark:shadow-black/90">
-                {/* HEADER */}
-
                 <div className="mb-3 flex items-center justify-between border-b border-slate-200 px-3 py-2 dark:border-[#286b94]/30">
                   <div className="flex items-center gap-2 text-[#286b94] dark:text-[#6ea1ff]">
-                    <Users size={14} />
+                    <Users size={14} className="shrink-0" />
 
                     <span className="text-[11px] font-bold uppercase tracking-wider">
                       Trusted Developers
@@ -735,22 +742,21 @@ const Navbar = () => {
                   <Link
                     to="/hire-developers"
                     onClick={closeMenus}
-                    className="rounded-lg px-2.5 py-1 text-[10px] font-bold text-[#286b94] transition-colors hover:bg-blue-50 dark:text-[#6ea1ff] dark:hover:bg-[#286b94]/20"
+                    className="cursor-pointer rounded-lg px-2.5 py-1 text-[10px] font-bold text-[#286b94] transition-colors hover:bg-blue-50 dark:text-[#6ea1ff] dark:hover:bg-[#286b94]/20"
                   >
                     View All
                   </Link>
                 </div>
 
-                {/* DEVELOPERS */}
                 <div className="grid grid-cols-3 gap-2">
                   {hireDevelopers.map((developer) => (
                     <Link
                       key={developer.label}
                       to={developer.href}
                       onClick={closeMenus}
-                      className="group flex items-start gap-2.5 rounded-xl border border-transparent p-2.5 transition-all duration-200 hover:border-[#286b94]/40 hover:bg-blue-50/80 dark:hover:border-[#6ea1ff]/40 dark:hover:bg-[#286b94]/20"
+                      className="group flex cursor-pointer items-start gap-2.5 rounded-xl border border-transparent p-2.5 transition-all duration-200 hover:border-[#286b94]/40 hover:bg-blue-50/80 dark:hover:border-[#6ea1ff]/40 dark:hover:bg-[#286b94]/20"
                     >
-                      <div className="mt-0.5 shrink-0 rounded-lg bg-blue-50 p-1.5 dark:bg-[#286b94]/30">
+                      <div className="mt-0.5 flex shrink-0 items-center justify-center rounded-lg bg-blue-50 p-1.5 dark:bg-[#286b94]/30">
                         {developer.icon}
                       </div>
 
@@ -770,6 +776,8 @@ const Navbar = () => {
             </div>
           </div>
 
+          {/* TECHNOLOGIES */}
+
           <div className="relative">
             <button
               type="button"
@@ -777,22 +785,27 @@ const Navbar = () => {
               aria-expanded={desktopDropdown === "technologies"}
               onClick={() => toggleDesktopDropdown("technologies")}
               onMouseEnter={() => setDesktopDropdown("technologies")}
-              className={`flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-sm font-medium transition-colors ${
+              className={`flex cursor-pointer items-center gap-1.5 rounded-xl px-3.5 py-2 text-sm font-medium transition-colors ${
                 desktopDropdown === "technologies"
                   ? "bg-blue-50 text-[#1e3a8a] dark:bg-[#286b94]/25 dark:text-white"
                   : "text-slate-700 hover:text-[#1e3a8a] dark:text-slate-200 dark:hover:text-white"
               }`}
             >
-              Technologies
+              <span>Technologies</span>
+
               <ChevronDown
                 size={14}
-                className={`transition-transform ${
+                strokeWidth={2}
+                aria-hidden="true"
+                className={`shrink-0 transition-transform duration-200 ${
                   desktopDropdown === "technologies"
                     ? "rotate-180 text-[#6ea1ff]"
                     : ""
                 }`}
               />
             </button>
+
+            {/* TECHNOLOGIES DROPDOWN */}
 
             <div
               onMouseEnter={() => setDesktopDropdown("technologies")}
@@ -820,8 +833,8 @@ const Navbar = () => {
                       className="flex min-w-0 flex-col gap-2.5"
                     >
                       <div className="mb-2 px-1">
-                        <div className="flex w-fit items-center gap-2 rounded-lg border border-[#286b94]/30 bg-blue-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#286b94] dark:border-[#286b94]/40 dark:bg-[#286b94]/20 dark:text-[#6ea1ff]">
-                          <Icon size={13} />
+                        <div className="flex w-fit cursor-pointer items-center gap-2 rounded-lg border border-[#286b94]/30 bg-blue-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#286b94] dark:border-[#286b94]/40 dark:bg-[#286b94]/20 dark:text-[#6ea1ff]">
+                          <Icon size={13} className="shrink-0" />
                           <span>{group.category}</span>
                         </div>
                       </div>
@@ -832,9 +845,12 @@ const Navbar = () => {
                             key={item.label}
                             to={item.to}
                             onClick={closeMenus}
-                            className="flex items-center gap-2 rounded-lg border-l-2 border-transparent px-2.5 py-1.5 text-xs font-semibold text-slate-800 transition-all hover:translate-x-1 hover:border-[#286b94] hover:bg-blue-100/70 hover:text-[#1e3a8a] dark:text-slate-200 dark:hover:border-[#6ea1ff] dark:hover:bg-[#286b94]/30 dark:hover:text-white"
+                            className="flex cursor-pointer items-center gap-2 rounded-lg border-l-2 border-transparent px-2.5 py-1.5 text-xs font-semibold text-slate-800 transition-all hover:translate-x-1 hover:border-[#286b94] hover:bg-blue-100/70 hover:text-[#1e3a8a] dark:text-slate-200 dark:hover:border-[#6ea1ff] dark:hover:bg-[#286b94]/30 dark:hover:text-white"
                           >
-                            {item.icon}
+                            <span className="flex shrink-0 items-center justify-center">
+                              {item.icon}
+                            </span>
+
                             <span>{item.label}</span>
                           </Link>
                         ))}
@@ -847,32 +863,54 @@ const Navbar = () => {
           </div>
 
           {/* ABOUT */}
+
           <NavLink to="/about-us" onClick={closeMenus}>
             About
           </NavLink>
 
           {/* CONTACT */}
+
           <NavLink to="/contact-us" onClick={closeMenus}>
             Contact
           </NavLink>
         </nav>
+
+        {/* RIGHT ACTIONS */}
+
         <div className="flex shrink-0 items-center gap-2">
-          {/* Dark Mode button */}
+          {/* DARK MODE */}
+
           <button
             type="button"
             onClick={toggleDarkMode}
             aria-label={
               darkMode ? "Switch to light mode" : "Switch to dark mode"
             }
-            className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-slate-700 transition-all hover:bg-slate-100 active:scale-95 dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-amber-300 dark:hover:bg-blue-500/20"
+            className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-slate-700 transition-colors duration-150 hover:bg-slate-100 active:scale-95 dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-amber-300 dark:hover:bg-blue-500/20"
           >
-            {darkMode ? <Sun size={16} /> : <Moon size={16} />}
+            {darkMode ? (
+              <Sun
+                size={16}
+                strokeWidth={2}
+                className="shrink-0"
+                aria-hidden="true"
+              />
+            ) : (
+              <Moon
+                size={16}
+                strokeWidth={2}
+                className="shrink-0"
+                aria-hidden="true"
+              />
+            )}
           </button>
+
+          {/* DESKTOP CTA */}
 
           <Link
             to="/contact-us"
             onClick={closeMenus}
-            className="group hidden items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold text-white shadow-md transition-transform hover:-translate-y-0.5 active:translate-y-0 lg:flex"
+            className="group hidden cursor-pointer items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold text-white shadow-md transition-transform hover:-translate-y-0.5 active:translate-y-0 lg:flex"
             style={{
               background: `linear-gradient(90deg, ${theme.primary}, ${theme.secondary})`,
             }}
@@ -881,11 +919,13 @@ const Navbar = () => {
 
             <ArrowUpRight
               size={15}
-              className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              strokeWidth={2}
+              className="shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
             />
           </Link>
 
-          {/* MOBILE BUTTON */}
+          {/* MOBILE MENU BUTTON */}
+
           <button
             type="button"
             onClick={toggleMobileMenu}
@@ -893,53 +933,78 @@ const Navbar = () => {
               isOpen ? "Close navigation menu" : "Open navigation menu"
             }
             aria-expanded={isOpen}
-            className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 text-slate-800 transition-all hover:bg-slate-100 active:scale-95 dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-white lg:hidden"
+            className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-slate-200 bg-transparent text-slate-800 transition-colors duration-150 hover:bg-slate-100 active:scale-95 dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-white dark:hover:bg-blue-500/20 lg:hidden"
           >
-            {isOpen ? <X size={17} /> : <Menu size={17} />}
+            {isOpen ? (
+              <X
+                size={17}
+                strokeWidth={2}
+                className="shrink-0"
+                aria-hidden="true"
+              />
+            ) : (
+              <Menu
+                size={17}
+                strokeWidth={2}
+                className="shrink-0"
+                aria-hidden="true"
+              />
+            )}
           </button>
         </div>
       </div>
 
+      {/* MOBILE NAVIGATION */}
+
       <div
-        className={`mx-1 mt-2 overflow-hidden rounded-2xl border shadow-xl backdrop-blur-md transition-all duration-300 sm:mx-4 ${
+        className={`mx-1 mt-2 overflow-hidden rounded-2xl border shadow-xl backdrop-blur-md transition-all duration-300 sm:mx-4 lg:hidden ${
           isOpen
             ? "max-h-[calc(100vh-90px)] overflow-y-auto border-slate-200 bg-white p-3 opacity-100 dark:border-blue-500/20 dark:bg-[#0b1528]"
             : "pointer-events-none max-h-0 border-transparent p-0 opacity-0"
         }`}
       >
-        <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
+        <nav
+          aria-label="Mobile navigation"
+          className="flex flex-col gap-1"
+        >
           {/* HOME */}
+
           <Link
             to="/"
             onClick={closeMenus}
-            className="rounded-xl px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
+            className="cursor-pointer rounded-xl px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
           >
             Home
           </Link>
 
-          {/* Mobile Services */}
+          {/* MOBILE SERVICES */}
+
           <div className="flex items-center">
             <Link
               to="/services"
               onClick={closeMenus}
-              className="flex-1 rounded-l-xl px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
+              className="flex flex-1 cursor-pointer items-center rounded-l-xl px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
             >
               Services
             </Link>
 
-            {/* SERVICES TOGGLE */}
             <button
               type="button"
               aria-label="Open Services submenu"
               aria-expanded={mobileServicesOpen}
-              onClick={() => setMobileServicesOpen((current) => !current)}
-              className="rounded-r-xl px-3 py-2.5 text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
+              onClick={() =>
+                setMobileServicesOpen((current) => !current)
+              }
+              className="flex cursor-pointer items-center justify-center rounded-r-xl px-3 py-2.5 text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
             >
               <ChevronDown
                 size={15}
-                className={
-                  mobileServicesOpen ? "rotate-180 text-[#6ea1ff]" : ""
-                }
+                strokeWidth={2}
+                className={`shrink-0 transition-transform duration-200 ${
+                  mobileServicesOpen
+                    ? "rotate-180 text-[#6ea1ff]"
+                    : ""
+                }`}
               />
             </button>
           </div>
@@ -951,7 +1016,7 @@ const Navbar = () => {
                   key={service.label}
                   to={service.href}
                   onClick={closeMenus}
-                  className="rounded-lg bg-slate-50 px-2.5 py-2 text-slate-900 hover:bg-blue-50 dark:bg-[#286b94]/10 dark:text-white dark:hover:bg-[#286b94]/30"
+                  className="cursor-pointer rounded-lg bg-slate-50 px-2.5 py-2 text-slate-900 hover:bg-blue-50 dark:bg-[#286b94]/10 dark:text-white dark:hover:bg-[#286b94]/30"
                 >
                   <span className="block text-[11px] font-bold leading-tight">
                     {service.label}
@@ -961,13 +1026,14 @@ const Navbar = () => {
             </div>
           )}
 
-          {/* Mobile Hire Developers */}
+          {/* MOBILE HIRE DEVELOPERS */}
+
           <div>
             <div className="flex items-center">
               <Link
                 to="/hire-developers"
                 onClick={closeMenus}
-                className="flex-1 rounded-l-xl px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
+                className="flex flex-1 cursor-pointer items-center rounded-l-xl px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
               >
                 Hire Developers
               </Link>
@@ -976,12 +1042,19 @@ const Navbar = () => {
                 type="button"
                 aria-label="Open Hire Developers submenu"
                 aria-expanded={mobileHireOpen}
-                onClick={() => setMobileHireOpen((current) => !current)}
-                className="rounded-r-xl px-3 py-2.5 text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
+                onClick={() =>
+                  setMobileHireOpen((current) => !current)
+                }
+                className="flex cursor-pointer items-center justify-center rounded-r-xl px-3 py-2.5 text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
               >
                 <ChevronDown
                   size={15}
-                  className={mobileHireOpen ? "rotate-180 text-[#6ea1ff]" : ""}
+                  strokeWidth={2}
+                  className={`shrink-0 transition-transform duration-200 ${
+                    mobileHireOpen
+                      ? "rotate-180 text-[#6ea1ff]"
+                      : ""
+                  }`}
                 />
               </button>
             </div>
@@ -991,7 +1064,7 @@ const Navbar = () => {
                 <Link
                   to="/hire-developers"
                   onClick={closeMenus}
-                  className="rounded-lg bg-blue-50 px-3 py-2 text-xs font-bold text-[#286b94] hover:bg-blue-100 dark:bg-[#286b94]/20 dark:text-[#6ea1ff] dark:hover:bg-[#286b94]/30"
+                  className="cursor-pointer rounded-lg bg-blue-50 px-3 py-2 text-xs font-bold text-[#286b94] hover:bg-blue-100 dark:bg-[#286b94]/20 dark:text-[#6ea1ff] dark:hover:bg-[#286b94]/30"
                 >
                   View All Developers
                 </Link>
@@ -1002,7 +1075,7 @@ const Navbar = () => {
                       key={developer.label}
                       to={developer.href}
                       onClick={closeMenus}
-                      className="rounded-lg bg-slate-50 px-2.5 py-2 text-slate-900 hover:bg-blue-50 dark:bg-[#286b94]/10 dark:text-white dark:hover:bg-[#286b94]/30"
+                      className="cursor-pointer rounded-lg bg-slate-50 px-2.5 py-2 text-slate-900 hover:bg-blue-50 dark:bg-[#286b94]/10 dark:text-white dark:hover:bg-[#286b94]/30"
                     >
                       <span className="block text-[11px] font-bold leading-tight">
                         {developer.label}
@@ -1014,17 +1087,26 @@ const Navbar = () => {
             )}
           </div>
 
+          {/* MOBILE TECHNOLOGIES */}
+
           <button
             type="button"
             aria-expanded={mobileTechOpen}
-            onClick={() => setMobileTechOpen((current) => !current)}
-            className="flex items-center justify-between rounded-xl px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
+            onClick={() =>
+              setMobileTechOpen((current) => !current)
+            }
+            className="flex cursor-pointer items-center justify-between rounded-xl px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
           >
             <span>Technologies</span>
 
             <ChevronDown
               size={15}
-              className={mobileTechOpen ? "rotate-180 text-[#6ea1ff]" : ""}
+              strokeWidth={2}
+              className={`shrink-0 transition-transform duration-200 ${
+                mobileTechOpen
+                  ? "rotate-180 text-[#6ea1ff]"
+                  : ""
+              }`}
             />
           </button>
 
@@ -1034,10 +1116,13 @@ const Navbar = () => {
                 const Icon = group.icon;
 
                 return (
-                  <div key={group.category} className="flex flex-col gap-1">
+                  <div
+                    key={group.category}
+                    className="flex flex-col gap-1"
+                  >
                     <div className="flex items-center gap-1.5 px-2 text-[10px] font-bold uppercase tracking-wider text-[#6ea1ff]">
-                      <Icon size={12} />
-                      {group.category}
+                      <Icon size={12} className="shrink-0" />
+                      <span>{group.category}</span>
                     </div>
 
                     {group.items.map((item) => (
@@ -1045,9 +1130,12 @@ const Navbar = () => {
                         key={item.label}
                         to={item.to}
                         onClick={closeMenus}
-                        className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-blue-50 dark:text-slate-300 dark:hover:bg-blue-500/15"
+                        className="flex cursor-pointer items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-blue-50 dark:text-slate-300 dark:hover:bg-blue-500/15"
                       >
-                        {item.icon}
+                        <span className="flex shrink-0 items-center justify-center">
+                          {item.icon}
+                        </span>
+
                         <span>{item.label}</span>
                       </Link>
                     ))}
@@ -1062,7 +1150,7 @@ const Navbar = () => {
           <Link
             to="/about-us"
             onClick={closeMenus}
-            className="rounded-xl px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
+            className="cursor-pointer rounded-xl px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
           >
             About
           </Link>
@@ -1072,17 +1160,15 @@ const Navbar = () => {
           <Link
             to="/contact-us"
             onClick={closeMenus}
-            className="rounded-xl px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
+            className="cursor-pointer rounded-xl px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-blue-500/15"
           >
             Contact
           </Link>
 
-          {/* MOBILE CTA */}
-
           <Link
             to="/contact-us"
             onClick={closeMenus}
-            className="mt-2 rounded-xl py-2.5 text-center text-xs font-semibold text-white shadow-md active:scale-[0.98]"
+            className="mt-2 cursor-pointer rounded-xl py-2.5 text-center text-xs font-semibold text-white shadow-md active:scale-[0.98]"
             style={{
               background: `linear-gradient(90deg, ${theme.primary}, ${theme.secondary})`,
             }}
