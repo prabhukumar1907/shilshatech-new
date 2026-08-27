@@ -4,8 +4,9 @@ import Footer from "../../components/Footer";
 const Careers = () => {
   const theme = {
     primary: "#286b94",
-    secondary: "#1e3a8a",
-    glow: "#6ea1ff",
+    secondary: "#173f67",
+    accent: "#69a8ff",
+    light: "#eaf4ff",
   };
 
   const jobs = [
@@ -14,6 +15,7 @@ const Careers = () => {
       type: "Full Time",
       location: "Gurugram / Remote",
       experience: "3+ Years",
+      department: "Engineering",
       description:
         "Build scalable, high-performance web applications using React, TypeScript, and modern frontend technologies.",
       tags: ["React", "TypeScript", "Next.js"],
@@ -23,6 +25,7 @@ const Careers = () => {
       type: "Full Time",
       location: "Gurugram / Remote",
       experience: "2+ Years",
+      department: "Engineering",
       description:
         "Design robust APIs and backend systems that power our next generation of digital products.",
       tags: ["Node.js", "MongoDB", "REST API"],
@@ -32,6 +35,7 @@ const Careers = () => {
       type: "Full Time",
       location: "Gurugram / Hybrid",
       experience: "2+ Years",
+      department: "Design",
       description:
         "Create intuitive, beautiful, and user-focused experiences for web and mobile products.",
       tags: ["Figma", "UI/UX", "Design Systems"],
@@ -41,6 +45,7 @@ const Careers = () => {
       type: "Full Time",
       location: "Gurugram / Remote",
       experience: "3+ Years",
+      department: "Engineering",
       description:
         "Work across the frontend and backend to build reliable, scalable, and user-friendly digital products.",
       tags: ["React", "Node.js", "PostgreSQL"],
@@ -49,24 +54,28 @@ const Careers = () => {
 
   const benefits = [
     {
-      icon: "🚀",
-      title: "Grow With Us",
-      text: "Work on challenging projects and accelerate your technical and professional growth.",
+      number: "01",
+      title: "Meaningful Work",
+      text: "Build digital products that solve real business problems and create measurable impact.",
+      icon: "spark",
     },
     {
-      icon: "💡",
-      title: "Innovative Culture",
-      text: "Bring your ideas to life in an environment that values creativity and experimentation.",
+      number: "02",
+      title: "Keep Growing",
+      text: "Learn continuously, take ownership and grow alongside experienced teammates.",
+      icon: "growth",
     },
     {
-      icon: "🌎",
-      title: "Flexible Work",
-      text: "Enjoy flexible working options designed to help you do your best work.",
+      number: "03",
+      title: "Flexible Culture",
+      text: "Work in an environment built around trust, flexibility, collaboration and autonomy.",
+      icon: "globe",
     },
     {
-      icon: "🤝",
+      number: "04",
       title: "Great People",
-      text: "Collaborate with talented, passionate people who love solving meaningful problems.",
+      text: "Collaborate with curious, ambitious and supportive people who enjoy building together.",
+      icon: "people",
     },
   ];
 
@@ -81,12 +90,8 @@ const Careers = () => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [selectedDepartment, setSelectedDepartment] = useState("All");
 
-  /*
-   * ---------------------------------------------------------
-   * Scroll reveal animation
-   * ---------------------------------------------------------
-   */
   const revealRefs = useRef([]);
 
   useEffect(() => {
@@ -100,28 +105,23 @@ const Careers = () => {
         });
       },
       {
-        threshold: 0.12,
+        threshold: 0.08,
       },
     );
 
-    revealRefs.current.forEach((el) => {
-      if (el) observer.observe(el);
+    revealRefs.current.forEach((element) => {
+      if (element) observer.observe(element);
     });
 
     return () => observer.disconnect();
   }, []);
 
-  const addRevealRef = (el) => {
-    if (el && !revealRefs.current.includes(el)) {
-      revealRefs.current.push(el);
+  const addRevealRef = (element) => {
+    if (element && !revealRefs.current.includes(element)) {
+      revealRefs.current.push(element);
     }
   };
 
-  /*
-   * ---------------------------------------------------------
-   * Form
-   * ---------------------------------------------------------
-   */
   const handleChange = (e) => {
     const { name, value, files } = e.target;
 
@@ -176,7 +176,6 @@ ${formData.name}
     )}&body=${encodeURIComponent(body)}`;
 
     setSubmitted(true);
-
     window.location.href = mailto;
   };
 
@@ -194,48 +193,159 @@ ${formData.name}
     });
   };
 
+  const filteredJobs =
+    selectedDepartment === "All"
+      ? jobs
+      : jobs.filter((job) => job.department === selectedDepartment);
+
+  const departments = ["All", ...new Set(jobs.map((job) => job.department))];
+
+  const Icon = ({ name, size = 20, strokeWidth = 1.8 }) => {
+    const common = {
+      width: size,
+      height: size,
+      viewBox: "0 0 24 24",
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth,
+      strokeLinecap: "round",
+      strokeLinejoin: "round",
+      "aria-hidden": true,
+    };
+
+    if (name === "arrow") {
+      return (
+        <svg {...common}>
+          <path d="M5 12h14" />
+          <path d="m13 6 6 6-6 6" />
+        </svg>
+      );
+    }
+
+    if (name === "spark") {
+      return (
+        <svg {...common}>
+          <path d="m12 3-1.5 5.5L5 10l5.5 1.5L12 17l1.5-5.5L19 10l-5.5-1.5L12 3Z" />
+          <path d="m19 16-.7 2.3L16 19l2.3.7L19 22l.7-2.3L22 19l-2.3-.7L19 16Z" />
+        </svg>
+      );
+    }
+
+    if (name === "growth") {
+      return (
+        <svg {...common}>
+          <path d="M4 19V5" />
+          <path d="M4 19h16" />
+          <path d="m7 15 4-5 3 3 5-7" />
+          <path d="M15 6h4v4" />
+        </svg>
+      );
+    }
+
+    if (name === "globe") {
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="9" />
+          <path d="M3 12h18" />
+          <path d="M12 3c2.2 2.4 3.3 5.4 3.3 9s-1.1 6.6-3.3 9c-2.2-2.4-3.3-5.4-3.3-9S9.8 5.4 12 3Z" />
+        </svg>
+      );
+    }
+
+    if (name === "people") {
+      return (
+        <svg {...common}>
+          <circle cx="9" cy="8" r="3" />
+          <path d="M3 20c.5-3.2 2.5-5 6-5s5.5 1.8 6 5" />
+          <path d="M16 5.5a3 3 0 0 1 0 5.8" />
+          <path d="M18 15c1.9.5 3 2 3.5 5" />
+        </svg>
+      );
+    }
+
+    if (name === "map") {
+      return (
+        <svg {...common}>
+          <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" />
+          <circle cx="12" cy="10" r="2.5" />
+        </svg>
+      );
+    }
+
+    if (name === "clock") {
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 7v5l3 2" />
+        </svg>
+      );
+    }
+
+    if (name === "briefcase") {
+      return (
+        <svg {...common}>
+          <rect x="3" y="7" width="18" height="13" rx="2" />
+          <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+          <path d="M3 12h18" />
+          <path d="M10 12v2h4v-2" />
+        </svg>
+      );
+    }
+
+    if (name === "mail") {
+      return (
+        <svg {...common}>
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <path d="m3 7 9 6 9-6" />
+        </svg>
+      );
+    }
+
+    if (name === "upload") {
+      return (
+        <svg {...common}>
+          <path d="M12 16V4" />
+          <path d="m7 9 5-5 5 5" />
+          <path d="M5 20h14" />
+        </svg>
+      );
+    }
+
+    if (name === "check") {
+      return (
+        <svg {...common}>
+          <path d="m5 12 4 4L19 6" />
+        </svg>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <>
       <style>{`
-        @keyframes careers-float {
+        @keyframes careerFloat {
           0%, 100% {
-            transform: translateY(0px);
+            transform: translateY(0);
           }
           50% {
-            transform: translateY(-12px);
+            transform: translateY(-8px);
           }
         }
 
-        @keyframes careers-float-slow {
+        @keyframes careerPulse {
           0%, 100% {
-            transform: translate3d(0, 0, 0) scale(1);
-          }
-          50% {
-            transform: translate3d(20px, -20px, 0) scale(1.05);
-          }
-        }
-
-        @keyframes careers-pulse-glow {
-          0%, 100% {
-            opacity: .25;
+            opacity: .35;
             transform: scale(1);
           }
           50% {
-            opacity: .45;
+            opacity: .65;
             transform: scale(1.08);
           }
         }
 
-        @keyframes careers-shimmer {
-          0% {
-            transform: translateX(-120%);
-          }
-          100% {
-            transform: translateX(120%);
-          }
-        }
-
-        @keyframes careers-gradient {
+        @keyframes careerGradient {
           0%, 100% {
             background-position: 0% 50%;
           }
@@ -244,118 +354,85 @@ ${formData.name}
           }
         }
 
-        @keyframes careers-spin-slow {
-          from {
-            transform: rotate(0deg);
+        @keyframes careerShine {
+          0% {
+            transform: translateX(-120%);
           }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-
-        @keyframes careers-grid {
-          from {
-            background-position: 0 0;
-          }
-          to {
-            background-position: 40px 40px;
+          100% {
+            transform: translateX(120%);
           }
         }
 
-        .careers-float {
-          animation: careers-float 5s ease-in-out infinite;
+        .career-float {
+          animation: careerFloat 6s ease-in-out infinite;
         }
 
-        .careers-float-slow {
-          animation: careers-float-slow 8s ease-in-out infinite;
+        .career-pulse {
+          animation: careerPulse 5s ease-in-out infinite;
         }
 
-        .careers-pulse-glow {
-          animation: careers-pulse-glow 4s ease-in-out infinite;
-        }
-
-        .careers-gradient {
+        .career-gradient {
           background-size: 200% 200%;
-          animation: careers-gradient 8s ease infinite;
+          animation: careerGradient 8s ease infinite;
         }
 
-        .careers-spin {
-          animation: careers-spin-slow 18s linear infinite;
-        }
-
-        .careers-grid {
-          animation: careers-grid 15s linear infinite;
-        }
-
-        .careers-reveal {
-          opacity: 0;
-          transform: translateY(35px);
-          transition:
-            opacity .8s cubic-bezier(.22,1,.36,1),
-            transform .8s cubic-bezier(.22,1,.36,1);
-        }
-
-        .careers-reveal.careers-visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        .careers-delay-1 {
-          transition-delay: .08s;
-        }
-
-        .careers-delay-2 {
-          transition-delay: .16s;
-        }
-
-        .careers-delay-3 {
-          transition-delay: .24s;
-        }
-
-        .careers-delay-4 {
-          transition-delay: .32s;
-        }
-
-        .careers-delay-5 {
-          transition-delay: .40s;
-        }
-
-        .careers-card {
-          transition:
-            transform .4s cubic-bezier(.22,1,.36,1),
-            box-shadow .4s ease,
-            border-color .4s ease,
-            background-color .4s ease;
-        }
-
-        .careers-card:hover {
-          transform: translateY(-8px);
-        }
-
-        .careers-shine {
+        .career-shine {
           position: relative;
           overflow: hidden;
         }
 
-        .careers-shine::after {
+        .career-shine::after {
           content: "";
           position: absolute;
-          top: 0;
-          bottom: 0;
-          width: 30%;
-          left: 0;
+          inset: 0;
+          width: 40%;
           background: linear-gradient(
             90deg,
             transparent,
-            rgba(255,255,255,.15),
+            rgba(255,255,255,.22),
             transparent
           );
           transform: translateX(-120%);
           pointer-events: none;
         }
 
-        .careers-shine:hover::after {
-          animation: careers-shimmer .9s ease;
+        .career-shine:hover::after {
+          animation: careerShine .8s ease;
+        }
+
+        .careers-reveal {
+          opacity: 0;
+          transform: translateY(28px);
+          transition:
+            opacity .7s cubic-bezier(.22,1,.36,1),
+            transform .7s cubic-bezier(.22,1,.36,1);
+        }
+
+        .careers-visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .career-card {
+          transition:
+            transform .35s cubic-bezier(.22,1,.36,1),
+            box-shadow .35s ease,
+            border-color .35s ease;
+        }
+
+        .career-card:hover {
+          transform: translateY(-5px);
+        }
+
+        .career-input {
+          transition:
+            border-color .2s ease,
+            box-shadow .2s ease,
+            background-color .2s ease;
+        }
+
+        .career-input:focus {
+          outline: none;
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -377,143 +454,96 @@ ${formData.name}
 
       <main
         className="
-          relative min-h-screen overflow-hidden
-          bg-slate-50 text-slate-900
-          transition-colors duration-500
-          dark:bg-[#050d17] dark:text-white
+          min-h-screen overflow-hidden
+          bg-[#f8fafc] text-slate-900
+          dark:bg-[#050b13] dark:text-white
         "
-        style={{
-          "--primary": theme.primary,
-          "--secondary": theme.secondary,
-          "--glow": theme.glow,
-        }}
       >
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          {/* Grid */}
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
           <div
             className="
-              careers-grid absolute inset-0 opacity-[0.025]
-              dark:opacity-[0.045]
+              absolute left-[-15%] top-[-10%]
+              h-125 w-125
+              rounded-full blur-[120px]
             "
             style={{
-              backgroundImage: `
-                linear-gradient(${theme.primary} 1px, transparent 1px),
-                linear-gradient(90deg, ${theme.primary} 1px, transparent 1px)
-              `,
-              backgroundSize: "40px 40px",
+              background: `${theme.primary}18`,
             }}
           />
 
-          {/* Top glow */}
           <div
             className="
-              careers-pulse-glow absolute
-              -left-40 -top-40
+              absolute right-[-15%] top-[20%]
               h-125 w-125
               rounded-full blur-[130px]
             "
             style={{
-              background: theme.primary,
+              background: `${theme.accent}12`,
             }}
           />
 
-          {/* Right glow */}
           <div
             className="
-              careers-float-slow absolute
-              -right-40 top-[30%]
+              absolute bottom-[-15%] left-[25%]
               h-112.5 w-112.5
-              rounded-full blur-[140px]
+              rounded-full blur-[130px]
             "
             style={{
-              background: theme.secondary,
-              opacity: 0.15,
+              background: `${theme.secondary}10`,
             }}
           />
 
-          {/* Bottom glow */}
           <div
-            className="
-              careers-pulse-glow absolute
-              -bottom-40 left-[35%]
-              h-100 w-100
-              rounded-full blur-[140px]
-            "
+            className="absolute inset-0 opacity-[0.025] dark:opacity-[0.035]"
             style={{
-              background: theme.glow,
-              opacity: 0.12,
-            }}
-          />
-
-          {/* Decorative rings */}
-          <div
-            className="
-              careers-spin absolute
-              right-[8%] top-[12%]
-              hidden h-44 w-44
-              rounded-full border
-              border-blue-500/10
-              lg:block
-            "
-          />
-
-          <div
-            className="
-              careers-spin absolute
-              left-[4%] top-[55%]
-              hidden h-24 w-24
-              rounded-full border
-              border-blue-500/10
-              lg:block
-            "
-            style={{
-              animationDirection: "reverse",
+              backgroundImage: `
+                linear-gradient(#286b94 1px, transparent 1px),
+                linear-gradient(90deg, #286b94 1px, transparent 1px)
+              `,
+              backgroundSize: "48px 48px",
             }}
           />
         </div>
 
-        <section className="relative z-10 mx-auto max-w-7xl px-6 pb-24 pt-20 lg:px-8 lg:pb-32 lg:pt-28">
-          <div className="grid items-center gap-16 lg:grid-cols-[1.05fr_.95fr]">
-            {/* Content */}
+        <section className="relative z-10 mx-auto max-w-7xl px-6 pb-20 pt-20 sm:pt-24 lg:px-8 lg:pb-28 lg:pt-32">
+          <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_.95fr] lg:gap-20">
             <div ref={addRevealRef} className="careers-reveal">
+              {/* Eyebrow */}
               <div
                 className="
-                  mb-7 inline-flex items-center gap-2.5
-                  rounded-full border
+                  inline-flex items-center gap-2
+                  rounded-full
+                  border
+                  bg-white/80
                   px-4 py-2
-                  text-sm font-medium
+                  text-xs font-bold
+                  uppercase tracking-[0.15em]
+                  shadow-sm
                   backdrop-blur-xl
-                  bg-blue-50/80 text-[#286b94]
-                  dark:bg-blue-500/8
-                  dark:text-blue-300
+                  dark:border-white/10
+                  dark:bg-white/4
                 "
                 style={{
-                  borderColor: `${theme.glow}40`,
+                  borderColor: `${theme.primary}25`,
+                  color: theme.primary,
                 }}
               >
-                <span className="relative flex h-2.5 w-2.5">
-                  <span
-                    className="
-                      absolute inline-flex
-                      h-full w-full
-                      animate-ping rounded-full
-                      opacity-60
-                    "
-                    style={{ background: theme.glow }}
-                  />
-                  <span
-                    className="relative inline-flex h-2.5 w-2.5 rounded-full"
-                    style={{ background: theme.glow }}
-                  />
-                </span>
-                We&apos;re hiring talented people
+                <span
+                  className="h-2 w-2 rounded-full"
+                  style={{
+                    background: theme.accent,
+                    boxShadow: `0 0 0 4px ${theme.accent}18`,
+                  }}
+                />
+                We&apos;re building the future
               </div>
 
-              <h1 className="max-w-4xl text-5xl font-black leading-[0.98] tracking-[-0.04em] sm:text-6xl lg:text-7xl xl:text-[80px]">
-                Build the
+              {/* Heading */}
+              <h1 className="mt-7 max-w-4xl text-[48px] font-black leading-[0.98] tracking-[-0.055em] sm:text-6xl lg:text-7xl xl:text-[82px]">
+                Do work that
                 <span
                   className="
-                    careers-gradient
+                    career-gradient
                     mt-2 block
                     bg-linear-to-r
                     bg-clip-text
@@ -523,33 +553,37 @@ ${formData.name}
                     backgroundImage: `linear-gradient(
                       90deg,
                       ${theme.primary},
-                      ${theme.glow},
+                      ${theme.accent},
                       ${theme.secondary}
                     )`,
                   }}
                 >
-                  future with us.
+                  actually matters.
                 </span>
               </h1>
 
-              <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400 sm:text-xl">
-                Join Shilsha Technologies and work with passionate engineers,
-                designers, and innovators building meaningful digital
-                experiences for businesses around the world.
+              <p className="mt-7 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-400 sm:text-lg sm:leading-8">
+                Join Shilsha Technologies and work alongside engineers,
+                designers and problem-solvers who are creating thoughtful
+                digital products for businesses around the world.
               </p>
 
-              <div className="mt-9 flex flex-wrap gap-4">
+              {/* CTA */}
+              <div className="mt-8 flex flex-wrap gap-3">
                 <button
                   type="button"
                   onClick={() => scrollToResume()}
                   className="
-                    careers-shine group relative
-                    rounded-xl px-7 py-4
-                    font-semibold text-white
-                    shadow-xl
-                    transition duration-300
+                    career-shine
+                    group
+                    inline-flex items-center gap-3
+                    rounded-xl
+                    px-6 py-3.5
+                    text-sm font-bold text-white
+                    shadow-lg
+                    transition
+                    duration-300
                     hover:-translate-y-1
-                    active:translate-y-0
                   "
                   style={{
                     background: `linear-gradient(
@@ -557,60 +591,61 @@ ${formData.name}
                       ${theme.primary},
                       ${theme.secondary}
                     )`,
-                    boxShadow: `0 15px 40px ${theme.primary}45`,
+                    boxShadow: `0 14px 35px ${theme.primary}30`,
                   }}
                 >
-                  <span className="relative z-10">
-                    Explore Opportunities
-                    <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1">
-                      →
-                    </span>
+                  Explore open roles
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">
+                    <Icon name="arrow" size={17} />
                   </span>
                 </button>
 
                 <a
                   href="#culture"
                   className="
-                    group rounded-xl
-                    border border-slate-200
-                    bg-white/70 px-7 py-4
-                    font-semibold
+                    inline-flex items-center gap-2
+                    rounded-xl
+                    border
+                    border-slate-200
+                    bg-white/80
+                    px-6 py-3.5
+                    text-sm font-bold
                     text-slate-700
+                    shadow-sm
                     backdrop-blur-xl
-                    transition duration-300
+                    transition
+                    duration-300
                     hover:-translate-y-1
                     hover:border-slate-300
-                    hover:bg-white
                     dark:border-white/10
                     dark:bg-white/4
                     dark:text-slate-200
-                    dark:hover:border-white/20
-                    dark:hover:bg-white/8
                   "
                 >
-                  Our Culture
-                  <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-y-1">
-                    ↓
-                  </span>
+                  Discover our culture
                 </a>
               </div>
 
               {/* Stats */}
-              <div className="mt-14 grid max-w-xl grid-cols-3 gap-5">
+              <div className="mt-12 grid max-w-2xl grid-cols-3 border-y border-slate-200/80 py-5 dark:border-white/10">
                 {[
-                  ["50+", "Team Members"],
-                  ["15+", "Countries Served"],
-                  ["100+", "Projects Delivered"],
+                  ["50+", "Team members"],
+                  ["15+", "Countries served"],
+                  ["100+", "Projects delivered"],
                 ].map(([number, label], index) => (
                   <div
                     key={label}
-                    className={`careers-reveal careers-delay-${index + 1}`}
                     ref={addRevealRef}
+                    className={`careers-reveal ${
+                      index > 0
+                        ? "border-l border-slate-200 dark:border-white/10"
+                        : ""
+                    } px-4 first:pl-0`}
                   >
-                    <p className="text-3xl font-black tracking-tight sm:text-4xl">
+                    <p className="text-2xl font-black tracking-tight sm:text-3xl">
                       {number}
                     </p>
-                    <p className="mt-1 text-xs leading-5 text-slate-500 sm:text-sm">
+                    <p className="mt-1 text-[11px] font-medium text-slate-500 sm:text-xs">
                       {label}
                     </p>
                   </div>
@@ -618,136 +653,157 @@ ${formData.name}
               </div>
             </div>
 
-            {/* Hero visual */}
             <div
               ref={addRevealRef}
               className="careers-reveal careers-delay-2 relative"
             >
               <div
                 className="
-                  careers-pulse-glow
-                  absolute inset-8
+                  career-pulse
+                  absolute inset-10
                   rounded-[40px]
-                  blur-3xl
+                  blur-[70px]
                 "
                 style={{
                   background: `linear-gradient(
                     135deg,
                     ${theme.primary},
-                    ${theme.glow}
+                    ${theme.accent}
                   )`,
-                  opacity: 0.18,
+                  opacity: 0.14,
                 }}
               />
 
-              {/* Main card */}
-              <div className="careers-float relative">
+              <div className="career-float relative">
                 <div
                   className="
-                    rounded-4xl
-                    border border-slate-200/80
+                    rounded-[30px]
+                    border
+                    border-slate-200/80
                     bg-white/75
-                    p-3
-                    shadow-2xl
+                    p-2
+                    shadow-[0_30px_90px_rgba(15,23,42,.12)]
                     backdrop-blur-2xl
                     dark:border-white/10
-                    dark:bg-[#0b1726]/80
+                    dark:bg-[#0b1420]/80
+                    dark:shadow-[0_30px_90px_rgba(0,0,0,.3)]
                   "
                 >
                   <div
                     className="
                       relative overflow-hidden
-                      rounded-[25px]
-                      border border-slate-100
-                      bg-slate-50
-                      p-7
+                      rounded-3xl
+                      border
+                      border-slate-100
+                      bg-[#f8fafc]
+                      p-6
                       dark:border-white/10
-                      dark:bg-[#07111d]
+                      dark:bg-[#07101a]
+                      sm:p-8
                     "
                   >
-                    {/* Gradient */}
+                    {/* top glow */}
                     <div
-                      className="
-                        absolute -right-20 -top-20
-                        h-52 w-52
-                        rounded-full
-                        blur-3xl
-                      "
+                      className="absolute -right-20 -top-25 h-72 w-72 rounded-full blur-[90px]"
                       style={{
-                        background: theme.primary,
-                        opacity: 0.15,
+                        background: theme.accent,
+                        opacity: 0.12,
                       }}
                     />
 
-                    {/* Browser */}
                     <div className="relative">
-                      <div className="mb-8 flex items-center justify-between">
-                        <div className="flex gap-2">
-                          <span className="h-3 w-3 rounded-full bg-red-400" />
-                          <span className="h-3 w-3 rounded-full bg-yellow-400" />
-                          <span className="h-3 w-3 rounded-full bg-green-400" />
+                      {/* Browser bar */}
+                      <div className="flex items-center justify-between">
+                        <div className="flex gap-1.5">
+                          <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
+                          <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
+                          <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
                         </div>
 
-                        <div className="rounded-full border border-slate-200 px-3 py-1 text-[10px] text-slate-400 dark:border-white/10">
+                        <div className="hidden rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-[9px] text-slate-400 dark:border-white/10 dark:bg-white/3 sm:block">
                           shilshatech.com/careers
                         </div>
                       </div>
 
-                      <div className="mb-8">
-                        <p className="text-xs font-medium uppercase tracking-[0.2em] text-slate-400">
+                      {/* Visual header */}
+                      <div className="mt-10">
+                        <p
+                          className="text-[10px] font-bold uppercase tracking-[0.25em]"
+                          style={{ color: theme.primary }}
+                        >
                           Your workspace
                         </p>
 
-                        <h3 className="mt-2 text-2xl font-bold">
+                        <h3 className="mt-2 text-2xl font-black tracking-tight sm:text-3xl">
                           Create. Build. Impact.
                         </h3>
+
+                        <p className="mt-2 max-w-sm text-xs leading-5 text-slate-500">
+                          A place where ambitious people turn ideas into
+                          meaningful products.
+                        </p>
                       </div>
 
-                      {/* Dashboard */}
-                      <div className="grid gap-4 sm:grid-cols-2">
+                      {/* Mini dashboard */}
+                      <div className="mt-8 grid gap-3 sm:grid-cols-2">
                         <div
                           className="
-                            rounded-2xl border
-                            border-slate-200
+                            rounded-2xl
+                            border
                             p-5
-                            dark:border-white/10
                           "
                           style={{
-                            background: `${theme.primary}08`,
+                            borderColor: `${theme.primary}18`,
+                            background: `${theme.primary}07`,
                           }}
                         >
                           <div
                             className="
-                              flex h-11 w-11
+                              flex h-10 w-10
                               items-center justify-center
                               rounded-xl
-                              text-lg
                             "
                             style={{
-                              background: `${theme.primary}18`,
+                              background: `${theme.primary}15`,
                               color: theme.primary,
                             }}
                           >
-                            ✦
+                            <Icon name="spark" size={20} />
                           </div>
 
-                          <div className="mt-8 h-2 w-20 rounded-full bg-slate-200 dark:bg-slate-700" />
+                          <p className="mt-8 text-xs font-bold">Innovation</p>
 
-                          <div className="mt-3 h-2 w-28 rounded-full bg-slate-100 dark:bg-slate-800" />
+                          <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
+                            <div
+                              className="h-full w-[88%] rounded-full"
+                              style={{
+                                background: `linear-gradient(
+                                  90deg,
+                                  ${theme.primary},
+                                  ${theme.accent}
+                                )`,
+                              }}
+                            />
+                          </div>
+
+                          <p className="mt-2 text-[10px] text-slate-400">
+                            Always improving
+                          </p>
                         </div>
 
                         <div
                           className="
-                            rounded-2xl border
+                            rounded-2xl
+                            border
                             border-slate-200
                             bg-white
                             p-5
                             dark:border-white/10
-                            dark:bg-white/3
+                            dark:bg-white/2.5
                           "
                         >
-                          <div className="flex items-end gap-1.5">
-                            {[35, 55, 45, 75, 60, 90, 72].map(
+                          <div className="flex items-end gap-1">
+                            {[35, 48, 42, 66, 54, 82, 70].map(
                               (height, index) => (
                                 <div
                                   key={index}
@@ -756,57 +812,71 @@ ${formData.name}
                                     height: `${height}px`,
                                     background:
                                       index === 5
-                                        ? theme.glow
-                                        : `${theme.primary}35`,
+                                        ? theme.accent
+                                        : `${theme.primary}28`,
                                   }}
                                 />
                               ),
                             )}
                           </div>
 
-                          <div className="mt-6 h-2 w-20 rounded-full bg-slate-200 dark:bg-slate-700" />
+                          <p className="mt-5 text-xs font-bold">
+                            Growth mindset
+                          </p>
 
-                          <div className="mt-3 h-2 w-28 rounded-full bg-slate-100 dark:bg-slate-800" />
+                          <p className="mt-2 text-[10px] text-slate-400">
+                            Learn every day
+                          </p>
                         </div>
                       </div>
 
-                      <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-5 dark:border-white/10 dark:bg-white/3">
-                        <div className="flex items-center gap-4">
-                          <div
-                            className="flex h-11 w-11 items-center justify-center rounded-xl"
-                            style={{
-                              background: `${theme.primary}15`,
-                            }}
-                          >
-                            🚀
+                      {/* Bottom row */}
+                      <div
+                        className="
+                          mt-3 flex items-center
+                          gap-4 rounded-2xl
+                          border border-slate-200
+                          bg-white
+                          p-4
+                          dark:border-white/10
+                          dark:bg-white/2.5
+                        "
+                      >
+                        <div
+                          className="
+                            flex h-10 w-10 shrink-0
+                            items-center justify-center
+                            rounded-xl
+                          "
+                          style={{
+                            background: `${theme.primary}12`,
+                            color: theme.primary,
+                          }}
+                        >
+                          <Icon name="people" size={19} />
+                        </div>
+
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-bold">
+                              People first
+                            </span>
+
+                            <span
+                              className="text-[10px] font-bold"
+                              style={{ color: theme.primary }}
+                            >
+                              100%
+                            </span>
                           </div>
 
-                          <div className="flex-1">
-                            <div className="flex items-center justify-between">
-                              <span className="text-sm font-semibold">
-                                Innovation
-                              </span>
-                              <span
-                                className="text-xs font-bold"
-                                style={{ color: theme.primary }}
-                              >
-                                94%
-                              </span>
-                            </div>
-
-                            <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
-                              <div
-                                className="h-full rounded-full"
-                                style={{
-                                  width: "94%",
-                                  background: `linear-gradient(
-                                    90deg,
-                                    ${theme.primary},
-                                    ${theme.glow}
-                                  )`,
-                                }}
-                              />
-                            </div>
+                          <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+                            <div
+                              className="h-full w-full rounded-full"
+                              style={{
+                                background: theme.primary,
+                              }}
+                            />
                           </div>
                         </div>
                       </div>
@@ -817,59 +887,63 @@ ${formData.name}
                 {/* Floating card */}
                 <div
                   className="
-                    absolute -bottom-7 -left-5
+                    absolute -bottom-6 -left-3
                     rounded-2xl
-                    border border-slate-200
-                    bg-white/95
-                    p-4
-                    shadow-2xl
-                    backdrop-blur-xl
-                    dark:border-white/10
-                    dark:bg-[#0b1726]/95
-                    sm:-left-8
-                  "
-                >
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="flex h-11 w-11 items-center justify-center rounded-xl"
-                      style={{
-                        background: `${theme.primary}18`,
-                      }}
-                    >
-                      💙
-                    </div>
-
-                    <div>
-                      <p className="text-sm font-bold">People First</p>
-                      <p className="mt-0.5 text-xs text-slate-500">
-                        Build. Learn. Grow.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Floating top badge */}
-                <div
-                  className="
-                    absolute -right-4 top-10
-                    hidden rounded-2xl
-                    border border-slate-200
+                    border
+                    border-slate-200/80
                     bg-white/95
                     px-4 py-3
                     shadow-xl
                     backdrop-blur-xl
                     dark:border-white/10
-                    dark:bg-[#0b1726]/95
+                    dark:bg-[#0b1420]/95
+                    sm:-left-7
+                  "
+                >
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="flex h-9 w-9 items-center justify-center rounded-xl"
+                      style={{
+                        background: `${theme.primary}12`,
+                        color: theme.primary,
+                      }}
+                    >
+                      <Icon name="spark" size={17} />
+                    </div>
+
+                    <div>
+                      <p className="text-xs font-bold">People first</p>
+                      <p className="mt-0.5 text-[10px] text-slate-500">
+                        Build · Learn · Grow
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Status */}
+                <div
+                  className="
+                    absolute -right-3 top-8
+                    hidden rounded-2xl
+                    border
+                    border-slate-200/80
+                    bg-white/95
+                    px-4 py-3
+                    shadow-xl
+                    backdrop-blur-xl
+                    dark:border-white/10
+                    dark:bg-[#0b1420]/95
                     sm:block
                   "
                 >
                   <div className="flex items-center gap-2">
-                    <span
-                      className="h-2.5 w-2.5 rounded-full"
-                      style={{ background: "#22c55e" }}
-                    />
-                    <span className="text-xs font-semibold">
-                      Innovation mode
+                    <span className="relative flex h-2.5 w-2.5">
+                      <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400 opacity-60" />
+                      <span className="relative h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                    </span>
+
+                    <span className="text-[10px] font-bold">
+                      We&apos;re hiring
                     </span>
                   </div>
                 </div>
@@ -882,62 +956,74 @@ ${formData.name}
           id="culture"
           className="
             relative z-10
-            border-y border-slate-200/80
-            bg-white/50 py-24
+            border-y
+            border-slate-200/80
+            bg-white/65
+            py-24
             backdrop-blur-xl
-            dark:border-white/6
+            dark:border-white/10
             dark:bg-white/1.5
           "
         >
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div
               ref={addRevealRef}
-              className="careers-reveal mx-auto max-w-2xl text-center"
+              className="careers-reveal grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-end"
             >
-              <p
-                className="text-sm font-bold uppercase tracking-[0.25em]"
-                style={{ color: theme.primary }}
-              >
-                Why join us
-              </p>
+              <div>
+                <p
+                  className="text-xs font-black uppercase tracking-[0.25em]"
+                  style={{ color: theme.primary }}
+                >
+                  Why Shilsha
+                </p>
 
-              <h2 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl">
-                More than just a job.
-              </h2>
+                <h2 className="mt-4 max-w-xl text-4xl font-black tracking-[-0.04em] sm:text-5xl">
+                  A career should feel like progress.
+                </h2>
+              </div>
 
-              <p className="mt-5 leading-7 text-slate-600 dark:text-slate-400">
-                We believe great products come from great people. That&apos;s
-                why we create an environment where curiosity, ownership, and
-                creativity can thrive.
+              <p className="max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-400 lg:pb-1">
+                We want people to do the best work of their careers here. That
+                means giving you ownership, room to experiment and a team that
+                genuinely wants you to succeed.
               </p>
             </div>
 
-            <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               {benefits.map((benefit, index) => (
                 <div
                   key={benefit.title}
                   ref={addRevealRef}
-                  className={`careers-reveal careers-delay-${
-                    (index % 4) + 1
-                  } careers-card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:border-[#286b94]/30 hover:shadow-2xl dark:border-white/10 dark:bg-white/[0.035] dark:hover:border-[#6ea1ff]/30 dark:hover:bg-white/6`}
+                  className="careers-reveal career-card group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/2.5"
+                  style={{
+                    transitionDelay: `${index * 80}ms`,
+                  }}
                 >
-                  <div
-                    className="
-                      mb-6 flex h-14 w-14
-                      items-center justify-center
-                      rounded-2xl text-2xl
-                      transition duration-300
-                      group-hover:scale-110
-                      group-hover:rotate-3
-                    "
-                    style={{
-                      background: `${theme.primary}12`,
-                    }}
-                  >
-                    {benefit.icon}
+                  <div className="flex items-start justify-between">
+                    <div
+                      className="
+                        flex h-11 w-11
+                        items-center justify-center
+                        rounded-xl
+                        transition
+                        duration-300
+                        group-hover:scale-105
+                      "
+                      style={{
+                        background: `${theme.primary}10`,
+                        color: theme.primary,
+                      }}
+                    >
+                      <Icon name={benefit.icon} size={20} />
+                    </div>
+
+                    <span className="text-xs font-bold text-slate-300 dark:text-slate-700">
+                      {benefit.number}
+                    </span>
                   </div>
 
-                  <h3 className="text-lg font-bold">{benefit.title}</h3>
+                  <h3 className="mt-7 text-lg font-bold">{benefit.title}</h3>
 
                   <p className="mt-3 text-sm leading-6 text-slate-500 dark:text-slate-400">
                     {benefit.text}
@@ -945,16 +1031,15 @@ ${formData.name}
 
                   <div
                     className="
-                      mt-6 h-1 w-0
-                      rounded-full
+                      mt-6 h-px w-0
                       transition-all duration-500
-                      group-hover:w-12
+                      group-hover:w-full
                     "
                     style={{
                       background: `linear-gradient(
                         90deg,
                         ${theme.primary},
-                        ${theme.glow}
+                        transparent
                       )`,
                     }}
                   />
@@ -968,65 +1053,118 @@ ${formData.name}
           id="openings"
           className="relative z-10 mx-auto max-w-7xl px-6 py-24 lg:px-8"
         >
-          <div
-            ref={addRevealRef}
-            className="careers-reveal flex flex-col justify-between gap-5 md:flex-row md:items-end"
-          >
-            <div>
-              <p
-                className="text-sm font-bold uppercase tracking-[0.25em]"
-                style={{ color: theme.primary }}
-              >
-                Opportunities
-              </p>
+          <div ref={addRevealRef} className="careers-reveal">
+            <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+              <div>
+                <div className="flex items-center gap-3">
+                  <p
+                    className="text-xs font-black uppercase tracking-[0.25em]"
+                    style={{ color: theme.primary }}
+                  >
+                    Open positions
+                  </p>
 
-              <h2 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">
-                Find your next role
-              </h2>
+                  <span
+                    className="rounded-full px-2.5 py-1 text-[10px] font-bold"
+                    style={{
+                      background: `${theme.primary}10`,
+                      color: theme.primary,
+                    }}
+                  >
+                    {jobs.length} roles
+                  </span>
+                </div>
+
+                <h2 className="mt-4 text-4xl font-black tracking-[-0.04em] sm:text-5xl">
+                  Find your next role.
+                </h2>
+              </div>
+
+              <p className="max-w-md text-sm leading-6 text-slate-500 dark:text-slate-400">
+                Explore opportunities across engineering, design and product.
+                Find a role where your skills can make a difference.
+              </p>
             </div>
 
-            <p className="max-w-md text-sm leading-6 text-slate-500 dark:text-slate-400">
-              Explore our current openings and find the opportunity that matches
-              your skills, ambition, and experience.
-            </p>
+            {/* Filters */}
+            <div className="mt-9 flex flex-wrap gap-2">
+              {departments.map((department) => {
+                const active = selectedDepartment === department;
+
+                return (
+                  <button
+                    key={department}
+                    type="button"
+                    onClick={() => setSelectedDepartment(department)}
+                    className={`
+                      rounded-full
+                      border
+                      px-4 py-2
+                      text-xs font-bold
+                      transition duration-200
+                      ${
+                        active
+                          ? "text-white shadow-sm"
+                          : "border-slate-200 bg-white text-slate-500 hover:border-slate-300 dark:border-white/10 dark:bg-white/3 dark:text-slate-400"
+                      }
+                    `}
+                    style={
+                      active
+                        ? {
+                            borderColor: theme.primary,
+                            background: theme.primary,
+                          }
+                        : {}
+                    }
+                  >
+                    {department}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
-          <div className="mt-12 space-y-5">
-            {jobs.map((job, index) => (
+          <div className="mt-8 space-y-4">
+            {filteredJobs.map((job, index) => (
               <div
                 key={job.title}
                 ref={addRevealRef}
-                className={`careers-reveal careers-delay-${
-                  (index % 4) + 1
-                } careers-card group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:border-[#286b94]/30 hover:shadow-2xl dark:border-white/10 dark:bg-white/[0.035] dark:hover:border-[#6ea1ff]/25 dark:hover:bg-white/5.5 md:p-7`}
+                className="careers-reveal career-card group relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm dark:border-white/10 dark:bg-white/2.5"
+                style={{
+                  transitionDelay: `${index * 80}ms`,
+                }}
               >
-                {/* Hover glow */}
+                {/* Hover accent */}
                 <div
                   className="
-                    pointer-events-none absolute
-                    -right-20 -top-20
-                    h-48 w-48
-                    rounded-full
-                    opacity-0 blur-3xl
-                    transition duration-500
-                    group-hover:opacity-20
+                    absolute left-0 top-0
+                    h-full w-1
+                    origin-top
+                    scale-y-0
+                    transition-transform
+                    duration-300
+                    group-hover:scale-y-100
                   "
                   style={{
-                    background: theme.glow,
+                    background: `linear-gradient(
+                      180deg,
+                      ${theme.primary},
+                      ${theme.accent}
+                    )`,
                   }}
                 />
 
-                <div className="relative flex flex-col gap-7 lg:flex-row lg:items-center lg:justify-between">
+                <div className="flex flex-col gap-6 p-6 sm:p-7 lg:flex-row lg:items-center lg:justify-between">
                   <div className="flex-1">
                     <div className="flex flex-wrap items-center gap-3">
-                      <h3 className="text-xl font-bold transition-colors group-hover:text-[#286b94] dark:group-hover:text-[#6ea1ff]">
+                      <h3 className="text-xl font-bold tracking-tight transition-colors group-hover:text-[#286b94] dark:group-hover:text-[#69a8ff]">
                         {job.title}
                       </h3>
 
                       <span
-                        className="rounded-full px-3 py-1 text-xs font-bold"
+                        className="rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-wide"
                         style={{
-                          background: `${theme.primary}12`,
+                          background: `${theme.primary}10`,
                           color: theme.primary,
                         }}
                       >
@@ -1034,9 +1172,21 @@ ${formData.name}
                       </span>
                     </div>
 
-                    <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate-500">
-                      <span>📍 {job.location}</span>
-                      <span>◷ {job.experience}</span>
+                    <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+                      <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500">
+                        <Icon name="map" size={14} />
+                        {job.location}
+                      </div>
+
+                      <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500">
+                        <Icon name="clock" size={14} />
+                        {job.experience}
+                      </div>
+
+                      <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500">
+                        <Icon name="briefcase" size={14} />
+                        {job.department}
+                      </div>
                     </div>
 
                     <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-500 dark:text-slate-400">
@@ -1048,16 +1198,15 @@ ${formData.name}
                         <span
                           key={tag}
                           className="
-                            rounded-lg border
+                            rounded-lg
+                            border
                             border-slate-200
                             bg-slate-50
-                            px-3 py-1.5
-                            text-xs font-medium
+                            px-2.5 py-1.5
+                            text-[10px] font-bold
                             text-slate-500
-                            transition
-                            group-hover:border-slate-300
-                            dark:border-white/6
-                            dark:bg-slate-900/70
+                            dark:border-white/10
+                            dark:bg-white/2.5
                             dark:text-slate-400
                           "
                         >
@@ -1071,134 +1220,129 @@ ${formData.name}
                     type="button"
                     onClick={() => scrollToResume(job.title)}
                     className="
-                      careers-shine
-                      group/btn relative
-                      flex shrink-0
-                      items-center justify-center
-                      gap-2 rounded-xl
-                      border px-5 py-3
+                      group/apply
+                      inline-flex
+                      shrink-0
+                      items-center
+                      justify-center
+                      gap-2
+                      rounded-xl
+                      border
+                      px-5 py-3
                       text-sm font-bold
-                      transition duration-300
-                      hover:-translate-y-1
+                      transition
+                      duration-300
+                      hover:-translate-y-0.5
                     "
                     style={{
-                      borderColor: `${theme.primary}45`,
+                      borderColor: `${theme.primary}35`,
                       color: theme.primary,
-                      background: `${theme.primary}08`,
+                      background: `${theme.primary}07`,
                     }}
                   >
-                    Apply Now
-                    <span className="transition-transform duration-300 group-hover/btn:translate-x-1">
-                      →
+                    Apply now
+                    <span className="transition-transform duration-300 group-hover/apply:translate-x-1">
+                      <Icon name="arrow" size={16} />
                     </span>
                   </button>
                 </div>
               </div>
             ))}
+
+            {filteredJobs.length === 0 && (
+              <div className="rounded-3xl border border-dashed border-slate-300 p-12 text-center dark:border-white/10">
+                <p className="font-bold">No roles found.</p>
+                <p className="mt-2 text-sm text-slate-500">
+                  Try selecting another department.
+                </p>
+              </div>
+            )}
           </div>
         </section>
 
         <section
           id="resume"
-          className="
-            relative z-10
-            mx-auto max-w-7xl
-            scroll-mt-20
-            px-6 pb-24 lg:px-8
-          "
+          className="relative z-10 scroll-mt-20 px-6 pb-24 lg:px-8"
         >
           <div
             ref={addRevealRef}
-            className="
-              careers-reveal
-              overflow-hidden rounded-4xl
-              border border-slate-200
-              bg-white
-              shadow-2xl
-              dark:border-white/10
-              dark:bg-[#0a1523]
-              dark:shadow-none
-            "
+            className="careers-reveal mx-auto max-w-7xl overflow-hidden rounded-4xl border border-slate-200 bg-white shadow-[0_25px_80px_rgba(15,23,42,.08)] dark:border-white/10 dark:bg-[#09121d] dark:shadow-none"
           >
-            <div className="grid lg:grid-cols-[.85fr_1.15fr]">
-              {/* Left */}
+            <div className="grid lg:grid-cols-[.78fr_1.22fr]">
+              {/* Form intro */}
               <div
-                className="relative overflow-hidden p-8 sm:p-12 lg:p-14"
+                className="relative overflow-hidden p-8 sm:p-10 lg:p-14"
                 style={{
                   background: `linear-gradient(
                     145deg,
                     ${theme.primary}12,
-                    ${theme.secondary}08,
+                    ${theme.accent}07,
                     transparent
                   )`,
                 }}
               >
                 <div
-                  className="
-                    careers-pulse-glow
-                    absolute -right-20 -top-20
-                    h-72 w-72
-                    rounded-full
-                    blur-[100px]
-                  "
+                  className="absolute -right-30 -top-25 h-80 w-80 rounded-full blur-[100px]"
                   style={{
-                    background: theme.glow,
-                    opacity: 0.18,
+                    background: theme.accent,
+                    opacity: 0.12,
                   }}
                 />
 
                 <div className="relative">
                   <div
                     className="
-                      flex h-14 w-14
+                      flex h-12 w-12
                       items-center justify-center
-                      rounded-2xl text-2xl
+                      rounded-2xl
                     "
                     style={{
-                      background: `${theme.primary}18`,
+                      background: `${theme.primary}12`,
+                      color: theme.primary,
                     }}
                   >
-                    📄
+                    <Icon name="mail" size={21} />
                   </div>
 
                   <p
-                    className="mt-8 text-sm font-bold uppercase tracking-[0.25em]"
+                    className="mt-8 text-xs font-black uppercase tracking-[0.25em]"
                     style={{ color: theme.primary }}
                   >
-                    Join our team
+                    Don&apos;t see your role?
                   </p>
 
-                  <h2 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl">
-                    Don&apos;t see your perfect role?
+                  <h2 className="mt-4 max-w-md text-3xl font-black tracking-[-0.04em] sm:text-4xl">
+                    Tell us what you can bring to the team.
                   </h2>
 
-                  <p className="mt-5 max-w-lg leading-7 text-slate-600 dark:text-slate-400">
-                    We&apos;re always looking for talented people. Send us your
-                    resume and tell us how you can make an impact at Shilsha
-                    Technologies.
+                  <p className="mt-5 max-w-md text-sm leading-7 text-slate-600 dark:text-slate-400">
+                    Great people don&apos;t always fit into a job description.
+                    Send us your resume and tell us how you could make an
+                    impact.
                   </p>
 
-                  <div className="mt-9 space-y-4">
+                  <div className="mt-9 space-y-3">
                     {[
-                      "Work with modern technologies",
-                      "Learn and grow with talented people",
-                      "Build products that matter",
+                      "Modern technologies",
+                      "Ownership and autonomy",
+                      "Learning-focused environment",
+                      "Supportive team culture",
                     ].map((item) => (
                       <div key={item} className="flex items-center gap-3">
-                        <div
+                        <span
                           className="
-                            flex h-9 w-9 shrink-0
+                            flex h-7 w-7
+                            shrink-0
                             items-center justify-center
-                            rounded-xl
-                            text-sm font-bold
+                            rounded-lg
                           "
                           style={{
-                            background: `${theme.primary}15`,
+                            background: `${theme.primary}10`,
                             color: theme.primary,
                           }}
                         >
-                          ✓
-                        </div>
+                          <Icon name="check" size={14} />
+                        </span>
 
                         <span className="text-sm text-slate-600 dark:text-slate-400">
                           {item}
@@ -1209,29 +1353,29 @@ ${formData.name}
 
                   <div
                     className="
-                      mt-10 rounded-2xl
-                      border p-5
-                      transition duration-300
-                      hover:-translate-y-1
+                      mt-10
+                      rounded-2xl
+                      border
+                      p-5
                     "
                     style={{
-                      borderColor: `${theme.primary}25`,
-                      background: `${theme.primary}08`,
+                      borderColor: `${theme.primary}20`,
+                      background: `${theme.primary}06`,
                     }}
                   >
-                    <p className="text-xs font-medium uppercase tracking-wider text-slate-500">
-                      Send your resume directly
+                    <p className="text-[10px] font-black uppercase tracking-[0.15em] text-slate-400">
+                      Prefer email?
                     </p>
 
                     <a
                       href="mailto:jobs@shilshatech.com"
-                      className="mt-2 block text-lg font-bold transition hover:underline"
+                      className="mt-2 block text-base font-bold hover:underline"
                       style={{ color: theme.primary }}
                     >
                       jobs@shilshatech.com
                     </a>
 
-                    <p className="mt-2 text-xs text-slate-500">
+                    <p className="mt-1 text-xs text-slate-500">
                       We&apos;d love to hear from you.
                     </p>
                   </div>
@@ -1239,21 +1383,21 @@ ${formData.name}
               </div>
 
               {/* Form */}
-              <div className="p-8 sm:p-12 lg:p-14">
+              <div className="p-8 sm:p-10 lg:p-14">
                 <div className="mb-8">
                   <p
-                    className="text-xs font-bold uppercase tracking-[0.2em]"
+                    className="text-xs font-black uppercase tracking-[0.2em]"
                     style={{ color: theme.primary }}
                   >
                     Application
                   </p>
 
-                  <h3 className="mt-2 text-2xl font-black">
-                    Submit your resume
+                  <h3 className="mt-2 text-2xl font-black tracking-tight">
+                    Submit your application
                   </h3>
 
                   <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
-                    Tell us about yourself and your experience.
+                    A few details are all we need to get started.
                   </p>
                 </div>
 
@@ -1262,9 +1406,9 @@ ${formData.name}
                   <div>
                     <label
                       htmlFor="name"
-                      className="mb-2 block text-sm font-semibold"
+                      className="mb-2 block text-xs font-bold"
                     >
-                      Full Name <span className="text-red-500">*</span>
+                      Full name <span className="text-red-500">*</span>
                     </label>
 
                     <input
@@ -1276,30 +1420,31 @@ ${formData.name}
                       onChange={handleChange}
                       placeholder="John Doe"
                       className="
+                        career-input
                         w-full rounded-xl
-                        border border-slate-200
+                        border
+                        border-slate-200
                         bg-slate-50
                         px-4 py-3.5
                         text-sm
-                        outline-none
-                        transition duration-200
                         placeholder:text-slate-400
                         focus:border-[#286b94]
                         focus:ring-4
                         focus:ring-[#286b94]/10
                         dark:border-white/10
                         dark:bg-white/[0.035]
+                        dark:text-white
                         dark:placeholder:text-slate-600
                       "
                     />
                   </div>
 
-                  {/* Email / Phone */}
+                  {/* Email + phone */}
                   <div className="grid gap-5 sm:grid-cols-2">
                     <div>
                       <label
                         htmlFor="email"
-                        className="mb-2 block text-sm font-semibold"
+                        className="mb-2 block text-xs font-bold"
                       >
                         Email <span className="text-red-500">*</span>
                       </label>
@@ -1313,19 +1458,19 @@ ${formData.name}
                         onChange={handleChange}
                         placeholder="john@example.com"
                         className="
+                          career-input
                           w-full rounded-xl
                           border border-slate-200
                           bg-slate-50
                           px-4 py-3.5
-                          text-sm outline-none
-                          transition duration-200
+                          text-sm
                           placeholder:text-slate-400
                           focus:border-[#286b94]
                           focus:ring-4
                           focus:ring-[#286b94]/10
                           dark:border-white/10
                           dark:bg-white/[0.035]
-                          dark:placeholder:text-slate-600
+                          dark:text-white
                         "
                       />
                     </div>
@@ -1333,7 +1478,7 @@ ${formData.name}
                     <div>
                       <label
                         htmlFor="phone"
-                        className="mb-2 block text-sm font-semibold"
+                        className="mb-2 block text-xs font-bold"
                       >
                         Phone
                       </label>
@@ -1346,108 +1491,111 @@ ${formData.name}
                         onChange={handleChange}
                         placeholder="+91 98765 43210"
                         className="
+                          career-input
                           w-full rounded-xl
                           border border-slate-200
                           bg-slate-50
                           px-4 py-3.5
-                          text-sm outline-none
-                          transition duration-200
+                          text-sm
                           placeholder:text-slate-400
                           focus:border-[#286b94]
                           focus:ring-4
                           focus:ring-[#286b94]/10
                           dark:border-white/10
                           dark:bg-white/[0.035]
-                          dark:placeholder:text-slate-600
+                          dark:text-white
                         "
                       />
                     </div>
                   </div>
 
-                  {/* Position */}
-                  <div>
-                    <label
-                      htmlFor="position"
-                      className="mb-2 block text-sm font-semibold"
-                    >
-                      Position Interested In
-                    </label>
+                  {/* Position + experience */}
+                  <div className="grid gap-5 sm:grid-cols-2">
+                    <div>
+                      <label
+                        htmlFor="position"
+                        className="mb-2 block text-xs font-bold"
+                      >
+                        Position
+                      </label>
 
-                    <select
-                      id="position"
-                      name="position"
-                      value={formData.position}
-                      onChange={handleChange}
-                      className="
-                        w-full rounded-xl
-                        border border-slate-200
-                        bg-slate-50
-                        px-4 py-3.5
-                        text-sm outline-none
-                        transition
-                        focus:border-[#286b94]
-                        focus:ring-4
-                        focus:ring-[#286b94]/10
-                        dark:border-white/10
-                        dark:bg-[#101d2c]
-                      "
-                    >
-                      <option value="">Select a position</option>
+                      <select
+                        id="position"
+                        name="position"
+                        value={formData.position}
+                        onChange={handleChange}
+                        className="
+                          career-input
+                          w-full rounded-xl
+                          border border-slate-200
+                          bg-slate-50
+                          px-4 py-3.5
+                          text-sm
+                          focus:border-[#286b94]
+                          focus:ring-4
+                          focus:ring-[#286b94]/10
+                          dark:border-white/10
+                          dark:bg-[#101b28]
+                          dark:text-white
+                        "
+                      >
+                        <option value="">Select position</option>
 
-                      {jobs.map((job) => (
-                        <option key={job.title} value={job.title}>
-                          {job.title}
+                        {jobs.map((job) => (
+                          <option key={job.title} value={job.title}>
+                            {job.title}
+                          </option>
+                        ))}
+
+                        <option value="General Application">
+                          General Application
                         </option>
-                      ))}
+                      </select>
+                    </div>
 
-                      <option value="General Application">
-                        General Application
-                      </option>
-                    </select>
-                  </div>
+                    <div>
+                      <label
+                        htmlFor="experience"
+                        className="mb-2 block text-xs font-bold"
+                      >
+                        Experience
+                      </label>
 
-                  {/* Experience */}
-                  <div>
-                    <label
-                      htmlFor="experience"
-                      className="mb-2 block text-sm font-semibold"
-                    >
-                      Experience
-                    </label>
-
-                    <select
-                      id="experience"
-                      name="experience"
-                      value={formData.experience}
-                      onChange={handleChange}
-                      className="
-                        w-full rounded-xl
-                        border border-slate-200
-                        bg-slate-50
-                        px-4 py-3.5
-                        text-sm outline-none
-                        transition
-                        focus:border-[#286b94]
-                        focus:ring-4
-                        focus:ring-[#286b94]/10
-                        dark:border-white/10
-                        dark:bg-[#101d2c]
-                      "
-                    >
-                      <option value="">Select experience</option>
-                      <option value="Fresher">Fresher</option>
-                      <option value="1-2 Years">1–2 Years</option>
-                      <option value="3-5 Years">3–5 Years</option>
-                      <option value="5-8 Years">5–8 Years</option>
-                      <option value="8+ Years">8+ Years</option>
-                    </select>
+                      <select
+                        id="experience"
+                        name="experience"
+                        value={formData.experience}
+                        onChange={handleChange}
+                        className="
+                          career-input
+                          w-full rounded-xl
+                          border border-slate-200
+                          bg-slate-50
+                          px-4 py-3.5
+                          text-sm
+                          focus:border-[#286b94]
+                          focus:ring-4
+                          focus:ring-[#286b94]/10
+                          dark:border-white/10
+                          dark:bg-[#101b28]
+                          dark:text-white
+                        "
+                      >
+                        <option value="">Select experience</option>
+                        <option value="Fresher">Fresher</option>
+                        <option value="1-2 Years">1–2 Years</option>
+                        <option value="3-5 Years">3–5 Years</option>
+                        <option value="5-8 Years">5–8 Years</option>
+                        <option value="8+ Years">8+ Years</option>
+                      </select>
+                    </div>
                   </div>
 
                   {/* Resume */}
                   <div>
                     <label
                       htmlFor="resumeFile"
-                      className="mb-2 block text-sm font-semibold"
+                      className="mb-2 block text-xs font-bold"
                     >
                       Resume / CV
                     </label>
@@ -1455,51 +1603,62 @@ ${formData.name}
                     <label
                       htmlFor="resumeFile"
                       className="
-                        group flex cursor-pointer
-                        flex-col items-center
-                        justify-center
-                        rounded-xl
+                        group
+                        flex cursor-pointer
+                        items-center gap-4
+                        rounded-2xl
                         border-2 border-dashed
                         border-slate-200
                         bg-slate-50
-                        px-6 py-8
-                        text-center
-                        transition duration-300
+                        p-5
+                        transition
+                        duration-300
                         hover:border-[#286b94]
-                        hover:bg-blue-50/50
+                        hover:bg-[#286b94]/2.5
                         dark:border-white/10
-                        dark:bg-white/2.5
-                        dark:hover:border-[#6ea1ff]
-                        dark:hover:bg-blue-500/5
+                        dark:bg-white/2
+                        dark:hover:border-[#69a8ff]
                       "
                     >
                       <div
                         className="
-                          mb-3 flex h-12 w-12
+                          flex h-12 w-12
+                          shrink-0
                           items-center justify-center
                           rounded-xl
-                          text-xl
-                          transition duration-300
-                          group-hover:-translate-y-1
-                          group-hover:scale-110
+                          transition
+                          duration-300
+                          group-hover:-translate-y-0.5
                         "
                         style={{
-                          background: `${theme.primary}15`,
+                          background: `${theme.primary}10`,
                           color: theme.primary,
                         }}
                       >
-                        ↑
+                        <Icon name="upload" size={20} />
                       </div>
 
-                      <p className="text-sm font-semibold">
-                        {formData.resume
-                          ? formData.resume.name
-                          : "Choose your resume"}
-                      </p>
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-sm font-bold">
+                          {formData.resume
+                            ? formData.resume.name
+                            : "Choose your resume"}
+                        </p>
 
-                      <p className="mt-1 text-xs text-slate-500">
-                        PDF, DOC or DOCX recommended
-                      </p>
+                        <p className="mt-1 text-xs text-slate-500">
+                          PDF, DOC or DOCX
+                        </p>
+                      </div>
+
+                      <span
+                        className="hidden rounded-lg px-3 py-2 text-xs font-bold sm:block"
+                        style={{
+                          background: `${theme.primary}10`,
+                          color: theme.primary,
+                        }}
+                      >
+                        Browse
+                      </span>
 
                       <input
                         id="resumeFile"
@@ -1516,7 +1675,7 @@ ${formData.name}
                   <div>
                     <label
                       htmlFor="message"
-                      className="mb-2 block text-sm font-semibold"
+                      className="mb-2 block text-xs font-bold"
                     >
                       Message
                     </label>
@@ -1527,79 +1686,68 @@ ${formData.name}
                       rows={4}
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Tell us a little about yourself..."
+                      placeholder="Tell us about yourself, your experience, or what you'd love to work on..."
                       className="
-                        w-full resize-none rounded-xl
+                        career-input
+                        w-full resize-none
+                        rounded-xl
                         border border-slate-200
                         bg-slate-50
                         px-4 py-3.5
-                        text-sm outline-none
-                        transition
+                        text-sm
                         placeholder:text-slate-400
                         focus:border-[#286b94]
                         focus:ring-4
                         focus:ring-[#286b94]/10
                         dark:border-white/10
                         dark:bg-white/[0.035]
-                        dark:placeholder:text-slate-600
+                        dark:text-white
                       "
                     />
                   </div>
 
-                  {/* Email notice */}
+                  {/* Notice */}
                   <div
                     className="rounded-xl border p-4"
                     style={{
-                      borderColor: `${theme.primary}25`,
-                      background: `${theme.primary}08`,
+                      borderColor: `${theme.primary}18`,
+                      background: `${theme.primary}05`,
                     }}
                   >
                     <div className="flex gap-3">
-                      <div className="text-lg">📧</div>
+                      <div
+                        className="mt-0.5 shrink-0"
+                        style={{ color: theme.primary }}
+                      >
+                        <Icon name="mail" size={17} />
+                      </div>
 
                       <div>
-                        <p className="text-sm font-semibold">
-                          Application email
+                        <p className="text-xs font-bold">
+                          Your email client will open
                         </p>
 
-                        <p className="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400">
-                          Clicking submit will open your email client with your
-                          application details. Please attach your resume before
-                          sending.
+                        <p className="mt-1 text-[11px] leading-5 text-slate-500 dark:text-slate-400">
+                          Clicking submit prepares an email containing your
+                          application details. Please attach your selected
+                          resume manually before sending.
                         </p>
-
-                        <a
-                          href="mailto:jobs@shilshatech.com"
-                          className="mt-1 inline-block text-xs font-bold hover:underline"
-                          style={{ color: theme.primary }}
-                        >
-                          jobs@shilshatech.com
-                        </a>
                       </div>
                     </div>
                   </div>
 
                   {/* Success */}
                   {submitted && (
-                    <div
-                      className="
-                        rounded-xl
-                        border border-green-200
-                        bg-green-50
-                        p-4
-                        text-sm text-green-700
-                        dark:border-green-500/20
-                        dark:bg-green-500/10
-                        dark:text-green-400
-                      "
-                    >
+                    <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4 dark:border-emerald-500/20 dark:bg-emerald-500/10">
                       <div className="flex gap-3">
-                        <span>✓</span>
+                        <div className="text-emerald-600 dark:text-emerald-400">
+                          <Icon name="check" size={17} />
+                        </div>
 
-                        <span>
+                        <p className="text-xs leading-5 text-emerald-700 dark:text-emerald-400">
                           Your application email is being prepared. Attach your
                           resume and click <strong>Send</strong>.
-                        </span>
+                        </p>
                       </div>
                     </div>
                   )}
@@ -1608,16 +1756,18 @@ ${formData.name}
                   <button
                     type="submit"
                     className="
-                      careers-shine
-                      group relative flex w-full
+                      career-shine
+                      group
+                      flex w-full
                       items-center justify-center
-                      gap-2 rounded-xl
+                      gap-3
+                      rounded-xl
                       px-6 py-4
-                      font-bold text-white
-                      shadow-xl
-                      transition duration-300
-                      hover:-translate-y-1
-                      active:translate-y-0
+                      text-sm font-bold text-white
+                      shadow-lg
+                      transition
+                      duration-300
+                      hover:-translate-y-0.5
                     "
                     style={{
                       background: `linear-gradient(
@@ -1625,22 +1775,20 @@ ${formData.name}
                         ${theme.primary},
                         ${theme.secondary}
                       )`,
-                      boxShadow: `0 15px 35px ${theme.primary}35`,
+                      boxShadow: `0 14px 35px ${theme.primary}28`,
                     }}
                   >
-                    <span className="relative z-10">
-                      Submit Application
-                      <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1">
-                        →
-                      </span>
+                    Submit application
+                    <span className="transition-transform duration-300 group-hover:translate-x-1">
+                      <Icon name="arrow" size={17} />
                     </span>
                   </button>
 
-                  <p className="text-center text-xs text-slate-400">
-                    Or send your resume directly to{" "}
+                  <p className="text-center text-[11px] text-slate-400">
+                    Or email your resume directly to{" "}
                     <a
                       href="mailto:jobs@shilshatech.com"
-                      className="font-semibold hover:underline"
+                      className="font-bold hover:underline"
                       style={{ color: theme.primary }}
                     >
                       jobs@shilshatech.com
@@ -1648,93 +1796,6 @@ ${formData.name}
                   </p>
                 </form>
               </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="relative z-10 px-6 pb-24 lg:px-8">
-          <div
-            ref={addRevealRef}
-            className="
-              careers-reveal
-              relative mx-auto max-w-7xl
-              overflow-hidden rounded-4xl
-              border border-slate-200
-              px-6 py-20 text-center
-              shadow-2xl
-              dark:border-white/10
-              dark:shadow-none
-              sm:px-12
-            "
-            style={{
-              background: `linear-gradient(
-                135deg,
-                ${theme.primary}12,
-                ${theme.secondary}10
-              )`,
-            }}
-          >
-            <div
-              className="
-                careers-pulse-glow
-                absolute left-1/2 top-0
-                h-48 w-80
-                -translate-x-1/2
-                rounded-full
-                blur-[100px]
-              "
-              style={{
-                background: theme.glow,
-                opacity: 0.15,
-              }}
-            />
-
-            <div className="relative">
-              <p
-                className="text-sm font-bold uppercase tracking-[0.25em]"
-                style={{ color: theme.primary }}
-              >
-                Your next chapter
-              </p>
-
-              <h2 className="mx-auto mt-4 max-w-2xl text-4xl font-black tracking-tight sm:text-5xl">
-                Ready to create something extraordinary?
-              </h2>
-
-              <p className="mx-auto mt-5 max-w-xl leading-7 text-slate-600 dark:text-slate-400">
-                Bring your curiosity, creativity, and ambition. Let&apos;s build
-                the future of technology together.
-              </p>
-
-              <button
-                type="button"
-                onClick={() => scrollToResume()}
-                className="
-                  careers-shine
-                  group relative mt-9
-                  rounded-xl
-                  px-7 py-4
-                  font-bold text-white
-                  shadow-xl
-                  transition duration-300
-                  hover:-translate-y-1
-                "
-                style={{
-                  background: `linear-gradient(
-                    135deg,
-                    ${theme.primary},
-                    ${theme.secondary}
-                  )`,
-                  boxShadow: `0 15px 40px ${theme.primary}35`,
-                }}
-              >
-                <span className="relative z-10">
-                  Submit Your Resume
-                  <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1">
-                    →
-                  </span>
-                </span>
-              </button>
             </div>
           </div>
         </section>
