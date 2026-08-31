@@ -24,12 +24,12 @@ export default function Footer() {
     {
       label: "Mobile App Dev",
       url: "/services",
-      // url: "/services/mobile-app-development",
+      url: "/services/mobile-app-development",
     },
     {
       label: "Web Applications",
       url: "/services",
-      //  url: "/services/web-application-development",
+       url: "/services/web-application-development",
     },
     {
       label: "QA & Automation",
@@ -38,7 +38,7 @@ export default function Footer() {
     {
       label: "Application Support",
       url: "/services",
-      // url: "/services/application-support",
+      url: "/services/application-support",
     },
   ];
 

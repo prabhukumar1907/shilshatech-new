@@ -3,14 +3,15 @@ import { motion } from "framer-motion";
 import {
   ArrowUpRight,
   Sparkles,
-  Bot,
-  BrainCircuit,
-  Workflow,
-  Zap,
+  Headphones,
   ShieldCheck,
-  BarChart3,
+  Activity,
+  Bug,
+  RefreshCw,
+  Gauge,
   CheckCircle2,
-  Cpu,
+  Clock3,
+  LifeBuoy,
   Layers3,
 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -23,58 +24,66 @@ const brandTheme = {
   electricCyan: "#60a5fa",
 };
 
-const solutions = [
+const supportServices = [
   {
-    icon: BrainCircuit,
-    title: "Artificial Intelligence",
+    icon: Headphones,
+    title: "Application Support",
     description:
-      "Build intelligent applications that understand data, automate decisions, and create personalized digital experiences.",
+      "Keep your business applications reliable with responsive technical support, issue resolution, and day-to-day application assistance.",
     accent: "#276ea5",
     features: [
-      "AI Applications",
-      "Predictive Analytics",
-      "Intelligent Assistants",
+      "Technical Support",
+      "Issue Resolution",
+      "User Assistance",
     ],
   },
   {
-    icon: Workflow,
-    title: "RPA Automation",
+    icon: Activity,
+    title: "Application Monitoring",
     description:
-      "Automate repetitive business processes with reliable digital workers that improve productivity and reduce operational effort.",
+      "Proactively monitor application health, performance, availability, and critical workflows to identify issues before they impact users.",
     accent: "#1d4ed8",
     features: [
-      "Process Automation",
-      "Digital Workers",
-      "Workflow Optimization",
+      "Health Monitoring",
+      "Performance Tracking",
+      "Alert Management",
     ],
   },
   {
-    icon: Bot,
-    title: "AI-Powered Automation",
+    icon: Bug,
+    title: "Incident & Bug Resolution",
     description:
-      "Combine AI with automation to create smarter workflows capable of understanding, reasoning, and taking action.",
+      "Diagnose application issues quickly, identify root causes, and deliver reliable fixes that minimize business disruption.",
     accent: "#7c3aed",
-    features: ["AI Workflows", "Document Intelligence", "Smart Automation"],
+    features: [
+      "Bug Fixing",
+      "Root Cause Analysis",
+      "Incident Management",
+    ],
   },
   {
-    icon: BarChart3,
-    title: "Data & Intelligence",
+    icon: RefreshCw,
+    title: "Maintenance & Enhancements",
     description:
-      "Turn complex business data into actionable intelligence with modern analytics, dashboards, and AI-driven insights.",
+      "Continuously improve your applications through updates, performance optimization, security fixes, and new functionality.",
     accent: "#0891b2",
-    features: ["Business Intelligence", "Data Analytics", "AI Insights"],
+    features: [
+      "Application Maintenance",
+      "Performance Optimization",
+      "Feature Enhancements",
+    ],
   },
 ];
 
 const capabilities = [
-  "Intelligent process automation",
-  "AI-powered business applications",
-  "Document and data processing",
-  "Workflow automation",
-  "Predictive analytics",
-  "Conversational AI",
-  "Legacy process modernization",
-  "Enterprise automation",
+  "Application health monitoring",
+  "Production support",
+  "Incident management",
+  "Bug identification and resolution",
+  "Performance optimization",
+  "Application upgrades",
+  "Security and stability fixes",
+  "Continuous application improvements",
 ];
 
 const fadeUp = {
@@ -101,7 +110,7 @@ const stagger = {
   },
 };
 
-const SolutionItem = ({ item }) => {
+const SupportItem = ({ item }) => {
   const Icon = item.icon;
 
   return (
@@ -154,11 +163,12 @@ const SolutionItem = ({ item }) => {
   );
 };
 
-const AIRPASolutions = () => {
+const AppSupport = () => {
   return (
     <>
       <main className="relative py-8 overflow-hidden bg-slate-50 font-sans text-slate-900 dark:bg-[#060b13] dark:text-white">
         {/* Background */}
+
         <div
           className="pointer-events-none absolute left-1/2 -top-45 h-125 w-175 -translate-x-1/2 rounded-full opacity-[0.1] blur-[130px]"
           style={{
@@ -183,7 +193,6 @@ const AIRPASolutions = () => {
         />
 
         {/* HERO */}
-
         <section className="relative px-5 pb-10 pt-16 sm:px-8 sm:pb-12 sm:pt-20 lg:px-10 lg:pb-14 lg:pt-24">
           <div className="mx-auto max-w-7xl">
             <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
@@ -195,11 +204,11 @@ const AIRPASolutions = () => {
               >
                 <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#276ea5]/15 bg-white/70 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#276ea5] shadow-sm backdrop-blur-md dark:border-sky-400/20 dark:bg-white/3 dark:text-sky-400">
                   <Sparkles size={12} />
-                  <span>AI & RPA Solutions</span>
+                  <span>Application Support & Maintenance</span>
                 </div>
 
                 <h1 className="max-w-5xl text-5xl font-black leading-[0.98] tracking-[-0.055em] sm:text-6xl lg:text-[68px]">
-                  Automate smarter.
+                  Keep applications
                   <br />
                   <span
                     className="bg-clip-text text-transparent"
@@ -212,14 +221,15 @@ const AIRPASolutions = () => {
                       )`,
                     }}
                   >
-                    Build intelligence.
+                    running smarter.
                   </span>
                 </h1>
 
                 <p className="mt-5 max-w-2xl text-base leading-7 text-slate-500 dark:text-slate-400 sm:text-lg">
-                  We help businesses combine artificial intelligence,
-                  automation, and modern engineering to eliminate repetitive
-                  work, improve decisions, and build smarter digital operations.
+                  We provide reliable application support, monitoring,
+                  troubleshooting, maintenance, and continuous improvements to
+                  keep your critical business applications stable, secure, and
+                  performing at their best.
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-3">
@@ -227,7 +237,7 @@ const AIRPASolutions = () => {
                     to="/contact"
                     className="group inline-flex items-center gap-2 rounded-lg bg-linear-to-r from-[#276ea5] to-[#1d4ed8] px-5 py-3 text-sm font-bold text-white shadow-lg shadow-[#276ea5]/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
                   >
-                    Discuss Your Automation
+                    Get Support
                     <ArrowUpRight
                       size={15}
                       className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
@@ -248,27 +258,27 @@ const AIRPASolutions = () => {
 
                 <div className="mt-7 flex flex-wrap gap-6">
                   <div>
-                    <p className="text-xl font-black">AI</p>
-                    <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-400">
-                      Intelligence
-                    </p>
-                  </div>
-
-                  <div className="h-9 w-px bg-slate-200 dark:bg-white/10" />
-
-                  <div>
-                    <p className="text-xl font-black">RPA</p>
-                    <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-400">
-                      Automation
-                    </p>
-                  </div>
-
-                  <div className="h-9 w-px bg-slate-200 dark:bg-white/10" />
-
-                  <div>
                     <p className="text-xl font-black">24/7</p>
                     <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-400">
-                      Digital Operations
+                      Monitoring
+                    </p>
+                  </div>
+
+                  <div className="h-9 w-px bg-slate-200 dark:bg-white/10" />
+
+                  <div>
+                    <p className="text-xl font-black">SLA</p>
+                    <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-400">
+                      Driven Support
+                    </p>
+                  </div>
+
+                  <div className="h-9 w-px bg-slate-200 dark:bg-white/10" />
+
+                  <div>
+                    <p className="text-xl font-black">Proactive</p>
+                    <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-400">
+                      Maintenance
                     </p>
                   </div>
                 </div>
@@ -318,6 +328,8 @@ const AIRPASolutions = () => {
                     className="absolute inset-7 rounded-full border border-dashed border-sky-400/20"
                   />
 
+                  {/* Center */}
+
                   <div className="absolute left-1/2 top-1/2 flex h-32 w-32 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[28px] border border-white/80 bg-white shadow-[0_25px_70px_rgba(39,110,165,0.18)] dark:border-white/10 dark:bg-[#0d1727]">
                     <div className="text-center">
                       <img
@@ -327,27 +339,29 @@ const AIRPASolutions = () => {
                       />
 
                       <div className="flex items-center justify-center gap-1.5 text-[9px] font-bold uppercase tracking-[0.18em] text-[#276ea5] dark:text-sky-400">
-                        <Cpu size={10} />
-                        AI + RPA
+                        <LifeBuoy size={10} />
+                        Support
                       </div>
                     </div>
                   </div>
 
+                  {/* Floating Icons */}
+
                   {[
                     {
-                      icon: BrainCircuit,
+                      icon: Headphones,
                       position: "left-0 top-14",
                     },
                     {
-                      icon: Workflow,
+                      icon: Activity,
                       position: "right-0 top-10",
                     },
                     {
-                      icon: Bot,
+                      icon: ShieldCheck,
                       position: "right-5 bottom-10",
                     },
                     {
-                      icon: Zap,
+                      icon: Bug,
                       position: "left-8 bottom-3",
                     },
                   ].map((item, index) => {
@@ -374,7 +388,7 @@ const AIRPASolutions = () => {
           </div>
         </section>
 
-        {/* SOLUTIONS */}
+        {/* SUPPORT SERVICES */}
 
         <section className="relative px-5 py-12 sm:px-8 lg:px-10 lg:py-14">
           <div className="mx-auto max-w-7xl">
@@ -390,12 +404,13 @@ const AIRPASolutions = () => {
                   <span className="h-px w-9 bg-[#276ea5] dark:bg-sky-400" />
 
                   <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#276ea5] dark:text-sky-400">
-                    What We Build
+                    What We Support
                   </span>
                 </div>
 
                 <h2 className="text-3xl font-black leading-[1.05] tracking-[-0.04em] sm:text-4xl">
-                  Intelligence that{" "}
+                  Reliable applications.
+                  <br />
                   <span
                     className="bg-clip-text text-transparent"
                     style={{
@@ -406,14 +421,14 @@ const AIRPASolutions = () => {
                       )`,
                     }}
                   >
-                    works for you.
+                    Better operations.
                   </span>
                 </h2>
 
                 <p className="mt-4 text-sm leading-6 text-slate-500 dark:text-slate-400 sm:text-base">
-                  From individual automation workflows to enterprise AI
-                  platforms, we design solutions around your processes,
-                  technology ecosystem, and business goals.
+                  From production incidents to ongoing maintenance, we help
+                  organizations keep their applications available, secure,
+                  optimized, and aligned with changing business needs.
                 </p>
               </motion.div>
 
@@ -424,8 +439,8 @@ const AIRPASolutions = () => {
                 viewport={{ once: true, margin: "-60px" }}
                 className="lg:col-span-8"
               >
-                {solutions.map((item) => (
-                  <SolutionItem key={item.title} item={item} />
+                {supportServices.map((item) => (
+                  <SupportItem key={item.title} item={item} />
                 ))}
               </motion.div>
             </div>
@@ -450,16 +465,16 @@ const AIRPASolutions = () => {
                 </div>
 
                 <h2 className="text-3xl font-black leading-tight tracking-[-0.04em] sm:text-4xl">
-                  From repetitive tasks to{" "}
+                  Support that keeps your{" "}
                   <span className="text-[#276ea5] dark:text-sky-400">
-                    intelligent operations.
+                    business moving.
                   </span>
                 </h2>
 
                 <p className="mt-4 text-sm leading-6 text-slate-500 dark:text-slate-400 sm:text-base">
-                  We help organizations identify automation opportunities,
-                  modernize existing processes, and introduce AI where it can
-                  create real business value.
+                  Our application support teams combine technical expertise,
+                  proactive monitoring, and structured incident management to
+                  reduce downtime and improve application reliability.
                 </p>
               </motion.div>
 
@@ -493,7 +508,7 @@ const AIRPASolutions = () => {
           </div>
         </section>
 
-        {/* WHY AI + RPA */}
+        {/* WHY APPLICATION SUPPORT */}
 
         <section className="relative px-5 py-12 sm:px-8 lg:px-10 lg:py-14">
           <div className="mx-auto max-w-7xl">
@@ -506,30 +521,34 @@ const AIRPASolutions = () => {
             >
               <div className="grid gap-8 md:grid-cols-3">
                 <div>
-                  <Zap
+                  <Clock3
                     size={22}
                     className="mb-3 text-[#276ea5] dark:text-sky-400"
                   />
 
-                  <h3 className="text-lg font-black">Reduce Manual Work</h3>
+                  <h3 className="text-lg font-black">
+                    Reduce Application Downtime
+                  </h3>
 
                   <p className="mt-1.5 text-sm leading-6 text-slate-500 dark:text-slate-400">
-                    Automate repetitive processes so your teams can focus on
-                    higher-value work.
+                    Detect and resolve application issues quickly to keep
+                    critical business operations running.
                   </p>
                 </div>
 
                 <div>
-                  <BarChart3
+                  <Gauge
                     size={22}
                     className="mb-3 text-[#276ea5] dark:text-sky-400"
                   />
 
-                  <h3 className="text-lg font-black">Improve Decisions</h3>
+                  <h3 className="text-lg font-black">
+                    Improve Performance
+                  </h3>
 
                   <p className="mt-1.5 text-sm leading-6 text-slate-500 dark:text-slate-400">
-                    Turn operational and business data into useful, actionable
-                    intelligence.
+                    Identify performance bottlenecks and continuously optimize
+                    applications for better user experiences.
                   </p>
                 </div>
 
@@ -539,11 +558,13 @@ const AIRPASolutions = () => {
                     className="mb-3 text-[#276ea5] dark:text-sky-400"
                   />
 
-                  <h3 className="text-lg font-black">Scale Securely</h3>
+                  <h3 className="text-lg font-black">
+                    Increase Reliability
+                  </h3>
 
                   <p className="mt-1.5 text-sm leading-6 text-slate-500 dark:text-slate-400">
-                    Build automation and AI solutions with enterprise
-                    reliability, security, and maintainability in mind.
+                    Maintain secure, stable, and dependable applications as
+                    your business and technology environment evolve.
                   </p>
                 </div>
               </div>
@@ -552,6 +573,7 @@ const AIRPASolutions = () => {
         </section>
 
         {/* CTA */}
+
         <section className="relative px-5 pb-10 pt-2 sm:px-8 lg:px-10 lg:pb-14">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
@@ -566,12 +588,12 @@ const AIRPASolutions = () => {
                   <span className="h-px w-7 bg-[#276ea5] dark:bg-sky-400" />
 
                   <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#276ea5] dark:text-sky-400">
-                    Let's Automate
+                    Need Application Support?
                   </span>
                 </div>
 
                 <h2 className="text-2xl font-black leading-tight tracking-[-0.03em] text-slate-900 dark:text-white sm:text-3xl">
-                  Have an automation challenge?{" "}
+                  Keep your applications{" "}
                   <span
                     className="bg-clip-text text-transparent"
                     style={{
@@ -583,13 +605,14 @@ const AIRPASolutions = () => {
                       )`,
                     }}
                   >
-                    Let's solve it together.
+                    stable and future-ready.
                   </span>
                 </h2>
 
                 <p className="mt-3 max-w-xl text-sm leading-6 text-slate-500 dark:text-slate-400">
-                  Tell us about your process or business challenge and discover
-                  where AI and automation can make a measurable difference.
+                  Tell us about your application environment, support needs,
+                  or recurring technical challenges and we'll help you build a
+                  more reliable support model.
                 </p>
               </div>
 
@@ -613,4 +636,4 @@ const AIRPASolutions = () => {
   );
 };
 
-export default AIRPASolutions;
+export default AppSupport;

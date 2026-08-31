@@ -3,15 +3,16 @@ import { motion } from "framer-motion";
 import {
   ArrowUpRight,
   Sparkles,
-  Bot,
-  BrainCircuit,
-  Workflow,
-  Zap,
-  ShieldCheck,
-  BarChart3,
-  CheckCircle2,
-  Cpu,
+  Code2,
+  MonitorSmartphone,
   Layers3,
+  Gauge,
+  ShieldCheck,
+  Database,
+  CloudCog,
+  CheckCircle2,
+  Rocket,
+  Workflow,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/shilshalogofinal.webp";
@@ -23,58 +24,66 @@ const brandTheme = {
   electricCyan: "#60a5fa",
 };
 
-const solutions = [
+const developmentServices = [
   {
-    icon: BrainCircuit,
-    title: "Artificial Intelligence",
+    icon: Code2,
+    title: "Custom Web Development",
     description:
-      "Build intelligent applications that understand data, automate decisions, and create personalized digital experiences.",
+      "Build scalable, high-performance web applications tailored to your business processes, users, and long-term technology goals.",
     accent: "#276ea5",
     features: [
-      "AI Applications",
-      "Predictive Analytics",
-      "Intelligent Assistants",
+      "Custom Applications",
+      "Modern Web Technologies",
+      "Scalable Architecture",
     ],
   },
   {
-    icon: Workflow,
-    title: "RPA Automation",
+    icon: MonitorSmartphone,
+    title: "Responsive Web Applications",
     description:
-      "Automate repetitive business processes with reliable digital workers that improve productivity and reduce operational effort.",
+      "Create seamless digital experiences that work beautifully across desktops, tablets, and mobile devices.",
     accent: "#1d4ed8",
     features: [
-      "Process Automation",
-      "Digital Workers",
-      "Workflow Optimization",
+      "Responsive Design",
+      "Mobile-First Development",
+      "Cross-Device Experiences",
     ],
   },
   {
-    icon: Bot,
-    title: "AI-Powered Automation",
+    icon: Layers3,
+    title: "Enterprise Applications",
     description:
-      "Combine AI with automation to create smarter workflows capable of understanding, reasoning, and taking action.",
+      "Develop robust business applications that integrate with your existing systems, workflows, APIs, and enterprise platforms.",
     accent: "#7c3aed",
-    features: ["AI Workflows", "Document Intelligence", "Smart Automation"],
+    features: [
+      "Enterprise Platforms",
+      "API Integration",
+      "Business Workflows",
+    ],
   },
   {
-    icon: BarChart3,
-    title: "Data & Intelligence",
+    icon: Rocket,
+    title: "Modernization & Optimization",
     description:
-      "Turn complex business data into actionable intelligence with modern analytics, dashboards, and AI-driven insights.",
+      "Modernize legacy applications and improve existing systems with better architecture, performance, usability, and maintainability.",
     accent: "#0891b2",
-    features: ["Business Intelligence", "Data Analytics", "AI Insights"],
+    features: [
+      "Legacy Modernization",
+      "Performance Optimization",
+      "Technology Upgrades",
+    ],
   },
 ];
 
 const capabilities = [
-  "Intelligent process automation",
-  "AI-powered business applications",
-  "Document and data processing",
-  "Workflow automation",
-  "Predictive analytics",
-  "Conversational AI",
-  "Legacy process modernization",
-  "Enterprise automation",
+  "Custom web application development",
+  "Enterprise application development",
+  "Responsive and mobile-first applications",
+  "API and third-party integrations",
+  "Frontend and backend engineering",
+  "Database architecture and development",
+  "Legacy application modernization",
+  "Application performance optimization",
 ];
 
 const fadeUp = {
@@ -101,7 +110,7 @@ const stagger = {
   },
 };
 
-const SolutionItem = ({ item }) => {
+const DevelopmentItem = ({ item }) => {
   const Icon = item.icon;
 
   return (
@@ -154,11 +163,12 @@ const SolutionItem = ({ item }) => {
   );
 };
 
-const AIRPASolutions = () => {
+const WebAppDevelopment = () => {
   return (
     <>
       <main className="relative py-8 overflow-hidden bg-slate-50 font-sans text-slate-900 dark:bg-[#060b13] dark:text-white">
         {/* Background */}
+
         <div
           className="pointer-events-none absolute left-1/2 -top-45 h-125 w-175 -translate-x-1/2 rounded-full opacity-[0.1] blur-[130px]"
           style={{
@@ -195,11 +205,11 @@ const AIRPASolutions = () => {
               >
                 <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#276ea5]/15 bg-white/70 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#276ea5] shadow-sm backdrop-blur-md dark:border-sky-400/20 dark:bg-white/3 dark:text-sky-400">
                   <Sparkles size={12} />
-                  <span>AI & RPA Solutions</span>
+                  <span>Web & Application Development</span>
                 </div>
 
                 <h1 className="max-w-5xl text-5xl font-black leading-[0.98] tracking-[-0.055em] sm:text-6xl lg:text-[68px]">
-                  Automate smarter.
+                  Build digital
                   <br />
                   <span
                     className="bg-clip-text text-transparent"
@@ -212,14 +222,15 @@ const AIRPASolutions = () => {
                       )`,
                     }}
                   >
-                    Build intelligence.
+                    experiences that scale.
                   </span>
                 </h1>
 
                 <p className="mt-5 max-w-2xl text-base leading-7 text-slate-500 dark:text-slate-400 sm:text-lg">
-                  We help businesses combine artificial intelligence,
-                  automation, and modern engineering to eliminate repetitive
-                  work, improve decisions, and build smarter digital operations.
+                  We design and develop modern web applications that combine
+                  intuitive user experiences, scalable architecture, strong
+                  performance, and reliable engineering to help businesses
+                  grow digitally.
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-3">
@@ -227,7 +238,7 @@ const AIRPASolutions = () => {
                     to="/contact"
                     className="group inline-flex items-center gap-2 rounded-lg bg-linear-to-r from-[#276ea5] to-[#1d4ed8] px-5 py-3 text-sm font-bold text-white shadow-lg shadow-[#276ea5]/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
                   >
-                    Discuss Your Automation
+                    Start Your Project
                     <ArrowUpRight
                       size={15}
                       className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
@@ -248,27 +259,27 @@ const AIRPASolutions = () => {
 
                 <div className="mt-7 flex flex-wrap gap-6">
                   <div>
-                    <p className="text-xl font-black">AI</p>
+                    <p className="text-xl font-black">UI/UX</p>
                     <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-400">
-                      Intelligence
+                      User Experience
                     </p>
                   </div>
 
                   <div className="h-9 w-px bg-slate-200 dark:bg-white/10" />
 
                   <div>
-                    <p className="text-xl font-black">RPA</p>
+                    <p className="text-xl font-black">API</p>
                     <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-400">
-                      Automation
+                      Integrations
                     </p>
                   </div>
 
                   <div className="h-9 w-px bg-slate-200 dark:bg-white/10" />
 
                   <div>
-                    <p className="text-xl font-black">24/7</p>
+                    <p className="text-xl font-black">Scale</p>
                     <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-400">
-                      Digital Operations
+                      Built to Grow
                     </p>
                   </div>
                 </div>
@@ -318,6 +329,8 @@ const AIRPASolutions = () => {
                     className="absolute inset-7 rounded-full border border-dashed border-sky-400/20"
                   />
 
+                  {/* Center */}
+
                   <div className="absolute left-1/2 top-1/2 flex h-32 w-32 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[28px] border border-white/80 bg-white shadow-[0_25px_70px_rgba(39,110,165,0.18)] dark:border-white/10 dark:bg-[#0d1727]">
                     <div className="text-center">
                       <img
@@ -327,27 +340,29 @@ const AIRPASolutions = () => {
                       />
 
                       <div className="flex items-center justify-center gap-1.5 text-[9px] font-bold uppercase tracking-[0.18em] text-[#276ea5] dark:text-sky-400">
-                        <Cpu size={10} />
-                        AI + RPA
+                        <Code2 size={10} />
+                        Development
                       </div>
                     </div>
                   </div>
 
+                  {/* Floating Icons */}
+
                   {[
                     {
-                      icon: BrainCircuit,
+                      icon: Code2,
                       position: "left-0 top-14",
                     },
                     {
-                      icon: Workflow,
+                      icon: MonitorSmartphone,
                       position: "right-0 top-10",
                     },
                     {
-                      icon: Bot,
+                      icon: Database,
                       position: "right-5 bottom-10",
                     },
                     {
-                      icon: Zap,
+                      icon: CloudCog,
                       position: "left-8 bottom-3",
                     },
                   ].map((item, index) => {
@@ -374,7 +389,7 @@ const AIRPASolutions = () => {
           </div>
         </section>
 
-        {/* SOLUTIONS */}
+        {/* DEVELOPMENT SERVICES */}
 
         <section className="relative px-5 py-12 sm:px-8 lg:px-10 lg:py-14">
           <div className="mx-auto max-w-7xl">
@@ -395,7 +410,7 @@ const AIRPASolutions = () => {
                 </div>
 
                 <h2 className="text-3xl font-black leading-[1.05] tracking-[-0.04em] sm:text-4xl">
-                  Intelligence that{" "}
+                  Digital products that{" "}
                   <span
                     className="bg-clip-text text-transparent"
                     style={{
@@ -406,14 +421,14 @@ const AIRPASolutions = () => {
                       )`,
                     }}
                   >
-                    works for you.
+                    move business forward.
                   </span>
                 </h2>
 
                 <p className="mt-4 text-sm leading-6 text-slate-500 dark:text-slate-400 sm:text-base">
-                  From individual automation workflows to enterprise AI
-                  platforms, we design solutions around your processes,
-                  technology ecosystem, and business goals.
+                  From customer-facing platforms to complex enterprise
+                  applications, we engineer solutions that are designed for
+                  usability, performance, security, and long-term growth.
                 </p>
               </motion.div>
 
@@ -424,8 +439,8 @@ const AIRPASolutions = () => {
                 viewport={{ once: true, margin: "-60px" }}
                 className="lg:col-span-8"
               >
-                {solutions.map((item) => (
-                  <SolutionItem key={item.title} item={item} />
+                {developmentServices.map((item) => (
+                  <DevelopmentItem key={item.title} item={item} />
                 ))}
               </motion.div>
             </div>
@@ -450,16 +465,16 @@ const AIRPASolutions = () => {
                 </div>
 
                 <h2 className="text-3xl font-black leading-tight tracking-[-0.04em] sm:text-4xl">
-                  From repetitive tasks to{" "}
+                  From idea to{" "}
                   <span className="text-[#276ea5] dark:text-sky-400">
-                    intelligent operations.
+                    production.
                   </span>
                 </h2>
 
                 <p className="mt-4 text-sm leading-6 text-slate-500 dark:text-slate-400 sm:text-base">
-                  We help organizations identify automation opportunities,
-                  modernize existing processes, and introduce AI where it can
-                  create real business value.
+                  Our development teams combine product thinking, modern
+                  engineering practices, and scalable architecture to turn
+                  business requirements into dependable digital products.
                 </p>
               </motion.div>
 
@@ -493,7 +508,7 @@ const AIRPASolutions = () => {
           </div>
         </section>
 
-        {/* WHY AI + RPA */}
+        {/* WHY WEB APPLICATION DEVELOPMENT */}
 
         <section className="relative px-5 py-12 sm:px-8 lg:px-10 lg:py-14">
           <div className="mx-auto max-w-7xl">
@@ -506,30 +521,34 @@ const AIRPASolutions = () => {
             >
               <div className="grid gap-8 md:grid-cols-3">
                 <div>
-                  <Zap
+                  <Gauge
                     size={22}
                     className="mb-3 text-[#276ea5] dark:text-sky-400"
                   />
 
-                  <h3 className="text-lg font-black">Reduce Manual Work</h3>
+                  <h3 className="text-lg font-black">
+                    Performance First
+                  </h3>
 
                   <p className="mt-1.5 text-sm leading-6 text-slate-500 dark:text-slate-400">
-                    Automate repetitive processes so your teams can focus on
-                    higher-value work.
+                    Build fast, responsive applications that deliver smooth
+                    experiences and efficient business workflows.
                   </p>
                 </div>
 
                 <div>
-                  <BarChart3
+                  <Workflow
                     size={22}
                     className="mb-3 text-[#276ea5] dark:text-sky-400"
                   />
 
-                  <h3 className="text-lg font-black">Improve Decisions</h3>
+                  <h3 className="text-lg font-black">
+                    Seamless Integration
+                  </h3>
 
                   <p className="mt-1.5 text-sm leading-6 text-slate-500 dark:text-slate-400">
-                    Turn operational and business data into useful, actionable
-                    intelligence.
+                    Connect applications with APIs, databases, cloud platforms,
+                    third-party services, and existing business systems.
                   </p>
                 </div>
 
@@ -539,11 +558,13 @@ const AIRPASolutions = () => {
                     className="mb-3 text-[#276ea5] dark:text-sky-400"
                   />
 
-                  <h3 className="text-lg font-black">Scale Securely</h3>
+                  <h3 className="text-lg font-black">
+                    Secure & Scalable
+                  </h3>
 
                   <p className="mt-1.5 text-sm leading-6 text-slate-500 dark:text-slate-400">
-                    Build automation and AI solutions with enterprise
-                    reliability, security, and maintainability in mind.
+                    Engineer applications with security, maintainability, and
+                    scalability built into the architecture from day one.
                   </p>
                 </div>
               </div>
@@ -552,6 +573,7 @@ const AIRPASolutions = () => {
         </section>
 
         {/* CTA */}
+
         <section className="relative px-5 pb-10 pt-2 sm:px-8 lg:px-10 lg:pb-14">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
@@ -566,12 +588,12 @@ const AIRPASolutions = () => {
                   <span className="h-px w-7 bg-[#276ea5] dark:bg-sky-400" />
 
                   <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#276ea5] dark:text-sky-400">
-                    Let's Automate
+                    Let's Build
                   </span>
                 </div>
 
                 <h2 className="text-2xl font-black leading-tight tracking-[-0.03em] text-slate-900 dark:text-white sm:text-3xl">
-                  Have an automation challenge?{" "}
+                  Have an idea for a web application?{" "}
                   <span
                     className="bg-clip-text text-transparent"
                     style={{
@@ -583,13 +605,14 @@ const AIRPASolutions = () => {
                       )`,
                     }}
                   >
-                    Let's solve it together.
+                    Let's build it.
                   </span>
                 </h2>
 
                 <p className="mt-3 max-w-xl text-sm leading-6 text-slate-500 dark:text-slate-400">
-                  Tell us about your process or business challenge and discover
-                  where AI and automation can make a measurable difference.
+                  Tell us about your product, business requirement, or
+                  application challenge and we'll help turn it into a scalable
+                  digital solution.
                 </p>
               </div>
 
@@ -597,7 +620,7 @@ const AIRPASolutions = () => {
                 to="/contact"
                 className="group inline-flex w-fit shrink-0 items-center gap-2 rounded-lg bg-[#276ea5] px-5 py-3 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1d4ed8]"
               >
-                Talk to Our Experts
+                Start a Conversation
                 <ArrowUpRight
                   size={15}
                   className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
@@ -613,4 +636,4 @@ const AIRPASolutions = () => {
   );
 };
 
-export default AIRPASolutions;
+export default WebAppDevelopment;
