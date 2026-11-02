@@ -216,6 +216,47 @@ const TypingHeadline = memo(function TypingHeadline() {
   );
 });
 
+const FloatingParticles = memo(function FloatingParticles({ particles }) {
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      {particles.map((particle) => (
+        <motion.div
+          key={particle.id}
+          initial={{
+            opacity: 0,
+            scale: 0,
+          }}
+          animate={{
+            opacity: [0, 0.6, 0],
+            scale: [0, 1, 0],
+            y: [0, -100, -200],
+            x: [0, (Math.random() - 0.5) * 50],
+          }}
+          transition={{
+            duration: 8 + particle.speed * 4,
+            repeat: Infinity,
+            delay: particle.delay,
+            ease: "easeInOut",
+          }}
+          className="absolute"
+          style={{
+            left: `${particle.x}%`,
+            top: `${particle.y}%`,
+          }}
+        >
+          <div
+            className="rounded-full bg-[#286b94] blur-sm dark:bg-[#8bb8ff]"
+            style={{
+              width: particle.size,
+              height: particle.size,
+            }}
+          />
+        </motion.div>
+      ))}
+    </div>
+  );
+});
+
 const TagCloud = memo(function TagCloud({ pool, side, inView }) {
   const [tags, setTags] = useState([pool[0], pool[1], pool[2]]);
 
@@ -254,7 +295,7 @@ const TagCloud = memo(function TagCloud({ pool, side, inView }) {
             x: isLeft ? -20 : 20,
           }}
           animate={{
-            opacity: 0.85,
+            opacity: 0.9,
             x: 0,
           }}
           exit={{
@@ -272,15 +313,24 @@ const TagCloud = memo(function TagCloud({ pool, side, inView }) {
             hidden
             items-center
             gap-3
+            rounded-full
+            bg-white/60
+            px-4
+            py-2
+            shadow-lg
+            backdrop-blur-sm
             xl:flex
             ${isLeft ? "flex-row" : "flex-row-reverse"}
             text-[10px]
             font-semibold
             tracking-wide
             text-slate-600
+            ring-1
+            ring-[#286b94]/10
+            dark:bg-[#0a1929]/60
             dark:text-slate-300
-            drop-shadow-[0_1px_2px_rgba(255,255,255,0.5)]
-            dark:drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)]
+            dark:ring-[#8bb8ff]/20
+            dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)]
           `}
         >
           <span
@@ -404,8 +454,8 @@ const DeliveryPipeline = memo(function DeliveryPipeline({ inView }) {
                           scale: 0.7,
                         }}
                         animate={{
-                          opacity: [0.15, 0.35, 0.15],
-                          scale: [0.9, 1.3, 0.9],
+                          opacity: [0.2, 0.4, 0.2],
+                          scale: [0.9, 1.4, 0.9],
                         }}
                         transition={{
                           duration: 1.8,
@@ -416,15 +466,15 @@ const DeliveryPipeline = memo(function DeliveryPipeline({ inView }) {
                           absolute
                           -inset-3
                           rounded-full
-                          bg-[#6ea1ff]/20
-                          blur-lg
+                          bg-[#6ea1ff]/25
+                          blur-xl
                         "
                       />
 
                       <motion.span
                         animate={{
-                          scale: [1, 1.45, 1],
-                          opacity: [0.4, 0, 0.4],
+                          scale: [1, 1.5, 1],
+                          opacity: [0.5, 0, 0.5],
                         }}
                         transition={{
                           duration: 1.8,
@@ -432,10 +482,10 @@ const DeliveryPipeline = memo(function DeliveryPipeline({ inView }) {
                         }}
                         className="
                           absolute
-                          -inset-1.25
+                          -inset-1.5
                           rounded-full
-                          border
-                          border-[#6ea1ff]/40
+                          border-2
+                          border-[#6ea1ff]/50
                         "
                       />
                     </>
@@ -444,7 +494,7 @@ const DeliveryPipeline = memo(function DeliveryPipeline({ inView }) {
                   {/* Icon circle */}
                   <motion.div
                     animate={{
-                      scale: isActive ? 1.1 : 1,
+                      scale: isActive ? 1.12 : 1,
                     }}
                     transition={{
                       duration: 0.35,
@@ -464,28 +514,32 @@ const DeliveryPipeline = memo(function DeliveryPipeline({ inView }) {
                         isActive
                           ? `
                             border-[#286b94]
-                            bg-[#286b94]
+                            bg-linear-to-br
+                            from-[#286b94]
+                            to-[#1e3a8a]
                             text-white
-                            shadow-[0_8px_28px_rgba(40,107,148,0.3)]
+                            shadow-[0_8px_32px_rgba(40,107,148,0.4)]
                             dark:border-[#8bb8ff]
-                            dark:bg-[#286b94]
+                            dark:from-[#38bdf8]
+                            dark:to-[#286b94]
                           `
                           : isComplete
                             ? `
-                              border-[#286b94]/40
-                              bg-[#286b94]/10
+                              border-[#286b94]/50
+                              bg-[#286b94]/15
                               text-[#286b94]
-                              dark:border-[#8bb8ff]/40
-                              dark:bg-[#6ea1ff]/10
+                              dark:border-[#8bb8ff]/50
+                              dark:bg-[#6ea1ff]/15
                               dark:text-[#8bb8ff]
                             `
                             : `
                               border-slate-300
-                              bg-white
+                              bg-white/80
                               text-slate-500
-                              shadow-sm
-                              dark:border-white/10
-                              dark:bg-white/5
+                              shadow-md
+                              backdrop-blur-sm
+                              dark:border-white/15
+                              dark:bg-white/10
                               dark:text-slate-300
                             `
                       }
@@ -509,7 +563,7 @@ const DeliveryPipeline = memo(function DeliveryPipeline({ inView }) {
                           w-2
                           rounded-full
                           bg-[#286b94]
-                          shadow-[0_0_8px_rgba(110,161,255,0.7)]
+                          shadow-[0_0_12px_rgba(110,161,255,0.9)]
                           dark:bg-[#8bb8ff]
                         "
                       />
@@ -663,6 +717,7 @@ const DeliveryPipeline = memo(function DeliveryPipeline({ inView }) {
 
 const Hero = () => {
   const [inView, setInView] = useState(true);
+  const [particles, setParticles] = useState([]);
 
   const sectionRef = useRef(null);
   const glowRef = useRef(null);
@@ -672,6 +727,19 @@ const Hero = () => {
     x: 0,
     y: 0,
   });
+
+  // Generate floating particles
+  useEffect(() => {
+    const newParticles = Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 3 + 1,
+      speed: Math.random() * 0.5 + 0.2,
+      delay: Math.random() * 2,
+    }));
+    setParticles(newParticles);
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined" || !sectionRef.current) {
@@ -777,8 +845,8 @@ const Hero = () => {
           -translate-y-1/2
           rounded-full
           blur-[110px]
-          opacity-20
-          dark:opacity-30
+          opacity-25
+          dark:opacity-35
         "
         style={{
           background: `
@@ -795,33 +863,57 @@ const Hero = () => {
         }}
       />
 
+      <FloatingParticles particles={particles} />
+
       <div
         className="
           pointer-events-none
           absolute
           inset-0
           z-0
-          opacity-[0.28]
-          dark:opacity-[0.15]
+          opacity-[0.35]
+          dark:opacity-[0.2]
         "
         style={{
           backgroundImage: `
             linear-gradient(
               to right,
-              rgba(40,107,148,0.09) 1px,
+              rgba(40,107,148,0.12) 1px,
               transparent 1px
             ),
             linear-gradient(
               to bottom,
-              rgba(40,107,148,0.09) 1px,
+              rgba(40,107,148,0.12) 1px,
               transparent 1px
             )
           `,
-          backgroundSize: "72px 72px",
+          backgroundSize: "64px 64px",
           maskImage:
             "radial-gradient(ellipse 75% 65% at 50% 42%, black 15%, transparent 80%)",
           WebkitMaskImage:
             "radial-gradient(ellipse 75% 65% at 50% 42%, black 15%, transparent 80%)",
+        }}
+      />
+
+      {/* Secondary glow */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-[35%]
+          z-0
+          h-80
+          w-80
+          -translate-x-1/2
+          -translate-y-1/2
+          rounded-full
+          blur-[80px]
+          opacity-15
+          dark:opacity-20
+        "
+        style={{
+          background: `radial-gradient(circle, ${theme.accent} 0%, transparent 70%)`,
         }}
       />
 
@@ -1047,11 +1139,15 @@ const Hero = () => {
               text-sm
               font-bold
               text-white
-              shadow-[0_16px_40px_rgba(30,58,138,0.25)]
+              shadow-[0_0_0_0_rgba(40,107,148,0.7),0_16px_40px_rgba(30,58,138,0.25)]
+              ring-1
+              ring-white/20
+              backdrop-blur-sm
               transition-all
               duration-300
               hover:-translate-y-1
-              hover:shadow-[0_22px_50px_rgba(30,58,138,0.35)]
+              hover:shadow-[0_0_30px_rgba(40,107,148,0.6),0_22px_50px_rgba(30,58,138,0.35)]
+              hover:ring-white/40
               active:translate-y-0
             "
           >
@@ -1093,16 +1189,29 @@ const Hero = () => {
               items-center
               gap-2
               rounded-full
+              border
+              border-slate-300
+              bg-white/60
               px-2
               py-3
               text-sm
               font-bold
               text-slate-800
+              shadow-md
+              backdrop-blur-sm
               transition-all
               duration-300
+              hover:border-[#286b94]
+              hover:bg-white
               hover:text-[#286b94]
+              hover:shadow-lg
+              dark:border-[#8bb8ff]/30
+              dark:bg-[#0a1929]/60
               dark:text-slate-200
+              dark:hover:border-[#8bb8ff]
+              dark:hover:bg-[#0a1929]/80
               dark:hover:text-[#8bb8ff]
+              dark:hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)]
             "
           >
             <span
@@ -1170,10 +1279,16 @@ const Hero = () => {
           divide-x
           divide-y
           divide-slate-300
-          border-y
-          border-slate-300
+          rounded-2xl
+          border
+          border-slate-200/50
+          bg-white/40
+          backdrop-blur-xl
+          shadow-xl
           dark:divide-[#6ea1ff]/20
-          dark:border-[#6ea1ff]/20
+          dark:border-[#6ea1ff]/30
+          dark:bg-[#0a1929]/40
+          dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)]
           sm:grid-cols-4
           sm:divide-y-0
         "
@@ -1183,6 +1298,7 @@ const Hero = () => {
             key={label}
             whileHover={{
               y: -3,
+              scale: 1.02,
             }}
             className="
               group
