@@ -15,7 +15,7 @@
       "type": "image/x-icon"
     },
     {
-      "src": "/shilshalogofinal.webp",
+      "src": "/shilshalogofinal_512.webp",
       "sizes": "512x512",
       "type": "image/webp",
       "purpose": "any maskable"
