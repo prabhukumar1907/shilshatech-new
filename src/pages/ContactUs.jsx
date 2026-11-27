@@ -25,6 +25,7 @@ import {
   Zap,
 } from "lucide-react";
 import Footer from "../components/Footer";
+import SEO from "../components/SEO";
 
 const COUNTRY_API = "https://countriesnow.space/api/v0.1/countries/codes";
 const MAP_URL =
@@ -612,6 +613,12 @@ const ContactUs = () => {
 
   return (
     <>
+      <SEO
+        title="Shilsha Technologies | Let's Connect"
+        description="Connect with Shilsha Technologies to discuss your project needs, explore innovative IT solutions, and get expert support for your business goals."
+        keywords=""
+        canonical="https://shilshatech.com/contact-us"
+      />
       <main className="relative min-h-screen overflow-hidden bg-[#f7faff] font-sans text-slate-900 dark:bg-[#050a12] dark:text-white">
         {/* Background */}
         <div

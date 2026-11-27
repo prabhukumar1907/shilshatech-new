@@ -21,6 +21,7 @@ import { motion } from "framer-motion";
 import ReasonsWhySection from "../components/ReasonsWhySection";
 import AwardsSection from "../components/AwardsSection";
 import Footer from "../components/Footer";
+import SEO from "../components/SEO";
 
 const theme = {
   primary: "#276ea5",
@@ -87,7 +88,14 @@ const ModelTrainingPage = () => {
   ];
 
   return (
-    <div
+    <>
+      <SEO
+        title="AI Model Training Services | Shilsha Technologies"
+        description="Improve AI performance with Shilsha Technologies' model training services, delivering tailored machine learning models and intelligent business solutions."
+        keywords="AI model development, custom AI model development, AI model development services, AI model development company"
+        canonical="https://shilshatech.com/ai-modal-training"
+      />
+      <div
       className="
         min-h-screen
         overflow-hidden
@@ -1330,6 +1338,7 @@ const ModelTrainingPage = () => {
         <Footer />
       </div>
     </div>
+    </>
   );
 };
 

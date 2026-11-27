@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import AwardsSection from "../components/AwardsSection";
 import Footer from "../components/Footer";
+import SEO from "../components/SEO";
 
 const theme = {
   primary: "#276ea5",
@@ -147,6 +148,12 @@ const AboutUs = () => {
 
   return (
     <>
+      <SEO
+        title="Shilsha Technologies | Our Story & Expertise"
+        description="Discover Shilsha Technologies, a technology partner delivering web development, mobile apps, AI solutions, and custom software for business growth."
+        keywords=""
+        canonical="https://shilshatech.com/about-us"
+      />
       <main className="min-h-screen bg-[#f8fafc] text-slate-900 dark:bg-[#050b14] dark:text-white font-sans overflow-hidden">
         <section className="relative px-6 lg:px-10 pt-24 pb-10 lg:pt-28 lg:pb-12 overflow-hidden">
           {/* Background */}

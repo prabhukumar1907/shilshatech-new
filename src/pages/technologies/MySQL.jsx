@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Zap,
-  ShieldCheck,
   ArrowRight,
   Database,
   Server,
@@ -16,6 +15,7 @@ import { motion } from "framer-motion";
 import AwardsSection from "../../components/AwardsSection";
 import ReasonsWhySection from "../../components/ReasonsWhySection";
 import Footer from "../../components/Footer";
+import SEO from "../../components/SEO";
 
 const theme = {
   primary: "#00758F",
@@ -75,7 +75,14 @@ const services = [
 
 const MysqlServicesPage = () => {
   return (
-    <main className="min-h-screen bg-slate-50 dark:bg-[#050a12] text-slate-900 dark:text-white overflow-hidden">
+    <>
+      <SEO
+        title="MySQL Development Services | Shilsha Technologies"
+        description="Build reliable database solutions with Shilsha Technologies' MySQL development services, offering efficient data management, security, and performance."
+        keywords="MySQL database development services, MySQL development company, MySQL database design, MySQL consulting, MySQL database management"
+        canonical="https://shilshatech.com/technologies/mysql-database-development-services-company"
+      />
+      <main className="min-h-screen bg-slate-50 dark:bg-[#050a12] text-slate-900 dark:text-white overflow-hidden">
 
       <section className="relative pt-28 sm:pt-36 pb-24 sm:pb-32">
         <div className="absolute inset-0 pointer-events-none">
@@ -421,6 +428,7 @@ const MysqlServicesPage = () => {
       <Footer />
 
     </main>
+    </>
   );
 };
 

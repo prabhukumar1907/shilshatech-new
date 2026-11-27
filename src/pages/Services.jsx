@@ -3,6 +3,7 @@ import img1 from "../assets/images/41Z_2106.w009.n001.5B.p8.5.jpg";
 import img2 from "../assets/images/mobside6.png";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 
 const ServicesPage = () => {
   const [activeFaq, setActiveFaq] = useState(0);
@@ -317,6 +318,12 @@ const ServicesPage = () => {
 
   return (
     <>
+      <SEO
+        title="IT Services & Software Development Solutions | Shilsha Technologies"
+        description="Shilsha Technologies' IT services, including custom software development, web development, mobile app development, AI solutions, and digital transformation."
+        keywords="custom web development services, web application development services, web app development services, custom web application development services, custom web app development services, web development services company, web app development service, web application development service, custom web development service, web design and development services"
+        canonical="https://www.shilshatech.com/services"
+      />
       <main className="min-h-screen overflow-hidden bg-slate-50 font-sans text-slate-800 selection:bg-sky-500 selection:text-white dark:bg-slate-950 dark:text-slate-100">
         <div className="pointer-events-none fixed left-1/2 top-0 -z-10 h-96 w-3xl -translate-x-1/2 rounded-full bg-linear-to-r from-sky-400/15 via-indigo-400/15 to-transparent blur-[120px] dark:from-sky-600/10 dark:via-indigo-600/10" />
 

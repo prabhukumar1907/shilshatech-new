@@ -15,11 +15,10 @@ import {
   ChevronDown,
   Sparkles,
 } from "lucide-react";
-import { Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 import RequestForm from "../../components/RequestForm";
+import SEO from "../../components/SEO";
 
-// Theme configuration matching Shilsha Technologies brand colors
 const theme = {
   primary: "#286b94", // Core Shilsha Brand Blue
   secondary: "#1e3a8a", // Deep Indigo Accent
@@ -48,10 +47,26 @@ const engagementModels = [
 ];
 
 const coreExpertise = [
-  { label: "Modern React & Next.js", desc: "Server-side rendering, App Router, Hooks, Context API", icon: Code },
-  { label: "UI / UX Implementation", desc: "Tailwind CSS, Framer Motion, Styled Components, Material-UI", icon: Layout },
-  { label: "State & Performance", desc: "Redux Toolkit, Zustand, React Query, Web Vitals Optimization", icon: Cpu },
-  { label: "Cross-Platform Apps", desc: "React Native for high-performance iOS and Android mobile applications", icon: Smartphone },
+  {
+    label: "Modern React & Next.js",
+    desc: "Server-side rendering, App Router, Hooks, Context API",
+    icon: Code,
+  },
+  {
+    label: "UI / UX Implementation",
+    desc: "Tailwind CSS, Framer Motion, Styled Components, Material-UI",
+    icon: Layout,
+  },
+  {
+    label: "State & Performance",
+    desc: "Redux Toolkit, Zustand, React Query, Web Vitals Optimization",
+    icon: Cpu,
+  },
+  {
+    label: "Cross-Platform Apps",
+    desc: "React Native for high-performance iOS and Android mobile applications",
+    icon: Smartphone,
+  },
 ];
 
 const comparisonData = [
@@ -105,15 +120,21 @@ const ReactDeveloper = () => {
 
   return (
     <>
+      <SEO
+        title="Hire React Developers | Shilsha Technologies"
+        description="Hire experienced React developers from Shilsha Technologies to build fast, responsive, and scalable web applications tailored to your business needs."
+        keywords="hire React developer, hire ReactJS developer, dedicated React developer, React developer for hire, ReactJS development services, remote React developer"
+        canonical="https://shilshatech.com/hire-developers/react-developer"
+      />
       <section className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden px-6 pt-32 pb-24 transition-colors duration-500 bg-slate-50 text-slate-900 dark:bg-[#070d18] dark:text-slate-100 selection:bg-blue-500 selection:text-white">
-        
-        <div 
+        <div
           className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-175 h-175 rounded-full blur-[160px] pointer-events-none opacity-20 dark:opacity-30"
-          style={{ background: `radial-gradient(circle, ${theme.primary} 0%, ${theme.secondary} 70%, transparent 100%)` }}
+          style={{
+            background: `radial-gradient(circle, ${theme.primary} 0%, ${theme.secondary} 70%, transparent 100%)`,
+          }}
         />
 
         <div className="relative z-10 mx-auto max-w-6xl w-full flex flex-col items-center">
-          
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -125,7 +146,6 @@ const ReactDeveloper = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full items-start">
-            
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -134,7 +154,7 @@ const ReactDeveloper = () => {
             >
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15]">
                 Hire Elite{" "}
-                <span 
+                <span
                   className="bg-clip-text text-transparent"
                   style={{
                     backgroundImage: `linear-gradient(135deg, ${theme.primary} 0%, #1d4ed8 50%, ${theme.secondary} 100%)`,
@@ -146,36 +166,46 @@ const ReactDeveloper = () => {
               </h1>
 
               <p className="mt-5 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
-                Build fast, scalable, and responsive user interfaces with world-class frontend talent from Shilsha Technologies. We deliver exceptional digital experiences tailored to your business goals.
+                Build fast, scalable, and responsive user interfaces with
+                world-class frontend talent from Shilsha Technologies. We
+                deliver exceptional digital experiences tailored to your
+                business goals.
               </p>
 
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex items-center gap-3 p-4 rounded-2xl border border-slate-200/80 bg-white/80 dark:border-blue-500/20 dark:bg-[#0a1325]/80 backdrop-blur-xl shadow-lg">
-                  <div className="p-2.5 rounded-xl bg-blue-500/10 text-blue-500"><ShieldCheck size={20} /></div>
+                  <div className="p-2.5 rounded-xl bg-blue-500/10 text-blue-500">
+                    <ShieldCheck size={20} />
+                  </div>
                   <div>
                     <h4 className="font-bold text-sm">Top 1% React Talent</h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Rigorously screened devs</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
+                      Rigorously screened devs
+                    </p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3 p-4 rounded-2xl border border-slate-200/80 bg-white/80 dark:border-blue-500/20 dark:bg-[#0a1325]/80 backdrop-blur-xl shadow-lg">
-                  <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400"><Zap size={20} /></div>
+                  <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400">
+                    <Zap size={20} />
+                  </div>
                   <div>
                     <h4 className="font-bold text-sm">48-Hour Onboarding</h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Fast team integration</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
+                      Fast team integration
+                    </p>
                   </div>
                 </div>
               </div>
             </motion.div>
 
-            <RequestForm 
+            <RequestForm
               className="lg:col-span-5"
               title="Request React Expert"
               subtitle="Fill out the form below and connect with matched frontend developers in less than 24 hours."
               textareaPlaceholder="Tell us about your project requirements and tech stack..."
               theme={theme}
             />
-
           </div>
 
           {/* Core Expertise Grid */}
@@ -199,7 +229,9 @@ const ReactDeveloper = () => {
                       <div className="p-3 rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400">
                         <Icon size={22} />
                       </div>
-                      <span className="text-xs font-mono font-bold text-slate-400 dark:text-slate-500">0{index + 1}</span>
+                      <span className="text-xs font-mono font-bold text-slate-400 dark:text-slate-500">
+                        0{index + 1}
+                      </span>
                     </div>
                     <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
                       {item.label}
@@ -229,7 +261,8 @@ const ReactDeveloper = () => {
                 Choose Your Engagement Model
               </h2>
               <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 mt-2">
-                Whether you need specialized individual contributors or an entire agile frontend unit, we adapt to your goals.
+                Whether you need specialized individual contributors or an
+                entire agile frontend unit, we adapt to your goals.
               </p>
             </div>
 
@@ -281,7 +314,8 @@ const ReactDeveloper = () => {
                 How Shilsha Technologies Compares
               </h2>
               <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 mt-2">
-                See why leading enterprises choose Shilsha Technologies over standard freelancers or legacy agencies.
+                See why leading enterprises choose Shilsha Technologies over
+                standard freelancers or legacy agencies.
               </p>
             </div>
 
@@ -289,19 +323,38 @@ const ReactDeveloper = () => {
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="border-b border-slate-200 dark:border-blue-500/20 text-xs sm:text-sm">
-                    <th className="py-4 px-4 font-bold text-slate-900 dark:text-white">Feature</th>
-                    <th className="py-4 px-4 font-bold text-blue-600 dark:text-blue-400 bg-blue-50/50 dark:bg-blue-950/40 rounded-t-xl">Shilsha Technologies</th>
-                    <th className="py-4 px-4 font-bold text-slate-500 dark:text-slate-400">Standard Freelancers</th>
-                    <th className="py-4 px-4 font-bold text-slate-500 dark:text-slate-400">Traditional Agencies</th>
+                    <th className="py-4 px-4 font-bold text-slate-900 dark:text-white">
+                      Feature
+                    </th>
+                    <th className="py-4 px-4 font-bold text-blue-600 dark:text-blue-400 bg-blue-50/50 dark:bg-blue-950/40 rounded-t-xl">
+                      Shilsha Technologies
+                    </th>
+                    <th className="py-4 px-4 font-bold text-slate-500 dark:text-slate-400">
+                      Standard Freelancers
+                    </th>
+                    <th className="py-4 px-4 font-bold text-slate-500 dark:text-slate-400">
+                      Traditional Agencies
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-200 dark:divide-blue-500/10 text-xs sm:text-sm">
                   {comparisonData.map((row, i) => (
-                    <tr key={i} className="hover:bg-slate-50/50 dark:hover:bg-blue-950/20 transition-colors">
-                      <td className="py-4 px-4 font-semibold text-slate-800 dark:text-slate-200">{row.feature}</td>
-                      <td className="py-4 px-4 font-semibold text-blue-700 dark:text-blue-300 bg-blue-50/50 dark:bg-blue-950/40">{row.shilsha}</td>
-                      <td className="py-4 px-4 text-slate-500 dark:text-slate-400">{row.freelance}</td>
-                      <td className="py-4 px-4 text-slate-500 dark:text-slate-400">{row.agency}</td>
+                    <tr
+                      key={i}
+                      className="hover:bg-slate-50/50 dark:hover:bg-blue-950/20 transition-colors"
+                    >
+                      <td className="py-4 px-4 font-semibold text-slate-800 dark:text-slate-200">
+                        {row.feature}
+                      </td>
+                      <td className="py-4 px-4 font-semibold text-blue-700 dark:text-blue-300 bg-blue-50/50 dark:bg-blue-950/40">
+                        {row.shilsha}
+                      </td>
+                      <td className="py-4 px-4 text-slate-500 dark:text-slate-400">
+                        {row.freelance}
+                      </td>
+                      <td className="py-4 px-4 text-slate-500 dark:text-slate-400">
+                        {row.agency}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -366,7 +419,6 @@ const ReactDeveloper = () => {
               })}
             </div>
           </motion.div>
-
         </div>
       </section>
       <Footer />

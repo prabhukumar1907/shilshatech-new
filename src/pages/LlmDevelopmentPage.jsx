@@ -19,6 +19,7 @@ import { motion } from "framer-motion";
 import ReasonsWhySection from "../components/ReasonsWhySection";
 import AwardsSection from "../components/AwardsSection";
 import Footer from "../components/Footer";
+import SEO from "../components/SEO";
 
 const theme = {
   primary: "#276ea5",
@@ -63,7 +64,14 @@ const LlmDevelopmentPage = () => {
   ];
 
   return (
-    <div
+    <>
+      <SEO
+        title="LLM Development Services | Shilsha Technologies"
+        description="Build powerful AI applications with Shilsha Technologies' LLM development services, offering custom language models and intelligent AI solutions."
+        keywords="LLM development services, LLM development company, custom LLM development, LLM application development, LLM app development, LLM product development, custom LLM development services, LLM application development company, LLM software development, LLM development solutions"
+        canonical="https://shilshatech.com/llm-development"
+      />
+      <div
       className="
         min-h-screen
         bg-[#f8fbff]
@@ -1014,6 +1022,7 @@ const LlmDevelopmentPage = () => {
       <AwardsSection />
       <Footer />
     </div>
+    </>
   );
 };
 

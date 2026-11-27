@@ -21,6 +21,7 @@ import { motion } from "framer-motion";
 import ReasonsWhySection from "../components/ReasonsWhySection";
 import AwardsSection from "../components/AwardsSection";
 import Footer from "../components/Footer";
+import SEO from "../components/SEO";
 
 const theme = {
   primary: "#276ea5",
@@ -51,7 +52,14 @@ const GenerativeAiPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#050b14] text-slate-800 dark:text-slate-100 transition-colors duration-300 font-sans selection:bg-blue-400 selection:text-slate-950 overflow-hidden">
+    <>
+      <SEO
+        title="Generative AI Development Services | Shilsha Tech"
+        description="Build smarter solutions with Shilsha Technologies' generative AI services, including AI-powered content creation, automation, and custom AI applications."
+        keywords="generative AI company, generative AI development company, generative AI consulting company, generative AI integration company, generative AI services company, generative AI app development company, top generative AI consulting company, generative AI software development company, generative AI solutions company"
+        canonical="https://shilshatech.com/generative-ai"
+      />
+      <div className="min-h-screen bg-slate-50 dark:bg-[#050b14] text-slate-800 dark:text-slate-100 transition-colors duration-300 font-sans selection:bg-blue-400 selection:text-slate-950 overflow-hidden">
      
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-40 left-[10%] w-112.5 h-112.5 rounded-full bg-blue-500/10 blur-[140px]" />
@@ -891,6 +899,7 @@ const GenerativeAiPage = () => {
         <Footer />
       </div>
     </div>
+    </>
   );
 };
 
