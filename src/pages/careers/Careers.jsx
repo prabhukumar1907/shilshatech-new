@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Footer from "../../components/Footer";
+import SEO from "../../components/SEO";
 
 const Careers = () => {
   const theme = {
@@ -324,6 +325,12 @@ ${formData.name}
 
   return (
     <>
+      <SEO
+        title="Careers at Shilsha Technologies | Join Our Team"
+        description="Explore career opportunities at Shilsha Technologies. Join our team of innovative professionals and contribute to building impactful digital products."
+        keywords="Shilsha Technologies careers, job openings, software development jobs, design jobs, engineering careers, join our team"
+        canonical="https://shilshatech.com/careers"
+      />
       <style>{`
         @keyframes careerFloat {
           0%, 100% {

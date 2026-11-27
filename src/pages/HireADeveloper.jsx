@@ -17,6 +17,7 @@ import {
   ChevronDown,
   Infinity as InfinityIcon,
 } from "lucide-react";
+import SEO from "../components/SEO";
 
 import {
   FaApple,
@@ -403,6 +404,12 @@ export default function HireADeveloper() {
 
   return (
     <>
+      <SEO
+        title="Hire Dedicated Developers | Hire a Developer​ Web, Mobile"
+        description="Hire dedicated developers for your business projects. Hire a team of developers for software, web, and mobile app developers for software solutions."
+        keywords="hire developers, hire a developer, hire a web developer, hire a team of developers, hire a dedicated development team, dedicated development team, hire dedicated developers, hire software developers, hire app developers, hire web developers, offshore developers, remote developer, hire a dedicated developer, hire a dedicated software development team, hire a software development team, hire a development team, hire a remote developer"
+        canonical="https://www.shilshatech.com/hire-developers"
+      />
       <div className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white font-sans select-none min-h-screen transition-colors duration-500 relative">
         {/* Background Pattern */}
         <div

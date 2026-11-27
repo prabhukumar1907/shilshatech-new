@@ -24,6 +24,7 @@ import { motion } from "framer-motion";
 import ReasonsWhySection from "../components/ReasonsWhySection";
 import AwardsSection from "../components/AwardsSection";
 import Footer from "../components/Footer";
+import SEO from "../components/SEO";
 
 const brand = {
   primary: "#276ea5",
@@ -96,7 +97,14 @@ const AiConsultingPage = () => {
   ];
 
   return (
-    <div className="min-h-screen mt-22 bg-[#f7faff] dark:bg-[#050a12] text-slate-900 dark:text-white overflow-hidden font-sans">
+    <>
+      <SEO
+        title="AI Consulting Services | Shilsha Technologies"
+        description="Transform your business with Shilsha Technologies' AI consulting services. Discover smart AI strategies, automation, and intelligent business solutions."
+        keywords="AI consulting company, AI consultant company, AI consulting services company, Gen AI consulting company, AI agent consulting company, AI consultancy company, AI technology consulting company"
+        canonical="https://shilshatech.com/ai-consulting-company"
+      />
+      <div className="min-h-screen mt-22 bg-[#f7faff] dark:bg-[#050a12] text-slate-900 dark:text-white overflow-hidden font-sans">
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-48 left-[5%] w-96 h-96 rounded-full bg-blue-500/7 blur-[120px]" />
         <div className="absolute top-[35%] -right-40 w-96 h-96 rounded-full bg-cyan-400/7 blur-[130px]" />
@@ -796,6 +804,7 @@ const AiConsultingPage = () => {
         <Footer />
       </div>
     </div>
+    </>
   );
 };
 

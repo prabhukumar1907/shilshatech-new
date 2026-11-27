@@ -24,6 +24,7 @@ import { motion } from "framer-motion";
 import ReasonsWhySection from "../components/ReasonsWhySection";
 import AwardsSection from "../components/AwardsSection";
 import Footer from "../components/Footer";
+import SEO from "../components/SEO";
 
 const theme = {
   primary: "#276ea5",
@@ -87,7 +88,14 @@ const AiDevelopmentPage = () => {
   ];
 
   return (
-    <div className="min-h-screen overflow-hidden bg-slate-50 font-sans text-slate-800 transition-colors duration-300 dark:bg-[#050b14] dark:text-slate-100">
+    <>
+      <SEO
+        title="AI Development Services | Shilsha Technologies"
+        description="Build smarter business solutions with Shilsha Technologies. Explore custom AI development, machine learning, and intelligent automation services."
+        keywords="AI development services, AI development company, AI software development services, AI software development company, custom AI development company, AI agent development services, AI chatbot development company, AI software development, AI agent development company, AI app development company, AI application development services, AI development solutions, AI software development solutions, AI application development company, custom AI development services, AI development agency, AI product development, custom AI chatbot development services, custom AI software development"
+        canonical="https://www.shilshatech.com/ai-development"
+      />
+      <div className="min-h-screen overflow-hidden bg-slate-50 font-sans text-slate-800 transition-colors duration-300 dark:bg-[#050b14] dark:text-slate-100">
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
         <div className="absolute -left-40 -top-40 h-125 w-125 rounded-full bg-blue-500/10 blur-[140px] dark:bg-blue-500/10" />
 
@@ -883,6 +891,7 @@ const AiDevelopmentPage = () => {
         <Footer />
       </div>
     </div>
+    </>
   );
 };
 

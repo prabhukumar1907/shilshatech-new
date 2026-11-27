@@ -20,6 +20,7 @@ import { motion } from "framer-motion";
 import ReasonsWhySection from "../components/ReasonsWhySection";
 import AwardsSection from "../components/AwardsSection";
 import Footer from "../components/Footer";
+import SEO from "../components/SEO";
 
 const theme = {
   primary: "#276ea5",
@@ -103,7 +104,14 @@ const NaturalLanguageProcessingPage = () => {
   ];
 
   return (
-    <div
+    <>
+      <SEO
+        title="Natural Language Processing Services | Shilsha Tech"
+        description="Enhance business communication with Shilsha Technologies' NLP solutions for text analysis, language understanding, chatbots, and intelligent automation."
+        keywords="NLP development services, hire NLP developers, NLP development company, NLP development, NLP developer, NLP developers, hire NLP developer, NLP business development services, NLP chatbot development"
+        canonical="https://shilshatech.com/natural-language-processing"
+      />
+      <div
       className="
         min-h-screen
         bg-[#f7faff]
@@ -1349,6 +1357,7 @@ const NaturalLanguageProcessingPage = () => {
         <Footer />
       </div>
     </div>
+    </>
   );
 };
 

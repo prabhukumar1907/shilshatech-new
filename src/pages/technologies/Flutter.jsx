@@ -19,6 +19,7 @@ import { motion } from "framer-motion";
 import AwardsSection from "../../components/AwardsSection";
 import ReasonsWhySection from "../../components/ReasonsWhySection";
 import Footer from "../../components/Footer";
+import SEO from "../../components/SEO";
 
 const theme = {
   primary: "#0284c7",
@@ -137,8 +138,15 @@ const servicesList = [
 
 const FlutterServicesPage = () => {
   return (
-    <div
-      className="
+    <>
+      <SEO
+        title="Flutter App Development | Shilsha Technologies"
+        description="Create beautiful and fast cross-platform mobile applications with Shilsha Technologies' Flutter development services tailored to your business needs."
+        keywords="Flutter development company, Flutter app development services, Flutter developers, cross platform app development, custom Flutter application development"
+        canonical="https://shilshatech.com/technologies/flutter-development-company"
+      />
+      <div
+        className="
         min-h-screen
         bg-slate-50
         dark:bg-[#070d18]
@@ -149,10 +157,10 @@ const FlutterServicesPage = () => {
         selection:text-white
         overflow-hidden
       "
-    >
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div
-          className="
+      >
+        <div className="fixed inset-0 pointer-events-none overflow-hidden">
+          <div
+            className="
             absolute
             -top-40
             left-1/2
@@ -163,11 +171,11 @@ const FlutterServicesPage = () => {
             blur-[140px]
             opacity-[0.06]
           "
-          style={{ background: theme.primary }}
-        />
+            style={{ background: theme.primary }}
+          />
 
-        <div
-          className="
+          <div
+            className="
             absolute
             top-[55%]
             -right-60
@@ -177,11 +185,11 @@ const FlutterServicesPage = () => {
             blur-[150px]
             opacity-[0.04]
           "
-          style={{ background: theme.glow }}
-        />
+            style={{ background: theme.glow }}
+          />
 
-        <div
-          className="
+          <div
+            className="
             absolute
             inset-0
             opacity-[0.02]
@@ -189,33 +197,33 @@ const FlutterServicesPage = () => {
             bg-[linear-gradient(to_right,#64748b_1px,transparent_1px),linear-gradient(to_bottom,#64748b_1px,transparent_1px)]
             bg-size-[48px_48px]
           "
-        />
-      </div>
+          />
+        </div>
 
-      <main className="relative z-10 pt-12">
-        <section className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 pt-20 sm:pt-24 pb-16 sm:pb-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
-            {/* LEFT CONTENT */}
+        <main className="relative z-10 pt-12">
+          <section className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 pt-20 sm:pt-24 pb-16 sm:pb-20">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+              {/* LEFT CONTENT */}
 
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-              className="lg:col-span-8"
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <RiFlutterFill
-                  size={21}
-                  className="text-sky-600 dark:text-sky-400"
-                />
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7 }}
+                className="lg:col-span-8"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <RiFlutterFill
+                    size={21}
+                    className="text-sky-600 dark:text-sky-400"
+                  />
 
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">
-                  Flutter Development Services
-                </span>
-              </div>
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">
+                    Flutter Development Services
+                  </span>
+                </div>
 
-              <h1
-                className="
+                <h1
+                  className="
                   text-5xl
                   sm:text-6xl
                   lg:text-[72px]
@@ -225,33 +233,33 @@ const FlutterServicesPage = () => {
                   leading-[0.95]
                   max-w-5xl
                 "
-              >
-                Beautiful apps.
-                <br />
-                <span
-                  className="text-transparent bg-clip-text"
-                  style={{
-                    backgroundImage: `linear-gradient(
+                >
+                  Beautiful apps.
+                  <br />
+                  <span
+                    className="text-transparent bg-clip-text"
+                    style={{
+                      backgroundImage: `linear-gradient(
                       110deg,
                       ${theme.primary},
                       ${theme.glow}
                     )`,
-                  }}
-                >
-                  Built with Flutter.
-                </span>
-              </h1>
+                    }}
+                  >
+                    Built with Flutter.
+                  </span>
+                </h1>
 
-              <p className="mt-7 max-w-2xl text-base sm:text-lg lg:text-xl leading-8 text-slate-600 dark:text-slate-400">
-                Build fast, scalable, and visually stunning cross-platform
-                applications with a Flutter engineering team focused on
-                performance, maintainability, and exceptional user experience.
-              </p>
+                <p className="mt-7 max-w-2xl text-base sm:text-lg lg:text-xl leading-8 text-slate-600 dark:text-slate-400">
+                  Build fast, scalable, and visually stunning cross-platform
+                  applications with a Flutter engineering team focused on
+                  performance, maintainability, and exceptional user experience.
+                </p>
 
-              <div className="flex flex-wrap items-center gap-6 mt-8">
-                <Link
-                  to="/contact-us"
-                  className="
+                <div className="flex flex-wrap items-center gap-6 mt-8">
+                  <Link
+                    to="/contact-us"
+                    className="
                     group
                     inline-flex
                     items-center
@@ -267,29 +275,29 @@ const FlutterServicesPage = () => {
                     hover:-translate-y-1
                     hover:shadow-xl
                   "
-                  style={{
-                    background: `linear-gradient(
+                    style={{
+                      background: `linear-gradient(
                       135deg,
                       ${theme.primary},
                       ${theme.secondary}
                     )`,
-                    boxShadow: "0 12px 30px rgba(2,132,199,0.18)",
-                  }}
-                >
-                  Hire Flutter Developers
-                  <ArrowRight
-                    size={16}
-                    className="
+                      boxShadow: "0 12px 30px rgba(2,132,199,0.18)",
+                    }}
+                  >
+                    Hire Flutter Developers
+                    <ArrowRight
+                      size={16}
+                      className="
                       transition-transform
                       duration-300
                       group-hover:translate-x-1
                     "
-                  />
-                </Link>
+                    />
+                  </Link>
 
-                <a
-                  href="#why-flutter"
-                  className="
+                  <a
+                    href="#why-flutter"
+                    className="
                     group
                     inline-flex
                     items-center
@@ -302,52 +310,52 @@ const FlutterServicesPage = () => {
                     dark:hover:text-sky-400
                     transition-colors
                   "
-                >
-                  Why Flutter
-                  <ArrowRight
-                    size={15}
-                    className="transition-transform group-hover:translate-x-1"
+                  >
+                    Why Flutter
+                    <ArrowRight
+                      size={15}
+                      className="transition-transform group-hover:translate-x-1"
+                    />
+                  </a>
+                </div>
+
+                <div className="flex items-center gap-3 mt-7 text-xs text-slate-500">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60 animate-ping" />
+
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+                  </span>
+                  Flutter engineering teams available for new projects
+                </div>
+              </motion.div>
+
+              {/* RIGHT FLUTTER VISUAL */}
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.85 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="lg:col-span-4 flex justify-center lg:justify-end"
+              >
+                <div className="relative w-57.5 h-57.5 sm:w-70 sm:h-70">
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: 26,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                    className="absolute inset-0 rounded-full border border-sky-500/20"
                   />
-                </a>
-              </div>
 
-              <div className="flex items-center gap-3 mt-7 text-xs text-slate-500">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60 animate-ping" />
-
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
-                </span>
-                Flutter engineering teams available for new projects
-              </div>
-            </motion.div>
-
-            {/* RIGHT FLUTTER VISUAL */}
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="lg:col-span-4 flex justify-center lg:justify-end"
-            >
-              <div className="relative w-57.5 h-57.5 sm:w-70 sm:h-70">
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{
-                    duration: 26,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  className="absolute inset-0 rounded-full border border-sky-500/20"
-                />
-
-                <motion.div
-                  animate={{ rotate: -360 }}
-                  transition={{
-                    duration: 34,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  className="
+                  <motion.div
+                    animate={{ rotate: -360 }}
+                    transition={{
+                      duration: 34,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                    className="
                     absolute
                     inset-7
                     rounded-full
@@ -355,67 +363,67 @@ const FlutterServicesPage = () => {
                     border-dashed
                     border-sky-500/20
                   "
-                />
+                  />
 
-                <div
-                  className="
+                  <div
+                    className="
                     absolute
                     inset-13.75
                     rounded-full
                     blur-[45px]
                     opacity-20
                   "
-                  style={{ background: theme.primary }}
-                />
+                    style={{ background: theme.primary }}
+                  />
 
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <motion.div
-                    animate={{
-                      y: [0, -8, 0],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  >
-                    <RiFlutterFill
-                      size={145}
-                      className="
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <motion.div
+                      animate={{
+                        y: [0, -8, 0],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    >
+                      <RiFlutterFill
+                        size={145}
+                        className="
                         text-sky-600
                         dark:text-sky-400
                         drop-shadow-[0_0_35px_rgba(56,189,248,0.25)]
                       "
-                    />
-                  </motion.div>
+                      />
+                    </motion.div>
+                  </div>
+
+                  <span className="absolute top-2 right-0 text-[10px] uppercase tracking-[0.25em] text-slate-400">
+                    Flutter
+                  </span>
+
+                  <span className="absolute bottom-5 left-0 text-[10px] uppercase tracking-[0.25em] text-slate-400">
+                    Mobile • Web • UI
+                  </span>
                 </div>
+              </motion.div>
+            </div>
+          </section>
 
-                <span className="absolute top-2 right-0 text-[10px] uppercase tracking-[0.25em] text-slate-400">
-                  Flutter
-                </span>
+          <section className="border-y border-slate-200 dark:border-white/[0.07]">
+            <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+              <div className="grid grid-cols-1 md:grid-cols-3">
+                {features.map((feature, index) => {
+                  const Icon = feature.icon;
 
-                <span className="absolute bottom-5 left-0 text-[10px] uppercase tracking-[0.25em] text-slate-400">
-                  Mobile • Web • UI
-                </span>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        <section className="border-y border-slate-200 dark:border-white/[0.07]">
-          <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-3">
-              {features.map((feature, index) => {
-                const Icon = feature.icon;
-
-                return (
-                  <motion.div
-                    key={feature.number}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="
+                  return (
+                    <motion.div
+                      key={feature.number}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      className="
                       py-8
                       sm:py-9
                       md:px-7
@@ -428,74 +436,74 @@ const FlutterServicesPage = () => {
                       border-slate-200
                       dark:border-white/[0.07]
                     "
-                  >
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="text-xs font-mono text-sky-500">
-                        {feature.number}
-                      </span>
+                    >
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="text-xs font-mono text-sky-500">
+                          {feature.number}
+                        </span>
 
-                      <Icon size={19} className="text-sky-500" />
-                    </div>
+                        <Icon size={19} className="text-sky-500" />
+                      </div>
 
-                    <h3 className="text-lg font-bold">{feature.title}</h3>
+                      <h3 className="text-lg font-bold">{feature.title}</h3>
 
-                    <p className="mt-3 text-sm leading-7 text-slate-500 dark:text-slate-400">
-                      {feature.desc}
-                    </p>
-                  </motion.div>
-                );
-              })}
+                      <p className="mt-3 text-sm leading-7 text-slate-500 dark:text-slate-400">
+                        {feature.desc}
+                      </p>
+                    </motion.div>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section
-          id="why-flutter"
-          className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-20 lg:py-24"
-        >
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-14">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="lg:col-span-5"
-            >
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">
-                Why Flutter
-              </span>
-
-              <h2 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-none">
-                Build once.
-                <span className="block text-slate-400 dark:text-slate-600">
-                  Experience everywhere.
+          <section
+            id="why-flutter"
+            className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-20 lg:py-24"
+          >
+            <div className="grid lg:grid-cols-12 gap-10 lg:gap-14">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="lg:col-span-5"
+              >
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">
+                  Why Flutter
                 </span>
-              </h2>
-            </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="lg:col-span-7"
-            >
-              <div className="border-l-2 border-sky-500/40 pl-6 sm:pl-8 space-y-6">
-                <p className="text-lg sm:text-xl leading-8 text-slate-600 dark:text-slate-300">
-                  Are you looking to build beautiful mobile applications without
-                  maintaining completely separate codebases? Our Flutter
-                  development team creates modern applications that combine
-                  expressive interfaces with scalable architecture.
-                </p>
+                <h2 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-none">
+                  Build once.
+                  <span className="block text-slate-400 dark:text-slate-600">
+                    Experience everywhere.
+                  </span>
+                </h2>
+              </motion.div>
 
-                <p className="text-base sm:text-lg leading-8 text-slate-500 dark:text-slate-400">
-                  From custom Flutter interfaces and API integrations to
-                  Firebase, cloud services, performance optimization, and
-                  app-store deployment, we provide an end-to-end development
-                  solution for startups and enterprises.
-                </p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="lg:col-span-7"
+              >
+                <div className="border-l-2 border-sky-500/40 pl-6 sm:pl-8 space-y-6">
+                  <p className="text-lg sm:text-xl leading-8 text-slate-600 dark:text-slate-300">
+                    Are you looking to build beautiful mobile applications
+                    without maintaining completely separate codebases? Our
+                    Flutter development team creates modern applications that
+                    combine expressive interfaces with scalable architecture.
+                  </p>
 
-                <Link
-                  to="/contact-us"
-                  className="
+                  <p className="text-base sm:text-lg leading-8 text-slate-500 dark:text-slate-400">
+                    From custom Flutter interfaces and API integrations to
+                    Firebase, cloud services, performance optimization, and
+                    app-store deployment, we provide an end-to-end development
+                    solution for startups and enterprises.
+                  </p>
+
+                  <Link
+                    to="/contact-us"
+                    className="
                     inline-flex
                     items-center
                     gap-2
@@ -505,47 +513,48 @@ const FlutterServicesPage = () => {
                     hover:gap-4
                     transition-all
                   "
-                >
-                  Discuss your Flutter project
-                  <ArrowRight size={17} />
-                </Link>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        <section className="border-y border-slate-200 dark:border-white/[0.07]">
-          <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-20 lg:py-24">
-            <div className="grid lg:grid-cols-12 gap-10 mb-12">
-              <div className="lg:col-span-5">
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">
-                  Flutter Capabilities
-                </span>
-
-                <h2 className="mt-4 text-4xl sm:text-5xl font-black tracking-tight">
-                  One framework.
-                  <span className="block text-slate-400 dark:text-slate-600">
-                    Multiple possibilities.
-                  </span>
-                </h2>
-              </div>
-
-              <p className="lg:col-span-6 lg:col-start-7 text-base sm:text-lg leading-8 text-slate-500 dark:text-slate-400">
-                Flutter provides a powerful foundation for creating mobile
-                applications with reusable components, expressive UI, integrated
-                platform capabilities, and a streamlined development workflow.
-              </p>
+                  >
+                    Discuss your Flutter project
+                    <ArrowRight size={17} />
+                  </Link>
+                </div>
+              </motion.div>
             </div>
+          </section>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 border-t border-slate-200 dark:border-white/8">
-              {benefits.map((item, index) => (
-                <motion.div
-                  key={item}
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  className="
+          <section className="border-y border-slate-200 dark:border-white/[0.07]">
+            <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-20 lg:py-24">
+              <div className="grid lg:grid-cols-12 gap-10 mb-12">
+                <div className="lg:col-span-5">
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">
+                    Flutter Capabilities
+                  </span>
+
+                  <h2 className="mt-4 text-4xl sm:text-5xl font-black tracking-tight">
+                    One framework.
+                    <span className="block text-slate-400 dark:text-slate-600">
+                      Multiple possibilities.
+                    </span>
+                  </h2>
+                </div>
+
+                <p className="lg:col-span-6 lg:col-start-7 text-base sm:text-lg leading-8 text-slate-500 dark:text-slate-400">
+                  Flutter provides a powerful foundation for creating mobile
+                  applications with reusable components, expressive UI,
+                  integrated platform capabilities, and a streamlined
+                  development workflow.
+                </p>
+              </div>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 border-t border-slate-200 dark:border-white/8">
+                {benefits.map((item, index) => (
+                  <motion.div
+                    key={item}
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.05 }}
+                    className="
                     flex
                     items-center
                     gap-3
@@ -556,53 +565,53 @@ const FlutterServicesPage = () => {
                     sm:px-5
                     first:sm:pl-0
                   "
-                >
-                  <CheckCircle2 size={18} className="text-sky-500 shrink-0" />
+                  >
+                    <CheckCircle2 size={18} className="text-sky-500 shrink-0" />
 
-                  <span className="text-sm sm:text-base font-medium text-slate-600 dark:text-slate-300">
-                    {item}
-                  </span>
-                </motion.div>
-              ))}
+                    <span className="text-sm sm:text-base font-medium text-slate-600 dark:text-slate-300">
+                      {item}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-20 lg:py-24">
-          <div className="grid lg:grid-cols-12 gap-10 mb-12">
-            <div className="lg:col-span-5">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">
-                Our Flutter Services
-              </span>
-
-              <h2 className="mt-4 text-4xl sm:text-5xl font-black tracking-tight leading-tight">
-                From idea.
-                <span className="block text-slate-400 dark:text-slate-600">
-                  To App Store.
+          <section className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-20 lg:py-24">
+            <div className="grid lg:grid-cols-12 gap-10 mb-12">
+              <div className="lg:col-span-5">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">
+                  Our Flutter Services
                 </span>
-              </h2>
+
+                <h2 className="mt-4 text-4xl sm:text-5xl font-black tracking-tight leading-tight">
+                  From idea.
+                  <span className="block text-slate-400 dark:text-slate-600">
+                    To App Store.
+                  </span>
+                </h2>
+              </div>
+
+              <p className="lg:col-span-6 lg:col-start-7 text-base sm:text-lg leading-8 text-slate-500 dark:text-slate-400">
+                Our Flutter development services cover the complete product
+                lifecycle, from application architecture and UI development to
+                integrations, optimization, deployment, and long-term support.
+              </p>
             </div>
 
-            <p className="lg:col-span-6 lg:col-start-7 text-base sm:text-lg leading-8 text-slate-500 dark:text-slate-400">
-              Our Flutter development services cover the complete product
-              lifecycle, from application architecture and UI development to
-              integrations, optimization, deployment, and long-term support.
-            </p>
-          </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-slate-200 dark:border-white/8">
+              {servicesList.map((service, index) => {
+                const Icon = service.icon;
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-slate-200 dark:border-white/8">
-            {servicesList.map((service, index) => {
-              const Icon = service.icon;
-
-              return (
-                <motion.div
-                  key={service.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.06 }}
-                  whileHover={{ y: -4 }}
-                  className="
+                return (
+                  <motion.div
+                    key={service.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.06 }}
+                    whileHover={{ y: -4 }}
+                    className="
                     group
                     p-6
                     sm:p-7
@@ -615,9 +624,9 @@ const FlutterServicesPage = () => {
                     hover:bg-sky-50/50
                     dark:hover:bg-sky-500/3
                   "
-                >
-                  <div
-                    className="
+                  >
+                    <div
+                      className="
                       w-11
                       h-11
                       rounded-xl
@@ -632,70 +641,71 @@ const FlutterServicesPage = () => {
                       duration-300
                       group-hover:scale-110
                     "
-                  >
-                    <Icon size={20} />
+                    >
+                      <Icon size={20} />
+                    </div>
+
+                    <h3 className="mt-5 text-base font-bold group-hover:text-sky-500 transition-colors">
+                      {service.title}
+                    </h3>
+
+                    <p className="mt-3 text-sm leading-7 text-slate-500 dark:text-slate-400">
+                      {service.desc}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </section>
+
+          <section className="border-y border-slate-200 dark:border-white/[0.07]">
+            <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-20 lg:py-24">
+              <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  className="lg:col-span-5"
+                >
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">
+                    Business Advantage
+                  </span>
+
+                  <h2 className="mt-4 text-4xl sm:text-5xl font-black tracking-tight leading-tight">
+                    Technology that
+                    <span className="block text-slate-400 dark:text-slate-600">
+                      grows with your business.
+                    </span>
+                  </h2>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="lg:col-span-7"
+                >
+                  <div className="space-y-6">
+                    <p className="text-base sm:text-lg leading-8 text-slate-600 dark:text-slate-300">
+                      As a Flutter Development Company in India, we help
+                      businesses create modern mobile products with a
+                      streamlined development process. Flutter allows teams to
+                      share application logic and UI components across
+                      platforms, helping reduce unnecessary development
+                      complexity.
+                    </p>
+
+                    <p className="text-base sm:text-lg leading-8 text-slate-500 dark:text-slate-400">
+                      Our Flutter development team focuses on building products
+                      that are easy to maintain, optimize, and evolve as your
+                      customer base and product requirements grow.
+                    </p>
                   </div>
 
-                  <h3 className="mt-5 text-base font-bold group-hover:text-sky-500 transition-colors">
-                    {service.title}
-                  </h3>
-
-                  <p className="mt-3 text-sm leading-7 text-slate-500 dark:text-slate-400">
-                    {service.desc}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </section>
-
-        <section className="border-y border-slate-200 dark:border-white/[0.07]">
-          <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-20 lg:py-24">
-            <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="lg:col-span-5"
-              >
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">
-                  Business Advantage
-                </span>
-
-                <h2 className="mt-4 text-4xl sm:text-5xl font-black tracking-tight leading-tight">
-                  Technology that
-                  <span className="block text-slate-400 dark:text-slate-600">
-                    grows with your business.
-                  </span>
-                </h2>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="lg:col-span-7"
-              >
-                <div className="space-y-6">
-                  <p className="text-base sm:text-lg leading-8 text-slate-600 dark:text-slate-300">
-                    As a Flutter Development Company in India, we help
-                    businesses create modern mobile products with a streamlined
-                    development process. Flutter allows teams to share
-                    application logic and UI components across platforms,
-                    helping reduce unnecessary development complexity.
-                  </p>
-
-                  <p className="text-base sm:text-lg leading-8 text-slate-500 dark:text-slate-400">
-                    Our Flutter development team focuses on building products
-                    that are easy to maintain, optimize, and evolve as your
-                    customer base and product requirements grow.
-                  </p>
-                </div>
-
-                <div className="mt-8 pt-6 border-t border-slate-200 dark:border-white/8">
-                  <Link
-                    to="/contact-us"
-                    className="
+                  <div className="mt-8 pt-6 border-t border-slate-200 dark:border-white/8">
+                    <Link
+                      to="/contact-us"
+                      className="
                       group
                       inline-flex
                       items-center
@@ -705,53 +715,53 @@ const FlutterServicesPage = () => {
                       text-sky-600
                       dark:text-sky-400
                     "
-                  >
-                    Build with Flutter
-                    <ArrowRight
-                      size={16}
-                      className="transition-transform group-hover:translate-x-1"
-                    />
-                  </Link>
-                </div>
-              </motion.div>
+                    >
+                      Build with Flutter
+                      <ArrowRight
+                        size={16}
+                        className="transition-transform group-hover:translate-x-1"
+                      />
+                    </Link>
+                  </div>
+                </motion.div>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-20 lg:py-24">
-          <div className="grid lg:grid-cols-12 gap-10 mb-12">
-            <div className="lg:col-span-5">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">
-                Why Choose Us
-              </span>
-
-              <h2 className="mt-4 text-4xl sm:text-5xl font-black tracking-tight">
-                A Flutter team
-                <span className="block text-slate-400 dark:text-slate-600">
-                  built for results.
+          <section className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-20 lg:py-24">
+            <div className="grid lg:grid-cols-12 gap-10 mb-12">
+              <div className="lg:col-span-5">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">
+                  Why Choose Us
                 </span>
-              </h2>
+
+                <h2 className="mt-4 text-4xl sm:text-5xl font-black tracking-tight">
+                  A Flutter team
+                  <span className="block text-slate-400 dark:text-slate-600">
+                    built for results.
+                  </span>
+                </h2>
+              </div>
+
+              <p className="lg:col-span-6 lg:col-start-7 text-base sm:text-lg leading-8 text-slate-500 dark:text-slate-400">
+                We combine Flutter expertise, product thinking, engineering
+                discipline, and transparent communication to help businesses
+                turn mobile product ideas into dependable digital experiences.
+              </p>
             </div>
 
-            <p className="lg:col-span-6 lg:col-start-7 text-base sm:text-lg leading-8 text-slate-500 dark:text-slate-400">
-              We combine Flutter expertise, product thinking, engineering
-              discipline, and transparent communication to help businesses turn
-              mobile product ideas into dependable digital experiences.
-            </p>
-          </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 border-t border-l border-slate-200 dark:border-white/8">
+              {whyChooseItems.map((item, index) => {
+                const Icon = item.icon;
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 border-t border-l border-slate-200 dark:border-white/8">
-            {whyChooseItems.map((item, index) => {
-              const Icon = item.icon;
-
-              return (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.07 }}
-                  className="
+                return (
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.07 }}
+                    className="
                     p-7
                     border-r
                     border-b
@@ -759,10 +769,10 @@ const FlutterServicesPage = () => {
                     dark:border-white/8
                     group
                   "
-                >
-                  <div className="flex items-center gap-4">
-                    <div
-                      className="
+                  >
+                    <div className="flex items-center gap-4">
+                      <div
+                        className="
                         w-11
                         h-11
                         rounded-xl
@@ -777,29 +787,29 @@ const FlutterServicesPage = () => {
                         duration-300
                         group-hover:scale-110
                       "
-                    >
-                      <Icon size={20} />
+                      >
+                        <Icon size={20} />
+                      </div>
+
+                      <h3 className="text-base font-bold group-hover:text-sky-500 transition-colors">
+                        {item.title}
+                      </h3>
                     </div>
 
-                    <h3 className="text-base font-bold group-hover:text-sky-500 transition-colors">
-                      {item.title}
-                    </h3>
-                  </div>
+                    <p className="mt-5 text-sm leading-7 text-slate-500 dark:text-slate-400">
+                      {item.desc}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </section>
 
-                  <p className="mt-5 text-sm leading-7 text-slate-500 dark:text-slate-400">
-                    {item.desc}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </section>
-
-        <section className="border-t border-slate-200 dark:border-white/[0.07]">
-          <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-20 lg:py-24">
-            <div className="relative text-center">
-              <div
-                className="
+          <section className="border-t border-slate-200 dark:border-white/[0.07]">
+            <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-20 lg:py-24">
+              <div className="relative text-center">
+                <div
+                  className="
                   absolute
                   left-1/2
                   -translate-x-1/2
@@ -810,26 +820,26 @@ const FlutterServicesPage = () => {
                   blur-[100px]
                   opacity-[0.08]
                 "
-                style={{ background: theme.primary }}
-              />
+                  style={{ background: theme.primary }}
+                />
 
-              <RiFlutterFill
-                size={42}
-                className="
+                <RiFlutterFill
+                  size={42}
+                  className="
                   relative
                   mx-auto
                   text-sky-600
                   dark:text-sky-400
                   mb-6
                 "
-              />
+                />
 
-              <p className="relative text-xs font-bold uppercase tracking-[0.25em] text-sky-600 dark:text-sky-400">
-                Start your next project
-              </p>
+                <p className="relative text-xs font-bold uppercase tracking-[0.25em] text-sky-600 dark:text-sky-400">
+                  Start your next project
+                </p>
 
-              <h2
-                className="
+                <h2
+                  className="
                   relative
                   mt-4
                   text-4xl
@@ -841,21 +851,21 @@ const FlutterServicesPage = () => {
                   max-w-4xl
                   mx-auto
                 "
-              >
-                Ready to build something
-                <span className="text-sky-500"> beautiful?</span>
-              </h2>
+                >
+                  Ready to build something
+                  <span className="text-sky-500"> beautiful?</span>
+                </h2>
 
-              <p className="relative max-w-2xl mx-auto mt-6 text-base sm:text-lg leading-8 text-slate-500 dark:text-slate-400">
-                Let's transform your product vision into a fast, scalable, and
-                engaging Flutter application designed for today's multi-platform
-                world.
-              </p>
+                <p className="relative max-w-2xl mx-auto mt-6 text-base sm:text-lg leading-8 text-slate-500 dark:text-slate-400">
+                  Let's transform your product vision into a fast, scalable, and
+                  engaging Flutter application designed for today's
+                  multi-platform world.
+                </p>
 
-              <div className="mt-7">
-                <Link
-                  to="/contact-us"
-                  className="
+                <div className="mt-7">
+                  <Link
+                    to="/contact-us"
+                    className="
                     group
                     inline-flex
                     items-center
@@ -870,30 +880,31 @@ const FlutterServicesPage = () => {
                     hover:-translate-y-1
                     hover:shadow-xl
                   "
-                  style={{
-                    background: `linear-gradient(
+                    style={{
+                      background: `linear-gradient(
                       135deg,
                       ${theme.primary},
                       ${theme.secondary}
                     )`,
-                  }}
-                >
-                  Talk to Flutter Experts
-                  <ArrowRight
-                    size={16}
-                    className="transition-transform group-hover:translate-x-1"
-                  />
-                </Link>
+                    }}
+                  >
+                    Talk to Flutter Experts
+                    <ArrowRight
+                      size={16}
+                      className="transition-transform group-hover:translate-x-1"
+                    />
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-      </main>
+          </section>
+        </main>
 
-      <ReasonsWhySection />
-      <AwardsSection />
-      <Footer />
-    </div>
+        <ReasonsWhySection />
+        <AwardsSection />
+        <Footer />
+      </div>
+    </>
   );
 };
 

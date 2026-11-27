@@ -15,9 +15,9 @@ import {
   Sparkles,
   Terminal,
 } from "lucide-react";
-import { Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 import RequestForm from "../../components/RequestForm";
+import SEO from "../../components/SEO";
 
 const theme = {
   primary: "#286b94", // Core Shilsha Brand Blue
@@ -47,10 +47,26 @@ const engagementModels = [
 ];
 
 const coreExpertise = [
-  { label: "Python Frameworks", desc: "Django, FastAPI, Flask, Tornado, Pyramid", icon: Code },
-  { label: "AI, ML & Data Science", desc: "TensorFlow, PyTorch, Scikit-Learn, Pandas, NumPy, LangChain", icon: Cpu },
-  { label: "Databases & Storage", desc: "PostgreSQL, MySQL, MongoDB, Redis, SQLAlchemy, ORMs", icon: Database },
-  { label: "Infrastructure & DevOps", desc: "Docker, Kubernetes, AWS / GCP, Celery, CI/CD Pipelines", icon: Terminal },
+  {
+    label: "Python Frameworks",
+    desc: "Django, FastAPI, Flask, Tornado, Pyramid",
+    icon: Code,
+  },
+  {
+    label: "AI, ML & Data Science",
+    desc: "TensorFlow, PyTorch, Scikit-Learn, Pandas, NumPy, LangChain",
+    icon: Cpu,
+  },
+  {
+    label: "Databases & Storage",
+    desc: "PostgreSQL, MySQL, MongoDB, Redis, SQLAlchemy, ORMs",
+    icon: Database,
+  },
+  {
+    label: "Infrastructure & DevOps",
+    desc: "Docker, Kubernetes, AWS / GCP, Celery, CI/CD Pipelines",
+    icon: Terminal,
+  },
 ];
 
 const comparisonData = [
@@ -104,17 +120,23 @@ const PythonDeveloper = () => {
 
   return (
     <>
+      <SEO
+        title="Hire Python Developers | Shilsha Technologies"
+        description="Hire skilled Python developers from Shilsha Technologies to build scalable applications, automate business processes, and deliver reliable software solutions."
+        keywords="hire Python developer, Python developers for hire, dedicated Python developer, Python developer for hire, remote Python developer, Python development services"
+        canonical="http://shilshatech.com/hire-developers/python-developer"
+      />
       <section className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden px-6 pt-36 pb-24 transition-colors duration-500 bg-slate-50 text-slate-900 dark:bg-[#070d18] dark:text-slate-100 selection:bg-blue-500 selection:text-white">
-        
-        <div 
+        <div
           className="absolute top-1/6 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 rounded-full blur-[180px] pointer-events-none opacity-25 dark:opacity-35"
-          style={{ background: `radial-gradient(circle, ${theme.primary} 0%, ${theme.secondary} 70%, transparent 100%)` }}
+          style={{
+            background: `radial-gradient(circle, ${theme.primary} 0%, ${theme.secondary} 70%, transparent 100%)`,
+          }}
         />
 
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 
         <div className="relative z-10 mx-auto max-w-6xl w-full flex flex-col items-center">
-          
           {/* Breadcrumb Badge */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -127,7 +149,6 @@ const PythonDeveloper = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full items-center">
-            
             {/* Hero Left Content */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -137,7 +158,7 @@ const PythonDeveloper = () => {
             >
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.12]">
                 Hire Elite{" "}
-                <span 
+                <span
                   className="bg-clip-text text-transparent"
                   style={{
                     backgroundImage: `linear-gradient(135deg, ${theme.primary} 0%, #3b82f6 50%, ${theme.secondary} 100%)`,
@@ -149,23 +170,34 @@ const PythonDeveloper = () => {
               </h1>
 
               <p className="mt-6 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
-                Build high-performance web applications, scalable APIs, and advanced AI/ML solutions with world-class Python talent from Shilsha Technologies. We deliver clean, maintainable, and enterprise-grade code tailored to your business needs.
+                Build high-performance web applications, scalable APIs, and
+                advanced AI/ML solutions with world-class Python talent from
+                Shilsha Technologies. We deliver clean, maintainable, and
+                enterprise-grade code tailored to your business needs.
               </p>
 
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex items-center gap-3.5 p-4 rounded-2xl border border-slate-200/80 bg-white/90 dark:border-blue-500/20 dark:bg-[#0a1325]/90 backdrop-blur-xl shadow-lg shadow-slate-200/50 dark:shadow-none">
-                  <div className="p-3 rounded-xl bg-blue-500/10 text-blue-500"><ShieldCheck size={20} /></div>
+                  <div className="p-3 rounded-xl bg-blue-500/10 text-blue-500">
+                    <ShieldCheck size={20} />
+                  </div>
                   <div>
                     <h4 className="font-bold text-sm">Top 1% Python Talent</h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Rigorously screened devs</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
+                      Rigorously screened devs
+                    </p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3.5 p-4 rounded-2xl border border-slate-200/80 bg-white/90 dark:border-blue-500/20 dark:bg-[#0a1325]/90 backdrop-blur-xl shadow-lg shadow-slate-200/50 dark:shadow-none">
-                  <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-500 dark:text-cyan-400"><Zap size={20} /></div>
+                  <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-500 dark:text-cyan-400">
+                    <Zap size={20} />
+                  </div>
                   <div>
                     <h4 className="font-bold text-sm">48-Hour Onboarding</h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Fast team integration</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
+                      Fast team integration
+                    </p>
                   </div>
                 </div>
               </div>
@@ -173,7 +205,7 @@ const PythonDeveloper = () => {
 
             {/* Request Form Right Side */}
             <div className="lg:col-span-5 w-full">
-              <RequestForm 
+              <RequestForm
                 className="w-full shadow-2xl shadow-blue-900/10 dark:shadow-blue-950/50 border border-slate-200/80 dark:border-blue-500/20 rounded-3xl bg-white/90 dark:bg-[#0a1325]/90 backdrop-blur-xl p-2 sm:p-4"
                 title="Request Python Expert"
                 subtitle="Fill out the form below and connect with matched Python developers in less than 24 hours."
@@ -181,7 +213,6 @@ const PythonDeveloper = () => {
                 theme={theme}
               />
             </div>
-
           </div>
 
           {/* Core Expertise Grid */}
@@ -205,7 +236,9 @@ const PythonDeveloper = () => {
                       <div className="p-3 rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300">
                         <Icon size={22} />
                       </div>
-                      <span className="text-xs font-mono font-bold text-slate-400 dark:text-slate-600">0{index + 1}</span>
+                      <span className="text-xs font-mono font-bold text-slate-400 dark:text-slate-600">
+                        0{index + 1}
+                      </span>
                     </div>
                     <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
                       {item.label}
@@ -235,7 +268,8 @@ const PythonDeveloper = () => {
                 Choose Your Engagement Model
               </h2>
               <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 mt-3">
-                Whether you need specialized individual contributors or an entire agile Python unit, we adapt to your goals.
+                Whether you need specialized individual contributors or an
+                entire agile Python unit, we adapt to your goals.
               </p>
             </div>
 
@@ -287,7 +321,8 @@ const PythonDeveloper = () => {
                 How Shilsha Technologies Compares
               </h2>
               <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 mt-3">
-                See why leading enterprises choose Shilsha Technologies over standard freelancers or legacy agencies.
+                See why leading enterprises choose Shilsha Technologies over
+                standard freelancers or legacy agencies.
               </p>
             </div>
 
@@ -295,19 +330,38 @@ const PythonDeveloper = () => {
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="border-b border-slate-200 dark:border-blue-500/20 text-xs sm:text-sm">
-                    <th className="py-4 px-4 font-bold text-slate-900 dark:text-white">Feature</th>
-                    <th className="py-4 px-4 font-bold text-blue-600 dark:text-blue-400 bg-blue-50/70 dark:bg-blue-950/50 rounded-t-xl">Shilsha Technologies</th>
-                    <th className="py-4 px-4 font-bold text-slate-500 dark:text-slate-400">Standard Freelancers</th>
-                    <th className="py-4 px-4 font-bold text-slate-500 dark:text-slate-400">Traditional Agencies</th>
+                    <th className="py-4 px-4 font-bold text-slate-900 dark:text-white">
+                      Feature
+                    </th>
+                    <th className="py-4 px-4 font-bold text-blue-600 dark:text-blue-400 bg-blue-50/70 dark:bg-blue-950/50 rounded-t-xl">
+                      Shilsha Technologies
+                    </th>
+                    <th className="py-4 px-4 font-bold text-slate-500 dark:text-slate-400">
+                      Standard Freelancers
+                    </th>
+                    <th className="py-4 px-4 font-bold text-slate-500 dark:text-slate-400">
+                      Traditional Agencies
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-200 dark:divide-blue-500/10 text-xs sm:text-sm">
                   {comparisonData.map((row, i) => (
-                    <tr key={i} className="hover:bg-slate-50/50 dark:hover:bg-blue-950/20 transition-colors">
-                      <td className="py-4 px-4 font-semibold text-slate-800 dark:text-slate-200">{row.feature}</td>
-                      <td className="py-4 px-4 font-semibold text-blue-700 dark:text-blue-300 bg-blue-50/50 dark:bg-blue-950/40">{row.shilsha}</td>
-                      <td className="py-4 px-4 text-slate-500 dark:text-slate-400">{row.freelance}</td>
-                      <td className="py-4 px-4 text-slate-500 dark:text-slate-400">{row.agency}</td>
+                    <tr
+                      key={i}
+                      className="hover:bg-slate-50/50 dark:hover:bg-blue-950/20 transition-colors"
+                    >
+                      <td className="py-4 px-4 font-semibold text-slate-800 dark:text-slate-200">
+                        {row.feature}
+                      </td>
+                      <td className="py-4 px-4 font-semibold text-blue-700 dark:text-blue-300 bg-blue-50/50 dark:bg-blue-950/40">
+                        {row.shilsha}
+                      </td>
+                      <td className="py-4 px-4 text-slate-500 dark:text-slate-400">
+                        {row.freelance}
+                      </td>
+                      <td className="py-4 px-4 text-slate-500 dark:text-slate-400">
+                        {row.agency}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -372,7 +426,6 @@ const PythonDeveloper = () => {
               })}
             </div>
           </motion.div>
-
         </div>
       </section>
       <Footer />
